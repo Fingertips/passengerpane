@@ -20,9 +20,11 @@ class PassengerApplication < NSObject
     end
   end
   
-  def initWithHost_path(host, path)
+  def initWithFile(file)
     if init
-      @host, @path = host, path
+      contents = File.read(file)
+      @host, @path = contents.scan(/ServerName\s+([\w\.]+).+DocumentRoot\s+"([\w\/\s]+)"/m).flatten
+      p @host, @path
       self
     end
   end
@@ -42,10 +44,9 @@ class PrefPanePassenger < NSPreferencePane
   
   def mainViewDidLoad
     @applications = [].to_ns
-    
-    #app = PassengerApplication.alloc.initWithHost_path('foo.local', '/some/path/to/app')
-    app = PassengerApplication.alloc.init
-    @applicationsController.addObject app
+    Dir.glob("/etc/apache2/users/passenger_apps/*.vhost.conf").each do |app|
+      @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
+    end
   end
   
   def add(sender)
