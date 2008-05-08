@@ -11,9 +11,28 @@ require 'osx/cocoa'
 include OSX
 
 class PrefPanePassenger < NSPreferencePane
-
-	def mainViewDidLoad
-		NSLog("Passenger PreferencePane loaded")
-	end
-	
+  kvc_accessor :applications
+  
+  def mainViewDidLoad
+    @applications = [{ 'host' => 'example.local', 'path' => '/some/path/to/app' }]
+    p @applications
+  end
+  
+  def add(sender)
+    p "add"
+  end
+  
+  def remove(sender)
+    p "remove"
+  end
+  
+  def restart(sender)
+    p "restart"
+  end
+  
+  private
+  
+  def p(obj)
+    NSLog(obj.inspect)
+  end
 end
