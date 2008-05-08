@@ -22,9 +22,7 @@ class PassengerApplication < NSObject
   
   def initWithFile(file)
     if init
-      contents = File.read(file)
-      @host, @path = contents.scan(/ServerName\s+([\w\.]+).+DocumentRoot\s+"([\w\/\s]+)"/m).flatten
-      p @host, @path
+      @host, @path = File.read(file).scan(/ServerName\s+([\w\.]+).+DocumentRoot\s+"([\w\/\s]+)"/m).flatten
       self
     end
   end
