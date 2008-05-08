@@ -2,8 +2,8 @@
 #  PassengerPref.m
 #  Passenger
 #
-#  Created by eloy on 5/8/08.
-#  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+#  Created by Eloy Duran on 5/8/08.
+#  Copyright (c) 2008 Eloy Duran. All rights reserved.
 #
 
 require 'osx/cocoa'
@@ -54,9 +54,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def remove(sender)
-    p "remove"
     apps = @applicationsController.selectedObjects
-    p apps
     apps.each { |app| app.remove! }
     @applicationsController.removeObjects apps
   end
