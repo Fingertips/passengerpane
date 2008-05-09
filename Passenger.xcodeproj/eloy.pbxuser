@@ -4,6 +4,9 @@
 		activeArchitecture = i386;
 		activeBuildConfigurationName = Release;
 		activeTarget = 8D202CE80486D31800D8A456 /* Passenger */;
+		addToTargets = (
+			8D202CE80486D31800D8A456 /* Passenger */,
+		);
 		codeSenseManager = 51379E840DD323B90069C81B /* Code sense */;
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
