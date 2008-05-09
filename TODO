@@ -1,0 +1,11 @@
+Sysmtem preference pane:
+tagline: "Putting the pane back into rails deployment."
+
+- at startup check if passenger is installed, if not run Installer.app.
+- Show list of rails apps that are found in /etc/apache2/passenger_apps/*.vhost.conf
+- Adding a new app:
+  - Let the user browse to app root
+  - Create new vhost file for app
+  - Add host with: $ sudo niload hosts . < hosts.txt
+  - Restart Apache
+- Restarting apps, by touching tmp/restart.txt
