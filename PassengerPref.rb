@@ -9,6 +9,7 @@
 require 'osx/cocoa'
 
 include OSX
+OSX.require_framework 'PreferencePanes'
 
 class PassengerApplication < NSObject
   CONF_PATH = "/etc/apache2/users/passenger_apps"
@@ -65,9 +66,9 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  def add(sender)
-    p "add"
-  end
+  # def add(sender)
+  #   p "add"
+  # end
   
   def remove(sender)
     apps = @applicationsController.selectedObjects
@@ -75,9 +76,9 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  def restart(sender)
-    p "restart"
-  end
+  # def restart(sender)
+  #   p "restart"
+  # end
   
   private
   
