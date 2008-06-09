@@ -29,6 +29,8 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
+  # "It seems that your apache configuration hasn't been supercharged with Passenger power, would you like to do this now?"
+  
   # def add(sender)
   #   p "add"
   # end
