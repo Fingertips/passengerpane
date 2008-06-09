@@ -33,7 +33,7 @@ describe "PassengerApplication" do
   end
   
   it "should be able to save the config file" do
-    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '#{passenger_app.config_path}' 'het-manfreds-blog.local' '/Users/het-manfred/rails code/blog'")
+    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '#{passenger_app.config_path}' '/etc/hosts' 'het-manfreds-blog.local' '/Users/het-manfred/rails code/blog'")
     passenger_app.save_config!
   end
 end

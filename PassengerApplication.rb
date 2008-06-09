@@ -33,7 +33,7 @@ class PassengerApplication < NSObject
   # end
   # 
   def save_config!
-    execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '#{config_path}' '#{@host}' '#{@path}'"
+    execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}' '#{@path}'"
   end
   
   def config_path
