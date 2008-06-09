@@ -11,6 +11,8 @@ include OSX
 
 OSX.require_framework 'PreferencePanes'
 
+require File.expand_path('../PassengerApplication', __FILE__)
+
 class PrefPanePassenger < NSPreferencePane
   ib_outlet :applicationsController
   kvc_accessor :applications
@@ -32,9 +34,9 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  # def restart(sender)
-  #   p "restart"
-  # end
+  def restart(sender)
+    p "restart"
+  end
   
   private
   
