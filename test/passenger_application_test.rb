@@ -6,6 +6,7 @@ describe "PassengerApplication, with a new application" do
   
   def after_setup
     @instance_to_be_tested = PassengerApplication.alloc.init
+    passenger_app.stubs(:execute)
   end
   
   it "should initialize with empty path & host" do
@@ -28,6 +29,11 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
   end
+  
+  it "should start the application by restarting apache" do
+    passenger_app.expects(:execute).with('/bin/launchctl stop org.apache.httpd')
+    passenger_app.start
+  end
 end
 
 describe "PassengerApplication, in general" do
@@ -36,6 +42,8 @@ describe "PassengerApplication, in general" do
   def after_setup
     @vhost = File.expand_path('../fixtures/blog.vhost.conf', __FILE__)
     @instance_to_be_tested = PassengerApplication.alloc.initWithFile(@vhost)
+    
+    Kernel.stubs(:system)
   end
   
   it "should parse the correct host & path from a vhost file" do
@@ -72,7 +80,7 @@ describe "PassengerApplication, in general" do
     assigns(:dirty).should.be true
   end
   
-  it "should not start the application if only one of host or path is entered" do
+  it "should not restart the application if only one of host or path is entered" do
     passenger_app.expects(:restart).times(0)
     
     passenger_app.setValue_forKey('', 'host')
@@ -82,5 +90,22 @@ describe "PassengerApplication, in general" do
   it "should restart the application if a valid host and path are entered" do
     passenger_app.expects(:restart).times(1)
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
+  end
+  
+  it "should save the config before restarting if it was marked dirty" do
+    passenger_app.expects(:save_config!).times(1)
+    assigns(:dirty, true)
+    passenger_app.restart
+  end
+  
+  it "should not save the config before restarting if it wasn't marked dirty" do
+    passenger_app.expects(:save_config!).times(0)
+    assigns(:dirty, false)
+    passenger_app.restart
+  end
+  
+  it "should restart the application" do
+    Kernel.expects(:system).with("/usr/bin/touch '/Users/het-manfred/rails code/blog/tmp/restart.txt'")
+    passenger_app.restart
   end
 end

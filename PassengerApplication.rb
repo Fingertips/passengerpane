@@ -26,16 +26,23 @@ class PassengerApplication < NSObject
     end
   end
   
-  # def restart(sender)
-  #   p "Restarting Rails application: #{@path}"
-  #   save_config!
-  # end
+  def start
+    p "Starting Rails application (restarting Apache): #{@path}"
+    execute '/bin/launchctl stop org.apache.httpd'
+  end
+  
+  def restart(sender = nil)
+    p "Restarting Rails application: #{@path}"
+    save_config! if @dirty
+    Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
+  end
   
   # def remove!
   #   p "remove #{self}"
   # end
   
   def save_config!
+    p "Saving configuration: #{config_path}"
     execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}' '#{@path}'"
   end
   
@@ -54,5 +61,9 @@ class PassengerApplication < NSObject
   def execute(command)
     script = NSAppleScript.alloc.initWithSource("do shell script \"#{command}\" with administrator privileges")
     script.performSelector_withObject("executeAndReturnError:", nil)
+  end
+  
+  def p(obj)
+    NSLog(obj.inspect)
   end
 end
