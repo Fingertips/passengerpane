@@ -19,8 +19,13 @@ class PrefPanePassenger < NSPreferencePane
   
   def mainViewDidLoad
     @applications = [].to_ns
-    Dir.glob("/etc/apache2/users/passenger_apps/*.vhost.conf").each do |app|
-      @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
+    
+    if is_users_apache_config_setup?
+      Dir.glob("/etc/apache2/users/passenger_apps/*.vhost.conf").each do |app|
+        @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
+      end
+    else
+      setup_users_apache_config!
     end
   end
   
@@ -36,6 +41,18 @@ class PrefPanePassenger < NSPreferencePane
   
   def restart(sender)
     p "restart"
+  end
+  
+  USERS_APACHE_CONFIG_LOAD_PASSENGER = [
+    'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/ext/apache2/mod_passenger.so',
+    'RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn-server',
+    'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby',
+    'RailsEnv development'
+  ]
+
+  def is_users_apache_config_setup?
+    conf = File.read("/etc/apache2/users/#{OSX.NSUserName}.conf")
+    USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
   end
   
   private
