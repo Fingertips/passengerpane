@@ -1,6 +1,8 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerPref'
 
+def OSX._ignore_ns_override; true; end
+
 describe "PrefPanePassenger, while loading" do
   tests PrefPanePassenger
   
@@ -43,10 +45,15 @@ describe "PrefPanePassenger, while loading" do
     pref_pane.user_wants_us_to_setup_config?.should.be true
   end
   
-  xit "should ask the user if we should set up passenger for them" do
+  it "should ask the user if we should set up passenger for them before actually doing it" do
     pref_pane.stubs(:is_users_apache_config_setup?).returns(false)
+    
     pref_pane.stubs(:user_wants_us_to_setup_config?).returns(true)
-    pref_pane.expects(:setup_users_apache_config!)
+    pref_pane.expects(:setup_users_apache_config!).times(1)
+    pref_pane.mainViewDidLoad
+    
+    pref_pane.stubs(:user_wants_us_to_setup_config?).returns(false)
+    pref_pane.expects(:setup_users_apache_config!).times(0)
     pref_pane.mainViewDidLoad
   end
 end

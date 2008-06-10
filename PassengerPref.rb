@@ -25,11 +25,11 @@ class PrefPanePassenger < NSPreferencePane
         @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
       end
     else
-      setup_users_apache_config!
+      setup_users_apache_config! if user_wants_us_to_setup_config?
     end
   end
   
-  # "It seems that your apache configuration hasn't been supercharged with Passenger power, would you like to do this now?"
+  # "It seems that your apache configuration hasn't been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
   
   # def add(sender)
   #   p "add"
@@ -55,6 +55,12 @@ class PrefPanePassenger < NSPreferencePane
   def is_users_apache_config_setup?
     conf = File.read("/etc/apache2/users/#{OSX.NSUserName}.conf")
     USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
+  end
+  
+  def user_wants_us_to_setup_config?
+    alert = OSX::NSAlert.alloc.init
+    alert.informativeText = "It seems that your apache configuration hasn't been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
+    alert.runModal == OSX::NSAlertFirstButtonReturn
   end
   
   private
