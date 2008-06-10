@@ -5,8 +5,6 @@ module SharedPassengerBehaviour
   USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
   
   def execute(command)
-    p 'Here!'
-    p "do shell script \"#{command}\" with administrator privileges"
     script = NSAppleScript.alloc.initWithSource("do shell script \"#{command}\" with administrator privileges")
     script.performSelector_withObject("executeAndReturnError:", nil)
   end
