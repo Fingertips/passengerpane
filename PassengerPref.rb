@@ -17,6 +17,7 @@ require File.expand_path('../PassengerApplication', __FILE__)
 class PrefPanePassenger < NSPreferencePane
   include SharedPassengerBehaviour
   
+  USERS_APACHE_PASSENGER_APPS = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps/*.vhost.conf"
   USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
   PASSENGER_CONFIG_INSTALLER = File.expand_path('../passenger_config_installer.rb', __FILE__)
   
@@ -27,7 +28,7 @@ class PrefPanePassenger < NSPreferencePane
     @applications = [].to_ns
     
     if is_users_apache_config_setup?
-      Dir.glob("/etc/apache2/users/passenger_apps/*.vhost.conf").each do |app|
+      Dir.glob(USERS_APACHE_PASSENGER_APPS).each do |app|
         @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
       end
     else
