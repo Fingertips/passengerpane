@@ -45,6 +45,10 @@ class PrefPanePassenger < NSPreferencePane
     p "restart"
   end
   
+  def users_apache_config
+    "/etc/apache2/users/#{OSX.NSUserName}.conf"
+  end
+  
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [
     'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/ext/apache2/mod_passenger.so',
     'RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn-server',
@@ -53,7 +57,7 @@ class PrefPanePassenger < NSPreferencePane
   ]
 
   def is_users_apache_config_setup?
-    conf = File.read("/etc/apache2/users/#{OSX.NSUserName}.conf")
+    conf = File.read(users_apache_config)
     USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
   end
   
@@ -61,6 +65,10 @@ class PrefPanePassenger < NSPreferencePane
     alert = OSX::NSAlert.alloc.init
     alert.informativeText = "It seems that your apache configuration hasn't been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
     alert.runModal == OSX::NSAlertFirstButtonReturn
+  end
+  
+  def setup_users_apache_config!
+    
   end
   
   private
