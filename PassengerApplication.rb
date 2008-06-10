@@ -32,7 +32,7 @@ class PassengerApplication < NSObject
   def start
     p "Starting Rails application (restarting Apache): #{@path}"
     save_config!
-    execute '/bin/launchctl stop org.apache.httpd'
+    execute '/usr/sbin/apachectl graceful'
   end
   
   def restart(sender = nil)

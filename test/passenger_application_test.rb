@@ -30,9 +30,9 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
   end
   
-  it "should start the application by restarting apache" do
+  it "should start the application by gracefully restarting apache" do
     passenger_app.expects(:save_config!).times(1)
-    passenger_app.expects(:execute).with('/bin/launchctl stop org.apache.httpd')
+    passenger_app.expects(:execute).with('/usr/sbin/apachectl graceful')
     passenger_app.start
   end
 end
