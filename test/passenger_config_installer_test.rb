@@ -5,7 +5,9 @@ describe "Config installer" do
     @tmp = File.expand_path('../tmp', __FILE__)
     FileUtils.mkdir_p @tmp
     @config_installer = File.expand_path('../../passenger_config_installer.rb', __FILE__)
-    @conf_file = File.join(@tmp, 'user.conf')
+    @conf_file = File.join(@tmp, 'eloy.conf')
+    File.open(@conf_file, 'w') { |f| f << "</Directory>" }
+    `/usr/bin/env ruby '#{@config_installer}' '#{@conf_file}'`
   end
   
   after do
@@ -13,10 +15,6 @@ describe "Config installer" do
   end
   
   it "should append the passenger configuration to an existing config" do
-    File.open(@conf_file, 'w') { |f| f << "</Directory>" }
-    
-    `/usr/bin/env ruby '#{@config_installer}' '#{@conf_file}'`
-    
     File.read(@conf_file).should == %{
 </Directory>
 
@@ -25,7 +23,11 @@ RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn
 RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
 RailsEnv development
 
-Include /private/etc/apache2/users/passenger_apps/*.vhost.conf
+Include #{File.join(@tmp, 'eloy-passenger-apps', '*.vhost.conf')}
 }.sub(/^\n/, '')
+  end
+  
+  it "should create a passenger apps directory for the user" do
+    File.should.be.directory File.join(@tmp, "eloy-passenger-apps")
   end
 end
