@@ -58,26 +58,8 @@ describe "PrefPanePassenger, while loading" do
   end
   
   it "should add the required lines to setup passenger to the users apache config" do
-    tmp = File.expand_path('../tmp', __FILE__)
-    FileUtils.mkdir_p tmp
-    
-    conf = File.join(tmp, 'user.conf')
-    File.open(conf, 'w') { |f| f << "</Directory>" }
-    
+    pref_pane.expects(:execute).with("/usr/bin/env ruby '#{PrefPanePassenger::PASSENGER_CONFIG_INSTALLER}' '#{PrefPanePassenger::USERS_APACHE_CONFIG}'")
     pref_pane.setup_users_apache_config!
-    
-    File.read(conf).should == %{
-</Directory>
-
-LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/ext/apache2/mod_passenger.so
-RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn-server
-RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
-RailsEnv development
-
-Include /private/etc/apache2/users/passenger_apps/*.vhost.conf
-}.sub(/^\n/, '')
-    
-    FileUtils.rm_rf tmp
   end
 end
 
@@ -110,9 +92,5 @@ describe "PrefPanePassenger, in general" do
     
     pref_pane.remove(nil)
     applicationsController.content.should == [stay_app]
-  end
-  
-  it "should return the path to the users apache config" do
-    pref_pane.users_apache_config.should == "/etc/apache2/users/#{OSX.NSUserName}.conf"
   end
 end

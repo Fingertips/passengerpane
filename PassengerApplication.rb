@@ -1,7 +1,11 @@
 require 'osx/cocoa'
 include OSX
 
+require File.expand_path('../shared_passenger_behaviour', __FILE__)
+
 class PassengerApplication < NSObject
+  include SharedPassengerBehaviour
+  
   CONFIG_PATH = "/etc/apache2/users/passenger_apps"
   CONFIG_INSTALLER = File.expand_path('../config_installer.rb', __FILE__)
   
@@ -54,16 +58,5 @@ class PassengerApplication < NSObject
     super
     @dirty = true
     (@new_app ? start : restart) unless @host.empty? or @path.empty?
-  end
-  
-  private
-  
-  def execute(command)
-    script = NSAppleScript.alloc.initWithSource("do shell script \"#{command}\" with administrator privileges")
-    script.performSelector_withObject("executeAndReturnError:", nil)
-  end
-  
-  def p(obj)
-    NSLog(obj.inspect)
   end
 end
