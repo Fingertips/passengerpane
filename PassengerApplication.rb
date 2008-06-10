@@ -6,7 +6,6 @@ require File.expand_path('../shared_passenger_behaviour', __FILE__)
 class PassengerApplication < NSObject
   include SharedPassengerBehaviour
   
-  CONFIG_PATH = "/etc/apache2/users/passenger_apps"
   CONFIG_INSTALLER = File.expand_path('../config_installer.rb', __FILE__)
   
   kvc_accessor :host, :path
@@ -32,6 +31,7 @@ class PassengerApplication < NSObject
   
   def start
     p "Starting Rails application (restarting Apache): #{@path}"
+    save_config!
     execute '/bin/launchctl stop org.apache.httpd'
   end
   
@@ -51,7 +51,7 @@ class PassengerApplication < NSObject
   end
   
   def config_path
-    @config_path ||= "#{CONFIG_PATH}/#{@host}.vhost.conf"
+    @config_path ||= File.join(USERS_APACHE_PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
   def rbSetValue_forKey(value, key)

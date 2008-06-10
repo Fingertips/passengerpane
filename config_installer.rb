@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'osx/cocoa'
+
 vhost_file, hosts_file, host, app_path = ARGV
 
 File.open(vhost_file, 'w') do |f|
