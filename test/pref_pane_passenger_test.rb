@@ -93,4 +93,18 @@ describe "PrefPanePassenger, in general" do
     pref_pane.remove(nil)
     applicationsController.content.should == [stay_app]
   end
+  
+  it "should open a directory browse panel and use the result as the path for the current selected application" do
+    OSX::NSOpenPanel.any_instance.expects(:canChooseDirectories=).with(true)
+    OSX::NSOpenPanel.any_instance.expects(:canChooseFiles=).with(false)
+    OSX::NSOpenPanel.any_instance.stubs(:runModalForTypes).returns(OSX::NSOKButton)
+    OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/src/root'])
+    
+    app = PassengerApplication.alloc.init
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    app.expects(:setValue_forKey).with('/some/path/to/src/root', 'path')
+    
+    pref_pane.browse
+  end
 end

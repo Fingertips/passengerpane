@@ -34,12 +34,6 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  # "It seems that your apache configuration hasn't been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
-  
-  # def add(sender)
-  #   p "add"
-  # end
-  
   def remove(sender)
     apps = @applicationsController.selectedObjects
     apps.each { |app| app.remove! }
@@ -72,5 +66,14 @@ class PrefPanePassenger < NSPreferencePane
   
   def setup_users_apache_config!
     execute "/usr/bin/env ruby '#{PASSENGER_CONFIG_INSTALLER}' '#{USERS_APACHE_CONFIG}'"
+  end
+  
+  def browse(sender = nil)
+    panel = NSOpenPanel.openPanel
+    panel.canChooseDirectories = true
+    panel.canChooseFiles = false
+    if panel.runModalForTypes([]) == NSOKButton
+      @applicationsController.selectedObjects.first.setValue_forKey(panel.filenames.first, 'path')
+    end
   end
 end
