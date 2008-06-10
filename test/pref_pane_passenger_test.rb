@@ -41,7 +41,7 @@ describe "PrefPanePassenger, while loading" do
   end
   
   it "should ask the user if we should set up passenger for them" do
-    OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertFirstButtonReturn)
+    OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertSecondButtonReturn)
     pref_pane.user_wants_us_to_setup_config?.should.be true
   end
   
