@@ -1,6 +1,5 @@
-Sysmtem preference pane:
-tagline: "Putting the pane back into rails deployment."
-
+- Make UI so that when adding an app it opens a modal window where the user can browse for an app.
+  Once the user has chosen a path take the basename and assume that as the host.
 - at startup check if passenger is installed, if not run Installer.app.
 - Show list of rails apps that are found in /etc/apache2/passenger_apps/*.vhost.conf
 - Adding a new app:
