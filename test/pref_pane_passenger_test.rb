@@ -34,8 +34,8 @@ describe "PrefPanePassenger, while loading" do
     File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns(%{
       </Directory>
       
-      LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/ext/apache2/mod_passenger.so
-      RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn-server
+      LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PrefPanePassenger::PASSENGER_VERSION}/ext/apache2/mod_passenger.so
+      RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PrefPanePassenger::PASSENGER_VERSION}/bin/passenger-spawn-server
       RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
       RailsEnv development
     })
@@ -84,7 +84,10 @@ describe "PrefPanePassenger, in general" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :newApplicationPathTextField => OSX::NSTextField.alloc.init,
+               :newApplicationHostTextField => OSX::NSTextField.alloc.init
+               
     pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
     pref_pane.stubs(:install_passenger!).returns(true)
     pref_pane.mainViewDidLoad
@@ -116,14 +119,25 @@ describe "PrefPanePassenger, in general" do
     OSX::NSOpenPanel.any_instance.expects(:canChooseDirectories=).with(true)
     OSX::NSOpenPanel.any_instance.expects(:canChooseFiles=).with(false)
     OSX::NSOpenPanel.any_instance.stubs(:runModalForTypes).returns(OSX::NSOKButton)
-    OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/src/root'])
-    
-    app = PassengerApplication.alloc.init
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
-    app.expects(:setValue_forKey).with('/some/path/to/src/root', 'path')
+    OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/Blog'])
     
     pref_pane.browse
+    newApplicationPathTextField.stringValue.should == '/some/path/to/Blog'
+    newApplicationHostTextField.stringValue.should == 'blog.local'
+  end
+  
+  it "should add a new application with the values from the form and close the sheet" do
+    newApplicationPathTextField.stringValue = '/some/path/to/Blog'
+    newApplicationHostTextField.stringValue = 'blog.local'
+    
+    PassengerApplication.any_instance.expects(:start)
+    pref_pane.expects(:closeNewApplicationSheet)
+    
+    pref_pane.addApplicationFromSheet
+    
+    app = applicationsController.content.last
+    app.path.should == '/some/path/to/Blog'
+    app.host.should == 'blog.local'
   end
   
   it "should be able to check if the passenger gem is installed" do

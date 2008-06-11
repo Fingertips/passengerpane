@@ -19,6 +19,10 @@ class PrefPanePassenger < NSPreferencePane
   
   PASSENGER_CONFIG_INSTALLER = File.expand_path('../passenger_config_installer.rb', __FILE__)
   
+  ib_outlet :newApplicationSheet
+  ib_outlet :newApplicationPathTextField
+  ib_outlet :newApplicationHostTextField
+  
   ib_outlet :applicationsController
   kvc_accessor :applications
   
@@ -36,16 +40,6 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  def remove(sender)
-    apps = @applicationsController.selectedObjects
-    apps.each { |app| app.remove! }
-    @applicationsController.removeObjects apps
-  end
-  
-  def restart(sender)
-    p "restart"
-  end
-  
   def passenger_installed?
     `/usr/bin/gem list passenger`.include? 'passenger'
   end
@@ -57,9 +51,10 @@ class PrefPanePassenger < NSPreferencePane
     alert.runModal
   end
   
+  PASSENGER_VERSION = `/usr/bin/gem list passenger`.rstrip.match(/\(([\d\.]+)[,\)]/)[1]
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [
-    'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/ext/apache2/mod_passenger.so',
-    'RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-1.0.1/bin/passenger-spawn-server',
+    "LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/ext/apache2/mod_passenger.so",
+    "RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/bin/passenger-spawn-server",
     'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby',
     'RailsEnv development'
   ]
@@ -81,12 +76,49 @@ class PrefPanePassenger < NSPreferencePane
     execute "/usr/bin/env ruby '#{PASSENGER_CONFIG_INSTALLER}' '#{USERS_APACHE_CONFIG}'"
   end
   
+  def add(sender)
+    NSApp.objc_send(
+      :beginSheet, @newApplicationSheet,
+      :modalForWindow, mainView.window,
+      :modalDelegate, nil,
+      :didEndSelector, nil,
+      :contextInfo, nil
+    )
+  end
+  
+  def remove(sender)
+    apps = @applicationsController.selectedObjects
+    apps.each { |app| app.remove! }
+    @applicationsController.removeObjects apps
+  end
+  
+  def restart(sender)
+    p "restart"
+  end
+  
   def browse(sender = nil)
     panel = NSOpenPanel.openPanel
     panel.canChooseDirectories = true
     panel.canChooseFiles = false
     if panel.runModalForTypes([]) == NSOKButton
-      @applicationsController.selectedObjects.first.setValue_forKey(panel.filenames.first, 'path')
+      file = panel.filenames.first
+      @newApplicationPathTextField.stringValue = file
+      @newApplicationHostTextField.stringValue = "#{File.basename(file).downcase}.local"
     end
+  end
+  
+  def addApplicationFromSheet(sender = nil)
+    app = PassengerApplication.alloc.init
+    app.path = @newApplicationPathTextField.stringValue
+    app.host = @newApplicationHostTextField.stringValue
+    @applicationsController.addObject app
+    app.start
+    
+    closeNewApplicationSheet
+  end
+  
+  def closeNewApplicationSheet(sender = nil)
+    NSApp.endSheet @newApplicationSheet
+    @newApplicationSheet.orderOut self
   end
 end

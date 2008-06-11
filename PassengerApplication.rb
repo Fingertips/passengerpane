@@ -38,7 +38,9 @@ class PassengerApplication < NSObject
   def restart(sender = nil)
     p "Restarting Rails application: #{@path}"
     save_config! if @dirty
-    Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
+    restart = File.join(@path, 'tmp', 'restart.txt')
+    Kernel.system("/usr/bin/touch '#{restart}'")
+    p File.exist? restart
   end
   
   # def remove!
