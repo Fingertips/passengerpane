@@ -92,10 +92,6 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  def restart(sender)
-    p "restart"
-  end
-  
   def browse(sender = nil)
     panel = NSOpenPanel.openPanel
     panel.canChooseDirectories = true

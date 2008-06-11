@@ -326,26 +326,6 @@
 								<reference key="NSTextColor" ref="52128434"/>
 							</object>
 						</object>
-						<object class="NSButton" id="199665981">
-							<reference key="NSNextResponder" ref="453226259"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{631, 8}, {25, 25}}</string>
-							<reference key="NSSuperview" ref="453226259"/>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="680510378">
-								<int key="NSCellFlags">67239424</int>
-								<int key="NSCellFlags2">134217728</int>
-								<string key="NSContents"/>
-								<reference key="NSSupport" ref="829849519"/>
-								<reference key="NSControlView" ref="199665981"/>
-								<int key="NSButtonFlags">-2038415105</int>
-								<int key="NSButtonFlags2">161</int>
-								<string key="NSAlternateContents"/>
-								<string key="NSKeyEquivalent"/>
-								<int key="NSPeriodicDelay">200</int>
-								<int key="NSPeriodicInterval">25</int>
-							</object>
-						</object>
 					</object>
 					<string key="NSFrameSize">{668, 368}</string>
 					<reference key="NSSuperview"/>
@@ -567,14 +547,6 @@
 					<int key="connectionID">26</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">restart:</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="435836413"/>
-					</object>
-					<int key="connectionID">120</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">contentArray: applications</string>
 						<reference key="source" ref="467003467"/>
@@ -667,14 +639,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">remove:</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="987090916"/>
-					</object>
-					<int key="connectionID">140</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">addApplicationFromSheet:</string>
 						<reference key="source" ref="565115411"/>
 						<reference key="destination" ref="349466269"/>
@@ -737,6 +701,14 @@
 					</object>
 					<int key="connectionID">188</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">remove:</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="987090916"/>
+					</object>
+					<int key="connectionID">189</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -781,7 +753,6 @@
 							<reference ref="987090916"/>
 							<reference ref="435836413"/>
 							<reference ref="796279687"/>
-							<reference ref="199665981"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
 					</object>
@@ -922,20 +893,6 @@
 						<int key="objectID">144</int>
 						<reference key="object" ref="266660527"/>
 						<reference key="parent" ref="796279687"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">147</int>
-						<reference key="object" ref="199665981"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="680510378"/>
-						</object>
-						<reference key="parent" ref="453226259"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">148</int>
-						<reference key="object" ref="680510378"/>
-						<reference key="parent" ref="199665981"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">164</int>
@@ -1100,8 +1057,6 @@
 					<string>121.IBPluginDependency</string>
 					<string>143.IBPluginDependency</string>
 					<string>144.IBPluginDependency</string>
-					<string>147.IBPluginDependency</string>
-					<string>148.IBPluginDependency</string>
 					<string>164.IBEditorWindowLastContentRect</string>
 					<string>164.IBPluginDependency</string>
 					<string>164.IBWindowTemplateEditedContentRect</string>
@@ -1145,17 +1100,15 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{306, -81}, {668, 368}}</string>
+					<string>{{77, 34}, {668, 368}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{306, -81}, {668, 368}}</string>
+					<string>{{77, 34}, {668, 368}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 368}}</string>
 					<reference ref="9"/>
 					<reference ref="9"/>
 					<string>{3.40282e+38, 3.40282e+38}</string>
 					<string>{224.664, 10}</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1205,7 +1158,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">188</int>
+			<int key="maxID">189</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1230,11 +1183,9 @@
 							<string>browse:</string>
 							<string>closeNewApplicationSheet:</string>
 							<string>remove:</string>
-							<string>restart:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

@@ -14,6 +14,6 @@ module SharedPassengerBehaviour
   end
   
   def p(obj)
-    NSLog(obj.inspect)
+    NSLog(obj.is_a?(String) ? obj : obj.inspect)
   end
 end

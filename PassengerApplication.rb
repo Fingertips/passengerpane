@@ -30,7 +30,7 @@ class PassengerApplication < NSObject
   end
   
   def start
-    p "Starting Rails application (restarting Apache): #{@path}"
+    p "Starting Rails application (restarting Apache gracefully): #{@path}"
     save_config!
     execute '/usr/sbin/apachectl graceful'
   end
@@ -38,9 +38,7 @@ class PassengerApplication < NSObject
   def restart(sender = nil)
     p "Restarting Rails application: #{@path}"
     save_config! if @dirty
-    restart = File.join(@path, 'tmp', 'restart.txt')
-    Kernel.system("/usr/bin/touch '#{restart}'")
-    p File.exist? restart
+    Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
   end
   
   # def remove!
