@@ -8,21 +8,23 @@ describe "PrefPanePassenger, while loading" do
   
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    pref_pane.stubs(:passenger_installed?).returns(true)
   end
   
-  it "should add existing applications found in /etc/apache2/users/passenger_apps to the array controller: applicationsController" do
-    dir = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps"
-    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
-    blog_stub, paste_stub = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
-    
-    PassengerApplication.any_instance.expects(:initWithFile).with(blog).returns(blog_stub)
-    PassengerApplication.any_instance.expects(:initWithFile).with(paste).returns(paste_stub)
-    
-    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
-    Dir.stubs(:glob).with("#{dir}/*.vhost.conf").returns([blog, paste])
+  it "should check if the passenger gem is installed" do
+    pref_pane.expects(:passenger_installed?).returns(true)
+    pref_pane.expects(:install_passenger!).times(0)
     pref_pane.mainViewDidLoad
     
-    applicationsController.content.should == [blog_stub, paste_stub]
+    pref_pane.expects(:passenger_installed?).returns(false)
+    pref_pane.expects(:install_passenger!).times(1)
+    pref_pane.mainViewDidLoad
+  end
+  
+  it "should tell the user to first install passenger" do
+    pref_pane.expects(:apple_script).with("tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell")
+    OSX::NSAlert.any_instance.expects(:runModal)
+    pref_pane.install_passenger!
   end
   
   it "should check if the users apache config is set up" do
@@ -61,6 +63,21 @@ describe "PrefPanePassenger, while loading" do
     pref_pane.expects(:execute).with("/usr/bin/env ruby '#{PrefPanePassenger::PASSENGER_CONFIG_INSTALLER}' '#{PrefPanePassenger::USERS_APACHE_CONFIG}'")
     pref_pane.setup_users_apache_config!
   end
+  
+  it "should add existing applications found in /etc/apache2/users/passenger_apps to the array controller: applicationsController" do
+    dir = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps"
+    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
+    blog_stub, paste_stub = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
+    
+    PassengerApplication.any_instance.expects(:initWithFile).with(blog).returns(blog_stub)
+    PassengerApplication.any_instance.expects(:initWithFile).with(paste).returns(paste_stub)
+    
+    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
+    Dir.stubs(:glob).with("#{dir}/*.vhost.conf").returns([blog, paste])
+    pref_pane.mainViewDidLoad
+    
+    applicationsController.content.should == [blog_stub, paste_stub]
+  end
 end
 
 describe "PrefPanePassenger, in general" do
@@ -69,6 +86,7 @@ describe "PrefPanePassenger, in general" do
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
     pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
+    pref_pane.stubs(:install_passenger!).returns(true)
     pref_pane.mainViewDidLoad
   end
   
@@ -106,5 +124,13 @@ describe "PrefPanePassenger, in general" do
     app.expects(:setValue_forKey).with('/some/path/to/src/root', 'path')
     
     pref_pane.browse
+  end
+  
+  it "should be able to check if the passenger gem is installed" do
+    pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\npassenger (1.0.5, 1.0.1)\n")
+    pref_pane.passenger_installed?.should.be true
+    
+    pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\n\n")
+    pref_pane.passenger_installed?.should.be false
   end
 end
