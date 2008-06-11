@@ -1,19 +1,15 @@
 #!/usr/bin/env ruby
 
-require 'osx/cocoa'
+require File.expand_path('../file_backup_and_open', __FILE__)
 
 vhost_file, hosts_file, host, app_path = ARGV
 
-File.open(vhost_file, 'w') do |f|
-  f << %{
+vhost = %{
 <VirtualHost *:80>
   ServerName #{host}
   DocumentRoot "#{File.join(app_path, 'public')}"
 </VirtualHost>
 }.sub(/^\n/, '')
-end
 
-current_hosts = File.read(hosts_file)
-File.open(hosts_file, 'w') do |f|
-  f << "#{current_hosts}\n127.0.0.1\t\t\t#{host}"
-end
+File.backup_and_open(vhost_file, 'w', vhost)
+File.backup_and_open(hosts_file, 'a', "\n127.0.0.1\t\t\t#{host}")

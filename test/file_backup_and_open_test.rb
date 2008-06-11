@@ -8,8 +8,7 @@ describe "File::backup_and_open" do
     @tmp_file = File.join(@tmp, 'testfile.txt')
     @backup = File.join(@tmp, 'testfile.txt.bak')
     
-    File.open(@tmp_file, 'w') {|f| f << 'line1' }
-    File.backup_and_open(@tmp_file, 'a', "\nline2")
+    create_tmp_file
   end
   
   after do
@@ -17,6 +16,11 @@ describe "File::backup_and_open" do
   end
   
   it "should create a backup of the file in the same directory as the file" do
+    remove_tmp
+    FileUtils.stubs(:rm)
+    create_tmp
+    create_tmp_file
+    
     File.should.exist @backup
     File.read(@backup).should == 'line1'
   end
@@ -34,9 +38,10 @@ describe "File::backup_and_open" do
     File.read(@tmp_file).should == 'line1'
   end
   
-  it "should check if everything went according to plan after writing the file" do
+  it "should check if everything went according to plan after writing the file and if so remove the backup" do
     File.expects(:read).with(@tmp_file).returns("line1\nline2\nline3").times(2)
     File.backup_and_open(@tmp_file, 'a', "\nline3")
+    File.should.not.exist @backup
   end
   
   it "should place the backup back and raise an exception if something went wrong while writing" do
@@ -46,6 +51,11 @@ describe "File::backup_and_open" do
   end
   
   private
+  
+  def create_tmp_file
+    File.open(@tmp_file, 'w') {|f| f << 'line1' }
+    File.backup_and_open(@tmp_file, 'a', "\nline2")
+  end
   
   def create_tmp
     @tmp = File.expand_path('../tmp')
