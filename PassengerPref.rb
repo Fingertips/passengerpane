@@ -84,6 +84,13 @@ class PrefPanePassenger < NSPreferencePane
     @newApplicationSheet.orderOut self
   end
   
+  def showInstallPassengerHelpAlert(sender)
+    alert = OSX::NSAlert.alloc.init
+    alert.messageText = "Install Passenger Gem"
+    alert.informativeText = "The Passenger Preference Pane uses the gem command to locate your Passenger installation.\n\nTo install the current release use:\n“$ gem install passenger”"
+    alert.runModal
+  end
+  
   private
   
   PASSENGER_VERSION = `/usr/bin/gem list passenger`.rstrip.match(/\(([\d\.]+)[,\)]/)[1] rescue nil
