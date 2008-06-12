@@ -11,3 +11,9 @@ module Rucola::TestCase::InstanceMethods
 end
 
 $: << File.expand_path('../../', __FILE__)
+
+require File.expand_path('../../shared_passenger_behaviour', __FILE__)
+module SharedPassengerBehaviour
+  # Silencio!
+  def p(obj); end
+end
