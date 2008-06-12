@@ -114,9 +114,9 @@ class PrefPanePassenger < NSPreferencePane
     alert = OSX::NSAlert.alloc.init
     alert.messageText = "Configure Apache"
     alert.informativeText = "It seems that your Apache configuration hasn’t been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
-    alert.addButtonWithTitle('Cancel')
     alert.addButtonWithTitle('OK')
-    alert.runModal == OSX::NSAlertSecondButtonReturn
+    alert.addButtonWithTitle('Cancel')
+    alert.runModal == OSX::NSAlertFirstButtonReturn
   end
   
   def setup_users_apache_config!

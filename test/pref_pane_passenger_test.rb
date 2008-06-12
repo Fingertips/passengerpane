@@ -40,12 +40,12 @@ describe "PrefPanePassenger, while loading" do
     pref_pane.send(:is_users_apache_config_setup?).should.be true
   end
   
-  it "should ask the user if we should set up passenger for them" do
-    OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertSecondButtonReturn)
+  it "should ask the user if we should set up the passenger apache config for them" do
+    OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertFirstButtonReturn)
     pref_pane.send(:user_wants_us_to_setup_config?).should.be true
   end
   
-  it "should ask the user if we should set up passenger for them before actually doing it" do
+  it "should ask the user if we should set up passenger apache config for them before actually doing it" do
     pref_pane.stubs(:is_users_apache_config_setup?).returns(false)
     
     pref_pane.stubs(:user_wants_us_to_setup_config?).returns(true)
