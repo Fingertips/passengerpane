@@ -24,12 +24,12 @@ describe "PrefPanePassenger, while loading" do
   it "should tell the user to first install passenger" do
     pref_pane.expects(:apple_script).with("tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell")
     OSX::NSAlert.any_instance.expects(:runModal)
-    pref_pane.install_passenger!
+    pref_pane.send :install_passenger!
   end
   
   it "should check if the users apache config is set up" do
     File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns("</Directory>")
-    pref_pane.is_users_apache_config_setup?.should.be false
+    pref_pane.send(:is_users_apache_config_setup?).should.be false
     
     File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns(%{
       </Directory>
@@ -39,12 +39,12 @@ describe "PrefPanePassenger, while loading" do
       RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
       RailsEnv development
     })
-    pref_pane.is_users_apache_config_setup?.should.be true
+    pref_pane.send(:is_users_apache_config_setup?).should.be true
   end
   
   it "should ask the user if we should set up passenger for them" do
     OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertSecondButtonReturn)
-    pref_pane.user_wants_us_to_setup_config?.should.be true
+    pref_pane.send(:user_wants_us_to_setup_config?).should.be true
   end
   
   it "should ask the user if we should set up passenger for them before actually doing it" do
@@ -61,7 +61,7 @@ describe "PrefPanePassenger, while loading" do
   
   it "should add the required lines to setup passenger to the users apache config" do
     pref_pane.expects(:execute).with("/usr/bin/env ruby '#{PrefPanePassenger::PASSENGER_CONFIG_INSTALLER}' '#{PrefPanePassenger::USERS_APACHE_CONFIG}'")
-    pref_pane.setup_users_apache_config!
+    pref_pane.send(:setup_users_apache_config!)
   end
   
   it "should add existing applications found in /etc/apache2/users/passenger_apps to the array controller: applicationsController" do
@@ -142,9 +142,9 @@ describe "PrefPanePassenger, in general" do
   
   it "should be able to check if the passenger gem is installed" do
     pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\npassenger (1.0.5, 1.0.1)\n")
-    pref_pane.passenger_installed?.should.be true
+    pref_pane.send(:passenger_installed?).should.be true
     
     pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\n\n")
-    pref_pane.passenger_installed?.should.be false
+    pref_pane.send(:passenger_installed?).should.be false
   end
 end

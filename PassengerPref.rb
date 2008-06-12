@@ -40,42 +40,6 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  def passenger_installed?
-    `/usr/bin/gem list passenger`.include? 'passenger'
-  end
-  
-  def install_passenger!
-    apple_script "tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell"
-    alert = OSX::NSAlert.alloc.init
-    alert.informativeText = "Oh noes, the drama! It seems like you haven't installed the Passenger gem yet...\n\nI took the liberty of setting up a terminal for you so that you can install it. Once it's done hit OK to continue."
-    alert.runModal
-  end
-  
-  PASSENGER_VERSION = `/usr/bin/gem list passenger`.rstrip.match(/\(([\d\.]+)[,\)]/)[1]
-  USERS_APACHE_CONFIG_LOAD_PASSENGER = [
-    "LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/ext/apache2/mod_passenger.so",
-    "RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/bin/passenger-spawn-server",
-    'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby',
-    'RailsEnv development'
-  ]
-
-  def is_users_apache_config_setup?
-    conf = File.read(USERS_APACHE_CONFIG)
-    USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
-  end
-  
-  def user_wants_us_to_setup_config?
-    alert = OSX::NSAlert.alloc.init
-    alert.informativeText = "It seems that your apache configuration hasn't been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
-    alert.addButtonWithTitle('Cancel')
-    alert.addButtonWithTitle('OK')
-    alert.runModal == OSX::NSAlertSecondButtonReturn
-  end
-  
-  def setup_users_apache_config!
-    execute "/usr/bin/env ruby '#{PASSENGER_CONFIG_INSTALLER}' '#{USERS_APACHE_CONFIG}'"
-  end
-  
   def add(sender)
     NSApp.objc_send(
       :beginSheet, @newApplicationSheet,
@@ -116,5 +80,45 @@ class PrefPanePassenger < NSPreferencePane
   def closeNewApplicationSheet(sender = nil)
     NSApp.endSheet @newApplicationSheet
     @newApplicationSheet.orderOut self
+  end
+  
+  private
+  
+  PASSENGER_VERSION = `/usr/bin/gem list passenger`.rstrip.match(/\(([\d\.]+)[,\)]/)[1] rescue nil
+  USERS_APACHE_CONFIG_LOAD_PASSENGER = [
+    "LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/ext/apache2/mod_passenger.so",
+    "RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/bin/passenger-spawn-server",
+    'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby',
+    'RailsEnv development'
+  ]
+  
+  def passenger_installed?
+    `/usr/bin/gem list passenger`.include? 'passenger'
+  end
+  
+  def install_passenger!
+    apple_script "tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell"
+    alert = OSX::NSAlert.alloc.init
+    alert.messageText = "Passenger not installed"
+    alert.informativeText = "Oh noes, the drama! It seems you haven't installed the Passenger gem yet...\n\nI took the liberty of setting up a terminal for you so that you can install it. Once it's done hit OK to continue."
+    alert.runModal
+  end
+  
+  def is_users_apache_config_setup?
+    conf = File.read(USERS_APACHE_CONFIG)
+    USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
+  end
+  
+  def user_wants_us_to_setup_config?
+    alert = OSX::NSAlert.alloc.init
+    alert.messageText = "Configure Apache"
+    alert.informativeText = "It seems that your Apache configuration hasn’t been supercharged with Passenger deploy-dull-making power yet, would you like to do this now?"
+    alert.addButtonWithTitle('Cancel')
+    alert.addButtonWithTitle('OK')
+    alert.runModal == OSX::NSAlertSecondButtonReturn
+  end
+  
+  def setup_users_apache_config!
+    execute "/usr/bin/env ruby '#{PASSENGER_CONFIG_INSTALLER}' '#{USERS_APACHE_CONFIG}'"
   end
 end

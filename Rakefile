@@ -11,26 +11,22 @@ task :test do
   end
 end
 
-CONF_PATH = "/etc/apache2/users/passenger_apps"
-
-task :install do
-  mkdir_p CONF_PATH
-  2.times do |i|
-    file = "#{CONF_PATH}/test_app_#{i}.vhost.conf"
-    File.open(file, "w") do |f|
-      f << %{
-<VirtualHost *:80>
-  ServerName testapp#{i}.example.local
-  DocumentRoot "/path/to/test/app/#{i}/public"
-</VirtualHost>
-}.sub(/^\n/, '')
-    end
-    sh "cat #{file}"
+CONF_DIR = '/etc/apache2/users/'
+task :remove do
+  require 'osx/cocoa'
+  
+  conf = File.join(CONF_DIR, "#{OSX.NSUserName}.conf")
+  unless File.exist? "#{conf}.backup" and File.exist? "#{conf}.without-passenger"
+    puts "Make sure that both these files exist:\n- #{conf}.backup\n- #{conf}.without-passenger"
+    exit 1
   end
+  
+  dir = File.join(CONF_DIR, "#{OSX.NSUserName}-passenger-apps")
+  sh "sudo rm -rf #{dir}" if File.exist? dir
+  sh "sudo rm #{conf}" if File.exist? conf
+  sh "sudo cp #{conf}.without-passenger #{conf}"
 end
 
-task :remove do
-  2.times do |i|
-    rm "#{CONF_PATH}/test_app_#{i}.vhost.conf"
-  end
+task :remove_all => :remove do
+  sh "sudo gem uninstall passenger"
 end

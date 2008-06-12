@@ -12,7 +12,7 @@ describe "File::backup_and_open" do
   end
   
   after do
-    #remove_tmp
+    remove_tmp
   end
   
   it "should create a backup of the file in the same directory as the file" do
