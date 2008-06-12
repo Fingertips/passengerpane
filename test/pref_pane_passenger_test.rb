@@ -8,6 +8,7 @@ describe "PrefPanePassenger, while loading" do
   
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :applicationsTableView => OSX::NSTableView.alloc.init,
                :installPassengerWarning => OSX::NSView.alloc.init
     
     pref_pane.stubs(:passenger_installed?).returns(true)
@@ -77,6 +78,12 @@ describe "PrefPanePassenger, while loading" do
     pref_pane.mainViewDidLoad
     
     applicationsController.content.should == [blog_stub, paste_stub]
+  end
+  
+  it "should configure the table view to accept drag and drop operations" do
+    pref_pane.mainViewDidLoad
+    applicationsTableView.delegate.should.be pref_pane
+    applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
   end
 end
 

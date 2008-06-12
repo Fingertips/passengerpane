@@ -25,11 +25,15 @@ class PrefPanePassenger < NSPreferencePane
   
   ib_outlet :installPassengerWarning
   
+  ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   kvc_accessor :applications
   
   def mainViewDidLoad
     @applications = [].to_ns
+    
+    @applicationsTableView.delegate = self
+    @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     
     if passenger_installed?
       if is_users_apache_config_setup?
