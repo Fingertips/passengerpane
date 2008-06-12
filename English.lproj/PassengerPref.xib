@@ -172,7 +172,7 @@
 												</object>
 											</object>
 											<double key="NSRowHeight">1.700000e+01</double>
-											<int key="NSTvFlags">-826277888</int>
+											<int key="NSTvFlags">-557842432</int>
 											<int key="NSColumnAutoresizingStyle">4</int>
 											<int key="NSDraggingSourceMaskForLocal">15</int>
 											<int key="NSDraggingSourceMaskForNonLocal">0</int>
@@ -472,7 +472,7 @@ bmdlciBnZW0geWV04oCmA</string>
 							<reference key="NSSuperview" ref="58773895"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="907927097">
-								<int key="NSCellFlags">-2072904127</int>
+								<int key="NSCellFlags">-1804468671</int>
 								<int key="NSCellFlags2">272630784</int>
 								<string key="NSContents"/>
 								<reference key="NSSupport" ref="829849519"/>
@@ -804,6 +804,38 @@ bmdlciBnZW0geWV04oCmA</string>
 					</object>
 					<int key="connectionID">208</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: canRemove</string>
+						<reference key="source" ref="987090916"/>
+						<reference key="destination" ref="467003467"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="987090916"/>
+							<reference key="NSDestination" ref="467003467"/>
+							<string key="NSLabel">enabled: canRemove</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">canRemove</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">211</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: canRemove</string>
+						<reference key="source" ref="435836413"/>
+						<reference key="destination" ref="467003467"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="435836413"/>
+							<reference key="NSDestination" ref="467003467"/>
+							<string key="NSLabel">enabled: canRemove</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">canRemove</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">213</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -846,9 +878,9 @@ bmdlciBnZW0geWV04oCmA</string>
 							<reference ref="987090916"/>
 							<reference ref="796279687"/>
 							<reference ref="992940565"/>
-							<reference ref="510136812"/>
 							<reference ref="352101313"/>
 							<reference ref="435836413"/>
+							<reference ref="510136812"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
 					</object>
@@ -1005,13 +1037,13 @@ bmdlciBnZW0geWV04oCmA</string>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="159912399"/>
-							<reference ref="128351780"/>
 							<reference ref="517072253"/>
 							<reference ref="7637144"/>
 							<reference ref="792338768"/>
 							<reference ref="7241917"/>
 							<reference ref="349466269"/>
 							<reference ref="606304672"/>
+							<reference ref="128351780"/>
 						</object>
 						<reference key="parent" ref="862910865"/>
 						<string key="objectName">NewApplicationSheet</string>
@@ -1256,9 +1288,9 @@ bmdlciBnZW0geWV04oCmA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{472, 76}, {668, 368}}</string>
+					<string>{{393, 163}, {668, 368}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{472, 76}, {668, 368}}</string>
+					<string>{{393, 163}, {668, 368}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 368}}</string>
 					<reference ref="9"/>
@@ -1268,9 +1300,9 @@ bmdlciBnZW0geWV04oCmA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{194, 628}, {454, 132}}</string>
+					<string>{{194, 630}, {454, 132}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{194, 628}, {454, 132}}</string>
+					<string>{{194, 630}, {454, 132}}</string>
 					<reference ref="6"/>
 					<string>{3.40282e+38, 3.40282e+38}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1321,7 +1353,7 @@ bmdlciBnZW0geWV04oCmA</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">208</int>
+			<int key="maxID">213</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
