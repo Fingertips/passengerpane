@@ -23,13 +23,15 @@ class PrefPanePassenger < NSPreferencePane
   ib_outlet :newApplicationPathTextField
   ib_outlet :newApplicationHostTextField
   
+  ib_outlet :installPassengerWarning
+  
   ib_outlet :applicationsController
   kvc_accessor :applications
   
   def mainViewDidLoad
     @applications = [].to_ns
     
-    install_passenger! unless passenger_installed?
+    @installPassengerWarning.hidden = passenger_installed?
     
     if is_users_apache_config_setup?
       Dir.glob(File.join(USERS_APACHE_PASSENGER_APPS_DIR, '*.vhost.conf')).each do |app|
@@ -94,14 +96,6 @@ class PrefPanePassenger < NSPreferencePane
   
   def passenger_installed?
     `/usr/bin/gem list passenger`.include? 'passenger'
-  end
-  
-  def install_passenger!
-    apple_script "tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell"
-    alert = OSX::NSAlert.alloc.init
-    alert.messageText = "Passenger not installed"
-    alert.informativeText = "Oh noes, the drama! It seems you haven't installed the Passenger gem yet...\n\nI took the liberty of setting up a terminal for you so that you can install it. Once it's done hit OK to continue."
-    alert.runModal
   end
   
   def is_users_apache_config_setup?

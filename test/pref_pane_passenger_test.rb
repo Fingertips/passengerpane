@@ -7,24 +7,22 @@ describe "PrefPanePassenger, while loading" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :installPassengerWarning => OSX::NSView.alloc.init
+    
     pref_pane.stubs(:passenger_installed?).returns(true)
   end
   
-  it "should check if the passenger gem is installed" do
-    pref_pane.expects(:passenger_installed?).returns(true)
-    pref_pane.expects(:install_passenger!).times(0)
-    pref_pane.mainViewDidLoad
+  it "should enable the 'install passenger' warning in the UI if the gem can't be found" do
+    installPassengerWarning.hidden = false
     
-    pref_pane.expects(:passenger_installed?).returns(false)
-    pref_pane.expects(:install_passenger!).times(1)
+    pref_pane.stubs(:passenger_installed?).returns(false)
     pref_pane.mainViewDidLoad
-  end
-  
-  it "should tell the user to first install passenger" do
-    pref_pane.expects(:apple_script).with("tell application \"Terminal\"\nactivate\ndo script with command \"sudo gem install passenger && sudo /usr/bin/passenger-install-apache2-module\"\nend tell")
-    OSX::NSAlert.any_instance.expects(:runModal)
-    pref_pane.send :install_passenger!
+    installPassengerWarning.hidden?.should.be false
+    
+    pref_pane.stubs(:passenger_installed?).returns(true)
+    pref_pane.mainViewDidLoad
+    installPassengerWarning.hidden?.should.be true
   end
   
   it "should check if the users apache config is set up" do
