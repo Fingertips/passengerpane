@@ -13,6 +13,7 @@
 		519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */; };
 		519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */; };
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
+		51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B919130E0172C200F45803 /* config_uninstaller.rb */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D202CEE0486D31800D8A456 /* PassengerPref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F506C040013D9D8001CA16C8 /* PassengerPref.tiff */; };
@@ -36,6 +37,7 @@
 		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = shared_passenger_behaviour.rb; sourceTree = "<group>"; };
 		519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = file_backup_and_open.rb; sourceTree = "<group>"; };
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Alerts.icns; sourceTree = "<group>"; };
+		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_uninstaller.rb; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */,
+				51B919130E0172C200F45803 /* config_uninstaller.rb */,
 				51B9190C0E01523900F45803 /* Alerts.icns */,
 				9648B5EE0D195C2F00DC73E2 /* Pref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
@@ -208,6 +211,7 @@
 				519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */,
 				519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */,
 				51B9190D0E01523900F45803 /* Alerts.icns in Resources */,
+				51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

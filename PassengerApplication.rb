@@ -6,7 +6,8 @@ require File.expand_path('../shared_passenger_behaviour', __FILE__)
 class PassengerApplication < NSObject
   include SharedPassengerBehaviour
   
-  CONFIG_INSTALLER = File.expand_path('../config_installer.rb', __FILE__)
+  CONFIG_UNINSTALLER = File.expand_path('../config_uninstaller.rb', __FILE__)
+  CONFIG_INSTALLER   = File.expand_path('../config_installer.rb', __FILE__)
   
   kvc_accessor :host, :path
   
@@ -41,9 +42,10 @@ class PassengerApplication < NSObject
     Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
   end
   
-  # def remove!
-  #   p "remove #{self}"
-  # end
+  def remove
+    p "Removing application: #{path}"
+    execute "/usr/bin/env ruby '#{CONFIG_UNINSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}'"
+  end
   
   def save_config!
     p "Saving configuration: #{config_path}"

@@ -106,7 +106,7 @@ describe "PrefPanePassenger, in general" do
   
   it "should remove the applications that are selected in the applicationsController (which resembles the table view in the ui)" do
     remove_app, stay_app = stub("PassengerApplication: should be removed"), stub("PassengerApplication: should stay")
-    remove_app.expects(:remove!)
+    remove_app.expects(:remove)
     
     applicationsController.content = [remove_app, stay_app]
     applicationsController.selectedObjects = [remove_app]

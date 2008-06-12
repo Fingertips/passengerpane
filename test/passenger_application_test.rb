@@ -109,4 +109,9 @@ describe "PassengerApplication, in general" do
     Kernel.expects(:system).with("/usr/bin/touch '/Users/het-manfred/rails code/blog/tmp/restart.txt'")
     passenger_app.restart
   end
+  
+  it "should remove an application" do
+    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_UNINSTALLER}' '#{passenger_app.config_path}' '/etc/hosts' 'het-manfreds-blog.local'")
+    passenger_app.remove
+  end
 end
