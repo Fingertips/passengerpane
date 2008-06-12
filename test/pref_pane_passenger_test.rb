@@ -118,7 +118,7 @@ describe "PrefPanePassenger, in general" do
   it "should open a directory browse panel and use the result as the path for the current selected application" do
     OSX::NSOpenPanel.any_instance.expects(:canChooseDirectories=).with(true)
     OSX::NSOpenPanel.any_instance.expects(:canChooseFiles=).with(false)
-    OSX::NSOpenPanel.any_instance.stubs(:runModalForTypes).returns(OSX::NSOKButton)
+    OSX::NSOpenPanel.any_instance.stubs(:runModal).returns(OSX::NSOKButton)
     OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/Blog'])
     
     pref_pane.browse

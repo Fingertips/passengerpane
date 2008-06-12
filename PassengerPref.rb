@@ -64,7 +64,7 @@ class PrefPanePassenger < NSPreferencePane
     panel = NSOpenPanel.openPanel
     panel.canChooseDirectories = true
     panel.canChooseFiles = false
-    if panel.runModalForTypes([]) == NSOKButton
+    if panel.runModal == NSOKButton
       file = panel.filenames.first
       @newApplicationPathTextField.stringValue = file
       @newApplicationHostTextField.stringValue = "#{File.basename(file).downcase}.local"
