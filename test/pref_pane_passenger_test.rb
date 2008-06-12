@@ -28,8 +28,8 @@ describe "PrefPanePassenger, while loading" do
     File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns(%{
       </Directory>
       
-      LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PrefPanePassenger::PASSENGER_VERSION}/ext/apache2/mod_passenger.so
-      RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PrefPanePassenger::PASSENGER_VERSION}/bin/passenger-spawn-server
+      LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-25.3.1/ext/apache2/mod_passenger.so
+      RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-25.3.1/bin/passenger-spawn-server
       RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
       RailsEnv development
     })

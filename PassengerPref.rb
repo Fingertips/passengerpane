@@ -95,10 +95,9 @@ class PrefPanePassenger < NSPreferencePane
   
   private
   
-  PASSENGER_VERSION = `/usr/bin/gem list passenger`.rstrip.match(/\(([\d\.]+)[,\)]/)[1] rescue nil
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [
-    "LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/ext/apache2/mod_passenger.so",
-    "RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{PASSENGER_VERSION}/bin/passenger-spawn-server",
+    'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+/ext/apache2/mod_passenger.so',
+    'RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+/bin/passenger-spawn-server',
     'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby',
     'RailsEnv development'
   ]
@@ -109,7 +108,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def is_users_apache_config_setup?
     conf = File.read(USERS_APACHE_CONFIG)
-    USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |line| conf.include? line }
+    USERS_APACHE_CONFIG_LOAD_PASSENGER.all? { |regexp| conf.match regexp }
   end
   
   def user_wants_us_to_setup_config?
