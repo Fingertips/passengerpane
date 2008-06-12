@@ -16,6 +16,8 @@ class File
       if read(file) == before << data
         FileUtils.rm backup
       else
+        FileUtils.rm file
+        FileUtils.cp backup, file
         raise FileNotSuccesfullyWrittenError, "Unable to write to: #{file}"
       end
     end

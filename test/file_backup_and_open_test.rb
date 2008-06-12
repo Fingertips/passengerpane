@@ -12,7 +12,7 @@ describe "File::backup_and_open" do
   end
   
   after do
-    remove_tmp
+    #remove_tmp
   end
   
   it "should create a backup of the file in the same directory as the file" do
@@ -45,9 +45,19 @@ describe "File::backup_and_open" do
   end
   
   it "should place the backup back and raise an exception if something went wrong while writing" do
-    File.stubs(:open)
+    # This is because FileUtils::cp internally uses File::open.
+    FileUtils.stubs(:cp).with do |from, to|
+      `cp #{from} #{to}`
+    end
+    
+    # Simulate a write operation going horribly wrong, i.e. emptying the file.
+    File.stubs(:open).with do |file, mode|
+      FileUtils.rm @tmp_file
+      `touch #{@tmp_file}`
+    end
+    
     lambda { File.backup_and_open(@tmp_file, 'a', "\nline3") }.should.raise File::FileNotSuccesfullyWrittenError
-    File.open(@tmp_file, 'r') { |f| f.read_all.should == "line1\nline2" }
+    `cat #{@tmp_file}`.should == "line1\nline2"
   end
   
   private
