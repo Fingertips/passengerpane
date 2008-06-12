@@ -14,15 +14,11 @@ describe "PrefPanePassenger, while loading" do
   end
   
   it "should enable the 'install passenger' warning in the UI if the gem can't be found" do
-    installPassengerWarning.hidden = false
+    installPassengerWarning.hidden = true
     
     pref_pane.stubs(:passenger_installed?).returns(false)
     pref_pane.mainViewDidLoad
     installPassengerWarning.hidden?.should.be false
-    
-    pref_pane.stubs(:passenger_installed?).returns(true)
-    pref_pane.mainViewDidLoad
-    installPassengerWarning.hidden?.should.be true
   end
   
   it "should check if the users apache config is set up" do
@@ -38,6 +34,12 @@ describe "PrefPanePassenger, while loading" do
       RailsEnv development
     })
     pref_pane.send(:is_users_apache_config_setup?).should.be true
+  end
+  
+  it "should not check the apache configuration if the gem hasn't been found" do
+    pref_pane.stubs(:passenger_installed?).returns(false)
+    pref_pane.expects(:is_users_apache_config_setup?).times(0)
+    pref_pane.mainViewDidLoad
   end
   
   it "should ask the user if we should set up the passenger apache config for them" do
