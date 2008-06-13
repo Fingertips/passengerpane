@@ -30,6 +30,13 @@ class PassengerApplication < NSObject
     end
   end
   
+  def initWithHost_path(host, path)
+    if init
+      @host, @path = host, path
+      self
+    end
+  end
+  
   def start
     p "Starting Rails application (restarting Apache gracefully): #{@path}"
     save_config!

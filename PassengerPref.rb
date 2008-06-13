@@ -106,9 +106,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
     info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).each do |path|
-      app = PassengerApplication.alloc.init
-      app.path, app.host = path, default_hostname_for_path(path)
-      @applicationsController.addObject app
+      @applicationsController.addObject PassengerApplication.alloc.initWithHost_path(default_hostname_for_path(path), path)
     end
   end
   
