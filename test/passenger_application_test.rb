@@ -14,6 +14,7 @@ describe "PassengerApplication, with a new application" do
     passenger_app.host.should == ''
     assigns(:dirty).should.be false
     assigns(:new_app).should.be true
+    assigns(:host_set_from_path).should.be false
   end
   
   it "should not start the application if only one of host or path is entered" do
@@ -22,6 +23,16 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
     passenger_app.setValue_forKey('', 'host')
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
+  end
+  
+  it "should set the default host if a path is entered (probably via browse)" do
+    passenger_app.expects(:start).times(0)
+    passenger_app.expects(:willChangeValueForKey).with('host')
+    passenger_app.expects(:didChangeValueForKey).with('host')
+    passenger_app.expects(:willChangeValueForKey).with('path')
+    passenger_app.expects(:didChangeValueForKey).with('path')
+    passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
+    assigns(:host).should == 'blog.local'
   end
   
   it "should start the application for the first time once a valid host and path are entered" do

@@ -22,6 +22,7 @@ class PassengerApplication < NSObject
     if super_init
       @new_app = true
       @dirty = false
+      @host_set_from_path = false
       @host, @path = '', ''
       self
     end
@@ -39,7 +40,8 @@ class PassengerApplication < NSObject
   
   def initWithPath(path)
     if init
-      @path, @host = path, "#{File.basename(path).downcase}.local"
+      @path = path
+      set_default_host_from_path(path)
       self
     end
   end
@@ -74,10 +76,21 @@ class PassengerApplication < NSObject
   def rbSetValue_forKey(value, key)
     super
     @dirty = true
-    (@new_app ? start : restart) unless @host.empty? or @path.empty?
+    (@new_app ? start : restart) unless @host_set_from_path or @host.empty? or @path.empty?
+    @host_set_from_path = false
+    set_default_host_from_path(@path) if @host.empty? and not @path.empty?
   end
   
   def to_hash
     {'config_path' => config_path, 'host' => @host.to_s, 'path' => @path.to_s}
+  end
+  
+  private
+  
+  def set_default_host_from_path(path)
+    willChangeValueForKey 'host'
+    @host = "#{File.basename(path).downcase}.local"
+    @host_set_from_path = true
+    didChangeValueForKey 'host'
   end
 end

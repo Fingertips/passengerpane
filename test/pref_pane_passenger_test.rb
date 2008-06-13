@@ -85,9 +85,9 @@ describe "PrefPanePassenger, in general" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
-               :newApplicationPathTextField => OSX::NSTextField.alloc.init,
-               :newApplicationHostTextField => OSX::NSTextField.alloc.init
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init# ,
+    #                :newApplicationPathTextField => OSX::NSTextField.alloc.init,
+    #                :newApplicationHostTextField => OSX::NSTextField.alloc.init
                
     pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
     pref_pane.stubs(:install_passenger!).returns(true)
@@ -126,12 +126,12 @@ describe "PrefPanePassenger, in general" do
     OSX::NSOpenPanel.any_instance.expects(:runModalForDirectory_file_types).with(app.path, nil, nil).returns(OSX::NSOKButton)
     OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/Blog'])
     
+    app.expects(:setValue_forKey).with('/some/path/to/Blog', 'path')
+    
     pref_pane.browse
-    newApplicationPathTextField.stringValue.should == '/some/path/to/Blog'
-    newApplicationHostTextField.stringValue.should == 'blog.local'
   end
   
-  it "should add a new application with the values from the form and close the sheet" do
+  xit "should add a new application with the values from the form and close the sheet" do
     newApplicationPathTextField.stringValue = '/some/path/to/Blog'
     newApplicationHostTextField.stringValue = 'blog.local'
     
