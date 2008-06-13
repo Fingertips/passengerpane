@@ -32,7 +32,7 @@ class PrefPanePassenger < NSPreferencePane
   def mainViewDidLoad
     @applications = [].to_ns
     
-    @applicationsTableView.delegate = self
+    @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     
     if passenger_installed?
@@ -48,7 +48,7 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  def add(sender)
+  def add(sender = nil)
     NSApp.objc_send(
       :beginSheet, @newApplicationSheet,
       :modalForWindow, mainView.window,
@@ -68,11 +68,7 @@ class PrefPanePassenger < NSPreferencePane
     panel = NSOpenPanel.openPanel
     panel.canChooseDirectories = true
     panel.canChooseFiles = false
-    if panel.runModal == NSOKButton
-      file = panel.filenames.first
-      @newApplicationPathTextField.stringValue = file
-      @newApplicationHostTextField.stringValue = "#{File.basename(file).downcase}.local"
-    end
+    fill_in_new_application_text_fields_with_file(panel.filenames.first) if panel.runModal == NSOKButton
   end
   
   def addApplicationFromSheet(sender = nil)
@@ -97,7 +93,28 @@ class PrefPanePassenger < NSPreferencePane
     alert.runModal
   end
   
+  # Applications NSTableView dataSource drag and drop methods
+  
+  def tableView_validateDrop_proposedRow_proposedDropOperation(tableView, info, row, operation)
+    files = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType)
+    if files.length == 1 and File.directory?(files.first)
+      OSX::NSDragOperationGeneric
+    else
+      OSX::NSDragOperationNone
+    end
+  end
+  
+  def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
+    fill_in_new_application_text_fields_with_file info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).first
+    add
+  end
+  
   private
+  
+  def fill_in_new_application_text_fields_with_file(file)
+    @newApplicationPathTextField.stringValue = file
+    @newApplicationHostTextField.stringValue = "#{File.basename(file).downcase}.local"
+  end
   
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [
     'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+/ext/apache2/mod_passenger.so',

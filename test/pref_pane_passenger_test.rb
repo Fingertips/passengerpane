@@ -79,12 +79,6 @@ describe "PrefPanePassenger, while loading" do
     
     applicationsController.content.should == [blog_stub, paste_stub]
   end
-  
-  it "should configure the table view to accept drag and drop operations" do
-    pref_pane.mainViewDidLoad
-    applicationsTableView.delegate.should.be pref_pane
-    applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
-  end
 end
 
 describe "PrefPanePassenger, in general" do
@@ -153,5 +147,80 @@ describe "PrefPanePassenger, in general" do
     
     pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\n\n")
     pref_pane.send(:passenger_installed?).should.be false
+  end
+end
+
+describe "PrefPanePassenger, with drag and drop support" do
+  tests PrefPanePassenger
+  
+  def after_setup
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :applicationsTableView => OSX::NSTableView.alloc.init,
+               :newApplicationPathTextField => OSX::NSTextField.alloc.init,
+               :newApplicationHostTextField => OSX::NSTextField.alloc.init
+    
+    pref_pane.stubs(:passenger_installed?).returns(true)
+    
+    @tmp = File.expand_path('../tmp')
+    FileUtils.mkdir_p @tmp
+  end
+  
+  def after_teardown
+    FileUtils.rm_rf @tmp
+  end
+  
+  it "should configure the table view to accept drag and drop operations" do
+    pref_pane.mainViewDidLoad
+    applicationsTableView.dataSource.should.be pref_pane
+    applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
+  end
+  
+  it "should allow 1 directory to be dropped" do
+    stub_pb_and_info_with_one_directory
+    pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
+  end
+  
+  it "should not allow multiple directories to be dropped" do
+    dir1 = File.join(@tmp, 'dir1')
+    dir2 = File.join(@tmp, 'dir2')
+    dirs = [dir1, dir2]
+    dirs.each { |f| FileUtils.mkdir_p f }
+    stub_pb_and_info_with dirs
+    
+    pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
+  end
+  
+  it "should not allow files to be dropped" do
+    file = File.join(@tmp, 'file')
+    `touch #{file}`
+    stub_pb_and_info_with [file]
+    
+    pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
+  end
+  
+  it "should open the newApplicationSheet if a directory is dropped" do
+    pref_pane.expects(:add)
+    
+    stub_pb_and_info_with_one_directory
+    pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
+    
+    newApplicationPathTextField.stringValue.should == @dir
+    newApplicationHostTextField.stringValue.should == 'someapp.local'
+  end
+  
+  private
+  
+  def stub_pb_and_info_with_one_directory
+    @dir = File.join(@tmp, 'SomeApp')
+    FileUtils.mkdir_p @dir
+    FileUtils.mkdir_p @dir
+    stub_pb_and_info_with [@dir]
+  end
+  
+  def stub_pb_and_info_with(files)
+    @pb = stub("NSPasteboard")
+    @info = stub("NSDraggingInfo")
+    @info.stubs(:draggingPasteboard).returns(@pb)
+    @pb.stubs(:propertyListForType).with(OSX::NSFilenamesPboardType).returns(files.to_ns)
   end
 end
