@@ -71,7 +71,9 @@ class PrefPanePassenger < NSPreferencePane
     panel = NSOpenPanel.openPanel
     panel.canChooseDirectories = true
     panel.canChooseFiles = false
-    fill_in_new_application_text_fields_with_file(panel.filenames.first) if panel.runModal == NSOKButton
+    if panel.runModalForDirectory_file_types(@applicationsController.selectedObjects.first.path, nil, nil) == NSOKButton
+      fill_in_new_application_text_fields_with_file(panel.filenames.first)
+    end
   end
   
   # todo: remove
