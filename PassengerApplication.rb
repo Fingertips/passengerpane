@@ -30,9 +30,9 @@ class PassengerApplication < NSObject
     end
   end
   
-  def initWithHost_path(host, path)
+  def initWithPath(path)
     if init
-      @host, @path = host, path
+      @path, @host = path, "#{File.basename(path).downcase}.local"
       self
     end
   end

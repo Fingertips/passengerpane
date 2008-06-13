@@ -19,6 +19,7 @@ class PrefPanePassenger < NSPreferencePane
   
   PASSENGER_CONFIG_INSTALLER = File.expand_path('../passenger_config_installer.rb', __FILE__)
   
+  # todo: remove
   ib_outlet :newApplicationSheet
   ib_outlet :newApplicationPathTextField
   ib_outlet :newApplicationHostTextField
@@ -48,6 +49,7 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
+  # todo: remove
   def add(sender = nil)
     NSApp.objc_send(
       :beginSheet, @newApplicationSheet,
@@ -71,6 +73,7 @@ class PrefPanePassenger < NSPreferencePane
     fill_in_new_application_text_fields_with_file(panel.filenames.first) if panel.runModal == NSOKButton
   end
   
+  # todo: remove
   def addApplicationFromSheet(sender = nil)
     app = PassengerApplication.alloc.init
     app.path = @newApplicationPathTextField.stringValue
@@ -81,6 +84,7 @@ class PrefPanePassenger < NSPreferencePane
     closeNewApplicationSheet
   end
   
+  # todo: remove
   def closeNewApplicationSheet(sender = nil)
     NSApp.endSheet @newApplicationSheet
     @newApplicationSheet.orderOut self
@@ -106,16 +110,18 @@ class PrefPanePassenger < NSPreferencePane
   
   def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
     info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).each do |path|
-      @applicationsController.addObject PassengerApplication.alloc.initWithHost_path(default_hostname_for_path(path), path)
+      @applicationsController.addObject PassengerApplication.alloc.initWithPath(path)
     end
   end
   
   private
   
+  # todo: remove
   def default_hostname_for_path(path)
     "#{File.basename(path).downcase}.local"
   end
   
+  # todo: remove
   def fill_in_new_application_text_fields_with_file(file)
     @newApplicationPathTextField.stringValue = file
     @newApplicationHostTextField.stringValue = default_hostname_for_path(file)

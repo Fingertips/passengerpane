@@ -35,6 +35,10 @@ describe "PassengerApplication, with a new application" do
     passenger_app.expects(:execute).with('/usr/sbin/apachectl graceful')
     passenger_app.start
   end
+  
+  it "should set a default host name if initialized with initWithPath" do
+    PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp").host.should == 'railsapp.local'
+  end
 end
 
 describe "PassengerApplication, in general" do
