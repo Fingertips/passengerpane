@@ -7,6 +7,7 @@ module SharedPassengerBehaviour
   def execute(command)
     apple_script "do shell script \"#{command}\" with administrator privileges"
   end
+  module_function :execute
   
   def apple_script(command)
     script = NSAppleScript.alloc.initWithSource(command)
