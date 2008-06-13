@@ -14,6 +14,12 @@
 		519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */; };
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
 		51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B919130E0172C200F45803 /* config_uninstaller.rb */; };
+		51B9191E0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */; };
+		51B919250E02B93400F45803 /* ButtonBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 51B919200E02B93400F45803 /* ButtonBackground.tiff */; };
+		51B919260E02B93400F45803 /* Minus.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919210E02B93400F45803 /* Minus.tif */; };
+		51B919270E02B93400F45803 /* MinusPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919220E02B93400F45803 /* MinusPressed.tif */; };
+		51B919280E02B93400F45803 /* Plus.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919230E02B93400F45803 /* Plus.tif */; };
+		51B919290E02B93400F45803 /* PlusPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919240E02B93400F45803 /* PlusPressed.tif */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D202CEE0486D31800D8A456 /* PassengerPref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F506C040013D9D8001CA16C8 /* PassengerPref.tiff */; };
@@ -38,6 +44,12 @@
 		519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = file_backup_and_open.rb; sourceTree = "<group>"; };
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Alerts.icns; sourceTree = "<group>"; };
 		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_uninstaller.rb; sourceTree = "<group>"; };
+		51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = TheButtonWhichOnlyLooksPretty.rb; sourceTree = "<group>"; };
+		51B919200E02B93400F45803 /* ButtonBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ButtonBackground.tiff; sourceTree = "<group>"; };
+		51B919210E02B93400F45803 /* Minus.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Minus.tif; sourceTree = "<group>"; };
+		51B919220E02B93400F45803 /* MinusPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MinusPressed.tif; sourceTree = "<group>"; };
+		51B919230E02B93400F45803 /* Plus.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Plus.tif; sourceTree = "<group>"; };
+		51B919240E02B93400F45803 /* PlusPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PlusPressed.tif; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
@@ -87,6 +99,11 @@
 			isa = PBXGroup;
 			children = (
 				519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */,
+				51B919200E02B93400F45803 /* ButtonBackground.tiff */,
+				51B919210E02B93400F45803 /* Minus.tif */,
+				51B919220E02B93400F45803 /* MinusPressed.tif */,
+				51B919230E02B93400F45803 /* Plus.tif */,
+				51B919240E02B93400F45803 /* PlusPressed.tif */,
 				51B919130E0172C200F45803 /* config_uninstaller.rb */,
 				51B9190C0E01523900F45803 /* Alerts.icns */,
 				9648B5EE0D195C2F00DC73E2 /* Pref.xib */,
@@ -133,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* Passenger.prefPane */,
+				51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,6 +230,12 @@
 				519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */,
 				51B9190D0E01523900F45803 /* Alerts.icns in Resources */,
 				51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */,
+				51B9191E0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb in Resources */,
+				51B919250E02B93400F45803 /* ButtonBackground.tiff in Resources */,
+				51B919260E02B93400F45803 /* Minus.tif in Resources */,
+				51B919270E02B93400F45803 /* MinusPressed.tif in Resources */,
+				51B919280E02B93400F45803 /* Plus.tif in Resources */,
+				51B919290E02B93400F45803 /* PlusPressed.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

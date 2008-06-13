@@ -13,6 +13,7 @@ OSX.require_framework 'PreferencePanes'
 
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
+require File.expand_path('../TheButtonWhichOnlyLooksPretty', __FILE__)
 
 class PrefPanePassenger < NSPreferencePane
   include SharedPassengerBehaviour
