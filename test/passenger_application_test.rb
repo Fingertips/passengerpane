@@ -31,8 +31,7 @@ describe "PassengerApplication, with a new application" do
   end
   
   it "should start the application by gracefully restarting apache" do
-    passenger_app.expects(:save_config!).times(1)
-    passenger_app.expects(:execute).with('/usr/sbin/apachectl graceful')
+    passenger_app.expects(:save_config!).with('/usr/sbin/apachectl graceful').times(1)
     passenger_app.start
   end
   

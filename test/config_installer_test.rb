@@ -19,12 +19,16 @@ describe "Config installer" do
     host = "het-manfreds-blog.local"
     path = "/User/het-manfred/rails code/blog"
     
-    `/usr/bin/env ruby #{@config_installer} '#{vhost_file}' '#{hosts_file}' '#{host}' '#{path}'`
+    file_which_is_created_by_the_optional_extra_command = File.join(@tmp, 'file_from_extra_command.txt')
+    
+    `/usr/bin/env ruby #{@config_installer} '#{vhost_file}' '#{hosts_file}' '#{host}' '#{path}' 'touch #{file_which_is_created_by_the_optional_extra_command}'`
     
     vhost = File.read(vhost_file)
     vhost.should == "<VirtualHost *:80>\n  ServerName #{host}\n  DocumentRoot \"#{path}/public\"\n</VirtualHost>\n"
     
     hosts = File.read(hosts_file)
     hosts.should == "127.0.0.1\t\t\tsome-other.local\n127.0.0.1\t\t\t#{host}"
+    
+    File.should.exist file_which_is_created_by_the_optional_extra_command
   end
 end

@@ -39,8 +39,7 @@ class PassengerApplication < NSObject
   
   def start
     p "Starting Rails application (restarting Apache gracefully): #{@path}"
-    save_config!
-    execute '/usr/sbin/apachectl graceful'
+    save_config! '/usr/sbin/apachectl graceful'
   end
   
   def restart(sender = nil)
@@ -54,9 +53,11 @@ class PassengerApplication < NSObject
     execute "/usr/bin/env ruby '#{CONFIG_UNINSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}'"
   end
   
-  def save_config!
+  def save_config!(extra_command = nil)
     p "Saving configuration: #{config_path}"
-    execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}' '#{@path}'"
+    command = "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '#{config_path}' '/etc/hosts' '#{@host}' '#{@path}'"
+    command << " '#{extra_command}'" if extra_command
+    execute command
   end
   
   def config_path
