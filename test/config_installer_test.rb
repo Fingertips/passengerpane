@@ -1,4 +1,5 @@
 require File.expand_path('../test_helper', __FILE__)
+require 'yaml'
 
 describe "Config installer" do
   before do
@@ -21,7 +22,7 @@ describe "Config installer" do
     
     file_which_is_created_by_the_optional_extra_command = File.join(@tmp, 'file_from_extra_command.txt')
     
-    `/usr/bin/env ruby #{@config_installer} '#{vhost_file}' '#{hosts_file}' '#{host}' '#{path}' 'touch #{file_which_is_created_by_the_optional_extra_command}'`
+    `/usr/bin/env ruby #{@config_installer} '#{hosts_file}' '#{ [{ 'config_path' => vhost_file, 'host' => host, 'path' => path }].to_yaml }' 'touch #{file_which_is_created_by_the_optional_extra_command}'`
     
     vhost = File.read(vhost_file)
     vhost.should == "<VirtualHost *:80>\n  ServerName #{host}\n  DocumentRoot \"#{path}/public\"\n</VirtualHost>\n"

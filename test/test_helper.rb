@@ -16,4 +16,5 @@ require File.expand_path('../../shared_passenger_behaviour', __FILE__)
 module SharedPassengerBehaviour
   # Silencio!
   def p(obj); end
+  module_function :p
 end

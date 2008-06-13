@@ -190,15 +190,16 @@ describe "PrefPanePassenger, with drag and drop support" do
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
   end
   
-  it "should add an application to the applications for each directory" do
+  it "should add an application to the applicationsController for each directory and then start them" do
     stub_pb_and_info_with_two_directories
-    pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
     
-    app1, app2 = applicationsController.content
-    app1.path.should == @dirs.first
-    app2.path.should == @dirs.last
-    app1.host.should == 'app1.local'
-    app2.host.should == 'app2.local'
+    apps_should_be = lambda do |apps|
+      apps.map { |app| app.path } == @dirs and apps.map { |app| app.host } == %w{ app1.local app2.local }
+    end
+    
+    PassengerApplication.expects(:startApplications).with &apps_should_be
+    pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
+    apps_should_be.call(applicationsController.content)
   end
   
   private

@@ -11,7 +11,9 @@ class PassengerApplication < NSObject
   CONFIG_INSTALLER   = File.expand_path('../config_installer.rb', __FILE__)
   
   def self.startApplications(apps)
-    SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{apps.map { |app| app.to_hash }.to_yaml}'"
+    data = apps.to_ruby.map { |app| app.to_hash }.to_yaml
+    SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
+    SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{data}' '/usr/sbin/apachectl graceful'"
   end
   
   kvc_accessor :host, :path
@@ -60,7 +62,7 @@ class PassengerApplication < NSObject
   
   def save_config!(extra_command = nil)
     p "Saving configuration: #{config_path}"
-    command = "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{config_path}' '#{@host}' '#{@path}'"
+    command = "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{[to_hash].to_yaml}'"
     command << " '#{extra_command}'" if extra_command
     execute command
   end
@@ -76,6 +78,6 @@ class PassengerApplication < NSObject
   end
   
   def to_hash
-    {'config_path' => config_path, 'host' => @host, 'path' => @path}
+    {'config_path' => config_path, 'host' => @host.to_s, 'path' => @path.to_s}
   end
 end

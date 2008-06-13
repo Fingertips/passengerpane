@@ -2,20 +2,23 @@
 
 require 'osx/cocoa'
 require File.expand_path('../file_backup_and_open', __FILE__)
+require 'yaml'
 
-vhost_file, hosts_file, host, app_path, extra_command = ARGV
+hosts_file, data, extra_command = ARGV
 
-vhost = %{
+YAML.load(data).each do |app|
+  vhost = %{
 <VirtualHost *:80>
-  ServerName #{host}
-  DocumentRoot "#{File.join(app_path, 'public')}"
+  ServerName #{app['host']}
+  DocumentRoot "#{File.join(app['path'], 'public')}"
 </VirtualHost>
 }.sub(/^\n/, '')
-
-OSX::NSLog("Will write file: #{vhost_file}\nData: #{vhost}")
-File.backup_and_open(vhost_file, 'w', vhost)
-
-OSX::NSLog("Will append to file: #{hosts_file}\nData: #{host}")
-File.backup_and_open(hosts_file, 'a', "\n127.0.0.1\t\t\t#{host}")
+  
+  OSX::NSLog("Will write file: #{app['config_path']}\nData: #{vhost}")
+  File.backup_and_open(app['config_path'], 'w', vhost)
+  
+  OSX::NSLog("Will append to file: #{hosts_file}\nData: #{app['host']}")
+  File.backup_and_open(hosts_file, 'a', "\n127.0.0.1\t\t\t#{app['host']}")
+end
 
 system(extra_command) if extra_command

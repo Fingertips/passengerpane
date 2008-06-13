@@ -13,8 +13,10 @@ module SharedPassengerBehaviour
     script = NSAppleScript.alloc.initWithSource(command)
     script.performSelector_withObject("executeAndReturnError:", nil)
   end
+  module_function :apple_script
   
   def p(obj)
     NSLog(obj.is_a?(String) ? obj : obj.inspect)
   end
+  module_function :p
 end

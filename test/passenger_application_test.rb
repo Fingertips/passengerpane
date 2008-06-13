@@ -72,7 +72,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should be able to save the config file" do
-    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{passenger_app.config_path}' 'het-manfreds-blog.local' '/Users/het-manfred/rails code/blog'")
+    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{[passenger_app.to_hash].to_yaml}'")
     passenger_app.save_config!
   end
   
@@ -118,16 +118,18 @@ describe "PassengerApplication, in general" do
     passenger_app.remove
   end
   
-  it "should return it's attributes as a hash" do
-    passenger_app.to_hash.should == {'config_path' => passenger_app.config_path, 'host' => passenger_app.host, 'path' => passenger_app.path}
+  it "should return it's attributes as a hash without NSStrings etc" do
+    assigns(:host, 'app.local'.to_ns)
+    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path }
+    passenger_app.to_hash.to_yaml.should.not.include 'NSCFString'
   end
   
   it "should start multiple applications at once" do
-    app1 = PassengerApplication.alloc.initWithPath('/rails/app1')
-    app2 = PassengerApplication.alloc.initWithPath('/rails/app2')
+    app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
+    app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
     
-    SharedPassengerBehaviour.expects(:execute).times(1).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{[app1.to_hash, app2.to_hash].to_yaml}'")
+    SharedPassengerBehaviour.expects(:execute).times(1).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{[app1.to_hash, app2.to_hash].to_yaml}' '/usr/sbin/apachectl graceful'")
     
-    PassengerApplication.startApplications [app1, app2]
+    PassengerApplication.startApplications [app1, app2].to_ns
   end
 end
