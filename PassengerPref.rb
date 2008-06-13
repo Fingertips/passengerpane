@@ -97,7 +97,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def tableView_validateDrop_proposedRow_proposedDropOperation(tableView, info, row, operation)
     files = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType)
-    if files.length == 1 and File.directory?(files.first)
+    if files.all? { |f| File.directory? f }
       OSX::NSDragOperationGeneric
     else
       OSX::NSDragOperationNone
@@ -105,15 +105,22 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
-    fill_in_new_application_text_fields_with_file info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).first
-    add
+    info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).each do |path|
+      app = PassengerApplication.alloc.init
+      app.path, app.host = path, default_hostname_for_path(path)
+      @applicationsController.addObject app
+    end
   end
   
   private
   
+  def default_hostname_for_path(path)
+    "#{File.basename(path).downcase}.local"
+  end
+  
   def fill_in_new_application_text_fields_with_file(file)
     @newApplicationPathTextField.stringValue = file
-    @newApplicationHostTextField.stringValue = "#{File.basename(file).downcase}.local"
+    @newApplicationHostTextField.stringValue = default_hostname_for_path(file)
   end
   
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [

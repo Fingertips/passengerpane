@@ -175,46 +175,40 @@ describe "PrefPanePassenger, with drag and drop support" do
     applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
   end
   
-  it "should allow 1 directory to be dropped" do
-    stub_pb_and_info_with_one_directory
+  it "should allow multiple directories to be dropped" do
+    stub_pb_and_info_with_two_directories
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
   end
   
-  it "should not allow multiple directories to be dropped" do
-    dir1 = File.join(@tmp, 'dir1')
-    dir2 = File.join(@tmp, 'dir2')
-    dirs = [dir1, dir2]
-    dirs.each { |f| FileUtils.mkdir_p f }
-    stub_pb_and_info_with dirs
-    
-    pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
-  end
-  
   it "should not allow files to be dropped" do
+    dir = File.join(@tmp, 'dir')
+    FileUtils.mkdir_p dir
     file = File.join(@tmp, 'file')
     `touch #{file}`
-    stub_pb_and_info_with [file]
+    stub_pb_and_info_with [file, dir]
     
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
   end
   
-  it "should open the newApplicationSheet if a directory is dropped" do
-    pref_pane.expects(:add)
-    
-    stub_pb_and_info_with_one_directory
+  it "should add an application to the applications for each directory" do
+    stub_pb_and_info_with_two_directories
     pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
     
-    newApplicationPathTextField.stringValue.should == @dir
-    newApplicationHostTextField.stringValue.should == 'someapp.local'
+    app1, app2 = applicationsController.content
+    app1.path.should == @dirs.first
+    app2.path.should == @dirs.last
+    app1.host.should == 'app1.local'
+    app2.host.should == 'app2.local'
   end
   
   private
   
-  def stub_pb_and_info_with_one_directory
-    @dir = File.join(@tmp, 'SomeApp')
-    FileUtils.mkdir_p @dir
-    FileUtils.mkdir_p @dir
-    stub_pb_and_info_with [@dir]
+  def stub_pb_and_info_with_two_directories
+    dir1 = File.join(@tmp, 'app1')
+    dir2 = File.join(@tmp, 'app2')
+    @dirs = [dir1, dir2]
+    @dirs.each { |f| FileUtils.mkdir_p f }
+    stub_pb_and_info_with @dirs
   end
   
   def stub_pb_and_info_with(files)
