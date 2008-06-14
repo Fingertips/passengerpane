@@ -10,16 +10,22 @@ class PassengerApplication < NSObject
   CONFIG_UNINSTALLER = File.expand_path('../config_uninstaller.rb', __FILE__)
   CONFIG_INSTALLER   = File.expand_path('../config_installer.rb', __FILE__)
   
+  DEVELOPMENT = 0
+  PRODUCTION = 1
+  
   def self.startApplications(apps)
     data = apps.to_ruby.map { |app| app.to_hash }.to_yaml
     SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
     SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{data}' '/usr/sbin/apachectl graceful'"
   end
   
-  kvc_accessor :host, :path, :dirty, :valid
+  kvc_accessor :host, :path, :dirty, :valid, :environment, :override_rewrite_rules
   
   def init
     if super_init
+      @environment = DEVELOPMENT
+      @override_rewrite_rules = false
+      
       @new_app = true
       @dirty = @valid = false
       @host, @path = '', ''
