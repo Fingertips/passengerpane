@@ -14,7 +14,7 @@ describe "PassengerApplication, with a new application" do
     passenger_app.host.should == ''
     assigns(:dirty).should.be false
     assigns(:new_app).should.be true
-    assigns(:host_set_from_path).should.be false
+    assigns(:valid).should.be false
   end
   
   it "should not start the application if only one of host or path is entered" do
@@ -26,19 +26,13 @@ describe "PassengerApplication, with a new application" do
   end
   
   it "should set the default host if a path is entered (probably via browse)" do
-    passenger_app.expects(:start).times(0)
-    passenger_app.expects(:willChangeValueForKey).with('host')
-    passenger_app.expects(:didChangeValueForKey).with('host')
-    passenger_app.expects(:willChangeValueForKey).with('path')
-    passenger_app.expects(:didChangeValueForKey).with('path')
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
     assigns(:host).should == 'blog.local'
   end
   
-  it "should start the application for the first time once a valid host and path are entered" do
+  it "should start the application for the first time" do
     passenger_app.expects(:start).times(1)
-    passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
-    passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
+    passenger_app.apply
   end
   
   it "should start the application by gracefully restarting apache" do
@@ -48,6 +42,11 @@ describe "PassengerApplication, with a new application" do
   
   it "should set a default host name if initialized with initWithPath" do
     PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp").host.should == 'railsapp.local'
+  end
+  
+  it "should be valid if a path is set as it will also set the host" do
+    passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
+    assigns(:valid).should.be true
   end
 end
 
@@ -95,16 +94,30 @@ describe "PassengerApplication, in general" do
     assigns(:dirty).should.be true
   end
   
-  it "should not restart the application if only one of host or path is entered" do
-    passenger_app.expects(:restart).times(0)
-    
+  it "should be valid if both a path and a host are entered" do
+    assigns(:valid).should.be true
     passenger_app.setValue_forKey('', 'host')
-    passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
+    assigns(:valid).should.be false
+    passenger_app.setValue_forKey('foo.local', 'host')
+    assigns(:valid).should.be true
+    passenger_app.setValue_forKey(nil, 'host')
+    assigns(:valid).should.be false
+    passenger_app.setValue_forKey('foo.local', 'host')
+    assigns(:valid).should.be true
+    
+    passenger_app.setValue_forKey('', 'path')
+    assigns(:valid).should.be false
+    passenger_app.setValue_forKey('/some/path', 'path')
+    assigns(:valid).should.be true
+    passenger_app.setValue_forKey(nil, 'path')
+    assigns(:valid).should.be false
+    passenger_app.setValue_forKey('/some/path', 'path')
+    assigns(:valid).should.be true
   end
   
-  it "should restart the application if a valid host and path are entered" do
+  it "should restart the application for an existing application" do
     passenger_app.expects(:restart).times(1)
-    passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
+    passenger_app.apply
   end
   
   it "should save the config before restarting if it was marked dirty" do

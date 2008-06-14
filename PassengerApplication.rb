@@ -16,13 +16,12 @@ class PassengerApplication < NSObject
     SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{data}' '/usr/sbin/apachectl graceful'"
   end
   
-  kvc_accessor :host, :path
+  kvc_accessor :host, :path, :dirty, :valid
   
   def init
     if super_init
       @new_app = true
-      @dirty = false
-      @host_set_from_path = false
+      @dirty = @valid = false
       @host, @path = '', ''
       self
     end
@@ -31,6 +30,7 @@ class PassengerApplication < NSObject
   def initWithFile(file)
     if init
       @new_app = false
+      @valid = true
       data = File.read(file)
       @host = data.match(/ServerName\s+(.+)\n/)[1]
       @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
@@ -44,6 +44,11 @@ class PassengerApplication < NSObject
       set_default_host_from_path(path)
       self
     end
+  end
+  
+  def apply(sender = nil)
+    p "apply"
+    @new_app ? start : restart
   end
   
   def start
@@ -75,10 +80,9 @@ class PassengerApplication < NSObject
   
   def rbSetValue_forKey(value, key)
     super
-    @dirty = true
-    (@new_app ? start : restart) unless @host_set_from_path or @host.empty? or @path.empty?
-    @host_set_from_path = false
-    set_default_host_from_path(@path) if @host.empty? and not @path.empty?
+    self.dirty = true
+    set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
+    self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
   end
   
   def to_hash
@@ -88,9 +92,6 @@ class PassengerApplication < NSObject
   private
   
   def set_default_host_from_path(path)
-    willChangeValueForKey 'host'
-    @host = "#{File.basename(path).downcase}.local"
-    @host_set_from_path = true
-    didChangeValueForKey 'host'
+    self.host = "#{File.basename(path).downcase}.local"
   end
 end
