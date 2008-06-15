@@ -19,12 +19,12 @@ class PassengerApplication < NSObject
     SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{data}' '/usr/sbin/apachectl graceful'"
   end
   
-  kvc_accessor :host, :path, :dirty, :valid, :environment, :override_rewrite_rules
+  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
   
   def init
     if super_init
       @environment = DEVELOPMENT
-      @override_rewrite_rules = false
+      @allow_mod_rewrite = false
       
       @new_app = true
       @dirty = @valid = false
@@ -36,10 +36,12 @@ class PassengerApplication < NSObject
   def initWithFile(file)
     if init
       @new_app = false
-      @valid = true
+      @valid = false
       data = File.read(file)
       @host = data.match(/ServerName\s+(.+)\n/)[1]
       @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
+      @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
+      @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
       self
     end
   end
@@ -55,6 +57,8 @@ class PassengerApplication < NSObject
   def apply(sender = nil)
     p "apply"
     @new_app ? start : restart
+    # todo: check if it went ok before assumin so.
+    self.dirty = self.valid = false
   end
   
   def start
@@ -77,6 +81,7 @@ class PassengerApplication < NSObject
     p "Saving configuration: #{config_path}"
     command = "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{[to_hash].to_yaml}'"
     command << " '#{extra_command}'" if extra_command
+    p command
     execute command
   end
   
@@ -92,7 +97,13 @@ class PassengerApplication < NSObject
   end
   
   def to_hash
-    {'config_path' => config_path, 'host' => @host.to_s, 'path' => @path.to_s}
+    {
+      'config_path' => config_path,
+      'host' => @host.to_s,
+      'path' => @path.to_s,
+      'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
+      'allow_mod_rewrite' => @allow_mod_rewrite == true || @allow_mod_rewrite == 1
+    }
   end
   
   private

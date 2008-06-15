@@ -23,7 +23,6 @@ describe "Config installer" do
 LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-#{version}/ext/apache2/mod_passenger.so
 RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-#{version}/bin/passenger-spawn-server
 RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
-RailsEnv development
 
 Include #{File.join(@tmp, 'eloy-passenger-apps', '*.vhost.conf')}
 }.sub(/^\n/, '')

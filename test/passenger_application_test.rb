@@ -60,9 +60,21 @@ describe "PassengerApplication, in general" do
     Kernel.stubs(:system)
   end
   
+  it "should set valid to false after opening a file, because the apply button should still be disabled" do
+    assigns(:valid).should.be false
+  end
+  
   it "should parse the correct host & path from a vhost file" do
     passenger_app.host.should == "het-manfreds-blog.local"
     passenger_app.path.should == "/Users/het-manfred/rails code/blog"
+    passenger_app.environment.should == PassengerApplication::DEVELOPMENT
+    passenger_app.allow_mod_rewrite.should.be false
+    
+    passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/wiki.vhost.conf', __FILE__))
+    passenger_app.host.should == "het-manfreds-wiki.local"
+    passenger_app.path.should == "/Users/het-manfred/rails code/wiki"
+    passenger_app.environment.should == PassengerApplication::PRODUCTION
+    passenger_app.allow_mod_rewrite.should.be true
   end
   
   it "should set @new_app to false" do
@@ -95,7 +107,6 @@ describe "PassengerApplication, in general" do
   end
   
   it "should be valid if both a path and a host are entered" do
-    assigns(:valid).should.be true
     passenger_app.setValue_forKey('', 'host')
     assigns(:valid).should.be false
     passenger_app.setValue_forKey('foo.local', 'host')
@@ -117,13 +128,18 @@ describe "PassengerApplication, in general" do
   
   it "should restart the application for an existing application" do
     passenger_app.expects(:restart).times(1)
+    
+    passenger_app.setValue_forKey('/some/path', 'path')
     passenger_app.apply
+    
+    assigns(:dirty).should.be false
+    assigns(:valid).should.be false
   end
   
   it "should save the config before restarting if it was marked dirty" do
     passenger_app.expects(:save_config!).times(1)
     assigns(:dirty, true)
-    passenger_app.restart
+    passenger_app.apply
   end
   
   it "should not save the config before restarting if it wasn't marked dirty" do
@@ -142,10 +158,11 @@ describe "PassengerApplication, in general" do
     passenger_app.remove
   end
   
-  it "should return it's attributes as a hash without NSStrings etc" do
+  it "should return it's attributes as a hash without NS classes" do
     assigns(:host, 'app.local'.to_ns)
-    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path }
-    passenger_app.to_hash.to_yaml.should.not.include 'NSCFString'
+    assigns(:allow_mod_rewrite, false.to_ns)
+    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path, 'environment' => 'development', 'allow_mod_rewrite' => false }
+    passenger_app.to_hash.to_yaml.should.not.include 'NSCF'
   end
   
   it "should start multiple applications at once" do

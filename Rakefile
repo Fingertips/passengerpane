@@ -12,6 +12,7 @@ task :test do
 end
 
 CONF_DIR = '/etc/apache2/users/'
+desc 'remove vhosts'
 task :remove do
   require 'osx/cocoa'
   

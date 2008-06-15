@@ -793,18 +793,18 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference key="NSContentView" ref="971792945"/>
 							<bytes key="NSScrollAmts">QSAAAEEgAABBoAAAQaAAAA</bytes>
 						</object>
-						<object class="NSButton" id="690551944">
+						<object class="NSButton" id="81605200">
 							<reference key="NSNextResponder" ref="453226259"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{558, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="453226259"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="1059602957">
+							<object class="NSButtonCell" key="NSCell" id="894664437">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Apply</string>
 								<reference key="NSSupport" ref="829849519"/>
-								<reference key="NSControlView" ref="690551944"/>
+								<reference key="NSControlView" ref="81605200"/>
 								<int key="NSButtonFlags">-2038284033</int>
 								<int key="NSButtonFlags2">129</int>
 								<string key="NSAlternateContents"/>
@@ -813,18 +813,18 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<int key="NSPeriodicInterval">25</int>
 							</object>
 						</object>
-						<object class="NSButton" id="844529751">
+						<object class="NSButton" id="615078570">
 							<reference key="NSNextResponder" ref="453226259"/>
 							<int key="NSvFlags">268</int>
 							<string key="NSFrame">{{462, 12}, {96, 32}}</string>
 							<reference key="NSSuperview" ref="453226259"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="876055425">
+							<object class="NSButtonCell" key="NSCell" id="365689102">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">134217728</int>
 								<string key="NSContents">Revert</string>
 								<reference key="NSSupport" ref="829849519"/>
-								<reference key="NSControlView" ref="844529751"/>
+								<reference key="NSControlView" ref="615078570"/>
 								<int key="NSButtonFlags">-2038284033</int>
 								<int key="NSButtonFlags2">129</int>
 								<string key="NSAlternateContents"/>
@@ -853,6 +853,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>valid</string>
 					<string>environment</string>
 					<string>override_rewrite_rules</string>
+					<string>allow_mod_rewrite</string>
 				</object>
 				<string key="NSObjectClassName">PassengerApplication</string>
 				<bool key="NSEditable">YES</bool>
@@ -1041,10 +1042,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.dirty</string>
-						<reference key="source" ref="844529751"/>
+						<reference key="source" ref="615078570"/>
 						<reference key="destination" ref="467003467"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="844529751"/>
+							<reference key="NSSource" ref="615078570"/>
 							<reference key="NSDestination" ref="467003467"/>
 							<string key="NSLabel">enabled: selection.dirty</string>
 							<string key="NSBinding">enabled</string>
@@ -1057,10 +1058,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">target: selection</string>
-						<reference key="source" ref="690551944"/>
+						<reference key="source" ref="81605200"/>
 						<reference key="destination" ref="467003467"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="690551944"/>
+							<reference key="NSSource" ref="81605200"/>
 							<reference key="NSDestination" ref="467003467"/>
 							<string key="NSLabel">target: selection</string>
 							<string key="NSBinding">target</string>
@@ -1077,10 +1078,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled: selection.valid</string>
-						<reference key="source" ref="690551944"/>
+						<reference key="source" ref="81605200"/>
 						<reference key="destination" ref="467003467"/>
 						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="690551944"/>
+							<reference key="NSSource" ref="81605200"/>
 							<reference key="NSDestination" ref="467003467"/>
 							<string key="NSLabel">enabled: selection.valid</string>
 							<string key="NSBinding">enabled</string>
@@ -1166,19 +1167,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.override_rewrite_rules</string>
+						<string key="label">value: selection.allow_mod_rewrite</string>
 						<reference key="source" ref="73888779"/>
 						<reference key="destination" ref="467003467"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="73888779"/>
 							<reference key="NSDestination" ref="467003467"/>
-							<string key="NSLabel">value: selection.override_rewrite_rules</string>
+							<string key="NSLabel">value: selection.allow_mod_rewrite</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.override_rewrite_rules</string>
+							<string key="NSKeyPath">selection.allow_mod_rewrite</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">294</int>
+					<int key="connectionID">295</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1226,8 +1227,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="435836413"/>
 							<reference ref="987090916"/>
 							<reference ref="796279687"/>
-							<reference ref="690551944"/>
-							<reference ref="844529751"/>
+							<reference ref="81605200"/>
+							<reference ref="615078570"/>
 							<reference ref="298054908"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
@@ -1588,31 +1589,31 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">274</int>
-						<reference key="object" ref="690551944"/>
+						<reference key="object" ref="81605200"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1059602957"/>
+							<reference ref="894664437"/>
 						</object>
 						<reference key="parent" ref="453226259"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">275</int>
-						<reference key="object" ref="1059602957"/>
-						<reference key="parent" ref="690551944"/>
+						<reference key="object" ref="894664437"/>
+						<reference key="parent" ref="81605200"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">276</int>
-						<reference key="object" ref="844529751"/>
+						<reference key="object" ref="615078570"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="876055425"/>
+							<reference ref="365689102"/>
 						</object>
 						<reference key="parent" ref="453226259"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">277</int>
-						<reference key="object" ref="876055425"/>
-						<reference key="parent" ref="844529751"/>
+						<reference key="object" ref="365689102"/>
+						<reference key="parent" ref="615078570"/>
 					</object>
 				</object>
 			</object>
@@ -1775,7 +1776,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">294</int>
+			<int key="maxID">295</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
