@@ -2,3 +2,5 @@
 - Open panel as sheet.
 - Use real authorization, code: http://code.google.com/p/kismac-ng/source/browse/trunk/Subprojects/BIGeneric/BLAuthentication.h / .m
 - Support RailsBaseURI and parse this from the address field.
+- Support backspace and delete for removing apps.
+- Tell Thijs how to add help text.
