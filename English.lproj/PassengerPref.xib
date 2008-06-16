@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">9D34</string>
-		<string key="IBDocument.InterfaceBuilderVersion">667</string>
+		<string key="IBDocument.InterfaceBuilderVersion">658</string>
 		<string key="IBDocument.AppKitVersion">949.33</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
@@ -860,7 +860,7 @@ bmdlciBnZW0geWV04oCmA</string>
 						<object class="NSCustomView" id="432233478">
 							<reference key="NSNextResponder" ref="453226259"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{20, 12}, {368, 35}}</string>
+							<string key="NSFrame">{{20, 20}, {368, 35}}</string>
 							<reference key="NSSuperview" ref="453226259"/>
 							<string key="NSClassName">SFAuthorizationView</string>
 						</object>
