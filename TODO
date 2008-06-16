@@ -1,2 +1,3 @@
 - When a new app is added directly open the browse panel.
 - Open panel as sheet.
+- Use real authorization, code: http://code.google.com/p/kismac-ng/source/browse/trunk/Subprojects/BIGeneric/BLAuthentication.h / .m
