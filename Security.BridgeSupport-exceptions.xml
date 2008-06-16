@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version="0.9">
+  <function name="AuthorizationExecuteWithPrivileges">
+    <arg index="3" c_array_of_variable_length="true" type_modifier="o"/>
+  </function>
+</signatures>
