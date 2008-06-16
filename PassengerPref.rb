@@ -132,8 +132,8 @@ class PrefPanePassenger < NSPreferencePane
   
   USERS_APACHE_CONFIG_LOAD_PASSENGER = [
     'LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+/ext/apache2/mod_passenger.so',
-    'RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+/bin/passenger-spawn-server',
-    'RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby'
+    'PassengerRoot /Library/Ruby/Gems/1.8/gems/passenger-[\d\.]+',
+    'PassengerRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby'
   ]
   
   def passenger_installed?

@@ -30,8 +30,8 @@ describe "PrefPanePassenger, while loading" do
       </Directory>
       
       LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-25.3.1/ext/apache2/mod_passenger.so
-      RailsSpawnServer /Library/Ruby/Gems/1.8/gems/passenger-25.3.1/bin/passenger-spawn-server
-      RailsRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
+      PassengerRoot /Library/Ruby/Gems/1.8/gems/passenger-25.3.1
+      PassengerRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
     })
     pref_pane.send(:is_users_apache_config_setup?).should.be true
   end
@@ -89,7 +89,6 @@ describe "PrefPanePassenger, in general" do
     #                :newApplicationHostTextField => OSX::NSTextField.alloc.init
                
     pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
-    pref_pane.stubs(:install_passenger!).returns(true)
     pref_pane.mainViewDidLoad
   end
   
@@ -163,6 +162,7 @@ describe "PrefPanePassenger, with drag and drop support" do
                :newApplicationHostTextField => OSX::NSTextField.alloc.init
     
     pref_pane.stubs(:passenger_installed?).returns(true)
+    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
     
     @tmp = File.expand_path('../tmp')
     FileUtils.mkdir_p @tmp
