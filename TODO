@@ -1,10 +1,2 @@
-- Make UI so that when adding an app it opens a modal window where the user can browse for an app.
-  Once the user has chosen a path take the basename and assume that as the host.
-- at startup check if passenger is installed, if not run Installer.app.
-- Show list of rails apps that are found in /etc/apache2/passenger_apps/*.vhost.conf
-- Adding a new app:
-  - Let the user browse to app root
-  - Create new vhost file for app
-  - Add host with: $ sudo niload hosts . < hosts.txt
-  - Restart Apache
-- Restarting apps, by touching tmp/restart.txt
+- When a new app is added directly open the browse panel.
+- Open panel as sheet.
