@@ -3,7 +3,7 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">9D34</string>
-		<string key="IBDocument.InterfaceBuilderVersion">658</string>
+		<string key="IBDocument.InterfaceBuilderVersion">667</string>
 		<string key="IBDocument.AppKitVersion">949.33</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
@@ -857,6 +857,13 @@ bmdlciBnZW0geWV04oCmA</string>
 								<reference key="NSTextColor" ref="52128434"/>
 							</object>
 						</object>
+						<object class="NSCustomView" id="432233478">
+							<reference key="NSNextResponder" ref="453226259"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{20, 12}, {368, 35}}</string>
+							<reference key="NSSuperview" ref="453226259"/>
+							<string key="NSClassName">SFAuthorizationView</string>
+						</object>
 					</object>
 					<string key="NSFrameSize">{668, 435}</string>
 					<reference key="NSSuperview"/>
@@ -1174,6 +1181,14 @@ bmdlciBnZW0geWV04oCmA</string>
 					</object>
 					<int key="connectionID">301</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">authorizationView</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="432233478"/>
+					</object>
+					<int key="connectionID">309</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1223,6 +1238,7 @@ bmdlciBnZW0geWV04oCmA</string>
 							<reference ref="99992128"/>
 							<reference ref="36341174"/>
 							<reference ref="1040168125"/>
+							<reference ref="432233478"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
 					</object>
@@ -1623,6 +1639,11 @@ bmdlciBnZW0geWV04oCmA</string>
 						<reference key="object" ref="26323044"/>
 						<reference key="parent" ref="1040168125"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">308</int>
+						<reference key="object" ref="432233478"/>
+						<reference key="parent" ref="453226259"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1693,6 +1714,7 @@ bmdlciBnZW0geWV04oCmA</string>
 					<string>305.IBPluginDependency</string>
 					<string>306.IBPluginDependency</string>
 					<string>307.IBPluginDependency</string>
+					<string>308.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>6.ImportedFromIB2</string>
 					<string>99.IBPluginDependency</string>
@@ -1710,9 +1732,9 @@ bmdlciBnZW0geWV04oCmA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{331, 640}, {668, 435}}</string>
+					<string>{{313, 415}, {668, 435}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{331, 640}, {668, 435}}</string>
+					<string>{{313, 415}, {668, 435}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 368}}</string>
 					<reference ref="9"/>
@@ -1726,6 +1748,7 @@ bmdlciBnZW0geWV04oCmA</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>TheButtonWhichOnlyLooksPretty</string>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1788,7 +1811,7 @@ bmdlciBnZW0geWV04oCmA</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">307</int>
+			<int key="maxID">309</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1835,6 +1858,7 @@ bmdlciBnZW0geWV04oCmA</string>
 							<string>_window</string>
 							<string>applicationsController</string>
 							<string>applicationsTableView</string>
+							<string>authorizationView</string>
 							<string>installPassengerWarning</string>
 							<string>newApplicationHostTextField</string>
 							<string>newApplicationPathTextField</string>
@@ -1842,6 +1866,7 @@ bmdlciBnZW0geWV04oCmA</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
