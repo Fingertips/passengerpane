@@ -31,3 +31,9 @@ end
 task :remove_all => :remove do
   sh "sudo gem uninstall passenger"
 end
+
+desc "Generate Security.framework BridgeSupport file"
+task :bridgesupport do
+  #sh "gen_bridge_metadata -f Security -e Security.BridgeSupport-exceptions.xml -o Security.bridgesupport"
+  sh "gen_bridge_metadata -f Security -o Security.bridgesupport"
+end

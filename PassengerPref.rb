@@ -10,7 +10,9 @@ require 'osx/cocoa'
 include OSX
 
 OSX.require_framework 'PreferencePanes'
+OSX.load_bridge_support_file File.expand_path('../Security.bridgesupport', __FILE__)
 
+require File.expand_path('../SecurityHelper', __FILE__)
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
 require File.expand_path('../TheButtonWhichOnlyLooksPretty', __FILE__)
@@ -27,11 +29,17 @@ class PrefPanePassenger < NSPreferencePane
   
   ib_outlet :installPassengerWarning
   
+  ib_outlet :authorizationView
+  
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   kvc_accessor :applications
   
   def mainViewDidLoad
+    @authorizationView.string = "com.fngtps.passengerpane.helper"
+    @authorizationView.delegate = self
+    @authorizationView.updateStatus self
+    
     @applications = [].to_ns
     
     @applicationsTableView.dataSource = self
@@ -115,6 +123,22 @@ class PrefPanePassenger < NSPreferencePane
     apps = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).map { |path| PassengerApplication.alloc.initWithPath(path) }
     @applicationsController.addObjects apps
     PassengerApplication.startApplications apps
+  end
+  
+  # SFAuthorizationView
+  
+  def authorizationViewDidAuthorize(authorizationView)
+    p 'authorizationViewDidAuthorize'
+    OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
+    p OSX::SecurityHelper.sharedInstance.authorized?
+    #p sec.executeCommand_withArgs('/usr/sbin/apachectl', ['graceful'])
+  end
+  
+  def authorizationViewDidDeauthorize(authorizationView)
+    p 'authorizationViewDidDeauthorize'
+    p @authorizationView.authorization.authorizationRef
+    OSX::SecurityHelper.sharedInstance.deauthorize
+    p OSX::SecurityHelper.sharedInstance.authorized?
   end
   
   private
