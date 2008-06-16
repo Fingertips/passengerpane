@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		516B1B6E0DD3D344009ADB8E /* config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 516B1B6D0DD3D344009ADB8E /* config_installer.rb */; };
+		518C7F520E0673C8003A3ED0 /* BLAuthentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F500E0673C8003A3ED0 /* BLAuthentication.h */; };
+		518C7F530E0673C8003A3ED0 /* BLAuthentication.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C7F510E0673C8003A3ED0 /* BLAuthentication.m */; };
+		518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C7F550E06745E003A3ED0 /* Security.framework */; };
 		519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */; };
 		519DFBA80DFE8EAF008A42FE /* passenger_config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */; };
 		519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */; };
@@ -40,6 +43,9 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger_Prefix.pch; sourceTree = "<group>"; };
 		516B1B6D0DD3D344009ADB8E /* config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_installer.rb; sourceTree = "<group>"; };
+		518C7F500E0673C8003A3ED0 /* BLAuthentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLAuthentication.h; sourceTree = "<group>"; };
+		518C7F510E0673C8003A3ED0 /* BLAuthentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLAuthentication.m; sourceTree = "<group>"; };
+		518C7F550E06745E003A3ED0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerApplication.rb; sourceTree = "<group>"; };
 		519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = passenger_config_installer.rb; sourceTree = "<group>"; };
 		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = shared_passenger_behaviour.rb; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
 				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
 				9648B5E80D195BC700DC73E2 /* RubyCocoa.framework in Frameworks */,
+				518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +123,7 @@
 				8D202CF70486D31800D8A456 /* Info.plist */,
 				519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */,
 				519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */,
+				518C7F550E06745E003A3ED0 /* Security.framework */,
 				519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				F506C040013D9D8001CA16C8 /* PassengerPref.tiff */,
@@ -127,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */,
+				518C7F500E0673C8003A3ED0 /* BLAuthentication.h */,
+				518C7F510E0673C8003A3ED0 /* BLAuthentication.m */,
 				F506C03D013D9D7901CA16C8 /* PassengerPref.m */,
 				516B1B6D0DD3D344009ADB8E /* config_installer.rb */,
 			);
@@ -177,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */,
+				518C7F520E0673C8003A3ED0 /* BLAuthentication.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D202CF10486D31800D8A456 /* PassengerPref.m in Sources */,
+				518C7F530E0673C8003A3ED0 /* BLAuthentication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
