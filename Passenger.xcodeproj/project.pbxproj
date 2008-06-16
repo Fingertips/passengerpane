@@ -22,6 +22,7 @@
 		51B919270E02B93400F45803 /* MinusPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919220E02B93400F45803 /* MinusPressed.tif */; };
 		51B919280E02B93400F45803 /* Plus.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919230E02B93400F45803 /* Plus.tif */; };
 		51B919290E02B93400F45803 /* PlusPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919240E02B93400F45803 /* PlusPressed.tif */; };
+		76A8DCDF0E068B7000B133F1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A8DCDE0E068B7000B133F1 /* icon.png */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D202CEE0486D31800D8A456 /* PassengerPref.tiff in Resources */ = {isa = PBXBuildFile; fileRef = F506C040013D9D8001CA16C8 /* PassengerPref.tiff */; };
@@ -54,6 +55,7 @@
 		51B919220E02B93400F45803 /* MinusPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MinusPressed.tif; sourceTree = "<group>"; };
 		51B919230E02B93400F45803 /* Plus.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Plus.tif; sourceTree = "<group>"; };
 		51B919240E02B93400F45803 /* PlusPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PlusPressed.tif; sourceTree = "<group>"; };
+		76A8DCDE0E068B7000B133F1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /System/Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
@@ -115,6 +117,7 @@
 				9648B5EE0D195C2F00DC73E2 /* Pref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
 				519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */,
+				76A8DCDE0E068B7000B133F1 /* icon.png */,
 				519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */,
 				519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -244,6 +247,7 @@
 				51B919290E02B93400F45803 /* PlusPressed.tif in Resources */,
 				519DFBD10E02EE69008A42FE /* Refresh.tif in Resources */,
 				519DFBD20E02EE69008A42FE /* RefreshPressed.tif in Resources */,
+				76A8DCDF0E068B7000B133F1 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
