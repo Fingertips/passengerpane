@@ -4,3 +4,4 @@
 - Support RailsBaseURI and parse this from the address field.
 - Support backspace and delete for removing apps.
 - Tell Thijs how to add help text.
+- Add a warning when you leave the pane and the changes haven't been applied (see the Network pane.
