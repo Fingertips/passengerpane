@@ -12,7 +12,6 @@
 		518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 518C7F720E06A668003A3ED0 /* Security.bridgesupport */; };
 		518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F740E06B665003A3ED0 /* SecurityHelper.h */; };
 		518C7F770E06B665003A3ED0 /* SecurityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C7F750E06B665003A3ED0 /* SecurityHelper.m */; };
-		518C7F7B0E06C4CB003A3ED0 /* SecurityHelper.rb in Resources */ = {isa = PBXBuildFile; fileRef = 518C7F7A0E06C4CB003A3ED0 /* SecurityHelper.rb */; };
 		519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */; };
 		519DFBA80DFE8EAF008A42FE /* passenger_config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */; };
 		519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */; };
@@ -50,7 +49,6 @@
 		518C7F720E06A668003A3ED0 /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
 		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityHelper.h; sourceTree = "<group>"; };
 		518C7F750E06B665003A3ED0 /* SecurityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityHelper.m; sourceTree = "<group>"; };
-		518C7F7A0E06C4CB003A3ED0 /* SecurityHelper.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = SecurityHelper.rb; sourceTree = "<group>"; };
 		519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerApplication.rb; sourceTree = "<group>"; };
 		519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = passenger_config_installer.rb; sourceTree = "<group>"; };
 		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = shared_passenger_behaviour.rb; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */,
-				518C7F7A0E06C4CB003A3ED0 /* SecurityHelper.rb */,
 				51B919200E02B93400F45803 /* ButtonBackground.tiff */,
 				51B919210E02B93400F45803 /* Minus.tif */,
 				518C7F720E06A668003A3ED0 /* Security.bridgesupport */,
@@ -266,7 +263,6 @@
 				519DFBD20E02EE69008A42FE /* RefreshPressed.tif in Resources */,
 				76A8DCDF0E068B7000B133F1 /* icon.png in Resources */,
 				518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */,
-				518C7F7B0E06C4CB003A3ED0 /* SecurityHelper.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
