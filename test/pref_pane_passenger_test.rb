@@ -3,13 +3,24 @@ require 'PassengerPref'
 
 def OSX._ignore_ns_override; true; end
 
+class InstallPassengerWarning < OSX::NSView
+  def initWithTextField
+    if init
+      text_field = OSX::NSTextField.alloc.init
+      text_field.stringValue = "blabla http://www.modrails.com blabla"
+      addSubview text_field
+      self
+    end
+  end
+end
+
 describe "PrefPanePassenger, while loading" do
   tests PrefPanePassenger
   
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
                :applicationsTableView => OSX::NSTableView.alloc.init,
-               :installPassengerWarning => OSX::NSView.alloc.init,
+               :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField,
                :authorizationView => OSX::SFAuthorizationView.alloc.init
     
     pref_pane.stubs(:passenger_installed?).returns(false)
@@ -48,7 +59,8 @@ describe "PrefPanePassenger, in general" do
   
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
-               :authorizationView => OSX::SFAuthorizationView.alloc.init
+               :authorizationView => OSX::SFAuthorizationView.alloc.init,
+               :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField
     
     mainView = stub('Main View')
     pref_pane.stubs(:mainView).returns(mainView)
@@ -144,8 +156,7 @@ describe "PrefPanePassenger, with drag and drop support" do
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
                :applicationsTableView => OSX::NSTableView.alloc.init,
-               :newApplicationPathTextField => OSX::NSTextField.alloc.init,
-               :newApplicationHostTextField => OSX::NSTextField.alloc.init
+               :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField
     
     @tmp = File.expand_path('../tmp')
     FileUtils.mkdir_p @tmp

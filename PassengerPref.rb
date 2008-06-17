@@ -43,7 +43,7 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     
-    @installPassengerWarning.hidden = passenger_installed?
+    showPassengerWarning unless passenger_installed?
     
     Dir.glob(File.join(USERS_APACHE_PASSENGER_APPS_DIR, '*.vhost.conf')).each do |app|
       @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
@@ -126,5 +126,27 @@ class PrefPanePassenger < NSPreferencePane
   
   def passenger_installed?
     `/usr/bin/gem list passenger`.include? 'passenger'
+  end
+  
+  MODRAILS_URL = 'http://www.modrails.com'
+  def showPassengerWarning
+    text_field = @installPassengerWarning.subviews.first
+    
+    link_str = OSX::NSMutableAttributedString.alloc.initWithString(MODRAILS_URL)
+    range = OSX::NSMakeRange(0, MODRAILS_URL.length)
+    link_str.addAttribute_value_range OSX::NSLinkAttributeName, MODRAILS_URL, range
+    link_str.addAttribute_value_range OSX::NSForegroundColorAttributeName, OSX::NSColor.blueColor, range
+    link_str.addAttribute_value_range OSX::NSUnderlineStyleAttributeName, OSX::NSSingleUnderlineStyle, range
+    
+    text_parts = text_field.stringValue.split(MODRAILS_URL)
+    
+    str = OSX::NSMutableAttributedString.alloc.initWithString(text_parts.first)
+    str.appendAttributedString link_str
+    str.appendAttributedString OSX::NSAttributedString.alloc.initWithString(text_parts.last)
+    str.addAttribute_value_range OSX::NSFontAttributeName, OSX::NSFont.systemFontOfSize(11), OSX::NSMakeRange(0, str.length)
+    
+    text_field.attributedStringValue = str
+    
+    @installPassengerWarning.hidden = false
   end
 end
