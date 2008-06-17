@@ -18,3 +18,25 @@ module SharedPassengerBehaviour
   def p(obj); end
   module_function :p
 end
+
+class OSX::SecurityHelper
+  def self.sharedInstance
+    @sharedInstance ||= new
+  end
+  
+  def authorizationRef=(ref)
+    @authorized = !ref.nil?
+  end
+  
+  def authorized
+    @authorized ||= false
+  end
+  
+  def deauthorize
+    @authorized = false
+  end
+  
+  def authorized?
+    @authorized
+  end
+end

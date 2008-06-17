@@ -96,7 +96,7 @@ class PrefPanePassenger < NSPreferencePane
     PassengerApplication.startApplications apps
   end
   
-  # SFAuthorizationView
+  # SFAuthorizationView: TODO this should actualy move to the SecurityHelper, but for some reason in prototyping it didn't work, try again when everything is cleaned up.
   
   def authorizationViewDidAuthorize(authorizationView = nil)
     p 'authorizationViewDidAuthorize'

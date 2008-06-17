@@ -4,16 +4,10 @@ module SharedPassengerBehaviour
   USERS_APACHE_PASSENGER_APPS_DIR = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps"
   USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
   
-  def execute(command)
-    apple_script "do shell script \"#{command}\" with administrator privileges"
+  def execute(command, *args)
+    OSX::SecurityHelper.sharedInstance.executeCommand_withArgs(command, args)
   end
   module_function :execute
-  
-  def apple_script(command)
-    script = NSAppleScript.alloc.initWithSource(command)
-    script.performSelector_withObject("executeAndReturnError:", nil)
-  end
-  module_function :apple_script
   
   def p(obj)
     NSLog(obj.is_a?(String) ? obj : obj.inspect)

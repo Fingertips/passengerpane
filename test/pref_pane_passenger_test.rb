@@ -1,28 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerPref'
 
-class OSX::SecurityHelper
-  def self.sharedInstance
-    @sharedInstance ||= new
-  end
-  
-  def authorizationRef=(ref)
-    @authorized = !ref.nil?
-  end
-  
-  def authorized
-    @authorized ||= false
-  end
-  
-  def deauthorize
-    @authorized = false
-  end
-  
-  def authorized?
-    @authorized
-  end
-end
-
 def OSX._ignore_ns_override; true; end
 
 describe "PrefPanePassenger, while loading" do
