@@ -1,6 +1,28 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerPref'
 
+class OSX::SecurityHelper
+  def self.sharedInstance
+    @sharedInstance ||= new
+  end
+  
+  def authorizationRef=(ref)
+    @authorized = !ref.nil?
+  end
+  
+  def authorized
+    @authorized ||= false
+  end
+  
+  def deauthorize
+    @authorized = false
+  end
+  
+  def authorized?
+    @authorized
+  end
+end
+
 def OSX._ignore_ns_override; true; end
 
 describe "PrefPanePassenger, while loading" do
@@ -9,7 +31,8 @@ describe "PrefPanePassenger, while loading" do
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
                :applicationsTableView => OSX::NSTableView.alloc.init,
-               :installPassengerWarning => OSX::NSView.alloc.init
+               :installPassengerWarning => OSX::NSView.alloc.init,
+               :authorizationView => OSX::SFAuthorizationView.alloc.init
     
     pref_pane.stubs(:passenger_installed?).returns(false)
   end
@@ -34,13 +57,20 @@ describe "PrefPanePassenger, while loading" do
     
     applicationsController.content.should == [blog_stub, paste_stub]
   end
+  
+  it "should configure the authorization view" do
+    authorizationView.expects(:string=).with(OSX::KAuthorizationRightExecute)
+    pref_pane.mainViewDidLoad
+    authorizationView.delegate.should.be pref_pane
+  end
 end
 
 describe "PrefPanePassenger, in general" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :authorizationView => OSX::SFAuthorizationView.alloc.init
     
     pref_pane.mainViewDidLoad
   end
@@ -88,6 +118,16 @@ describe "PrefPanePassenger, in general" do
     
     pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\n\n")
     pref_pane.send(:passenger_installed?).should.be false
+  end
+  
+  it "should forward delegate messages from the authorization view to the security helper" do
+    authorization = stub('Authorization Ref')
+    authorizationView.authorization.stubs(:authorizationRef).returns(authorization)
+    pref_pane.authorizationViewDidAuthorize
+    OSX::SecurityHelper.sharedInstance.should.be.authorized
+    
+    pref_pane.authorizationViewDidDeauthorize
+    OSX::SecurityHelper.sharedInstance.should.not.be.authorized
   end
 end
 

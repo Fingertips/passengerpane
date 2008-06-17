@@ -30,7 +30,7 @@ class PrefPanePassenger < NSPreferencePane
   kvc_accessor :applications
   
   def mainViewDidLoad
-    @authorizationView.string = "com.fngtps.passengerpane.helper"
+    @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
     @authorizationView.updateStatus self
     
@@ -98,15 +98,14 @@ class PrefPanePassenger < NSPreferencePane
   
   # SFAuthorizationView
   
-  def authorizationViewDidAuthorize(authorizationView)
+  def authorizationViewDidAuthorize(authorizationView = nil)
     p 'authorizationViewDidAuthorize'
     OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
     p OSX::SecurityHelper.sharedInstance.authorized?
   end
   
-  def authorizationViewDidDeauthorize(authorizationView)
+  def authorizationViewDidDeauthorize(authorizationView = nil)
     p 'authorizationViewDidDeauthorize'
-    p @authorizationView.authorization.authorizationRef
     OSX::SecurityHelper.sharedInstance.deauthorize
     p OSX::SecurityHelper.sharedInstance.authorized?
   end
