@@ -829,10 +829,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<reference key="NSSuperview" ref="992940565"/>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="937447759">
-										<int key="NSCellFlags">67239424</int>
+										<int key="NSCellFlags">69336577</int>
 										<int key="NSCellFlags2">1346502656</int>
-										<string type="base64-UTF8" key="NSContents">VGhlIFBodXNpb24gUGFzc2VuZ2VyIEdlbSBkb2VzbuKAmXQgc2VlbSB0byBiZSBpbnN0YWxsZWQuIOKA
-qFZpc2l0IGh0dHA6Ly93d3cubW9kcmFpbHMuY29tLyBmb3IgaW5zdHJ1Y3Rpb25zLg</string>
+										<string type="base64-UTF8" key="NSContents">VGhlIFBodXNpb24gUGFzc2VuZ2VyIEdlbSBkb2VzbuKAmXQgc2VlbSB0byBiZSBpbnN0YWxsZWQuIFZp
+c2l0IGh0dHA6Ly93d3cubW9kcmFpbHMuY29tIGZvciBpbnN0cnVjdGlvbnMuA</string>
 										<reference key="NSSupport" ref="26"/>
 										<reference key="NSControlView" ref="700798641"/>
 										<reference key="NSBackgroundColor" ref="211713244"/>
