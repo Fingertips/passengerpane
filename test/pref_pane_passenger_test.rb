@@ -96,6 +96,18 @@ describe "PrefPanePassenger, in general" do
     applicationsController.content.should == [stay_app]
   end
   
+  it "should return the home directory if no application is selected" do
+    pref_pane.send(:path_for_browser).to_s.should == File.expand_path('~')
+  end
+  
+  it "should return the path to a application if one is selected" do
+    app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    
+    pref_pane.send(:path_for_browser).should == '/previous/path/to/Blog'
+  end
+  
   it "should open a directory browse panel and use the result as the path for the current selected application" do
     app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
     applicationsController.content = [app]

@@ -75,7 +75,7 @@ class PrefPanePassenger < NSPreferencePane
     panel.canChooseDirectories = true
     panel.canChooseFiles = false
     panel.objc_send(
-      :beginSheetForDirectory, @applicationsController.selectedObjects.first.path,
+      :beginSheetForDirectory, path_for_browser,
       :file, nil,
       :types, nil,
       :modalForWindow, mainView.window,
@@ -126,6 +126,10 @@ class PrefPanePassenger < NSPreferencePane
   
   def passenger_installed?
     `/usr/bin/gem list passenger`.include? 'passenger'
+  end
+  
+  def path_for_browser
+    @applicationsController.selectedObjects.first.nil? ? OSX.NSHomeDirectory : @applicationsController.selectedObjects.first.path
   end
   
   MODRAILS_URL = 'http://www.modrails.com'

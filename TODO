@@ -2,9 +2,8 @@
 - Find out how to add help text and tell Thijs to write some. => http://developer.apple.com/documentation/Carbon/Conceptual/ProvidingUserAssitAppleHelp/user_help_intro/chapter_1_section_1.html
   We'll use NSHelpManager directly to show help with -openHelpAnchor:inBook:
 - Add a warning when you leave the pane and the changes haven't been applied (see the Network pane for an example).
-- Disable the fields when multiple apps have been selected and when the apps list is empty.
-- Disable the Restart button when the apps list is empty.
-- Make 'http://www.modrails.com' a link.
+- Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev)
 - Wouldn't it be better to have a single global Apache configuration file instead of making it per-user?
 - What happens when Passenger has already been added to the Apache configuration?
 - Dragging folders into the list should only focus the list and not show the individual items as targets.
+- ALways first check if the directory for the passenger apps exists.
