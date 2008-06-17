@@ -103,16 +103,10 @@ td
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
-#footer
+p.footer
 {
+  margin: 16px 0 0 0;
   font-size: 11px;
   line-height: 14px;
-  border-top: 1px solid #bfbfbf;
-  background-color: #f2f2f2;
   color: #666;
-}
-#footer p
-{
-  margin: 8px 0;
-  padding: 0 15px;
 }
