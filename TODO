@@ -9,3 +9,4 @@
 - Make 'http://www.modrails.com' a link.
 - Wouldn't it be better to have a single global Apache configuration file instead of making it per-user?
 - What happens when Passenger has already been added to the Apache configuration?
+- Dragging folders into the list should only focus the list and not show the individual items as targets.
