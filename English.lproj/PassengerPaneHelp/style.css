@@ -1,0 +1,118 @@
+body
+{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font: 12px/16px "Lucida Grande", Arial, sans-serif;
+}
+a
+{
+  color: #666;
+}
+a:hover
+{
+  background-color: #777;
+  outline: 1px solid #777;
+  color: #fff;
+  text-decoration: none;
+}
+tt
+{
+  font: 11px/16px "Monaco", monospace;
+}
+#nav
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  font-size: 11px;
+  line-height: 17px;
+  border-bottom: 1px solid #bfbfbf;
+  background-color: #f2f2f2;
+}
+#nav a
+{
+  display: block;
+  float: left;
+  padding: 2px 15px 0 15px;
+  text-decoration: none;
+}
+#nav a:hover
+{
+  text-decoration: underline;
+  color: #666;
+  background-color: transparent;
+  outline: none;
+}
+#nav a.index
+{
+  float: right;
+  padding: 2px 25px 0 8px;
+  border-left: 1px solid #bfbfbf;
+}
+#main
+{
+  padding: 22px 15px 15px 15px;
+}
+h1
+{
+  margin: 15px 0;
+  font-size: 17px;
+  line-height: 32px;
+}
+h1 img
+{
+  display: block;
+  float: left;
+  width: 32px;
+  height: 32px;
+  padding: 0 9px 0 0;
+  vertical-align: middle;
+}
+p
+{
+  margin: 8px 0;
+}
+table
+{
+  margin: 29px 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td
+{
+  width: 50%;
+  padding: 12px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th
+{
+  padding: 19px 10px 9px 10px;
+  background: url(table_border.gif) top left no-repeat;
+  color: #778fbd;
+}
+th+th
+{
+  background-position: top right;
+}
+td
+{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+#footer
+{
+  font-size: 11px;
+  line-height: 14px;
+  border-top: 1px solid #bfbfbf;
+  background-color: #f2f2f2;
+  color: #666;
+}
+#footer p
+{
+  margin: 8px 0;
+  padding: 0 15px;
+}
