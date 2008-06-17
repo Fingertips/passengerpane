@@ -11,57 +11,13 @@ describe "PrefPanePassenger, while loading" do
                :applicationsTableView => OSX::NSTableView.alloc.init,
                :installPassengerWarning => OSX::NSView.alloc.init
     
-    pref_pane.stubs(:passenger_installed?).returns(true)
+    pref_pane.stubs(:passenger_installed?).returns(false)
   end
   
   it "should enable the 'install passenger' warning in the UI if the gem can't be found" do
     installPassengerWarning.hidden = true
-    
-    pref_pane.stubs(:passenger_installed?).returns(false)
     pref_pane.mainViewDidLoad
     installPassengerWarning.hidden?.should.be false
-  end
-  
-  it "should check if the users apache config is set up" do
-    File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns("</Directory>")
-    pref_pane.send(:is_users_apache_config_setup?).should.be false
-    
-    File.expects(:read).with("/etc/apache2/users/#{OSX.NSUserName}.conf").returns(%{
-      </Directory>
-      
-      LoadModule passenger_module /Library/Ruby/Gems/1.8/gems/passenger-25.3.1/ext/apache2/mod_passenger.so
-      PassengerRoot /Library/Ruby/Gems/1.8/gems/passenger-25.3.1
-      PassengerRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby
-    })
-    pref_pane.send(:is_users_apache_config_setup?).should.be true
-  end
-  
-  it "should not check the apache configuration if the gem hasn't been found" do
-    pref_pane.stubs(:passenger_installed?).returns(false)
-    pref_pane.expects(:is_users_apache_config_setup?).times(0)
-    pref_pane.mainViewDidLoad
-  end
-  
-  it "should ask the user if we should set up the passenger apache config for them" do
-    OSX::NSAlert.any_instance.expects(:runModal).returns(OSX::NSAlertFirstButtonReturn)
-    pref_pane.send(:user_wants_us_to_setup_config?).should.be true
-  end
-  
-  it "should ask the user if we should set up passenger apache config for them before actually doing it" do
-    pref_pane.stubs(:is_users_apache_config_setup?).returns(false)
-    
-    pref_pane.stubs(:user_wants_us_to_setup_config?).returns(true)
-    pref_pane.expects(:setup_users_apache_config!).times(1)
-    pref_pane.mainViewDidLoad
-    
-    pref_pane.stubs(:user_wants_us_to_setup_config?).returns(false)
-    pref_pane.expects(:setup_users_apache_config!).times(0)
-    pref_pane.mainViewDidLoad
-  end
-  
-  it "should add the required lines to setup passenger to the users apache config" do
-    pref_pane.expects(:execute).with("/usr/bin/env ruby '#{PrefPanePassenger::PASSENGER_CONFIG_INSTALLER}' '#{PrefPanePassenger::USERS_APACHE_CONFIG}'")
-    pref_pane.send(:setup_users_apache_config!)
   end
   
   it "should add existing applications found in /etc/apache2/users/passenger_apps to the array controller: applicationsController" do
@@ -84,11 +40,8 @@ describe "PrefPanePassenger, in general" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init# ,
-    #                :newApplicationPathTextField => OSX::NSTextField.alloc.init,
-    #                :newApplicationHostTextField => OSX::NSTextField.alloc.init
-               
-    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    
     pref_pane.mainViewDidLoad
   end
   
@@ -129,20 +82,6 @@ describe "PrefPanePassenger, in general" do
     pref_pane.browse
   end
   
-  xit "should add a new application with the values from the form and close the sheet" do
-    newApplicationPathTextField.stringValue = '/some/path/to/Blog'
-    newApplicationHostTextField.stringValue = 'blog.local'
-    
-    PassengerApplication.any_instance.expects(:start)
-    pref_pane.expects(:closeNewApplicationSheet)
-    
-    pref_pane.addApplicationFromSheet
-    
-    app = applicationsController.content.last
-    app.path.should == '/some/path/to/Blog'
-    app.host.should == 'blog.local'
-  end
-  
   it "should be able to check if the passenger gem is installed" do
     pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\npassenger (1.0.5, 1.0.1)\n")
     pref_pane.send(:passenger_installed?).should.be true
@@ -160,9 +99,6 @@ describe "PrefPanePassenger, with drag and drop support" do
                :applicationsTableView => OSX::NSTableView.alloc.init,
                :newApplicationPathTextField => OSX::NSTextField.alloc.init,
                :newApplicationHostTextField => OSX::NSTextField.alloc.init
-    
-    pref_pane.stubs(:passenger_installed?).returns(true)
-    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
     
     @tmp = File.expand_path('../tmp')
     FileUtils.mkdir_p @tmp
