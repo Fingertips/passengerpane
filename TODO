@@ -5,3 +5,4 @@
 - Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev)
 - Dragging folders into the list should only focus the list and not show the individual items as targets.
 - ALways first check if the directory for the passenger apps exists.
+- No new entry should be added if you click Add and then 'Cancel' in the Open panel.
