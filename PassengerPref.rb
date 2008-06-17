@@ -50,17 +50,6 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  # todo: remove
-  def add(sender = nil)
-    NSApp.objc_send(
-      :beginSheet, @newApplicationSheet,
-      :modalForWindow, mainView.window,
-      :modalDelegate, nil,
-      :didEndSelector, nil,
-      :contextInfo, nil
-    )
-  end
-  
   def remove(sender)
     apps = @applicationsController.selectedObjects
     apps.each { |app| app.remove }
@@ -75,6 +64,11 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   # Select application directory panel
+  
+  def rbSetValue_forKey(value, key)
+    super
+    browse if key == 'applications' and value.last.new_app?
+  end
   
   def browse(sender = nil)
     panel = NSOpenPanel.openPanel

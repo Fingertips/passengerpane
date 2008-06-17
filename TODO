@@ -1,4 +1,3 @@
-- When a new app is added directly open the browse panel.
 - Support RailsBaseURI and parse this from the address field.
 - Find out how to add help text and tell Thijs to write some. => http://developer.apple.com/documentation/Carbon/Conceptual/ProvidingUserAssitAppleHelp/user_help_intro/chapter_1_section_1.html
   We'll use NSHelpManager directly to show help with -openHelpAnchor:inBook:

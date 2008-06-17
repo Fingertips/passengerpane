@@ -12,8 +12,8 @@ describe "PassengerApplication, with a new application" do
   it "should initialize with empty path & host" do
     passenger_app.path.should == ''
     passenger_app.host.should == ''
+    passenger_app.should.be.new_app
     assigns(:dirty).should.be false
-    assigns(:new_app).should.be true
     assigns(:valid).should.be false
   end
   

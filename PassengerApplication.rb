@@ -54,6 +54,10 @@ class PassengerApplication < NSObject
     end
   end
   
+  def new_app?
+    @new_app
+  end
+  
   def apply(sender = nil)
     p "apply"
     @new_app ? start : restart

@@ -128,6 +128,14 @@ describe "PrefPanePassenger, in general" do
     OSX::SecurityHelper.sharedInstance.should.not.be.authorized
     assigns(:authorized).should.be false
   end
+  
+  it "should open the browse panel when a new empty application is added to the applications array" do
+    pref_pane.expects(:browse).times(1)
+    pref_pane.setValue_forKey([PassengerApplication.alloc.init], 'applications')
+    
+    pref_pane.expects(:browse).times(0)
+    pref_pane.setValue_forKey([PassengerApplication.alloc.init, PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))], 'applications')
+  end
 end
 
 describe "PrefPanePassenger, with drag and drop support" do
