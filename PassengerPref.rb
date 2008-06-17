@@ -27,9 +27,12 @@ class PrefPanePassenger < NSPreferencePane
   
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
-  kvc_accessor :applications
+  
+  kvc_accessor :applications, :authorized
   
   def mainViewDidLoad
+    @authorized = false
+    
     @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
     @authorizationView.updateStatus self
@@ -102,12 +105,14 @@ class PrefPanePassenger < NSPreferencePane
     p 'authorizationViewDidAuthorize'
     OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
     p OSX::SecurityHelper.sharedInstance.authorized?
+    self.authorized = true
   end
   
   def authorizationViewDidDeauthorize(authorizationView = nil)
     p 'authorizationViewDidDeauthorize'
     OSX::SecurityHelper.sharedInstance.deauthorize
     p OSX::SecurityHelper.sharedInstance.authorized?
+    self.authorized = false
   end
   
   private

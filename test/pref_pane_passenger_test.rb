@@ -53,6 +53,10 @@ describe "PrefPanePassenger, in general" do
     pref_pane.mainViewDidLoad
   end
   
+  it "should set authorized to false" do
+    assigns(:authorized).should.be false
+  end
+  
   it "should initialize an empty array which will hold the list of applications" do
     apps = assigns(:applications)
     apps.should.be.instance_of OSX::NSCFArray
@@ -103,9 +107,11 @@ describe "PrefPanePassenger, in general" do
     authorizationView.authorization.stubs(:authorizationRef).returns(authorization)
     pref_pane.authorizationViewDidAuthorize
     OSX::SecurityHelper.sharedInstance.should.be.authorized
+    assigns(:authorized).should.be true
     
     pref_pane.authorizationViewDidDeauthorize
     OSX::SecurityHelper.sharedInstance.should.not.be.authorized
+    assigns(:authorized).should.be false
   end
 end
 

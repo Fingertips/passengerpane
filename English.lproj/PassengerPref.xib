@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">9D34</string>
-		<string key="IBDocument.InterfaceBuilderVersion">658</string>
+		<string key="IBDocument.InterfaceBuilderVersion">667</string>
 		<string key="IBDocument.AppKitVersion">949.33</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="230"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -952,22 +952,6 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 					<int key="connectionID">208</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">enabled: canRemove</string>
-						<reference key="source" ref="987090916"/>
-						<reference key="destination" ref="467003467"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="987090916"/>
-							<reference key="NSDestination" ref="467003467"/>
-							<string key="NSLabel">enabled: canRemove</string>
-							<string key="NSBinding">enabled</string>
-							<string key="NSKeyPath">canRemove</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">211</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">applicationsTableView</string>
 						<reference key="source" ref="565115411"/>
@@ -1168,6 +1152,118 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 						<reference key="destination" ref="432233478"/>
 					</object>
 					<int key="connectionID">309</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="352101313"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="352101313"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">320</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="987090916"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="987090916"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">325</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="1057804348"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1057804348"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">328</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="423181793"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="423181793"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">333</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="425273535"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="425273535"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">336</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="73888779"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="73888779"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">339</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: authorized</string>
+						<reference key="source" ref="713455384"/>
+						<reference key="destination" ref="565115411"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="713455384"/>
+							<reference key="NSDestination" ref="565115411"/>
+							<string key="NSLabel">enabled: authorized</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">authorized</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">342</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1714,9 +1810,9 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{26, 63}, {668, 438}}</string>
+					<string>{{148, 444}, {668, 438}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{26, 63}, {668, 438}}</string>
+					<string>{{148, 444}, {668, 438}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 368}}</string>
 					<reference ref="9"/>
@@ -1807,7 +1903,7 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">317</int>
+			<int key="maxID">342</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
