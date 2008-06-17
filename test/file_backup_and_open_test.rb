@@ -1,6 +1,17 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'file_backup_and_open'
 
+describe "String::bypass_safe_level_1" do
+  it "should create a untainted copy of a string" do
+    str = "foo"
+    str.taint; str.freeze
+    
+    new_str = str.bypass_safe_level_1
+    new_str.should.not.be.tainted
+    new_str.should == 'foo'
+  end
+end
+
 describe "File::backup_and_open" do
   before do
     create_tmp

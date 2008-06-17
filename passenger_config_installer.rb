@@ -16,5 +16,5 @@ PassengerRuby /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/rub
 Include #{File.join(apps_dir, '*.vhost.conf')}
 }
 
-File.backup_and_open(conf_path, 'a', conf)
-FileUtils.mkdir_p apps_dir
+File.backup_and_open(conf_path.bypass_safe_level_1, 'a', conf)
+FileUtils.mkdir_p apps_dir.bypass_safe_level_1

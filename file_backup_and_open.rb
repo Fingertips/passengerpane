@@ -1,5 +1,13 @@
 require 'fileutils'
 
+class String
+  def bypass_safe_level_1
+    str = dup
+    str.untaint
+    str
+  end
+end
+
 class File
   class FileNotSuccesfullyWrittenError < StandardError; end
   

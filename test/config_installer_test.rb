@@ -28,7 +28,8 @@ describe "Config installer" do
     
     file_which_is_created_by_the_optional_extra_command = File.join(@tmp, 'file_from_extra_command.txt')
     
-    `/usr/bin/env ruby #{@config_installer} '#{hosts_file}' '#{ [data].to_yaml }' 'touch #{file_which_is_created_by_the_optional_extra_command}'`
+    # Set $SAFE = 1 as happens when used with setuid.
+    `/usr/bin/env ruby -T1 #{@config_installer} '#{hosts_file}' '#{ [data].to_yaml }' 'touch #{file_which_is_created_by_the_optional_extra_command}'`
     
     vhost = File.read(vhost_file)
     vhost.should == "<VirtualHost *:80>\n  ServerName #{host}\n  DocumentRoot \"#{path}/public\"\n  RailsEnv production\n  RailsAllowModRewrite on\n</VirtualHost>\n"

@@ -7,7 +7,7 @@ describe "Config installer" do
     @config_installer = File.expand_path('../../passenger_config_installer.rb', __FILE__)
     @conf_file = File.join(@tmp, 'eloy.conf')
     File.open(@conf_file, 'w') { |f| f << "</Directory>" }
-    `/usr/bin/env ruby '#{@config_installer}' '#{@conf_file}'`
+    `/usr/bin/ruby -T1 '#{@config_installer}' '#{@conf_file}'`
   end
   
   after do

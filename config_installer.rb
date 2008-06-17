@@ -18,10 +18,10 @@ YAML.load(data).each do |app|
 }.sub(/^\n/, '')
   
   OSX::NSLog("Will write file: #{app['config_path']}\nData: #{vhost}")
-  File.open(app['config_path'], 'w') { |f| f << vhost }
+  File.open(app['config_path'].bypass_safe_level_1, 'w') { |f| f << vhost }
   
   OSX::NSLog("Will append to file: #{hosts_file}\nData: #{app['host']}")
-  File.backup_and_open(hosts_file, 'a', "\n127.0.0.1\t\t\t#{app['host']}")
+  File.backup_and_open(hosts_file.bypass_safe_level_1, 'a', "\n127.0.0.1\t\t\t#{app['host']}")
 end
 
-system(extra_command) if extra_command
+system(extra_command.bypass_safe_level_1) if extra_command
