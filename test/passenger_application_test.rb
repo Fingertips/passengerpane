@@ -81,20 +81,12 @@ describe "PassengerApplication, in general" do
     assigns(:new_app).should.be false
   end
   
-  it "should be able to execute shell with administrator permissions" do
-    osa = mock('NSAppleScript')
-    OSX::NSAppleScript.any_instance.expects(:initWithSource).with('do shell script "/requires/admin/privileges" with administrator privileges').returns(osa)
-    osa.expects(:performSelector_withObject).with("executeAndReturnError:", nil)
-    
-    passenger_app.send(:execute, '/requires/admin/privileges')
-  end
-  
   it "should return the path to the config file" do
     passenger_app.config_path.should == File.join(SharedPassengerBehaviour::USERS_APACHE_PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
   end
   
   it "should be able to save the config file" do
-    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{[passenger_app.to_hash].to_yaml}'")
+    passenger_app.expects(:execute).with('/usr/bin/ruby',  PassengerApplication::CONFIG_INSTALLER, '/etc/hosts', [passenger_app.to_hash].to_yaml)
     passenger_app.save_config!
   end
   
@@ -154,7 +146,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should remove an application" do
-    passenger_app.expects(:execute).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_UNINSTALLER}' '/etc/hosts' '#{passenger_app.config_path}' 'het-manfreds-blog.local'")
+    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, '/etc/hosts', passenger_app.config_path, 'het-manfreds-blog.local')
     passenger_app.remove
   end
   
@@ -169,7 +161,7 @@ describe "PassengerApplication, in general" do
     app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
     
-    SharedPassengerBehaviour.expects(:execute).times(1).with("/usr/bin/env ruby '#{PassengerApplication::CONFIG_INSTALLER}' '/etc/hosts' '#{[app1.to_hash, app2.to_hash].to_yaml}' '/usr/sbin/apachectl graceful'")
+    SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, '/etc/hosts', [app1.to_hash, app2.to_hash].to_yaml, '/usr/sbin/apachectl graceful')
     
     PassengerApplication.startApplications [app1, app2].to_ns
   end

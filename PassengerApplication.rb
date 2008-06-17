@@ -16,7 +16,7 @@ class PassengerApplication < NSObject
   def self.startApplications(apps)
     data = apps.to_ruby.map { |app| app.to_hash }.to_yaml
     SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
-    SharedPassengerBehaviour.execute "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{data}' '/usr/sbin/apachectl graceful'"
+    SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_INSTALLER, '/etc/hosts', data, '/usr/sbin/apachectl graceful'
   end
   
   kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
@@ -74,15 +74,15 @@ class PassengerApplication < NSObject
   
   def remove
     p "Removing application: #{path}"
-    execute "/usr/bin/env ruby '#{CONFIG_UNINSTALLER}' '/etc/hosts' '#{config_path}' '#{@host}'"
+    execute '/usr/bin/ruby', CONFIG_UNINSTALLER, '/etc/hosts', config_path, @host
   end
   
   def save_config!(extra_command = nil)
     p "Saving configuration: #{config_path}"
-    command = "/usr/bin/env ruby '#{CONFIG_INSTALLER}' '/etc/hosts' '#{[to_hash].to_yaml}'"
-    command << " '#{extra_command}'" if extra_command
+    command = ['/usr/bin/ruby', CONFIG_INSTALLER, '/etc/hosts', [to_hash].to_yaml]
+    command << extra_command if extra_command
     p command
-    execute command
+    execute *command
   end
   
   def config_path
