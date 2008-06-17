@@ -160,6 +160,14 @@ describe "PrefPanePassenger, in general" do
     pref_pane.expects(:browse).times(0)
     pref_pane.setValue_forKey([PassengerApplication.alloc.init, PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))], 'applications')
   end
+  
+  it "should check if the current selected application is dirty before allowing the table view to change it's selection" do
+    app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    
+    pref_pane.tableView_shouldSelectRow(applicationsTableView, applicationsController.selectionIndex + 1).should.be false
+  end
 end
 
 describe "PrefPanePassenger, with drag and drop support" do

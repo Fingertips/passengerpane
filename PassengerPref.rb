@@ -122,6 +122,10 @@ class PrefPanePassenger < NSPreferencePane
     self.authorized = false
   end
   
+  def tableView_shouldSelectRow(tableView, row)
+    not @applicationsController.selectedObjects.first.dirty?
+  end
+  
   private
   
   def passenger_installed?

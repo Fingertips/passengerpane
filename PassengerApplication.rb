@@ -48,6 +48,7 @@ class PassengerApplication < NSObject
   
   def initWithPath(path)
     if init
+      @dirty = true
       @path = path
       set_default_host_from_path(path)
       self
@@ -56,6 +57,10 @@ class PassengerApplication < NSObject
   
   def new_app?
     @new_app
+  end
+  
+  def dirty?
+    @dirty
   end
   
   def apply(sender = nil)

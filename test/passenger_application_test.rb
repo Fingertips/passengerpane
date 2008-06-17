@@ -48,6 +48,10 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
     assigns(:valid).should.be true
   end
+  
+  it "should mark the app as dirty if it's initialized with a path" do
+    PassengerApplication.alloc.initWithPath('/Users/het-manfred/rails code/blog').should.be.dirty
+  end
 end
 
 describe "PassengerApplication, in general" do
