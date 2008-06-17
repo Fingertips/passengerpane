@@ -50,6 +50,11 @@ describe "PrefPanePassenger, in general" do
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
                :authorizationView => OSX::SFAuthorizationView.alloc.init
     
+    mainView = stub('Main View')
+    pref_pane.stubs(:mainView).returns(mainView)
+    window = stub('Main Window')
+    mainView.stubs(:window).returns(window)
+    
     pref_pane.mainViewDidLoad
   end
   
@@ -86,12 +91,22 @@ describe "PrefPanePassenger, in general" do
     
     OSX::NSOpenPanel.any_instance.expects(:canChooseDirectories=).with(true)
     OSX::NSOpenPanel.any_instance.expects(:canChooseFiles=).with(false)
-    OSX::NSOpenPanel.any_instance.expects(:runModalForDirectory_file_types).with(app.path, nil, nil).returns(OSX::NSOKButton)
-    OSX::NSOpenPanel.any_instance.stubs(:filenames).returns(['/some/path/to/Blog'])
+    OSX::NSOpenPanel.any_instance.expects(:objc_send).with(
+      :beginSheetForDirectory, app.path,
+      :file, nil,
+      :types, nil,
+      :modalForWindow, pref_pane.mainView.window,
+      :modalDelegate, pref_pane,
+      :didEndSelector, 'openPanelDidEnd:returnCode:contextInfo:',
+      :contextInfo, nil
+    )
+    pref_pane.browse
+    
+    panel = stub('NSOpenPanel')
+    panel.stubs(:filename).returns('/some/path/to/Blog')
     
     app.expects(:setValue_forKey).with('/some/path/to/Blog', 'path')
-    
-    pref_pane.browse
+    pref_pane.openPanelDidEnd_returnCode_contextInfo(panel, OSX::NSOKButton, nil)
   end
   
   it "should be able to check if the passenger gem is installed" do

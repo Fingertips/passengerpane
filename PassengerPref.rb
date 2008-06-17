@@ -36,6 +36,7 @@ class PrefPanePassenger < NSPreferencePane
     @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
     @authorizationView.updateStatus self
+    @authorizationView.autoupdate = true
     
     @applications = [].to_ns
     
@@ -66,20 +67,32 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  def browse(sender = nil)
-    panel = NSOpenPanel.openPanel
-    panel.canChooseDirectories = true
-    panel.canChooseFiles = false
-    if panel.runModalForDirectory_file_types(@applicationsController.selectedObjects.first.path, nil, nil) == NSOKButton
-      @applicationsController.selectedObjects.first.setValue_forKey panel.filenames.first, 'path'
-    end
-  end
-  
   def showInstallPassengerHelpAlert(sender)
     alert = OSX::NSAlert.alloc.init
     alert.messageText = "Install Passenger Gem"
     alert.informativeText = "The Passenger Preference Pane uses the gem command to locate your Passenger installation.\n\nTo install the current release use:\n“$ sudo gem install passenger”\n“$ sudo passenger-install-apache2-module”\n\nAfter installing the Passenger gem, load the Passenger Preference Pane again and we’ll setup your Apache config for you. (You can ignore the instructions about this during the installation process.)"
     alert.runModal
+  end
+  
+  # Select application directory panel
+  
+  def browse(sender = nil)
+    panel = NSOpenPanel.openPanel
+    panel.canChooseDirectories = true
+    panel.canChooseFiles = false
+    panel.objc_send(
+      :beginSheetForDirectory, @applicationsController.selectedObjects.first.path,
+      :file, nil,
+      :types, nil,
+      :modalForWindow, mainView.window,
+      :modalDelegate, self,
+      :didEndSelector, 'openPanelDidEnd:returnCode:contextInfo:',
+      :contextInfo, nil
+    )
+  end
+  
+  def openPanelDidEnd_returnCode_contextInfo(panel, button, contextInfo)
+    @applicationsController.selectedObjects.first.setValue_forKey(panel.filename, 'path') if button == OSX::NSOKButton
   end
   
   # Applications NSTableView dataSource drag and drop methods
