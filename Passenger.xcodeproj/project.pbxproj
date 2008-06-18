@@ -16,9 +16,7 @@
 		518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F740E06B665003A3ED0 /* SecurityHelper.h */; };
 		518C7F770E06B665003A3ED0 /* SecurityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C7F750E06B665003A3ED0 /* SecurityHelper.m */; };
 		519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */; };
-		519DFBA80DFE8EAF008A42FE /* passenger_config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */; };
 		519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */; };
-		519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */; };
 		519DFBD10E02EE69008A42FE /* Refresh.tif in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBCF0E02EE69008A42FE /* Refresh.tif */; };
 		519DFBD20E02EE69008A42FE /* RefreshPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBD00E02EE69008A42FE /* RefreshPressed.tif */; };
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
@@ -57,9 +55,7 @@
 		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityHelper.h; sourceTree = "<group>"; };
 		518C7F750E06B665003A3ED0 /* SecurityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityHelper.m; sourceTree = "<group>"; };
 		519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerApplication.rb; sourceTree = "<group>"; };
-		519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = passenger_config_installer.rb; sourceTree = "<group>"; };
 		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = shared_passenger_behaviour.rb; sourceTree = "<group>"; };
-		519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = file_backup_and_open.rb; sourceTree = "<group>"; };
 		519DFBCF0E02EE69008A42FE /* Refresh.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Refresh.tif; sourceTree = "<group>"; };
 		519DFBD00E02EE69008A42FE /* RefreshPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RefreshPressed.tif; sourceTree = "<group>"; };
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Alerts.icns; sourceTree = "<group>"; };
@@ -137,9 +133,7 @@
 				51B9190C0E01523900F45803 /* Alerts.icns */,
 				9648B5EE0D195C2F00DC73E2 /* Pref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
-				519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */,
 				76A8DCDE0E068B7000B133F1 /* icon.png */,
-				519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */,
 				5186C31E0E090C9C008D8E1F /* Carbon.framework */,
 				518C7F550E06745E003A3ED0 /* Security.framework */,
 				519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */,
@@ -262,9 +256,7 @@
 				9648B5F00D195C2F00DC73E2 /* Pref.xib in Resources */,
 				516B1B6E0DD3D344009ADB8E /* config_installer.rb in Resources */,
 				519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */,
-				519DFBA80DFE8EAF008A42FE /* passenger_config_installer.rb in Resources */,
 				519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */,
-				519DFBAD0DFFF4F6008A42FE /* file_backup_and_open.rb in Resources */,
 				51B9190D0E01523900F45803 /* Alerts.icns in Resources */,
 				51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */,
 				51B9191E0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb in Resources */,
