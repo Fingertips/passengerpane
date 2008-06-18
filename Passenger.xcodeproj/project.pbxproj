@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		516B1B6E0DD3D344009ADB8E /* config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 516B1B6D0DD3D344009ADB8E /* config_installer.rb */; };
+		5186C3170E090B59008D8E1F /* HelpHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5186C3150E090B59008D8E1F /* HelpHelper.h */; };
+		5186C3180E090B59008D8E1F /* HelpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5186C3160E090B59008D8E1F /* HelpHelper.m */; };
+		5186C31F0E090C9C008D8E1F /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5186C31E0E090C9C008D8E1F /* Carbon.framework */; };
 		518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C7F550E06745E003A3ED0 /* Security.framework */; };
 		518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 518C7F720E06A668003A3ED0 /* Security.bridgesupport */; };
 		518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F740E06B665003A3ED0 /* SecurityHelper.h */; };
@@ -46,6 +49,9 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger_Prefix.pch; sourceTree = "<group>"; };
 		516B1B6D0DD3D344009ADB8E /* config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_installer.rb; sourceTree = "<group>"; };
+		5186C3150E090B59008D8E1F /* HelpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpHelper.h; sourceTree = "<group>"; };
+		5186C3160E090B59008D8E1F /* HelpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpHelper.m; sourceTree = "<group>"; };
+		5186C31E0E090C9C008D8E1F /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		518C7F550E06745E003A3ED0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		518C7F720E06A668003A3ED0 /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
 		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityHelper.h; sourceTree = "<group>"; };
@@ -85,6 +91,7 @@
 				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
 				9648B5E80D195BC700DC73E2 /* RubyCocoa.framework in Frameworks */,
 				518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */,
+				5186C31F0E090C9C008D8E1F /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +130,8 @@
 				519DFBCF0E02EE69008A42FE /* Refresh.tif */,
 				519DFBD00E02EE69008A42FE /* RefreshPressed.tif */,
 				51B919230E02B93400F45803 /* Plus.tif */,
+				5186C3150E090B59008D8E1F /* HelpHelper.h */,
+				5186C3160E090B59008D8E1F /* HelpHelper.m */,
 				51B919240E02B93400F45803 /* PlusPressed.tif */,
 				51B919130E0172C200F45803 /* config_uninstaller.rb */,
 				51B9190C0E01523900F45803 /* Alerts.icns */,
@@ -131,6 +140,7 @@
 				519DFBA60DFE8EAF008A42FE /* passenger_config_installer.rb */,
 				76A8DCDE0E068B7000B133F1 /* icon.png */,
 				519DFBAC0DFFF4F6008A42FE /* file_backup_and_open.rb */,
+				5186C31E0E090C9C008D8E1F /* Carbon.framework */,
 				518C7F550E06745E003A3ED0 /* Security.framework */,
 				519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -197,6 +207,7 @@
 			files = (
 				8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */,
 				518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */,
+				5186C3170E090B59008D8E1F /* HelpHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +300,7 @@
 			files = (
 				8D202CF10486D31800D8A456 /* PassengerPref.m in Sources */,
 				518C7F770E06B665003A3ED0 /* SecurityHelper.m in Sources */,
+				5186C3180E090B59008D8E1F /* HelpHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

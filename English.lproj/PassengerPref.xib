@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.02">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9D34</string>
+		<string key="IBDocument.SystemVersion">9C7010</string>
 		<string key="IBDocument.InterfaceBuilderVersion">667</string>
-		<string key="IBDocument.AppKitVersion">949.33</string>
+		<string key="IBDocument.AppKitVersion">949.26</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="230"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -938,14 +938,6 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">showInstallPassengerHelpAlert:</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="905802421"/>
-					</object>
-					<int key="connectionID">204</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
 						<reference key="source" ref="565115411"/>
 						<reference key="destination" ref="987090916"/>
@@ -1297,6 +1289,14 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 						</object>
 					</object>
 					<int key="connectionID">368</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">showInstallPassengerHelp:</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="905802421"/>
+					</object>
+					<int key="connectionID">369</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1843,9 +1843,9 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{527, 647}, {668, 438}}</string>
+					<string>{{12, 52}, {668, 438}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{527, 647}, {668, 438}}</string>
+					<string>{{12, 52}, {668, 438}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 368}}</string>
 					<reference ref="9"/>
@@ -1936,7 +1936,7 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">368</int>
+			<int key="maxID">369</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1961,7 +1961,7 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 							<string>browse:</string>
 							<string>closeNewApplicationSheet:</string>
 							<string>remove:</string>
-							<string>showInstallPassengerHelpAlert:</string>
+							<string>showInstallPassengerHelp:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>

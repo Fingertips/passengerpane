@@ -56,11 +56,8 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  def showInstallPassengerHelpAlert(sender)
-    alert = OSX::NSAlert.alloc.init
-    alert.messageText = "Install Passenger Gem"
-    alert.informativeText = "The Passenger Preference Pane uses the gem command to locate your Passenger installation.\n\nTo install the current release use:\n“$ sudo gem install passenger”\n“$ sudo passenger-install-apache2-module”\n\nAfter installing the Passenger gem, load the Passenger Preference Pane again and we’ll setup your Apache config for you. (You can ignore the instructions about this during the installation process.)"
-    alert.runModal
+  def showInstallPassengerHelp(sender)
+    OSX::HelpHelper.openHelpPage File.expand_path('../English.lproj/PassengerPaneHelp/PassengerPaneHelp.html', __FILE__)
   end
   
   # Select application directory panel
