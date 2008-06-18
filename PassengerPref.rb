@@ -51,6 +51,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def remove(sender)
+    p "REMOVE!"
     apps = @applicationsController.selectedObjects
     apps.each { |app| app.remove }
     @applicationsController.removeObjects apps
@@ -64,7 +65,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def rbSetValue_forKey(value, key)
     super
-    browse if key == 'applications' and value.last.new_app?
+    browse if key == 'applications' and !value.empty? and value.last.new_app?
   end
   
   def browse(sender = nil)

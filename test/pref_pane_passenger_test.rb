@@ -162,6 +162,11 @@ describe "PrefPanePassenger, in general" do
     pref_pane.setValue_forKey([PassengerApplication.alloc.init, PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))], 'applications')
   end
   
+  it "should not open the browse panel if the applications array is empty" do
+    pref_pane.expects(:browse).times(0)
+    pref_pane.setValue_forKey([], 'applications')
+  end
+  
   it "should show a warning if the current selected application is dirty before allowing the pane to unselect" do
     app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
     applicationsController.content = [app]
