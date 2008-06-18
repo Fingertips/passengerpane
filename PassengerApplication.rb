@@ -41,6 +41,8 @@ class PassengerApplication < NSObject
       @new_app = true
       @dirty = @valid = false
       @host, @path = '', ''
+      
+      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
       self
     end
   end
@@ -54,6 +56,8 @@ class PassengerApplication < NSObject
       @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
       @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
       @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
+      
+      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
       self
     end
   end
@@ -63,6 +67,8 @@ class PassengerApplication < NSObject
       @dirty = true
       @path = path
       set_default_host_from_path(path)
+      
+      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
       self
     end
   end
@@ -73,6 +79,10 @@ class PassengerApplication < NSObject
   
   def dirty?
     @dirty
+  end
+  
+  def valid?
+    @valid
   end
   
   def apply(sender = nil)
@@ -117,6 +127,13 @@ class PassengerApplication < NSObject
       'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
       'allow_mod_rewrite' => @allow_mod_rewrite == true || @allow_mod_rewrite == 1
     }
+  end
+  
+  def revert(sender = nil)
+    @original_values.each do |key, value|
+      send "#{key}=", value
+    end
+    self.valid = self.dirty = false
   end
   
   private

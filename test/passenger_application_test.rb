@@ -1,6 +1,14 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerApplication'
 
+class Hash
+  def except(key)
+    copy = dup
+    copy.delete(key)
+    copy
+  end
+end
+
 describe "PassengerApplication, with a new application" do
   tests PassengerApplication
   
@@ -95,8 +103,6 @@ describe "PassengerApplication, in general" do
   end
   
   it "should mark the application as dirty if a value has changed" do
-    passenger_app.stubs(:restart)
-    
     assigns(:dirty).should.be false
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
     assigns(:dirty).should.be true
@@ -168,5 +174,22 @@ describe "PassengerApplication, in general" do
     SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
     PassengerApplication.startApplications [app1, app2].to_ns
+  end
+  
+  it "should remember all the original values for the case that the user wants to revert" do
+    passenger_app.setValue_forKey('foo.local', 'host')
+    passenger_app.setValue_forKey('/some/path', 'path')
+    passenger_app.setValue_forKey('production', 'environment')
+    passenger_app.setValue_forKey(true, 'allow_mod_rewrite')
+    
+    passenger_app.should.be.dirty
+    passenger_app.should.be.valid
+    passenger_app.to_hash.except('config_path').should == { 'host' => 'foo.local', 'path' => '/some/path', 'environment' => 'production', 'allow_mod_rewrite' => true }
+    
+    passenger_app.revert
+    
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.valid
+    passenger_app.to_hash.except('config_path').should == { 'host' => 'het-manfreds-blog.local', 'path' => '/Users/het-manfred/rails code/blog', 'environment' => 'development', 'allow_mod_rewrite' => false }
   end
 end

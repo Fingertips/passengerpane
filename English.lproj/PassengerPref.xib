@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="230"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1366,6 +1366,26 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 					</object>
 					<int key="connectionID">375</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">target: selection</string>
+						<reference key="source" ref="615078570"/>
+						<reference key="destination" ref="467003467"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="615078570"/>
+							<reference key="NSDestination" ref="467003467"/>
+							<string key="NSLabel">target: selection</string>
+							<string key="NSBinding">target</string>
+							<string key="NSKeyPath">selection</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSSelectorName</string>
+								<string key="NS.object.0">revert</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">377</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -2004,7 +2024,7 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">375</int>
+			<int key="maxID">377</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
