@@ -13,10 +13,22 @@ class PassengerApplication < NSObject
   DEVELOPMENT = 0
   PRODUCTION = 1
   
-  def self.startApplications(apps)
-    data = apps.to_ruby.map { |app| app.to_hash }.to_yaml
-    SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
-    SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_INSTALLER, data, '/usr/sbin/apachectl graceful'
+  class << self
+    def startApplications(apps)
+      data = serializedApplicationsData(apps)
+      SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
+      SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_INSTALLER, data
+    end
+  
+    def removeApplications(apps)
+      data = serializedApplicationsData(apps)
+      SharedPassengerBehaviour.p "Removing applications: #{data}"
+      SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_UNINSTALLER, data
+    end
+  
+    def serializedApplicationsData(apps)
+      apps.to_ruby.map { |app| app.to_hash }.to_yaml
+    end
   end
   
   kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
@@ -79,11 +91,6 @@ class PassengerApplication < NSObject
     p "Restarting Rails application: #{@path}"
     save_config! if @dirty
     Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
-  end
-  
-  def remove
-    p "Removing application: #{path}"
-    execute '/usr/bin/ruby', CONFIG_UNINSTALLER, [{ 'config_path' => config_path, 'host' => @host }].to_yaml
   end
   
   def save_config!(extra_command = nil)

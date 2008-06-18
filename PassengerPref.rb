@@ -48,9 +48,8 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def remove(sender)
-    p "REMOVE!"
     apps = @applicationsController.selectedObjects
-    apps.each { |app| app.remove }
+    PassengerApplication.removeApplications apps
     @applicationsController.removeObjects apps
   end
   

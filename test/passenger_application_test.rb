@@ -149,9 +149,9 @@ describe "PassengerApplication, in general" do
     passenger_app.restart
   end
   
-  it "should remove an application" do
-    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [{ 'config_path' => passenger_app.config_path, 'host' => 'het-manfreds-blog.local' }].to_yaml)
-    passenger_app.remove
+  it "should remove application(s)" do
+    SharedPassengerBehaviour.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [passenger_app.to_hash].to_yaml)
+    PassengerApplication.removeApplications([passenger_app].to_ns)
   end
   
   it "should return it's attributes as a hash without NS classes" do
@@ -165,7 +165,7 @@ describe "PassengerApplication, in general" do
     app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
     
-    SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml, '/usr/sbin/apachectl graceful')
+    SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
     PassengerApplication.startApplications [app1, app2].to_ns
   end
