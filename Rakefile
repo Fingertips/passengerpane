@@ -11,27 +11,6 @@ task :test do
   end
 end
 
-CONF_DIR = '/etc/apache2/users/'
-desc 'remove vhosts'
-task :remove do
-  require 'osx/cocoa'
-  
-  conf = File.join(CONF_DIR, "#{OSX.NSUserName}.conf")
-  unless File.exist? "#{conf}.backup" and File.exist? "#{conf}.without-passenger"
-    puts "Make sure that both these files exist:\n- #{conf}.backup\n- #{conf}.without-passenger"
-    exit 1
-  end
-  
-  dir = File.join(CONF_DIR, "#{OSX.NSUserName}-passenger-apps")
-  sh "sudo rm -rf #{dir}" if File.exist? dir
-  sh "sudo rm #{conf}" if File.exist? conf
-  sh "sudo cp #{conf}.without-passenger #{conf}"
-end
-
-task :remove_all => :remove do
-  sh "sudo gem uninstall passenger"
-end
-
 desc "Generate Security.framework BridgeSupport file"
 task :bridgesupport do
   #sh "gen_bridge_metadata -f Security -e Security.BridgeSupport-exceptions.xml -o Security.bridgesupport"

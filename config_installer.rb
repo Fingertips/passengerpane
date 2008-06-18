@@ -2,6 +2,7 @@
 
 require 'osx/cocoa'
 require 'yaml'
+require 'fileutils'
 
 class String
   def bypass_safe_level_1
@@ -23,6 +24,19 @@ class ConfigInstaller
     host = @data[index]['host']
     OSX::NSLog("Will add host: #{host}")
     system "/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host.bypass_safe_level_1} IPAddress 127.0.0.1"
+  end
+  
+  VHOSTS_DIR = "/private/etc/apache2/passenger_vhosts"
+  CONF = "/private/etc/apache2/other/passenger_pane.conf"
+  def verify_vhost_conf
+    unless File.exist? VHOSTS_DIR
+      OSX::NSLog("Will create directory: #{VHOSTS_DIR}")
+      FileUtils.mkdir_p VHOSTS_DIR
+    end
+    unless File.exist? CONF
+      OSX::NSLog("Will create config: #{CONF}")
+      File.open(CONF, 'w') { |f| f << "Include #{VHOSTS_DIR}/*.conf" }
+    end
   end
   
   def create_vhost_conf(index)
@@ -49,6 +63,7 @@ class ConfigInstaller
   end
   
   def install!
+    verify_vhost_conf
     (0..(@data.length - 1)).each do |index|
       add_to_hosts index
       create_vhost_conf index

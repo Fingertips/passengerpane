@@ -42,7 +42,7 @@ class PrefPanePassenger < NSPreferencePane
     
     showPassengerWarning unless passenger_installed?
     
-    Dir.glob(File.join(USERS_APACHE_PASSENGER_APPS_DIR, '*.vhost.conf')).each do |app|
+    Dir.glob(File.join(PASSENGER_APPS_DIR, '*.vhost.conf')).each do |app|
       @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
     end
   end

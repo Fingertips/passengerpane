@@ -1,9 +1,7 @@
 - Support RailsBaseURI and parse this from the address field.
-- Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev)
+- Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev, wrote 18-06)
 - Dragging folders into the list should only focus the list and not show the individual items as targets.
-- Always first check if the directory for the passenger apps exists.
 - No new entry should be added if you click Add and then 'Cancel' in the Open panel.
-- What exactly happens to /etc/hosts? Mine is suddenly empty... Is there another way to add new hostnames to the resolver?
 - Check paths in help file.
 - Check what we want to do with the text and buttons on the alert warning the user when he/she unselects the pane.
 - Check if "apachectl graceful" is causing all these permission denied errors and if "launchctl stop org.apache.httpd" would solve this.

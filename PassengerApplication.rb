@@ -84,7 +84,7 @@ class PassengerApplication < NSObject
   
   def start
     p "Starting Rails application (restarting Apache gracefully): #{@path}"
-    save_config! '/usr/sbin/apachectl graceful'
+    save_config!
   end
   
   def restart(sender = nil)
@@ -93,16 +93,13 @@ class PassengerApplication < NSObject
     Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
   end
   
-  def save_config!(extra_command = nil)
+  def save_config!
     p "Saving configuration: #{config_path}"
-    command = ['/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml]
-    command << extra_command if extra_command
-    p command
-    execute *command
+    execute '/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml
   end
   
   def config_path
-    @config_path ||= File.join(USERS_APACHE_PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
+    @config_path ||= File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
   def rbSetValue_forKey(value, key)

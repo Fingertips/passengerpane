@@ -32,8 +32,8 @@ describe "PrefPanePassenger, while loading" do
     installPassengerWarning.hidden?.should.be false
   end
   
-  it "should add existing applications found in /etc/apache2/users/passenger_apps to the array controller: applicationsController" do
-    dir = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps"
+  it "should add existing applications found in #{SharedPassengerBehaviour::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
+    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
     blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
     blog_stub, paste_stub = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
     

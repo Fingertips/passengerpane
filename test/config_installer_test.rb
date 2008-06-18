@@ -38,6 +38,18 @@ describe "ConfigInstaller" do
     @installer.add_to_hosts(0)
   end
   
+  it "should check if the vhost directory exists, if not add it and also the create the passenger-vhosts.conf" do
+    dir = "/private/etc/apache2/passenger_vhosts"
+    File.expects(:exist?).with(dir).returns(false)
+    FileUtils.expects(:mkdir_p).with(dir)
+    
+    conf = "/private/etc/apache2/other/passenger_pane.conf"
+    File.expects(:exist?).with(conf).returns(false)
+    File.expects(:open).with(conf, 'w')
+    
+    @installer.verify_vhost_conf
+  end
+  
   it "should create a new vhost conf file" do
     @installer.create_vhost_conf(0)
     
@@ -69,6 +81,8 @@ describe "ConfigInstaller" do
   
   it "should be able to take a serialized array of hashes and do all the work necessary in one go" do
     installer = ConfigInstaller.any_instance
+    
+    installer.expects(:verify_vhost_conf)
     
     installer.expects(:add_to_hosts).with(0)
     installer.expects(:add_to_hosts).with(1)

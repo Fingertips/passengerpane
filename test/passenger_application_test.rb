@@ -36,7 +36,7 @@ describe "PassengerApplication, with a new application" do
   end
   
   it "should start the application by gracefully restarting apache" do
-    passenger_app.expects(:save_config!).with('/usr/sbin/apachectl graceful').times(1)
+    passenger_app.expects(:save_config!).times(1)
     passenger_app.start
   end
   
@@ -86,7 +86,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should return the path to the config file" do
-    passenger_app.config_path.should == File.join(SharedPassengerBehaviour::USERS_APACHE_PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
+    passenger_app.config_path.should == File.join(SharedPassengerBehaviour::PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
   end
   
   it "should be able to save the config file" do

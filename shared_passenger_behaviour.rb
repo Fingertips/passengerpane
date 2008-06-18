@@ -1,8 +1,8 @@
 module SharedPassengerBehaviour
   include OSX
   
-  USERS_APACHE_PASSENGER_APPS_DIR = "/etc/apache2/users/#{OSX.NSUserName}-passenger-apps"
-  USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
+  PASSENGER_APPS_DIR = "/private/etc/apache2/passenger_vhosts"
+  #USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
   
   def execute(command, *args)
     OSX::SecurityHelper.sharedInstance.executeCommand_withArgs(command, args)
