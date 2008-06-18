@@ -122,8 +122,27 @@ class PrefPanePassenger < NSPreferencePane
     self.authorized = false
   end
   
-  def tableView_shouldSelectRow(tableView, row)
-    not @applicationsController.selectedObjects.first.dirty?
+  def shouldUnselect
+    if @applicationsController.selectedObjects.first.dirty?
+      alert = OSX::NSAlert.alloc.init
+      alert.messageText = 'This service has unsaved changes'
+      alert.informativeText = 'Would you like to discard your changes?'
+      alert.addButtonWithTitle 'OK'
+      alert.addButtonWithTitle 'Cancel'
+      alert.objc_send(
+        :beginSheetModalForWindow, mainView.window,
+        :modalDelegate, self,
+        :didEndSelector, 'unsavedChangesAlertDidEnd:returnCode:contextInfo:',
+        :contextInfo, nil
+      )
+      return OSX::NSUnselectLater
+    end
+    OSX::NSUnselectNow
+  end
+  
+  def unsavedChangesAlertDidEnd_returnCode_contextInfo(alert, returnCode, contextInfo)
+    alert.window.orderOut(self)
+    replyToShouldUnselect(returnCode == OSX::NSAlertFirstButtonReturn)
   end
   
   private

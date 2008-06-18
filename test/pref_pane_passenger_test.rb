@@ -97,6 +97,7 @@ describe "PrefPanePassenger, in general" do
   end
   
   it "should return the home directory if no application is selected" do
+    applicationsController.selectedObjects = []
     pref_pane.send(:path_for_browser).to_s.should == File.expand_path('~')
   end
   
@@ -161,12 +162,53 @@ describe "PrefPanePassenger, in general" do
     pref_pane.setValue_forKey([PassengerApplication.alloc.init, PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))], 'applications')
   end
   
-  it "should check if the current selected application is dirty before allowing the table view to change it's selection" do
+  it "should show a warning if the current selected application is dirty before allowing the pane to unselect" do
     app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
     applicationsController.content = [app]
     applicationsController.selectedObjects = [app]
     
-    pref_pane.tableView_shouldSelectRow(applicationsTableView, applicationsController.selectionIndex + 1).should.be false
+    OSX::NSAlert.any_instance.expects(:objc_send).with(
+      :beginSheetModalForWindow, pref_pane.mainView.window,
+      :modalDelegate, pref_pane,
+      :didEndSelector, 'unsavedChangesAlertDidEnd:returnCode:contextInfo:',
+      :contextInfo, nil
+    ).times(1)
+    
+    pref_pane.shouldUnselect.should == OSX::NSUnselectLater
+  end
+  
+  it "should not show a warning if the current selected application is not dirty" do
+    app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    
+    OSX::NSAlert.any_instance.expects(:objc_send).with(
+      :beginSheetModalForWindow, pref_pane.mainView.window,
+      :modalDelegate, pref_pane,
+      :didEndSelector, 'unsavedChangesAlertDidEnd:returnCode:contextInfo:',
+      :contextInfo, nil
+    ).times(0)
+    
+    pref_pane.shouldUnselect.should == OSX::NSUnselectNow
+  end
+  
+  it "should tell the pane to unselect if the user chooses to discard unsaved changes" do
+    pref_pane.expects(:replyToShouldUnselect).with(true)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, OSX::NSAlertFirstButtonReturn, nil)
+  end
+  
+  it "should tell the pane to not unselect if the user chooses to review unsaved changes" do
+    pref_pane.expects(:replyToShouldUnselect).with(false)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, OSX::NSAlertSecondButtonReturn, nil)
+  end
+  
+  private
+  
+  def alert_stub
+    window = stub_everything('Window')
+    alert = stub('Alert')
+    alert.stubs(:window).returns(window)
+    alert
   end
 end
 
