@@ -1,4 +1,3 @@
-- Support RailsBaseURI and parse this from the address field.
 - Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev, wrote 18-06)
 - Dragging folders into the list should only focus the list and not show the individual items as targets.
 - No new entry should be added if you click Add and then 'Cancel' in the Open panel.

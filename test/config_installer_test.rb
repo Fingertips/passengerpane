@@ -13,7 +13,8 @@ describe "ConfigInstaller" do
       'host' => 'het-manfreds-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
-      'allow_mod_rewrite' => true
+      'allow_mod_rewrite' => true,
+      'base_uri' => ''
     }
     
     @installer = ConfigInstaller.new([@data].to_yaml)
@@ -29,7 +30,8 @@ describe "ConfigInstaller" do
       'host' => 'het-manfreds-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
-      'allow_mod_rewrite' => true
+      'allow_mod_rewrite' => true,
+      'base_uri' => ''
     }]
   end
   
@@ -59,6 +61,21 @@ describe "ConfigInstaller" do
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
   RailsAllowModRewrite on
+</VirtualHost>
+}.sub(/^\n/, '')
+  end
+  
+  it "should set the RailsBaseURI if there is one" do
+    @installer.instance_variable_get(:@data)[0]['base_uri'] = '/rails/blog'
+    @installer.create_vhost_conf(0)
+    
+    File.read(@vhost_file.bypass_safe_level_1).should == %{
+<VirtualHost *:80>
+  ServerName het-manfreds-blog.local
+  DocumentRoot "/User/het-manfred/rails code/blog/public"
+  RailsEnv production
+  RailsAllowModRewrite on
+  RailsBaseURI /rails/blog
 </VirtualHost>
 }.sub(/^\n/, '')
   end

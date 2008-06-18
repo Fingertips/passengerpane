@@ -31,7 +31,7 @@ class PassengerApplication < NSObject
     end
   end
   
-  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
+  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite, :base_uri
   
   def init
     if super_init
@@ -40,9 +40,9 @@ class PassengerApplication < NSObject
       
       @new_app = true
       @dirty = @valid = false
-      @host, @path = '', ''
+      @host, @path, @base_uri = '', '', ''
       
-      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
+      set_original_values!
       self
     end
   end
@@ -57,7 +57,11 @@ class PassengerApplication < NSObject
       @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
       @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
       
-      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
+      if match = data.match(/RailsBaseURI\s+(.+)\n/)
+        @base_uri = match[1]
+      end
+      
+      set_original_values!
       self
     end
   end
@@ -68,7 +72,7 @@ class PassengerApplication < NSObject
       @path = path
       set_default_host_from_path(path)
       
-      @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
+      set_original_values!
       self
     end
   end
@@ -113,9 +117,22 @@ class PassengerApplication < NSObject
     File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
+  def rbValueForKey(key)
+    key == 'host' ? "#{@host}#{@base_uri}" : super
+  end
+  
   def rbSetValue_forKey(value, key)
     super
     self.dirty = true
+    
+    if key == 'host'
+      if value.to_s =~ /^(.+?)(\/.+)$/
+        @host, @base_uri = $1, $2
+      else
+        @base_uri = ''
+      end
+    end
+    
     set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
   end
@@ -126,7 +143,8 @@ class PassengerApplication < NSObject
       'host' => @host.to_s,
       'path' => @path.to_s,
       'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
-      'allow_mod_rewrite' => @allow_mod_rewrite == true || @allow_mod_rewrite == 1
+      'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
+      'base_uri' => @base_uri
     }
   end
   
@@ -138,6 +156,10 @@ class PassengerApplication < NSObject
   end
   
   private
+  
+  def set_original_values!
+    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite, 'base_uri' => @base_uri }
+  end
   
   def set_default_host_from_path(path)
     self.host = "#{File.basename(path).downcase}.local"

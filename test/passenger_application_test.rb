@@ -22,6 +22,7 @@ describe "PassengerApplication, with a new application" do
   it "should initialize with empty path & host" do
     passenger_app.path.should == ''
     passenger_app.host.should == ''
+    passenger_app.base_uri.should == ''
     passenger_app.should.be.new_app
     assigns(:dirty).should.be false
     assigns(:valid).should.be false
@@ -89,6 +90,7 @@ describe "PassengerApplication, in general" do
     passenger_app.path.should == "/Users/het-manfred/rails code/wiki"
     passenger_app.environment.should == PassengerApplication::PRODUCTION
     passenger_app.allow_mod_rewrite.should.be true
+    passenger_app.base_uri.should == '/rails/wiki'
   end
   
   it "should set @new_app to false" do
@@ -165,7 +167,7 @@ describe "PassengerApplication, in general" do
   it "should return it's attributes as a hash without NS classes" do
     assigns(:host, 'app.local'.to_ns)
     assigns(:allow_mod_rewrite, false.to_ns)
-    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path, 'environment' => 'development', 'allow_mod_rewrite' => false }
+    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path, 'environment' => 'development', 'allow_mod_rewrite' => false, 'base_uri' => '' }
     passenger_app.to_hash.to_yaml.should.not.include 'NSCF'
   end
   
@@ -183,16 +185,17 @@ describe "PassengerApplication, in general" do
     passenger_app.setValue_forKey('/some/path', 'path')
     passenger_app.setValue_forKey('production', 'environment')
     passenger_app.setValue_forKey(true, 'allow_mod_rewrite')
+    passenger_app.setValue_forKey('/rails/foo', 'base_uri')
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
-    passenger_app.to_hash.except('config_path').should == { 'host' => 'foo.local', 'path' => '/some/path', 'environment' => 'production', 'allow_mod_rewrite' => true }
+    passenger_app.to_hash.except('config_path').should == { 'host' => 'foo.local', 'path' => '/some/path', 'environment' => 'production', 'allow_mod_rewrite' => true, 'base_uri' => '/rails/foo' }
     
     passenger_app.revert
     
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.valid
-    passenger_app.to_hash.except('config_path').should == { 'host' => 'het-manfreds-blog.local', 'path' => '/Users/het-manfred/rails code/blog', 'environment' => 'development', 'allow_mod_rewrite' => false }
+    passenger_app.to_hash.except('config_path').should == { 'host' => 'het-manfreds-blog.local', 'path' => '/Users/het-manfred/rails code/blog', 'environment' => 'development', 'allow_mod_rewrite' => false, 'base_uri' => '' }
   end
   
   it "should first remove a config and then add it again if the host has changed so we don't leave stale files/hosts" do
@@ -200,5 +203,20 @@ describe "PassengerApplication, in general" do
     passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
+  end
+  
+  it "should parse the base uri from the host" do
+    passenger_app.setValue_forKey('foo.local/rails/foo', 'host')
+    passenger_app.host.should == 'foo.local'
+    passenger_app.base_uri.should == '/rails/foo'
+    
+    passenger_app.setValue_forKey('foo.local', 'host')
+    passenger_app.host.should == 'foo.local'
+    passenger_app.base_uri.should == ''
+  end
+  
+  it "should return the host plus the RailsBaseURI if the host is requested by the UI" do
+    passenger_app.setValue_forKey('foo.local/rails/foo', 'host')
+    passenger_app.valueForKey('host').should == 'foo.local/rails/foo'
   end
 end
