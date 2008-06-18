@@ -53,7 +53,7 @@
 }
 
 -(AuthorizationRef)authorizationRef {
-  authorizationRef;
+  return authorizationRef;
 }
 
 -(void)deauthorize {
