@@ -30,7 +30,7 @@ class ConfigUninstaller
   end
   
   def config_path(index)
-    "/private/etc/apache2/passenger_vhosts/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
+    "/private/etc/apache2/passenger_pane_vhosts/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
   end
   
   def restart_apache!

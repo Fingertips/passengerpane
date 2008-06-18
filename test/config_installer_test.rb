@@ -41,7 +41,7 @@ describe "ConfigInstaller" do
   end
   
   it "should check if the vhost directory exists, if not add it and also the create the passenger-vhosts.conf" do
-    dir = "/private/etc/apache2/passenger_vhosts"
+    dir = "/private/etc/apache2/passenger_pane_vhosts"
     File.expects(:exist?).with(dir).returns(false)
     FileUtils.expects(:mkdir_p).with(dir)
     

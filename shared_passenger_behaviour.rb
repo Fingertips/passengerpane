@@ -1,7 +1,7 @@
 module SharedPassengerBehaviour
   include OSX
   
-  PASSENGER_APPS_DIR = "/private/etc/apache2/passenger_vhosts"
+  PASSENGER_APPS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
   #USERS_APACHE_CONFIG = "/etc/apache2/users/#{OSX.NSUserName}.conf"
   
   def execute(command, *args)

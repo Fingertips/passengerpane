@@ -26,7 +26,7 @@ class ConfigInstaller
     system "/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host.bypass_safe_level_1} IPAddress 127.0.0.1"
   end
   
-  VHOSTS_DIR = "/private/etc/apache2/passenger_vhosts"
+  VHOSTS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
   CONF = "/private/etc/apache2/other/passenger_pane.conf"
   def verify_vhost_conf
     unless File.exist? VHOSTS_DIR
