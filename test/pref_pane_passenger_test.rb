@@ -167,6 +167,29 @@ describe "PrefPanePassenger, in general" do
     pref_pane.setValue_forKey([], 'applications')
   end
   
+  it "should remove the new application if the user pressed cancel in the browse panel if it's a new not dirty app" do
+    remove_app = PassengerApplication.alloc.init
+    
+    applicationsController.content = [remove_app]
+    applicationsController.selectedObjects = [remove_app]
+    
+    PassengerApplication.expects(:removeApplications).with([remove_app])
+    pref_pane.openPanelDidEnd_returnCode_contextInfo(nil, OSX::NSCancelButton, nil)
+    applicationsController.content.should.be.empty
+  end
+  
+  it "should not remove an application when the user presses cancel in the browse panel if the app is dirty" do
+    stay_app = PassengerApplication.alloc.init
+    stay_app.setValue_forKey('foo.local', 'host')
+    
+    applicationsController.content = [stay_app]
+    applicationsController.selectedObjects = [stay_app]
+    
+    PassengerApplication.expects(:removeApplications).times(0)
+    pref_pane.openPanelDidEnd_returnCode_contextInfo(nil, OSX::NSCancelButton, nil)
+    applicationsController.content.should == [stay_app]
+  end
+  
   it "should show a warning if the current selected application is dirty before allowing the pane to unselect" do
     app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
     applicationsController.content = [app]

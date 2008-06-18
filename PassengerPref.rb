@@ -48,7 +48,7 @@ class PrefPanePassenger < NSPreferencePane
     end
   end
   
-  def remove(sender)
+  def remove(sender = nil)
     apps = @applicationsController.selectedObjects
     PassengerApplication.removeApplications apps
     @applicationsController.removeObjects apps
@@ -84,7 +84,12 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def openPanelDidEnd_returnCode_contextInfo(panel, button, contextInfo)
-    @applicationsController.selectedObjects.first.setValue_forKey(panel.filename, 'path') if button == OSX::NSOKButton
+    app = @applicationsController.selectedObjects.first
+    if button == OSX::NSOKButton
+      app.setValue_forKey(panel.filename, 'path')
+    else
+      remove if app.new_app? and !app.dirty?
+    end
   end
   
   # Applications NSTableView dataSource drag and drop methods
