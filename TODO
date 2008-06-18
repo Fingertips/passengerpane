@@ -1,5 +1,4 @@
 - Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev, wrote 18-06)
-- No new entry should be added if you click Add and then 'Cancel' in the Open panel.
 - Check paths in help file.
 - Check what we want to do with the text and buttons on the alert warning the user when he/she unselects the pane.
 - Check if "apachectl graceful" is causing all these permission denied errors and if "launchctl stop org.apache.httpd" would solve this.
