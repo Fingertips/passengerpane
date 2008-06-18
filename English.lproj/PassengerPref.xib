@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.02">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">9C7010</string>
-		<string key="IBDocument.InterfaceBuilderVersion">667</string>
-		<string key="IBDocument.AppKitVersion">949.26</string>
+		<string key="IBDocument.SystemVersion">9D34</string>
+		<string key="IBDocument.InterfaceBuilderVersion">658</string>
+		<string key="IBDocument.AppKitVersion">949.33</string>
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -454,13 +454,13 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 										<object class="NSButton" id="73888779">
 											<reference key="NSNextResponder" ref="452669158"/>
 											<int key="NSvFlags">268</int>
-											<string key="NSFrame">{{91, 66}, {159, 18}}</string>
+											<string key="NSFrame">{{91, 66}, {190, 18}}</string>
 											<reference key="NSSuperview" ref="452669158"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="866162661">
-												<int key="NSCellFlags">-2080244224</int>
+												<int key="NSCellFlags">67239424</int>
 												<int key="NSCellFlags2">0</int>
-												<string key="NSContents">Override rewrite rules</string>
+												<string key="NSContents">Allow custom rewrite rules</string>
 												<reference key="NSSupport" ref="829849519"/>
 												<reference key="NSControlView" ref="73888779"/>
 												<int key="NSButtonFlags">1211912703</int>
