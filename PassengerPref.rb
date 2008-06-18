@@ -106,16 +106,12 @@ class PrefPanePassenger < NSPreferencePane
   # SFAuthorizationView: TODO this should actualy move to the SecurityHelper, but for some reason in prototyping it didn't work, try again when everything is cleaned up.
   
   def authorizationViewDidAuthorize(authorizationView = nil)
-    p 'authorizationViewDidAuthorize'
     OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
-    p OSX::SecurityHelper.sharedInstance.authorized?
     self.authorized = true
   end
   
   def authorizationViewDidDeauthorize(authorizationView = nil)
-    p 'authorizationViewDidDeauthorize'
     OSX::SecurityHelper.sharedInstance.deauthorize
-    p OSX::SecurityHelper.sharedInstance.authorized?
     self.authorized = false
   end
   
