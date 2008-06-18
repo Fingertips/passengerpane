@@ -239,9 +239,10 @@ describe "PrefPanePassenger, with drag and drop support" do
     applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
   end
   
-  it "should allow multiple directories to be dropped" do
+  it "should allow multiple directories to be dropped and always to the bottom of the list" do
     assigns(:authorized, true)
     stub_pb_and_info_with_two_directories
+    applicationsTableView.expects(:setDropRow_dropOperation).with(0, OSX::NSTableViewDropAbove)
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
   end
   
