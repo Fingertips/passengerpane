@@ -120,7 +120,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def shouldUnselect
-    if @applicationsController.selectedObjects.first.dirty?
+    if !@applicationsController.content.empty? and @applicationsController.selectedObjects.first.dirty?
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'This service has unsaved changes'
       alert.informativeText = 'Would you like to discard your changes?'

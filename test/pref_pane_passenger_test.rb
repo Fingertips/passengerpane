@@ -187,13 +187,14 @@ describe "PrefPanePassenger, in general" do
     applicationsController.content = [app]
     applicationsController.selectedObjects = [app]
     
-    OSX::NSAlert.any_instance.expects(:objc_send).with(
-      :beginSheetModalForWindow, pref_pane.mainView.window,
-      :modalDelegate, pref_pane,
-      :didEndSelector, 'unsavedChangesAlertDidEnd:returnCode:contextInfo:',
-      :contextInfo, nil
-    ).times(0)
+    OSX::NSAlert.any_instance.expects(:objc_send).times(0)
     
+    pref_pane.shouldUnselect.should == OSX::NSUnselectNow
+  end
+  
+  it "should not show a warning if there aren't any applications" do
+    applicationsController.content = []
+    OSX::NSAlert.any_instance.expects(:objc_send).times(0)
     pref_pane.shouldUnselect.should == OSX::NSUnselectNow
   end
   
