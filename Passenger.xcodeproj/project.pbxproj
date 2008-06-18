@@ -21,7 +21,6 @@
 		519DFBD20E02EE69008A42FE /* RefreshPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBD00E02EE69008A42FE /* RefreshPressed.tif */; };
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
 		51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B919130E0172C200F45803 /* config_uninstaller.rb */; };
-		51B9191E0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */; };
 		51B919250E02B93400F45803 /* ButtonBackground.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 51B919200E02B93400F45803 /* ButtonBackground.tiff */; };
 		51B919260E02B93400F45803 /* Minus.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919210E02B93400F45803 /* Minus.tif */; };
 		51B919270E02B93400F45803 /* MinusPressed.tif in Resources */ = {isa = PBXBuildFile; fileRef = 51B919220E02B93400F45803 /* MinusPressed.tif */; };
@@ -60,7 +59,6 @@
 		519DFBD00E02EE69008A42FE /* RefreshPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = RefreshPressed.tif; sourceTree = "<group>"; };
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Alerts.icns; sourceTree = "<group>"; };
 		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_uninstaller.rb; sourceTree = "<group>"; };
-		51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = TheButtonWhichOnlyLooksPretty.rb; sourceTree = "<group>"; };
 		51B919200E02B93400F45803 /* ButtonBackground.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ButtonBackground.tiff; sourceTree = "<group>"; };
 		51B919210E02B93400F45803 /* Minus.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Minus.tif; sourceTree = "<group>"; };
 		51B919220E02B93400F45803 /* MinusPressed.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MinusPressed.tif; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* Passenger.prefPane */,
-				51B9191D0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -259,7 +256,6 @@
 				519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */,
 				51B9190D0E01523900F45803 /* Alerts.icns in Resources */,
 				51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */,
-				51B9191E0E02B1A800F45803 /* TheButtonWhichOnlyLooksPretty.rb in Resources */,
 				51B919250E02B93400F45803 /* ButtonBackground.tiff in Resources */,
 				51B919260E02B93400F45803 /* Minus.tif in Resources */,
 				51B919270E02B93400F45803 /* MinusPressed.tif in Resources */,

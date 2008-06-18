@@ -14,12 +14,9 @@ OSX.load_bridge_support_file File.expand_path('../Security.bridgesupport', __FIL
 
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
-require File.expand_path('../TheButtonWhichOnlyLooksPretty', __FILE__)
 
 class PrefPanePassenger < NSPreferencePane
   include SharedPassengerBehaviour
-  
-  PASSENGER_CONFIG_INSTALLER = File.expand_path('../passenger_config_installer.rb', __FILE__)
   
   ib_outlet :installPassengerWarning
   
