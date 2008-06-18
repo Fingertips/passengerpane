@@ -86,6 +86,8 @@ class PrefPanePassenger < NSPreferencePane
   # Applications NSTableView dataSource drag and drop methods
   
   def tableView_validateDrop_proposedRow_proposedDropOperation(tableView, info, row, operation)
+    return OSX::NSDragOperationNone unless @authorized
+    
     files = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType)
     if files.all? { |f| File.directory? f }
       OSX::NSDragOperationGeneric

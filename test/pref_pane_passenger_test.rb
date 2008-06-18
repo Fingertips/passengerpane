@@ -240,6 +240,7 @@ describe "PrefPanePassenger, with drag and drop support" do
   end
   
   it "should allow multiple directories to be dropped" do
+    assigns(:authorized, true)
     stub_pb_and_info_with_two_directories
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
   end
@@ -264,6 +265,11 @@ describe "PrefPanePassenger, with drag and drop support" do
     PassengerApplication.expects(:startApplications).with &apps_should_be
     pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
     apps_should_be.call(applicationsController.content)
+  end
+  
+  it "should not allow directories to be dropped if not authorized" do
+    assigns(:authorized, false)
+    pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, nil, nil, nil).should == OSX::NSDragOperationNone
   end
   
   private
