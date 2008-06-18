@@ -179,8 +179,10 @@ describe "PassengerApplication, in general" do
     
     PassengerApplication.startApplications [app1, app2].to_ns
     
+    app1.should.not.be.new_app
     app1.should.not.be.valid
     app1.should.not.be.dirty
+    app2.should.not.be.new_app
     app2.should.not.be.valid
     app2.should.not.be.dirty
   end
