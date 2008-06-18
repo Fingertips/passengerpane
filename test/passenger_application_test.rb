@@ -178,6 +178,11 @@ describe "PassengerApplication, in general" do
     SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
     PassengerApplication.startApplications [app1, app2].to_ns
+    
+    app1.should.not.be.valid
+    app1.should.not.be.dirty
+    app2.should.not.be.valid
+    app2.should.not.be.dirty
   end
   
   it "should remember all the original values for the case that the user wants to revert" do

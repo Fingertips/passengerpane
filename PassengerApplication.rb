@@ -18,6 +18,7 @@ class PassengerApplication < NSObject
       data = serializedApplicationsData(apps)
       SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
       SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_INSTALLER, data
+      apps.each { |app| app.reset_dirty_and_valid! }
     end
   
     def removeApplications(apps)
@@ -93,6 +94,10 @@ class PassengerApplication < NSObject
     p "apply"
     @new_app ? start : restart
     # todo: check if it went ok before assumin so.
+    reset_dirty_and_valid!
+  end
+  
+  def reset_dirty_and_valid!
     self.dirty = self.valid = false
   end
   
