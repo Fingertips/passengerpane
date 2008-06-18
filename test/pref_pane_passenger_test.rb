@@ -240,10 +240,12 @@ describe "PrefPanePassenger, with drag and drop support" do
     applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
   end
   
-  it "should allow multiple directories to be dropped and always to the bottom of the list" do
+  it "should allow multiple directories to be dropped and always add to the bottom of the list" do
     assigns(:authorized, true)
     stub_pb_and_info_with_two_directories
+    
     applicationsTableView.expects(:setDropRow_dropOperation).with(0, OSX::NSTableViewDropAbove)
+    
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
   end
   
@@ -266,12 +268,23 @@ describe "PrefPanePassenger, with drag and drop support" do
     
     PassengerApplication.expects(:startApplications).with &apps_should_be
     pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
+    
     apps_should_be.call(applicationsController.content)
+    assigns(:dropping_directories).should.be true
   end
   
   it "should not allow directories to be dropped if not authorized" do
     assigns(:authorized, false)
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, nil, nil, nil).should == OSX::NSDragOperationNone
+  end
+  
+  it "should not open the browse panel if directories are dropped" do
+    assigns(:dropping_directories, true)
+    pref_pane.expects(:browse).times(0)
+    
+    new_app = stub('PassengerApplication')
+    new_app.stubs(:new_app?).returns(true)
+    pref_pane.setValue_forKey([new_app], 'applications')
   end
   
   private

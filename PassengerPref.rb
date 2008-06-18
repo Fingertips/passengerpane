@@ -29,6 +29,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def mainViewDidLoad
     @authorized = false
+    @dropping_directories = false
     
     @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
@@ -61,7 +62,10 @@ class PrefPanePassenger < NSPreferencePane
   
   def rbSetValue_forKey(value, key)
     super
-    browse if key == 'applications' and !value.empty? and value.last.new_app?
+    if key == 'applications' and !value.empty? and value.last.new_app?
+      browse unless @dropping_directories
+      @dropping_directories = false
+    end
   end
   
   def browse(sender = nil)
@@ -98,6 +102,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
+    @dropping_directories = true
     apps = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).map { |path| PassengerApplication.alloc.initWithPath(path) }
     @applicationsController.addObjects apps
     PassengerApplication.startApplications apps
