@@ -50,7 +50,8 @@ class PrefPanePassenger < NSPreferencePane
   
   def remove(sender = nil)
     apps = @applicationsController.selectedObjects
-    PassengerApplication.removeApplications apps
+    existing_apps = apps.reject { |app| app.new_app? }
+    PassengerApplication.removeApplications(existing_apps) unless existing_apps.empty?
     @applicationsController.removeObjects apps
   end
   
@@ -129,9 +130,10 @@ class PrefPanePassenger < NSPreferencePane
     if !@applicationsController.content.empty? and @applicationsController.selectedObjects.first.dirty?
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'This service has unsaved changes'
-      alert.informativeText = 'Would you like to discard your changes?'
-      alert.addButtonWithTitle 'OK'
+      alert.informativeText = 'Would you like to apply your changes before closing the Network preferences pane?'
+      alert.addButtonWithTitle 'Apply'
       alert.addButtonWithTitle 'Cancel'
+      alert.addButtonWithTitle 'Don’t Apply'
       alert.objc_send(
         :beginSheetModalForWindow, mainView.window,
         :modalDelegate, self,
@@ -143,9 +145,27 @@ class PrefPanePassenger < NSPreferencePane
     OSX::NSUnselectNow
   end
   
+  APPLY = OSX::NSAlertFirstButtonReturn
+  CANCEL = OSX::NSAlertSecondButtonReturn
+  DONT_APPLY = OSX::NSAlertThirdButtonReturn
+  
   def unsavedChangesAlertDidEnd_returnCode_contextInfo(alert, returnCode, contextInfo)
     alert.window.orderOut(self)
-    replyToShouldUnselect(returnCode == OSX::NSAlertFirstButtonReturn)
+    app = @applicationsController.selectedObjects.first
+    case returnCode
+    when CANCEL
+      replyToShouldUnselect false
+      return
+    when APPLY
+      app.apply
+    when DONT_APPLY
+      if app.new_app?
+        remove
+      else
+        app.revert
+      end
+    end
+    replyToShouldUnselect true
   end
   
   private

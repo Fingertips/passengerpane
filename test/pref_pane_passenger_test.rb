@@ -87,13 +87,25 @@ describe "PrefPanePassenger, in general" do
   
   it "should remove the applications that are selected in the applicationsController (which resembles the table view in the ui)" do
     remove_app, stay_app = stub("PassengerApplication: should be removed"), stub("PassengerApplication: should stay")
+    remove_app.stubs(:new_app?).returns(false)
+    stay_app.stubs(:new_app?).returns(false)
     PassengerApplication.expects(:removeApplications).with([remove_app])
     
     applicationsController.content = [remove_app, stay_app]
     applicationsController.selectedObjects = [remove_app]
     
-    pref_pane.remove(nil)
+    pref_pane.remove
     applicationsController.content.should == [stay_app]
+  end
+  
+  it "should not try to delete files when removing a new app" do
+    app = PassengerApplication.alloc.init
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    
+    PassengerApplication.expects(:removeApplications).times(0)
+    pref_pane.remove
+    applicationsController.content.should.be.empty
   end
   
   it "should return the home directory if no application is selected" do
@@ -173,7 +185,6 @@ describe "PrefPanePassenger, in general" do
     applicationsController.content = [remove_app]
     applicationsController.selectedObjects = [remove_app]
     
-    PassengerApplication.expects(:removeApplications).with([remove_app])
     pref_pane.openPanelDidEnd_returnCode_contextInfo(nil, OSX::NSCancelButton, nil)
     applicationsController.content.should.be.empty
   end
@@ -185,7 +196,6 @@ describe "PrefPanePassenger, in general" do
     applicationsController.content = [stay_app]
     applicationsController.selectedObjects = [stay_app]
     
-    PassengerApplication.expects(:removeApplications).times(0)
     pref_pane.openPanelDidEnd_returnCode_contextInfo(nil, OSX::NSCancelButton, nil)
     applicationsController.content.should == [stay_app]
   end
@@ -221,14 +231,49 @@ describe "PrefPanePassenger, in general" do
     pref_pane.shouldUnselect.should == OSX::NSUnselectNow
   end
   
-  it "should tell the pane to unselect if the user chooses to discard unsaved changes" do
+  it "should save the application and then tell the pane to unselect if the user chooses to apply unsaved changes" do
+    app = stub('PassengerApplication')
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    app.expects(:apply).times(1)
+    
     pref_pane.expects(:replyToShouldUnselect).with(true)
-    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, OSX::NSAlertFirstButtonReturn, nil)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::APPLY, nil)
   end
   
   it "should tell the pane to not unselect if the user chooses to review unsaved changes" do
+    app = stub('PassengerApplication')
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    app.expects(:apply).times(0)
+    
     pref_pane.expects(:replyToShouldUnselect).with(false)
-    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, OSX::NSAlertSecondButtonReturn, nil)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::CANCEL, nil)
+  end
+  
+  it "should remove the unsaved app and tell the pane to unselect if the user chooses to not apply unsaved changes if it's a new app" do
+    app = stub('PassengerApplication')
+    app.stubs(:new_app?).returns(true)
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    app.expects(:apply).times(0)
+    
+    pref_pane.expects(:replyToShouldUnselect).with(true)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::DONT_APPLY, nil)
+    applicationsController.content.should.be.empty
+  end
+  
+  it "should not remove the unsaved app but revert the changes and tell the pane to unselect if the user chooses to not apply unsaved changes and if it's not a new app" do
+    app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))
+    app.setValue_forKey('foo.local', 'host')
+    applicationsController.content = [app]
+    applicationsController.selectedObjects = [app]
+    app.expects(:apply).times(0)
+    
+    pref_pane.expects(:replyToShouldUnselect).with(true)
+    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::DONT_APPLY, nil)
+    applicationsController.content.should == [app]
+    app.should.not.be.dirty
   end
   
   private
