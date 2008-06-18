@@ -25,9 +25,12 @@ class ConfigUninstaller
   end
   
   def remove_vhost_conf(index)
-    config_path = @data[index]['config_path']
-    OSX::NSLog("Will remove vhost file: #{config_path}")
-    File.delete config_path.bypass_safe_level_1
+    OSX::NSLog("Will remove vhost file: #{config_path(index)}")
+    File.delete config_path(index)
+  end
+  
+  def config_path(index)
+    "/private/etc/apache2/passenger_vhosts/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
   end
   
   def restart_apache!
@@ -44,5 +47,6 @@ class ConfigUninstaller
 end
 
 if $0 == __FILE__
+  OSX::NSLog("Will try to remove config(s).")
   ConfigUninstaller.new(ARGV.first).uninstall!
 end

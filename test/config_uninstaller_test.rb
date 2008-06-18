@@ -24,7 +24,12 @@ describe "ConfigUninstaller" do
     @uninstaller.remove_from_hosts(0)
   end
   
+  it "should return the path to the vhost config" do
+    @uninstaller.config_path(0).should == "/private/etc/apache2/passenger_vhosts/het-manfreds-blog.local.vhost.conf"
+  end
+  
   it "should remove the vhost config file" do
+    @uninstaller.stubs(:config_path).returns(@vhost_file)
     @uninstaller.remove_vhost_conf(0)
     File.should.not.exist @vhost_file
   end

@@ -63,17 +63,6 @@ describe "ConfigInstaller" do
 }.sub(/^\n/, '')
   end
   
-  xit "should not execute an extra command if there is none" do
-    @installer.expects(:system).times(0)
-    @installer.execute_extra_command
-  end
-  
-  xit "should execute an extra command if there is one" do
-    tmp_file = File.join(@tmp, 'file_from_extra_command.txt')
-    ConfigInstaller.new([].to_yaml, "touch #{tmp_file}").execute_extra_command
-    File.should.exist tmp_file
-  end
-  
   it "should restart Apache" do
     @installer.expects(:system).with("/bin/launchctl stop org.apache.httpd")
     @installer.restart_apache!

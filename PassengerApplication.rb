@@ -99,6 +99,7 @@ class PassengerApplication < NSObject
   
   def restart(sender = nil)
     p "Restarting Rails application: #{@path}"
+    execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml) unless @host == @original_values['host']
     save_config! if @dirty
     Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
   end
@@ -109,7 +110,7 @@ class PassengerApplication < NSObject
   end
   
   def config_path
-    @config_path ||= File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
+    File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
   def rbSetValue_forKey(value, key)

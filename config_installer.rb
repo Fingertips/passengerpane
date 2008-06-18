@@ -54,10 +54,6 @@ class ConfigInstaller
     File.open(app['config_path'].bypass_safe_level_1, 'w') { |f| f << vhost }
   end
   
-  # def execute_extra_command
-  #   system(@extra_command.bypass_safe_level_1) if @extra_command
-  # end
-  
   def restart_apache!
     system "/bin/launchctl stop org.apache.httpd"
   end
@@ -68,7 +64,6 @@ class ConfigInstaller
       add_to_hosts index
       create_vhost_conf index
     end
-    #execute_extra_command
     restart_apache!
   end
 end

@@ -2,9 +2,11 @@ require File.expand_path('../test_helper', __FILE__)
 require 'PassengerApplication'
 
 class Hash
-  def except(key)
+  def except(*keys)
     copy = dup
-    copy.delete(key)
+    keys.each do |key|
+      copy.delete(key)
+    end
     copy
   end
 end
@@ -191,5 +193,12 @@ describe "PassengerApplication, in general" do
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.valid
     passenger_app.to_hash.except('config_path').should == { 'host' => 'het-manfreds-blog.local', 'path' => '/Users/het-manfred/rails code/blog', 'environment' => 'development', 'allow_mod_rewrite' => false }
+  end
+  
+  it "should first remove a config and then add it again if the host has changed so we don't leave stale files/hosts" do
+    passenger_app.setValue_forKey('foo.local', 'host')
+    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
+    passenger_app.expects(:save_config!)
+    passenger_app.apply
   end
 end
