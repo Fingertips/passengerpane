@@ -31,21 +31,20 @@ class PrefPanePassenger < NSPreferencePane
     @authorized = false
     @dropping_directories = false
     
+    showPassengerWarning unless passenger_installed?
+    
     @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
     @authorizationView.updateStatus self
     @authorizationView.autoupdate = true
     
     @applications = [].to_ns
-    
     @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     
-    showPassengerWarning unless passenger_installed?
-    
-    Dir.glob(File.join(PASSENGER_APPS_DIR, '*.vhost.conf')).each do |app|
-      @applicationsController.addObject PassengerApplication.alloc.initWithFile(app)
-    end
+    existing_apps = PassengerApplication.existingApplications
+    @applicationsController.addObjects existing_apps
+    @applicationsController.selectedObjects = [existing_apps.last]
   end
   
   def remove(sender = nil)

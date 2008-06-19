@@ -1,6 +1,7 @@
 - Apply/Revert/Restart should be for all applications instead of the selected one.
 - Don't automatically Apply dragged applications.
 - Preserve any other content in the vhost confs that a user might have added.
+- When false is returned by executeCommand_withArgs show an alert telling the user to check his console.
 - Disable the fields when multiple apps have been selected and when the apps list is empty. (write email to cocoa-dev, wrote 18-06)
 - Check paths in help file.
 - Check if "apachectl graceful" is causing all these permission denied errors and if "launchctl stop org.apache.httpd" would solve this.

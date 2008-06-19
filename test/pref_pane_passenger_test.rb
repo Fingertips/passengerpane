@@ -35,16 +35,12 @@ describe "PrefPanePassenger, while loading" do
   it "should add existing applications found in #{SharedPassengerBehaviour::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
     dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
     blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
-    blog_stub, paste_stub = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
+    blog_app, paste_app = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
+    PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
     
-    PassengerApplication.any_instance.expects(:initWithFile).with(blog).returns(blog_stub)
-    PassengerApplication.any_instance.expects(:initWithFile).with(paste).returns(paste_stub)
-    
-    pref_pane.stubs(:is_users_apache_config_setup?).returns(true)
-    Dir.stubs(:glob).with("#{dir}/*.vhost.conf").returns([blog, paste])
     pref_pane.mainViewDidLoad
-    
-    applicationsController.content.should == [blog_stub, paste_stub]
+    applicationsController.content.should == [blog_app, paste_app]
+    applicationsController.selectedObjects.should == [paste_app]
   end
   
   it "should configure the authorization view" do

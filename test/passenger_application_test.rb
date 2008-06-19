@@ -160,7 +160,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should remove application(s)" do
-    SharedPassengerBehaviour.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [passenger_app.to_hash].to_yaml)
+    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [passenger_app.to_hash].to_yaml)
     PassengerApplication.removeApplications([passenger_app].to_ns)
   end
   
@@ -171,11 +171,23 @@ describe "PassengerApplication, in general" do
     passenger_app.to_hash.to_yaml.should.not.include 'NSCF'
   end
   
+  it "should load existing applications" do
+    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
+    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
+    blog_app, paste_app = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
+    
+    Dir.stubs(:glob).with("#{dir}/*.vhost.conf").returns([blog, paste])
+    PassengerApplication.any_instance.stubs(:initWithFile).with(blog).returns(blog_app)
+    PassengerApplication.any_instance.stubs(:initWithFile).with(paste).returns(paste_app)
+    
+    PassengerApplication.existingApplications.should == [blog_app, paste_app]
+  end
+  
   it "should start multiple applications at once" do
     app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
     
-    SharedPassengerBehaviour.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
+    PassengerApplication.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
     PassengerApplication.startApplications [app1, app2].to_ns
     

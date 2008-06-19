@@ -14,22 +14,27 @@ class PassengerApplication < NSObject
   PRODUCTION = 1
   
   class << self
-    def startApplications(apps)
-      data = serializedApplicationsData(apps)
-      SharedPassengerBehaviour.p "Starting Rails applications (restarting Apache gracefully):\n#{data}"
-      SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_INSTALLER, data
-      apps.each do |app|
-        app.not_new!
-        app.reset_dirty_and_valid!
+    include SharedPassengerBehaviour
+    
+    def existingApplications
+      Dir.glob(File.join(PASSENGER_APPS_DIR, '*.vhost.conf')).map do |app|
+        PassengerApplication.alloc.initWithFile(app)
       end
     end
-  
+    
+    def startApplications(apps)
+      data = serializedApplicationsData(apps)
+      p "Starting Rails applications:\n#{data}"
+      execute '/usr/bin/ruby', CONFIG_INSTALLER, data
+      apps.each { |app| app.apply(false) }
+    end
+    
     def removeApplications(apps)
       data = serializedApplicationsData(apps)
-      SharedPassengerBehaviour.p "Removing applications: #{data}"
-      SharedPassengerBehaviour.execute '/usr/bin/ruby', CONFIG_UNINSTALLER, data
+      p "Removing applications: #{data}"
+      execute '/usr/bin/ruby', CONFIG_UNINSTALLER, data
     end
-  
+    
     def serializedApplicationsData(apps)
       apps.to_ruby.map { |app| app.to_hash }.to_yaml
     end
@@ -93,19 +98,11 @@ class PassengerApplication < NSObject
     @valid
   end
   
-  def apply(sender = nil)
-    p "apply"
-    @new_app ? start : restart
+  def apply(save_config = nil)
+    p "Applying changes to Rails application: #{@path}"
+    (@new_app ? start : restart) unless save_config == false
     # todo: check if it went ok before assumin so.
-    reset_dirty_and_valid!
-  end
-  
-  def not_new!
-    @new_app = false
-  end
-  
-  def reset_dirty_and_valid!
-    self.dirty = self.valid = false
+    @new_app = self.dirty = self.valid = false
   end
   
   def start
