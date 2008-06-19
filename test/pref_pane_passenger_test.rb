@@ -48,6 +48,10 @@ describe "PrefPanePassenger, while loading" do
     pref_pane.mainViewDidLoad
     authorizationView.delegate.should.be pref_pane
   end
+  
+  it "should register itself as the sharedInstance" do
+    PrefPanePassenger.sharedInstance.should.be.instance_of PrefPanePassenger
+  end
 end
 
 describe "PrefPanePassenger, in general" do
@@ -197,9 +201,7 @@ describe "PrefPanePassenger, in general" do
   end
   
   it "should show a warning if the current selected application is dirty before allowing the pane to unselect" do
-    app = PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
+    set_apps_controller_content [PassengerApplication.alloc.initWithPath('/previous/path/to/Blog')]
     
     OSX::NSAlert.any_instance.expects(:objc_send).with(
       :beginSheetModalForWindow, pref_pane.mainView.window,
@@ -211,34 +213,26 @@ describe "PrefPanePassenger, in general" do
     pref_pane.shouldUnselect.should == OSX::NSUnselectLater
   end
   
-  it "should not show a warning if the current selected application is not dirty" do
-    app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
-    
+  it "should not show a warning if dirty_apps is false" do
+    assigns(:dirty_apps, false)
     OSX::NSAlert.any_instance.expects(:objc_send).times(0)
-    
     pref_pane.shouldUnselect.should == OSX::NSUnselectNow
   end
   
   it "should not show a warning if there aren't any applications" do
+    assigns(:dirty_apps, true)
     applicationsController.content = []
     OSX::NSAlert.any_instance.expects(:objc_send).times(0)
     pref_pane.shouldUnselect.should == OSX::NSUnselectNow
   end
   
   it "should know if there are dirty apps" do
-    apps = stub_app_controller_with_number_of_apps(3)
+    app = PassengerApplication.alloc.init
+    set_apps_controller_content([app])
     
-    apps.first.stubs(:dirty?).returns(true)
-    apps[1..2].each do |app|
-      app.stubs(:dirty?).returns(false)
-    end
-    
-    pref_pane.valueForKey('dirty_apps').to_ruby.should.be true
-    
-    apps.first.stubs(:dirty?).returns(false)
-    pref_pane.valueForKey('dirty_apps').to_ruby.should.be false
+    pref_pane.dirty_apps.should.be false
+    app.setValue_forKey('foo.local', 'host')
+    pref_pane.dirty_apps.should.be true
   end
   
   it "should send the apply message to all the dirty apps if the user hits apply" do
@@ -253,6 +247,12 @@ describe "PrefPanePassenger, in general" do
     end
     
     pref_pane.apply
+  end
+  
+  it "should set dirty_apps to false once all unsaved apps received the apply message" do
+    assigns(:dirty_apps, true)
+    pref_pane.apply
+    pref_pane.dirty_apps.should.be false
   end
   
   it "should send the revert message to all the dirty apps if the user hits revert" do
@@ -284,44 +284,30 @@ describe "PrefPanePassenger, in general" do
   end
   
   it "should save the application and then tell the pane to unselect if the user chooses to apply unsaved changes" do
-    app = stub_app_controller_with_a_app
-    app.expects(:apply).times(1)
-    
+    pref_pane.expects(:apply)
     pref_pane.expects(:replyToShouldUnselect).with(true)
     pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::APPLY, nil)
   end
   
   it "should tell the pane to not unselect if the user chooses to review unsaved changes" do
-    app = stub_app_controller_with_a_app
-    app.expects(:apply).times(0)
-    
+    pref_pane.expects(:apply).times(0)
     pref_pane.expects(:replyToShouldUnselect).with(false)
     pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::CANCEL, nil)
   end
   
-  it "should remove the unsaved app and tell the pane to unselect if the user chooses to not apply unsaved changes if it's a new app" do
-    app = stub('PassengerApplication')
-    app.stubs(:new_app?).returns(true)
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
-    app.expects(:apply).times(0)
+  it "should remove new and unsaved apps and revert unsaved existing apps and tell the pane to unselect if the user chooses to not apply unsaved changes" do
+    new_app = PassengerApplication.alloc.init
+    existing_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))
+    existing_app.setValue_forKey('foo.local', 'host')
     
+    set_apps_controller_content([new_app, existing_app])
+    
+    PassengerApplication.expects(:removeApplications).times(0)
     pref_pane.expects(:replyToShouldUnselect).with(true)
     pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::DONT_APPLY, nil)
-    applicationsController.content.should.be.empty
-  end
-  
-  it "should not remove the unsaved app but revert the changes and tell the pane to unselect if the user chooses to not apply unsaved changes and if it's not a new app" do
-    app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/blog.vhost.conf', __FILE__))
-    app.setValue_forKey('foo.local', 'host')
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
-    app.expects(:apply).times(0)
     
-    pref_pane.expects(:replyToShouldUnselect).with(true)
-    pref_pane.unsavedChangesAlertDidEnd_returnCode_contextInfo(alert_stub, PrefPanePassenger::DONT_APPLY, nil)
-    applicationsController.content.should == [app]
-    app.should.not.be.dirty
+    applicationsController.content.should == [existing_app]
+    applicationsController.content.first.host.should == "het-manfreds-blog.local"
   end
   
   private

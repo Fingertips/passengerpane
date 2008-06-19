@@ -16,6 +16,10 @@ require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
 
 class PrefPanePassenger < NSPreferencePane
+  class << self
+    attr_accessor :sharedInstance
+  end
+  
   include SharedPassengerBehaviour
   
   ib_outlet :installPassengerWarning
@@ -25,9 +29,11 @@ class PrefPanePassenger < NSPreferencePane
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   
-  kvc_accessor :applications, :authorized
+  kvc_accessor :applications, :authorized, :dirty_apps
   
   def mainViewDidLoad
+    self.class.sharedInstance = self
+    
     @authorized = @dropping_directories = @dirty_apps = false
     
     showPassengerWarning unless passenger_installed?
@@ -44,6 +50,23 @@ class PrefPanePassenger < NSPreferencePane
     existing_apps = PassengerApplication.existingApplications
     @applicationsController.addObjects existing_apps
     @applicationsController.selectedObjects = [existing_apps.last]
+  end
+  
+  def applicationMarkedDirty(app)
+    self.dirty_apps = true
+  end
+  
+  def apply(sender = nil)
+    @applicationsController.content.each { |app| app.apply if app.dirty? }
+    self.dirty_apps = false
+  end
+  
+  def revert(sender = nil)
+    @applicationsController.content.each { |app| app.revert if app.dirty? }
+  end
+  
+  def restart(sender = nil)
+    @applicationsController.content.each { |app| app.restart unless app.new_app? }
   end
   
   def remove(sender = nil)
@@ -124,8 +147,10 @@ class PrefPanePassenger < NSPreferencePane
     self.authorized = false
   end
   
+  # When the pane wants to be unselected
+  
   def shouldUnselect
-    if !@applicationsController.content.empty? and @applicationsController.selectedObjects.first.dirty?
+    if @dirty_apps and !@applicationsController.content.empty?
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'This service has unsaved changes'
       alert.informativeText = 'Would you like to apply your changes before closing the Network preferences pane?'
@@ -143,22 +168,6 @@ class PrefPanePassenger < NSPreferencePane
     OSX::NSUnselectNow
   end
   
-  def rbValueForKey(key)
-    key == 'dirty_apps' ? (@applicationsController.content.any? { |app| app.dirty? }) : super
-  end
-  
-  def apply(sender = nil)
-    @applicationsController.content.each { |app| app.apply if app.dirty? }
-  end
-  
-  def revert(sender = nil)
-    @applicationsController.content.each { |app| app.revert if app.dirty? }
-  end
-  
-  def restart(sender = nil)
-    @applicationsController.content.each { |app| app.restart unless app.new_app? }
-  end
-  
   APPLY = OSX::NSAlertFirstButtonReturn
   CANCEL = OSX::NSAlertSecondButtonReturn
   DONT_APPLY = OSX::NSAlertThirdButtonReturn
@@ -171,13 +180,10 @@ class PrefPanePassenger < NSPreferencePane
       replyToShouldUnselect false
       return
     when APPLY
-      app.apply
+      apply
     when DONT_APPLY
-      if app.new_app?
-        remove
-      else
-        app.revert
-      end
+      @applicationsController.removeObjects @applicationsController.content.select { |app| app.new_app? }
+      revert
     end
     replyToShouldUnselect true
   end

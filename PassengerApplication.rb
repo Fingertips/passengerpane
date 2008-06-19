@@ -77,7 +77,7 @@ class PassengerApplication < NSObject
   
   def initWithPath(path)
     if init
-      @dirty = true
+      mark_dirty!
       @path = path
       set_default_host_from_path(path)
       
@@ -132,7 +132,7 @@ class PassengerApplication < NSObject
   
   def rbSetValue_forKey(value, key)
     super
-    self.dirty = true
+    mark_dirty!
     
     if key == 'host'
       if value.to_s =~ /^(.+?)(\/.+)$/
@@ -144,6 +144,11 @@ class PassengerApplication < NSObject
     
     set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
+  end
+  
+  def mark_dirty!
+    self.dirty = true
+    PrefPanePassenger.sharedInstance.applicationMarkedDirty self
   end
   
   def to_hash

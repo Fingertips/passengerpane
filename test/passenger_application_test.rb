@@ -1,6 +1,16 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerApplication'
 
+class PrefPanePassenger
+  class << self
+    attr_accessor :sharedInstance
+  end
+  self.sharedInstance = new
+  
+  def applicationMarkedDirty(app)
+  end
+end
+
 class Hash
   def except(*keys)
     copy = dup
@@ -110,6 +120,11 @@ describe "PassengerApplication, in general" do
     assigns(:dirty).should.be false
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
     assigns(:dirty).should.be true
+  end
+  
+  it "should let the PrefPanePassenger instance know that an app has been marked dirty" do
+    PrefPanePassenger.sharedInstance.expects(:applicationMarkedDirty).with(passenger_app)
+    passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
   end
   
   it "should be valid if both a path and a host are entered" do
