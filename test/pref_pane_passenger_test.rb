@@ -269,6 +269,12 @@ describe "PrefPanePassenger, in general" do
     pref_pane.revert
   end
   
+  it "should set dirty_apps to false once all unsaved apps received the revert message" do
+    assigns(:dirty_apps, true)
+    pref_pane.revert
+    pref_pane.dirty_apps.should.be false
+  end
+  
   it "should send the restart message to all not new apps if the user hits revert" do
     apps = stub_app_controller_with_number_of_apps(3)
     

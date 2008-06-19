@@ -63,6 +63,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def revert(sender = nil)
     @applicationsController.content.each { |app| app.revert if app.dirty? }
+    self.dirty_apps = false
   end
   
   def restart(sender = nil)
@@ -174,7 +175,6 @@ class PrefPanePassenger < NSPreferencePane
   
   def unsavedChangesAlertDidEnd_returnCode_contextInfo(alert, returnCode, contextInfo)
     alert.window.orderOut(self)
-    app = @applicationsController.selectedObjects.first
     case returnCode
     when CANCEL
       replyToShouldUnselect false
