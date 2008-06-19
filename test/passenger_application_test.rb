@@ -101,6 +101,13 @@ describe "PassengerApplication, in general" do
     passenger_app.environment.should == PassengerApplication::PRODUCTION
     passenger_app.allow_mod_rewrite.should.be true
     passenger_app.base_uri.should == '/rails/wiki'
+    passenger_app.user_defined_data.should == %{
+  <Location "/">
+      AuthType Basic
+      AuthName "Development Preview"
+      AuthUserFile /home2/cogat/htpasswd
+      Require valid-user
+  </Location>}.sub(/^\n/, '')
   end
   
   it "should set @new_app to false" do

@@ -41,6 +41,7 @@ class PassengerApplication < NSObject
   end
   
   kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite, :base_uri
+  attr_reader :user_defined_data
   
   def init
     if super_init
@@ -49,7 +50,7 @@ class PassengerApplication < NSObject
       
       @new_app = true
       @dirty = @valid = false
-      @host, @path, @base_uri = '', '', ''
+      @host, @path, @base_uri, @user_defined_data = '', '', '', ''
       
       set_original_values!
       self
@@ -60,15 +61,36 @@ class PassengerApplication < NSObject
     if init
       @new_app = false
       @valid = false
-      data = File.read(file)
-      @host = data.match(/ServerName\s+(.+)\n/)[1]
-      @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
-      @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
-      @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
       
-      if match = data.match(/RailsBaseURI\s+(.+)\n/)
-        @base_uri = match[1]
-      end
+      data = File.read(file)
+      
+      # @host = data.match(/ServerName\s+(.+)\n/)[1]
+      # @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
+      # @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
+      # @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
+      # 
+      # if match = data.match(/RailsBaseURI\s+(.+)\n/)
+      #   @base_uri = match[1]
+      # end
+      
+      data.gsub!(/\s*ServerName\s+(.+)\n/, '')
+      @host = $1
+      
+      data.gsub!(/\s*DocumentRoot\s+"(.+)\/public"\n/, '')
+      @path = $1
+      
+      data.gsub!(/\s*RailsEnv\s+(development|production)\n/, '')
+      @environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
+      
+      data.gsub!(/\s*RailsAllowModRewrite\s+(off|on)\n/, '')
+      @allow_mod_rewrite = ($1 == 'on')
+      
+      data.gsub!(/\s*RailsBaseURI\s+(.+)\n/, '')
+      @base_uri = $1 unless $1.nil?
+      
+      data.gsub!(/\s*<VirtualHost.+\n*/, '')
+      data.gsub!(/\s*<\/VirtualHost>\n*/, '')
+      @user_defined_data = data
       
       set_original_values!
       self
