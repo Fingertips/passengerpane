@@ -57,14 +57,17 @@ class PrefPanePassenger < NSPreferencePane
     self.dirty_apps = true
   end
   
-  def apply(sender = nil)
-    @applicationsController.content.each { |app| app.apply if app.dirty? }
+  def apply_or_revert(action)
+    @applicationsController.content.each { |app| app.send(action) if app.dirty? }
     self.dirty_apps = false
   end
   
+  def apply(sender = nil)
+    apply_or_revert :apply
+  end
+  
   def revert(sender = nil)
-    @applicationsController.content.each { |app| app.revert if app.dirty? }
-    self.dirty_apps = false
+    apply_or_revert :revert
   end
   
   def restart(sender = nil)
