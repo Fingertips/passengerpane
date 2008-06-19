@@ -275,7 +275,7 @@ describe "PrefPanePassenger, in general" do
     pref_pane.dirty_apps.should.be false
   end
   
-  it "should send the restart message to all not new apps if the user hits revert" do
+  it "should send the restart message to all not new apps if the user hits restart" do
     apps = stub_app_controller_with_number_of_apps(3)
     
     apps.first.stubs(:new_app?).returns(true)
@@ -353,6 +353,9 @@ describe "PrefPanePassenger, with drag and drop support" do
     
     @tmp = File.expand_path('../tmp')
     FileUtils.mkdir_p @tmp
+    
+    PassengerApplication.stubs(:existingApplications).returns([])
+    pref_pane.mainViewDidLoad
   end
   
   def after_teardown
@@ -360,7 +363,6 @@ describe "PrefPanePassenger, with drag and drop support" do
   end
   
   it "should configure the table view to accept drag and drop operations" do
-    pref_pane.mainViewDidLoad
     applicationsTableView.dataSource.should.be pref_pane
     applicationsTableView.registeredDraggedTypes.should == [OSX::NSFilenamesPboardType]
   end
@@ -384,18 +386,15 @@ describe "PrefPanePassenger, with drag and drop support" do
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
   end
   
-  it "should add an application to the applicationsController for each directory and then start them" do
+  it "should add an application to the applicationsController" do
     stub_pb_and_info_with_two_directories
     
-    apps_should_be = lambda do |apps|
-      apps.map { |app| app.path } == @dirs and apps.map { |app| app.host } == %w{ app1.local app2.local }
-    end
-    
-    PassengerApplication.expects(:startApplications).with &apps_should_be
+    PassengerApplication.expects(:startApplications).times(0)
     pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
     
-    apps_should_be.call(applicationsController.content)
-    assigns(:dropping_directories).should.be true
+    apps = applicationsController.content
+    apps.map { |app| app.path }.should == @dirs
+    apps.map { |app| app.host }.should == %w{ app1.local app2.local }
   end
   
   it "should not allow directories to be dropped if not authorized" do
@@ -404,12 +403,17 @@ describe "PrefPanePassenger, with drag and drop support" do
   end
   
   it "should not open the browse panel if directories are dropped" do
-    assigns(:dropping_directories, true)
-    pref_pane.expects(:browse).times(0)
+    assigns(:dropping_directories, false)
+    stub_pb_and_info_with_two_directories
     
-    new_app = stub('PassengerApplication')
-    new_app.stubs(:new_app?).returns(true)
-    pref_pane.setValue_forKey([new_app], 'applications')
+    applicationsController.expects(:addObjects).with do |apps|
+      pref_pane.setValue_forKey([PassengerApplication.alloc.init], 'applications')
+      true
+    end
+    
+    pref_pane.expects(:browse).times(0)
+    pref_pane.tableView_acceptDrop_row_dropOperation(nil, @info, nil, nil)
+    assigns(:dropping_directories).should.be false
   end
   
   private

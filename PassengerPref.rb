@@ -47,9 +47,10 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     
-    existing_apps = PassengerApplication.existingApplications
-    @applicationsController.addObjects existing_apps
-    @applicationsController.selectedObjects = [existing_apps.last]
+    unless (existing_apps = PassengerApplication.existingApplications).empty?
+      @applicationsController.addObjects existing_apps
+      @applicationsController.selectedObjects = [existing_apps.last]
+    end
   end
   
   def applicationMarkedDirty(app)
@@ -85,10 +86,7 @@ class PrefPanePassenger < NSPreferencePane
   
   def rbSetValue_forKey(value, key)
     super
-    if key == 'applications' and !value.empty? and value.last.new_app?
-      browse unless @dropping_directories
-      @dropping_directories = false
-    end
+    browse if !@dropping_directories and key == 'applications' and !value.empty? and value.last.new_app?
   end
   
   def browse(sender = nil)
@@ -130,10 +128,10 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def tableView_acceptDrop_row_dropOperation(tableView, info, row, operation)
-    @dropping_directories = true
     apps = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType).map { |path| PassengerApplication.alloc.initWithPath(path) }
+    @dropping_directories = true
     @applicationsController.addObjects apps
-    PassengerApplication.startApplications apps
+    @dropping_directories = false
   end
   
   # SFAuthorizationView: TODO this should actualy move to the SecurityHelper, but for some reason in prototyping it didn't work, try again when everything is cleaned up.
