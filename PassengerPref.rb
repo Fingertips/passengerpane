@@ -28,8 +28,7 @@ class PrefPanePassenger < NSPreferencePane
   kvc_accessor :applications, :authorized
   
   def mainViewDidLoad
-    @authorized = false
-    @dropping_directories = false
+    @authorized = @dropping_directories = @dirty_apps = false
     
     showPassengerWarning unless passenger_installed?
     
@@ -142,6 +141,22 @@ class PrefPanePassenger < NSPreferencePane
       return OSX::NSUnselectLater
     end
     OSX::NSUnselectNow
+  end
+  
+  def rbValueForKey(key)
+    key == 'dirty_apps' ? (@applicationsController.content.any? { |app| app.dirty? }) : super
+  end
+  
+  def apply(sender = nil)
+    @applicationsController.content.each { |app| app.apply if app.dirty? }
+  end
+  
+  def revert(sender = nil)
+    @applicationsController.content.each { |app| app.revert if app.dirty? }
+  end
+  
+  def restart(sender = nil)
+    @applicationsController.content.each { |app| app.restart unless app.new_app? }
   end
   
   APPLY = OSX::NSAlertFirstButtonReturn

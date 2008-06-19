@@ -227,10 +227,64 @@ describe "PrefPanePassenger, in general" do
     pref_pane.shouldUnselect.should == OSX::NSUnselectNow
   end
   
+  it "should know if there are dirty apps" do
+    apps = stub_app_controller_with_number_of_apps(3)
+    
+    apps.first.stubs(:dirty?).returns(true)
+    apps[1..2].each do |app|
+      app.stubs(:dirty?).returns(false)
+    end
+    
+    pref_pane.valueForKey('dirty_apps').to_ruby.should.be true
+    
+    apps.first.stubs(:dirty?).returns(false)
+    pref_pane.valueForKey('dirty_apps').to_ruby.should.be false
+  end
+  
+  it "should send the apply message to all the dirty apps if the user hits apply" do
+    apps = stub_app_controller_with_number_of_apps(3)
+    
+    apps.first.stubs(:dirty?).returns(false)
+    apps.first.expects(:apply).times(0)
+    
+    apps[1..2].each do |app|
+      app.stubs(:dirty?).returns(true)
+      app.expects(:apply).times(1)
+    end
+    
+    pref_pane.apply
+  end
+  
+  it "should send the revert message to all the dirty apps if the user hits revert" do
+    apps = stub_app_controller_with_number_of_apps(3)
+    
+    apps.first.stubs(:dirty?).returns(false)
+    apps.first.expects(:revert).times(0)
+    
+    apps[1..2].each do |app|
+      app.stubs(:dirty?).returns(true)
+      app.expects(:revert).times(1)
+    end
+    
+    pref_pane.revert
+  end
+  
+  it "should send the restart message to all not new apps if the user hits revert" do
+    apps = stub_app_controller_with_number_of_apps(3)
+    
+    apps.first.stubs(:new_app?).returns(true)
+    apps.first.expects(:restart).times(0)
+    
+    apps[1..2].each do |app|
+      app.stubs(:new_app?).returns(false)
+      app.expects(:restart).times(1)
+    end
+    
+    pref_pane.restart
+  end
+  
   it "should save the application and then tell the pane to unselect if the user chooses to apply unsaved changes" do
-    app = stub('PassengerApplication')
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
+    app = stub_app_controller_with_a_app
     app.expects(:apply).times(1)
     
     pref_pane.expects(:replyToShouldUnselect).with(true)
@@ -238,9 +292,7 @@ describe "PrefPanePassenger, in general" do
   end
   
   it "should tell the pane to not unselect if the user chooses to review unsaved changes" do
-    app = stub('PassengerApplication')
-    applicationsController.content = [app]
-    applicationsController.selectedObjects = [app]
+    app = stub_app_controller_with_a_app
     app.expects(:apply).times(0)
     
     pref_pane.expects(:replyToShouldUnselect).with(false)
@@ -273,6 +325,23 @@ describe "PrefPanePassenger, in general" do
   end
   
   private
+  
+  def set_apps_controller_content(apps)
+    applicationsController.content = apps
+    applicationsController.selectedObjects = apps
+  end
+  
+  def stub_app_controller_with_number_of_apps(number)
+    apps = Array.new(number) do |i|
+      stub("PassengerApplication: #{i}")
+    end
+    set_apps_controller_content(apps)
+    apps
+  end
+  
+  def stub_app_controller_with_a_app
+    stub_app_controller_with_number_of_apps(1).first
+  end
   
   def alert_stub
     window = stub_everything('Window')
