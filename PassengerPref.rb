@@ -46,6 +46,7 @@ class PrefPanePassenger < NSPreferencePane
     @applications = [].to_ns
     @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
+    @applicationsTableView.setDraggingSourceOperationMask_forLocal(OSX::NSDragOperationGeneric, false)
     
     unless (existing_apps = PassengerApplication.existingApplications).empty?
       @applicationsController.addObjects existing_apps
@@ -138,8 +139,9 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def tableView_writeRowsWithIndexes_toPasteboard(tableView, rows, pboard)
+    config_paths = @applicationsController.content.objectsAtIndexes(rows).map { |app| app.config_path }
     pboard.declareTypes_owner([OSX::NSFilenamesPboardType], self)
-    pboard.setPropertyList_forType(['/etc/hosts'], OSX::NSFilenamesPboardType)
+    pboard.setPropertyList_forType(config_paths, OSX::NSFilenamesPboardType)
     true
   end
   

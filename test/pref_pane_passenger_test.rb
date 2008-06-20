@@ -440,6 +440,21 @@ describe "PrefPanePassenger, with drag and drop support" do
     assigns(:dropping_directories).should.be false
   end
   
+  it "should allow entries from the table view to be dragged to for instance a text editor" do
+    app1 = PassengerApplication.alloc.init
+    app2 = PassengerApplication.alloc.init
+    app1.host = "app1.local"
+    app2.host = "app2.local"
+    
+    applicationsController.content = [app1, app2]
+    applicationsController.selectedObjects = [app1, app2]
+    
+    pboard = OSX::NSPasteboard.generalPasteboard
+    allowed = pref_pane.tableView_writeRowsWithIndexes_toPasteboard(nil, OSX::NSIndexSet.indexSetWithIndexesInRange(0..1), pboard)
+    allowed.should.be true
+    pboard.propertyListForType(OSX::NSFilenamesPboardType).should == [app1.config_path, app2.config_path]
+  end
+  
   private
   
   def stub_pb_and_info_with_two_directories
