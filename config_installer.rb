@@ -27,15 +27,28 @@ class ConfigInstaller
   end
   
   VHOSTS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
-  CONF = "/private/etc/apache2/other/passenger_pane.conf"
   def verify_vhost_conf
     unless File.exist? VHOSTS_DIR
       OSX::NSLog("Will create directory: #{VHOSTS_DIR}")
       FileUtils.mkdir_p VHOSTS_DIR
     end
-    unless File.exist? CONF
-      OSX::NSLog("Will create config: #{CONF}")
-      File.open(CONF, 'w') { |f| f << "Include #{VHOSTS_DIR}/*.conf" }
+  end
+  
+  CONF = "/private/etc/apache2/httpd.conf"
+  def verify_httpd_conf
+    unless File.read(CONF).include? 'Added by the Passenger preferences pane'
+      OSX::NSLog("Will try to append passenger pane vhosts conf to: #{CONF}")
+      File.open(CONF, 'a') do |f|
+        f << %{
+
+# Added by the Passenger preferences pane
+# Make sure to include the Passenger configuration (the LoadModule,
+# PassengerRoot, and PassengerRuby directives) before this section.
+<IfModule passenger_module>
+  NameVirtualHost *:80
+  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+</IfModule>}
+      end
     end
   end
   
@@ -61,10 +74,13 @@ class ConfigInstaller
   
   def install!
     verify_vhost_conf
+    verify_httpd_conf
+    
     (0..(@data.length - 1)).each do |index|
       add_to_hosts index
       create_vhost_conf index
     end
+    
     restart_apache!
   end
 end
