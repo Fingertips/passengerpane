@@ -48,7 +48,7 @@ class ConfigInstaller
   DocumentRoot "#{public_dir}"
   RailsEnv #{app['environment']}
   RailsAllowModRewrite #{app['allow_mod_rewrite'] ? 'on' : 'off'}
-#{ "  RailsBaseURI #{app['base_uri']}\n" unless app['base_uri'].empty? }#{ "  <directory \"#{public_dir}\">\n    Order allow,deny\n    Allow from all\n  </directory>\n" if app['new_app'] }#{ "#{app['user_defined_data']}\n" unless app['user_defined_data'].empty? }</VirtualHost>
+#{ "  RailsBaseURI #{app['base_uri']}\n" unless app['base_uri'].empty? }#{ "#{app['user_defined_data']}\n" unless app['user_defined_data'].empty? }</VirtualHost>
 }.sub(/^\n/, '')
     
     OSX::NSLog("Will write vhost file: #{app['config_path']}\nData: #{vhost}")

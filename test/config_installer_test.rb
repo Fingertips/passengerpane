@@ -1,6 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'config_installer'
 require 'yaml'
+require 'PassengerApplication'
 
 describe "ConfigInstaller" do
   before do
@@ -8,19 +9,15 @@ describe "ConfigInstaller" do
     FileUtils.mkdir_p @tmp
     @vhost_file = File.join(@tmp, 'test.vhost.conf')
     
-    @data = {
-      'new_app' => true,
-      'config_path' => @vhost_file,
-      'host' => 'het-manfreds-blog.local',
-      'path' => '/User/het-manfred/rails code/blog',
-      'environment' => 'production',
-      'allow_mod_rewrite' => true,
-      'base_uri' => '',
-      'vhostname' => 'het-manfreds-wiki.local:443',
-      'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
-    }
+    app = PassengerApplication.alloc.init
+    app.stubs(:config_path).returns(@vhost_file)
+    app.host = 'het-manfreds-blog.local'
+    app.path = '/User/het-manfred/rails code/blog'
+    app.environment = PassengerApplication::PRODUCTION
+    app.allow_mod_rewrite = true
+    app.vhostname = 'het-manfreds-wiki.local:443'
     
-    @installer = ConfigInstaller.new([@data].to_yaml)
+    @installer = ConfigInstaller.new([app.to_hash].to_yaml)
   end
   
   after do
@@ -29,7 +26,6 @@ describe "ConfigInstaller" do
   
   it "should initialize" do
     @installer.data.should == [{
-      'new_app' => true,
       'config_path' => @vhost_file,
       'host' => 'het-manfreds-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
@@ -37,7 +33,7 @@ describe "ConfigInstaller" do
       'allow_mod_rewrite' => true,
       'base_uri' => '',
       'vhostname' => 'het-manfreds-wiki.local:443',
-      'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
+      'user_defined_data' => "  <directory \"/User/het-manfred/rails code/blog/public\">\n    Order allow,deny\n    Allow from all\n  </directory>"
     }]
   end
   
@@ -56,43 +52,6 @@ describe "ConfigInstaller" do
     File.expects(:open).with(conf, 'w')
     
     @installer.verify_vhost_conf
-  end
-  
-  it "should create a new vhost conf file and include permissions data if it's a new app" do
-    @installer.create_vhost_conf(0)
-    
-    File.read(@vhost_file.bypass_safe_level_1).should == %{
-<VirtualHost het-manfreds-wiki.local:443>
-  ServerName het-manfreds-blog.local
-  DocumentRoot "/User/het-manfred/rails code/blog/public"
-  RailsEnv production
-  RailsAllowModRewrite on
-  <directory "/User/het-manfred/rails code/blog/public">
-    Order allow,deny
-    Allow from all
-  </directory>
-  <something_else "/some/path">
-    foo bar
-  </something_else>
-</VirtualHost>
-}.sub(/^\n/, '')
-  end
-  
-  it "should not add the permissions part if it's not a new app because we treat the directory directive as user defined data" do
-    @installer.instance_variable_get(:@data)[0]['new_app'] = false
-    @installer.create_vhost_conf(0)
-    
-    File.read(@vhost_file.bypass_safe_level_1).should == %{
-<VirtualHost het-manfreds-wiki.local:443>
-  ServerName het-manfreds-blog.local
-  DocumentRoot "/User/het-manfred/rails code/blog/public"
-  RailsEnv production
-  RailsAllowModRewrite on
-  <something_else "/some/path">
-    foo bar
-  </something_else>
-</VirtualHost>
-}.sub(/^\n/, '')
   end
   
   it "should set the RailsBaseURI if there is one" do

@@ -41,7 +41,7 @@ class PassengerApplication < NSObject
   end
   
   kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite, :base_uri
-  attr_reader :user_defined_data, :vhostname
+  attr_accessor :user_defined_data, :vhostname
   
   def init
     if super_init
@@ -168,8 +168,8 @@ class PassengerApplication < NSObject
   end
   
   def to_hash
+    @user_defined_data = "  <directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </directory>" if @new_app
     {
-      'new_app' => @new_app,
       'config_path' => config_path,
       'host' => @host.to_s,
       'path' => @path.to_s,

@@ -75,8 +75,17 @@ describe "PassengerApplication, with a new application" do
     PassengerApplication.alloc.initWithPath('/Users/het-manfred/rails code/blog').should.be.dirty
   end
   
-  it "should return a hash which indicates that this is a new app" do
-    passenger_app.to_hash['new_app'].should.be true
+  it "should return a hash with a default user_defined_data variable that contains the permissions directive and also set it as the value for @user_defined_data" do
+    passenger_app.setValue_forKey('/some/path/to/rails/app', 'path')
+    
+    string = %{
+  <directory "/some/path/to/rails/app/public">
+    Order allow,deny
+    Allow from all
+  </directory>}.sub(/^\n/, '')
+    
+    passenger_app.to_hash['user_defined_data'].should == string
+    assigns(:user_defined_data).should == string
   end
 end
 
@@ -201,7 +210,6 @@ describe "PassengerApplication, in general" do
     assigns(:vhostname, 'het-manfreds-wiki.local:443')
     
     passenger_app.to_hash.should == {
-      'new_app' => false,
       'config_path' => passenger_app.config_path,
       'host' => 'app.local',
       'path' => passenger_app.path,
