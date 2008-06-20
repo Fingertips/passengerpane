@@ -62,7 +62,7 @@ class PassengerApplication < NSObject
       @new_app = false
       @valid = false
       
-      data = File.read(file)
+      data = File.read(file).strip
       
       data.gsub!(/\s*ServerName\s+(.+)\n/, '')
       @host = $1
@@ -79,7 +79,7 @@ class PassengerApplication < NSObject
       data.gsub!(/\s*RailsBaseURI\s+(.+)\n/, '')
       @base_uri = $1 unless $1.nil?
       
-      data.gsub!(/\s*<VirtualHost.+\n*/, '')
+      data.gsub!(/<VirtualHost\s(.+?)>/, '')
       data.gsub!(/\s*<\/VirtualHost>\n*/, '')
       @user_defined_data = data
       
