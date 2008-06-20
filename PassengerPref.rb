@@ -150,6 +150,7 @@ class PrefPanePassenger < NSPreferencePane
   def authorizationViewDidAuthorize(authorizationView = nil)
     OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
     self.authorized = true
+    execute('/some/blaaa', 'jaja')
   end
   
   def authorizationViewDidDeauthorize(authorizationView = nil)
