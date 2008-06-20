@@ -15,6 +15,10 @@ describe "ConfigUninstaller" do
     @uninstaller = ConfigUninstaller.new([{ 'config_path' => @vhost_file, 'host' => @host}].to_yaml)
   end
   
+  after do
+    FileUtils.rm_rf @tmp
+  end
+  
   it "should initialize" do
     @uninstaller.data.should == [{ 'config_path' => @vhost_file, 'host' => @host }]
   end
