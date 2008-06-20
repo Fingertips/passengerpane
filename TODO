@@ -1,4 +1,3 @@
-- Treat the <VirtualHost(.+)> as user defined data as well.
 - When a application is written to disk for the first time and you start editing the apps settings directly afterwards
   the permissions directives are lost because they aren in the @user_defined_data yet. Probably better to add this as a default to @user_defined_data.
 - When false is returned by executeCommand_withArgs show an alert telling the user to check his console.

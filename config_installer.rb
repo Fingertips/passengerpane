@@ -43,7 +43,7 @@ class ConfigInstaller
     app = @data[index]
     public_dir = File.join(app['path'], 'public')
     vhost = %{
-<VirtualHost *:80>
+<VirtualHost #{app['vhostname']}>
   ServerName #{app['host']}
   DocumentRoot "#{public_dir}"
   RailsEnv #{app['environment']}

@@ -16,6 +16,7 @@ describe "ConfigInstaller" do
       'environment' => 'production',
       'allow_mod_rewrite' => true,
       'base_uri' => '',
+      'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
     }
     
@@ -35,6 +36,7 @@ describe "ConfigInstaller" do
       'environment' => 'production',
       'allow_mod_rewrite' => true,
       'base_uri' => '',
+      'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
     }]
   end
@@ -60,7 +62,7 @@ describe "ConfigInstaller" do
     @installer.create_vhost_conf(0)
     
     File.read(@vhost_file.bypass_safe_level_1).should == %{
-<VirtualHost *:80>
+<VirtualHost het-manfreds-wiki.local:443>
   ServerName het-manfreds-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
@@ -81,7 +83,7 @@ describe "ConfigInstaller" do
     @installer.create_vhost_conf(0)
     
     File.read(@vhost_file.bypass_safe_level_1).should == %{
-<VirtualHost *:80>
+<VirtualHost het-manfreds-wiki.local:443>
   ServerName het-manfreds-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
@@ -94,9 +96,11 @@ describe "ConfigInstaller" do
   end
   
   it "should set the RailsBaseURI if there is one" do
-    @installer.instance_variable_get(:@data)[0]['new_app'] = false
-    @installer.instance_variable_get(:@data)[0]['base_uri'] = '/rails/blog'
-    @installer.instance_variable_get(:@data)[0]['user_defined_data'] = ''
+    app_data = @installer.instance_variable_get(:@data)[0]
+    app_data['new_app'] = false
+    app_data['base_uri'] = '/rails/blog'
+    app_data['vhostname'] = '*:80'
+    app_data['user_defined_data'] = ''
     @installer.create_vhost_conf(0)
     
     File.read(@vhost_file.bypass_safe_level_1).should == %{

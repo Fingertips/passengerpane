@@ -41,7 +41,7 @@ class PassengerApplication < NSObject
   end
   
   kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite, :base_uri
-  attr_reader :user_defined_data
+  attr_reader :user_defined_data, :vhostname
   
   def init
     if super_init
@@ -51,6 +51,7 @@ class PassengerApplication < NSObject
       @new_app = true
       @dirty = @valid = false
       @host, @path, @base_uri, @user_defined_data = '', '', '', ''
+      @vhostname = '*:80'
       
       set_original_values!
       self
@@ -80,6 +81,8 @@ class PassengerApplication < NSObject
       @base_uri = $1 unless $1.nil?
       
       data.gsub!(/<VirtualHost\s(.+?)>/, '')
+      @vhostname = $1
+      
       data.gsub!(/\s*<\/VirtualHost>\n*/, '')
       @user_defined_data = data
       
@@ -173,6 +176,7 @@ class PassengerApplication < NSObject
       'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
       'base_uri' => @base_uri,
+      'vhostname' => @vhostname,
       'user_defined_data' => @user_defined_data
     }
   end

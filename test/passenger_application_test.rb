@@ -33,6 +33,7 @@ describe "PassengerApplication, with a new application" do
     passenger_app.path.should == ''
     passenger_app.host.should == ''
     passenger_app.base_uri.should == ''
+    passenger_app.vhostname.should == '*:80'
     passenger_app.should.be.new_app
     assigns(:dirty).should.be false
     assigns(:valid).should.be false
@@ -98,6 +99,8 @@ describe "PassengerApplication, in general" do
     passenger_app.path.should == "/Users/het-manfred/rails code/blog"
     passenger_app.environment.should == PassengerApplication::DEVELOPMENT
     passenger_app.allow_mod_rewrite.should.be false
+    passenger_app.base_uri.should == ''
+    passenger_app.vhostname.should == '*:80'
     
     passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/wiki.vhost.conf', __FILE__))
     passenger_app.host.should == "het-manfreds-wiki.local"
@@ -105,6 +108,7 @@ describe "PassengerApplication, in general" do
     passenger_app.environment.should == PassengerApplication::PRODUCTION
     passenger_app.allow_mod_rewrite.should.be true
     passenger_app.base_uri.should == '/rails/wiki'
+    passenger_app.vhostname.should == 'het-manfreds-wiki.local:443'
     passenger_app.user_defined_data.should == %{
   <Location "/">
       AuthType Basic
@@ -194,6 +198,7 @@ describe "PassengerApplication, in general" do
     assigns(:host, 'app.local'.to_ns)
     assigns(:user_defined_data, "<directory \"/some/path\">\n  foo bar\n</directory>")
     assigns(:allow_mod_rewrite, false.to_ns)
+    assigns(:vhostname, 'het-manfreds-wiki.local:443')
     
     passenger_app.to_hash.should == {
       'new_app' => false,
@@ -203,6 +208,7 @@ describe "PassengerApplication, in general" do
       'environment' => 'development',
       'allow_mod_rewrite' => false,
       'base_uri' => '',
+      'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "<directory \"/some/path\">\n  foo bar\n</directory>"
     }
     
@@ -246,7 +252,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
-    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app').should == {
+    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'foo.local',
       'path' => '/some/path',
       'environment' => 'production',
@@ -258,7 +264,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.valid
-    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app').should == {
+    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'het-manfreds-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
       'environment' => 'development',
