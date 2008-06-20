@@ -1,4 +1,2 @@
 - When false is returned by executeCommand_withArgs show an alert telling the user to check his console.
 - Check paths in help file.
-- Check if "apachectl graceful" is causing all these permission denied errors and if "launchctl stop org.apache.httpd" would solve this.
-- Check if our "directory" directive needs more default options.

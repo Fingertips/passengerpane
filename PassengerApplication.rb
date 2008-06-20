@@ -115,6 +115,11 @@ class PassengerApplication < NSObject
   end
   
   def apply(save_config = nil)
+    unless @valid
+      p "Not applying changes to invalid Rails application: #{@path}"
+      return
+    end
+    
     p "Applying changes to Rails application: #{@path}"
     (@new_app ? start : restart) unless save_config == false
     # todo: check if it went ok before assumin so.

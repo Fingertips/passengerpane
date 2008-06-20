@@ -53,6 +53,7 @@ describe "PassengerApplication, with a new application" do
   end
   
   it "should start the application for the first time" do
+    assigns(:valid, true)
     passenger_app.expects(:start).times(1)
     passenger_app.apply
   end
@@ -171,6 +172,14 @@ describe "PassengerApplication, in general" do
     assigns(:valid).should.be true
   end
   
+  it "should not apply if the applications configuration is not valid" do
+    passenger_app.setValue_forKey('', 'host')
+    passenger_app.expects(:restart).times(0)
+    passenger_app.apply
+    assigns(:valid).should.be false
+    assigns(:dirty).should.be true
+  end
+  
   it "should restart the application for an existing application" do
     passenger_app.expects(:restart).times(1)
     
@@ -183,6 +192,7 @@ describe "PassengerApplication, in general" do
   
   it "should save the config before restarting if it was marked dirty" do
     passenger_app.expects(:save_config!).times(1)
+    assigns(:valid, true)
     assigns(:dirty, true)
     passenger_app.apply
   end
@@ -238,6 +248,7 @@ describe "PassengerApplication, in general" do
   it "should start multiple applications at once" do
     app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
+    [app1, app2].each { |app| app.instance_variable_set(:@valid, true) }
     
     PassengerApplication.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
