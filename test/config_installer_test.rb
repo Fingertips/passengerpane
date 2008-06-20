@@ -9,13 +9,14 @@ describe "ConfigInstaller" do
     @vhost_file = File.join(@tmp, 'test.vhost.conf')
     
     @data = {
+      'new_app' => true,
       'config_path' => @vhost_file,
       'host' => 'het-manfreds-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
       'base_uri' => '',
-      'user_defined_data' => "  <directory \"/some/path\">\n    foo bar\n  </directory>"
+      'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
     }
     
     @installer = ConfigInstaller.new([@data].to_yaml)
@@ -27,13 +28,14 @@ describe "ConfigInstaller" do
   
   it "should initialize" do
     @installer.data.should == [{
+      'new_app' => true,
       'config_path' => @vhost_file,
       'host' => 'het-manfreds-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
       'base_uri' => '',
-      'user_defined_data' => "  <directory \"/some/path\">\n    foo bar\n  </directory>"
+      'user_defined_data' => "  <something_else \"/some/path\">\n    foo bar\n  </something_else>"
     }]
   end
   
@@ -54,7 +56,7 @@ describe "ConfigInstaller" do
     @installer.verify_vhost_conf
   end
   
-  it "should create a new vhost conf file" do
+  it "should create a new vhost conf file and include permissions data if it's a new app" do
     @installer.create_vhost_conf(0)
     
     File.read(@vhost_file.bypass_safe_level_1).should == %{
@@ -63,14 +65,36 @@ describe "ConfigInstaller" do
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
   RailsAllowModRewrite on
-  <directory "/some/path">
-    foo bar
+  <directory "/User/het-manfred/rails code/blog/public">
+    Order allow,deny
+    Allow from all
   </directory>
+  <something_else "/some/path">
+    foo bar
+  </something_else>
+</VirtualHost>
+}.sub(/^\n/, '')
+  end
+  
+  it "should not add the permissions part if it's not a new app because we treat the directory directive as user defined data" do
+    @installer.instance_variable_get(:@data)[0]['new_app'] = false
+    @installer.create_vhost_conf(0)
+    
+    File.read(@vhost_file.bypass_safe_level_1).should == %{
+<VirtualHost *:80>
+  ServerName het-manfreds-blog.local
+  DocumentRoot "/User/het-manfred/rails code/blog/public"
+  RailsEnv production
+  RailsAllowModRewrite on
+  <something_else "/some/path">
+    foo bar
+  </something_else>
 </VirtualHost>
 }.sub(/^\n/, '')
   end
   
   it "should set the RailsBaseURI if there is one" do
+    @installer.instance_variable_get(:@data)[0]['new_app'] = false
     @installer.instance_variable_get(:@data)[0]['base_uri'] = '/rails/blog'
     @installer.instance_variable_get(:@data)[0]['user_defined_data'] = ''
     @installer.create_vhost_conf(0)
