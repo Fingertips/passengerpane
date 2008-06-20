@@ -137,6 +137,12 @@ class PrefPanePassenger < NSPreferencePane
     @dropping_directories = false
   end
   
+  def tableView_writeRowsWithIndexes_toPasteboard(tableView, rows, pboard)
+    pboard.declareTypes_owner([OSX::NSFilenamesPboardType], self)
+    pboard.setPropertyList_forType(['/etc/hosts'], OSX::NSFilenamesPboardType)
+    true
+  end
+  
   # SFAuthorizationView: TODO this should actualy move to the SecurityHelper, but for some reason in prototyping it didn't work, try again when everything is cleaned up.
   
   def authorizationViewDidAuthorize(authorizationView = nil)
