@@ -54,6 +54,35 @@ describe "PrefPanePassenger, while loading" do
   end
 end
 
+describe "PrefPanePassenger, while checking for passenger" do
+  tests PrefPanePassenger
+  
+  it "should be able to check if the passenger gem is installed" do
+    pref_pane.stubs(:`).with('/usr/sbin/httpd -t -D DUMP_MODULES 2>&1').returns(%{
+[Fri Jun 20 12:20:03 2008] [warn] _default_ VirtualHost overlap on port 80, the first has precedence
+[Fri Jun 20 12:20:03 2008] [warn] _default_ VirtualHost overlap on port 80, the first has precedence
+Loaded Modules:
+ core_module (static)
+ mpm_prefork_module (static)
+ http_module (static)
+ passenger_module (shared)
+Syntax OK})
+    
+    pref_pane.send(:passenger_installed?).should.be true
+    
+    pref_pane.stubs(:`).with('/usr/sbin/httpd -t -D DUMP_MODULES 2>&1').returns(%{
+[Fri Jun 20 12:20:03 2008] [warn] _default_ VirtualHost overlap on port 80, the first has precedence
+[Fri Jun 20 12:20:03 2008] [warn] _default_ VirtualHost overlap on port 80, the first has precedence
+Loaded Modules:
+ core_module (static)
+ mpm_prefork_module (static)
+ http_module (static)
+Syntax OK})
+
+    pref_pane.send(:passenger_installed?).should.be false
+  end
+end
+
 describe "PrefPanePassenger, in general" do
   tests PrefPanePassenger
   
@@ -66,6 +95,8 @@ describe "PrefPanePassenger, in general" do
     pref_pane.stubs(:mainView).returns(mainView)
     window = stub('Main Window')
     mainView.stubs(:window).returns(window)
+    
+    pref_pane.stubs(:passenger_installed?).returns(true)
     
     pref_pane.mainViewDidLoad
   end
@@ -144,14 +175,6 @@ describe "PrefPanePassenger, in general" do
     
     app.expects(:setValue_forKey).with('/some/path/to/Blog', 'path')
     pref_pane.openPanelDidEnd_returnCode_contextInfo(panel, OSX::NSOKButton, nil)
-  end
-  
-  it "should be able to check if the passenger gem is installed" do
-    pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\npassenger (1.0.5, 1.0.1)\n")
-    pref_pane.send(:passenger_installed?).should.be true
-    
-    pref_pane.expects(:`).with('/usr/bin/gem list passenger').returns("*** LOCAL GEMS ***\n\n\n")
-    pref_pane.send(:passenger_installed?).should.be false
   end
   
   it "should forward delegate messages from the authorization view to the security helper" do
@@ -354,6 +377,7 @@ describe "PrefPanePassenger, with drag and drop support" do
     @tmp = File.expand_path('../tmp')
     FileUtils.mkdir_p @tmp
     
+    pref_pane.stubs(:passenger_installed?).returns(true)
     PassengerApplication.stubs(:existingApplications).returns([])
     pref_pane.mainViewDidLoad
   end

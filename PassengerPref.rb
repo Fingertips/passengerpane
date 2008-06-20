@@ -192,7 +192,7 @@ class PrefPanePassenger < NSPreferencePane
   private
   
   def passenger_installed?
-    `/usr/bin/gem list passenger`.include? 'passenger'
+    `/usr/sbin/httpd -t -D DUMP_MODULES 2>&1`.include? 'passenger_module'
   end
   
   def path_for_browser
