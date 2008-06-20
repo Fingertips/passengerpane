@@ -64,15 +64,6 @@ class PassengerApplication < NSObject
       
       data = File.read(file)
       
-      # @host = data.match(/ServerName\s+(.+)\n/)[1]
-      # @path = data.match(/DocumentRoot\s+"(.+)\/public"\n/)[1]
-      # @environment = (data.match(/RailsEnv\s+(development|production)\n/)[1] == 'development' ? DEVELOPMENT : PRODUCTION)
-      # @allow_mod_rewrite = (data.match(/RailsAllowModRewrite\s+(off|on)\n/)[1] == 'on')
-      # 
-      # if match = data.match(/RailsBaseURI\s+(.+)\n/)
-      #   @base_uri = match[1]
-      # end
-      
       data.gsub!(/\s*ServerName\s+(.+)\n/, '')
       @host = $1
       
@@ -180,7 +171,8 @@ class PassengerApplication < NSObject
       'path' => @path.to_s,
       'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
-      'base_uri' => @base_uri
+      'base_uri' => @base_uri,
+      'user_defined_data' => @user_defined_data
     }
   end
   

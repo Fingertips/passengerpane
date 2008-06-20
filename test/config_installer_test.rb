@@ -14,7 +14,8 @@ describe "ConfigInstaller" do
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
-      'base_uri' => ''
+      'base_uri' => '',
+      'user_defined_data' => "  <directory \"/some/path\">\n    foo bar\n  </directory>"
     }
     
     @installer = ConfigInstaller.new([@data].to_yaml)
@@ -31,7 +32,8 @@ describe "ConfigInstaller" do
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
-      'base_uri' => ''
+      'base_uri' => '',
+      'user_defined_data' => "  <directory \"/some/path\">\n    foo bar\n  </directory>"
     }]
   end
   
@@ -61,12 +63,16 @@ describe "ConfigInstaller" do
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
   RailsAllowModRewrite on
+  <directory "/some/path">
+    foo bar
+  </directory>
 </VirtualHost>
 }.sub(/^\n/, '')
   end
   
   it "should set the RailsBaseURI if there is one" do
     @installer.instance_variable_get(:@data)[0]['base_uri'] = '/rails/blog'
+    @installer.instance_variable_get(:@data)[0]['user_defined_data'] = ''
     @installer.create_vhost_conf(0)
     
     File.read(@vhost_file.bypass_safe_level_1).should == %{
@@ -96,7 +102,6 @@ describe "ConfigInstaller" do
     installer.expects(:create_vhost_conf).with(0)
     installer.expects(:create_vhost_conf).with(1)
     
-    #installer.expects(:execute_extra_command)
     installer.expects(:restart_apache!)
     
     ConfigInstaller.new([{}, {}].to_yaml, 'extra command').install!

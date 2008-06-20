@@ -188,8 +188,19 @@ describe "PassengerApplication, in general" do
   
   it "should return it's attributes as a hash without NS classes" do
     assigns(:host, 'app.local'.to_ns)
+    assigns(:user_defined_data, "<directory \"/some/path\">\n  foo bar\n</directory>")
     assigns(:allow_mod_rewrite, false.to_ns)
-    passenger_app.to_hash.should == { 'config_path' => passenger_app.config_path, 'host' => 'app.local', 'path' => passenger_app.path, 'environment' => 'development', 'allow_mod_rewrite' => false, 'base_uri' => '' }
+    
+    passenger_app.to_hash.should == {
+      'config_path' => passenger_app.config_path,
+      'host' => 'app.local',
+      'path' => passenger_app.path,
+      'environment' => 'development',
+      'allow_mod_rewrite' => false,
+      'base_uri' => '',
+      'user_defined_data' => "<directory \"/some/path\">\n  foo bar\n</directory>"
+    }
+    
     passenger_app.to_hash.to_yaml.should.not.include 'NSCF'
   end
   
@@ -230,13 +241,25 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
-    passenger_app.to_hash.except('config_path').should == { 'host' => 'foo.local', 'path' => '/some/path', 'environment' => 'production', 'allow_mod_rewrite' => true, 'base_uri' => '/rails/foo' }
+    passenger_app.to_hash.except('config_path', 'user_defined_data').should == {
+      'host' => 'foo.local',
+      'path' => '/some/path',
+      'environment' => 'production',
+      'allow_mod_rewrite' => true,
+      'base_uri' => '/rails/foo'
+    }
     
     passenger_app.revert
     
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.valid
-    passenger_app.to_hash.except('config_path').should == { 'host' => 'het-manfreds-blog.local', 'path' => '/Users/het-manfred/rails code/blog', 'environment' => 'development', 'allow_mod_rewrite' => false, 'base_uri' => '' }
+    passenger_app.to_hash.except('config_path', 'user_defined_data').should == {
+      'host' => 'het-manfreds-blog.local',
+      'path' => '/Users/het-manfred/rails code/blog',
+      'environment' => 'development',
+      'allow_mod_rewrite' => false,
+      'base_uri' => ''
+    }
   end
   
   it "should first remove a config and then add it again if the host has changed so we don't leave stale files/hosts" do
