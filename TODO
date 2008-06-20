@@ -1,4 +1,4 @@
-- Add permissions config to each vhost if it's a new app. After that, treat it as user defined data.
+- Treat the <VirtualHost(.+)> as user defined data as well.
 - When false is returned by executeCommand_withArgs show an alert telling the user to check his console.
 - Check paths in help file.
 - Check if "apachectl graceful" is causing all these permission denied errors and if "launchctl stop org.apache.httpd" would solve this.
