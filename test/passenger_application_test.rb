@@ -73,6 +73,10 @@ describe "PassengerApplication, with a new application" do
   it "should mark the app as dirty if it's initialized with a path" do
     PassengerApplication.alloc.initWithPath('/Users/het-manfred/rails code/blog').should.be.dirty
   end
+  
+  it "should return a hash which indicates that this is a new app" do
+    passenger_app.to_hash['new_app'].should.be true
+  end
 end
 
 describe "PassengerApplication, in general" do
@@ -192,6 +196,7 @@ describe "PassengerApplication, in general" do
     assigns(:allow_mod_rewrite, false.to_ns)
     
     passenger_app.to_hash.should == {
+      'new_app' => false,
       'config_path' => passenger_app.config_path,
       'host' => 'app.local',
       'path' => passenger_app.path,
@@ -241,7 +246,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
-    passenger_app.to_hash.except('config_path', 'user_defined_data').should == {
+    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app').should == {
       'host' => 'foo.local',
       'path' => '/some/path',
       'environment' => 'production',
@@ -253,7 +258,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.valid
-    passenger_app.to_hash.except('config_path', 'user_defined_data').should == {
+    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app').should == {
       'host' => 'het-manfreds-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
       'environment' => 'development',

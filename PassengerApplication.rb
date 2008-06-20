@@ -166,6 +166,7 @@ class PassengerApplication < NSObject
   
   def to_hash
     {
+      'new_app' => @new_app,
       'config_path' => config_path,
       'host' => @host.to_s,
       'path' => @path.to_s,
