@@ -3,7 +3,7 @@
 //  Passenger
 //
 //  Created by eloy on 5/8/08.
-//  Copyright (c) 2008 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2008 Fingertips. All rights reserved.
 //
 
 @interface PassengerLoader : NSObject
