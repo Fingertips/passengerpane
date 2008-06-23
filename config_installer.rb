@@ -69,7 +69,7 @@ class ConfigInstaller
   end
   
   def restart_apache!
-    system "/bin/launchctl stop org.apache.httpd"
+    system "sudo /bin/launchctl stop org.apache.httpd"
   end
   
   def install!

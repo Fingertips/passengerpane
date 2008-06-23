@@ -125,7 +125,7 @@ Include /private/etc/apache2/other/*.conf
   end
   
   it "should restart Apache" do
-    @installer.expects(:system).with("/bin/launchctl stop org.apache.httpd")
+    @installer.expects(:system).with("sudo /bin/launchctl stop org.apache.httpd")
     @installer.restart_apache!
   end
   
