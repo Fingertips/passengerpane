@@ -19,6 +19,9 @@ module SharedPassengerBehaviour
   module_function :p
 end
 
+# Silencio!
+def OSX.NSLog(*args); end
+
 class OSX::SecurityHelper
   def self.sharedInstance
     @sharedInstance ||= new

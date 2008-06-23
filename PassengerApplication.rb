@@ -40,7 +40,7 @@ class PassengerApplication < NSObject
     end
   end
   
-  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite, :base_uri
+  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
   attr_accessor :user_defined_data, :vhostname
   
   def init
@@ -50,7 +50,7 @@ class PassengerApplication < NSObject
       
       @new_app = true
       @dirty = @valid = false
-      @host, @path, @base_uri, @user_defined_data = '', '', '', ''
+      @host, @path, @user_defined_data = '', '', ''
       @vhostname = '*:80'
       
       set_original_values!
@@ -76,9 +76,6 @@ class PassengerApplication < NSObject
       
       data.gsub!(/\s*RailsAllowModRewrite\s+(off|on)\n/, '')
       @allow_mod_rewrite = ($1 == 'on')
-      
-      data.gsub!(/\s*RailsBaseURI\s+(.+)\n/, '')
-      @base_uri = $1 unless $1.nil?
       
       data.gsub!(/<VirtualHost\s(.+?)>/, '')
       @vhostname = $1
@@ -151,22 +148,9 @@ class PassengerApplication < NSObject
     File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
-  def rbValueForKey(key)
-    key == 'host' ? "#{@host}#{@base_uri}" : super
-  end
-  
   def rbSetValue_forKey(value, key)
     super
     mark_dirty!
-    
-    if key == 'host'
-      if value.to_s =~ /^(.+?)(\/.+)$/
-        @host, @base_uri = $1, $2
-      else
-        @base_uri = ''
-      end
-    end
-    
     set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
   end
@@ -184,7 +168,6 @@ class PassengerApplication < NSObject
       'path' => @path.to_s,
       'environment' => (@environment == DEVELOPMENT ? 'development' : 'production'),
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
-      'base_uri' => @base_uri,
       'vhostname' => @vhostname,
       'user_defined_data' => @user_defined_data
     }
@@ -200,7 +183,7 @@ class PassengerApplication < NSObject
   private
   
   def set_original_values!
-    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite, 'base_uri' => @base_uri }
+    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
   end
   
   def set_default_host_from_path(path)

@@ -31,7 +31,6 @@ describe "ConfigInstaller" do
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
-      'base_uri' => '',
       'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "  <directory \"/User/het-manfred/rails code/blog/public\">\n    Order allow,deny\n    Allow from all\n  </directory>"
     }]
@@ -103,25 +102,6 @@ Include /private/etc/apache2/other/*.conf
 </IfModule>})
     
     @installer.verify_httpd_conf
-  end
-  
-  it "should set the RailsBaseURI if there is one" do
-    app_data = @installer.instance_variable_get(:@data)[0]
-    app_data['new_app'] = false
-    app_data['base_uri'] = '/rails/blog'
-    app_data['vhostname'] = '*:80'
-    app_data['user_defined_data'] = ''
-    @installer.create_vhost_conf(0)
-    
-    File.read(@vhost_file.bypass_safe_level_1).should == %{
-<VirtualHost *:80>
-  ServerName het-manfreds-blog.local
-  DocumentRoot "/User/het-manfred/rails code/blog/public"
-  RailsEnv production
-  RailsAllowModRewrite on
-  RailsBaseURI /rails/blog
-</VirtualHost>
-}.sub(/^\n/, '')
   end
   
   it "should restart Apache" do

@@ -1,15 +1,19 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerApplication'
 
-class PrefPanePassenger
-  class << self
-    attr_accessor :sharedInstance
-  end
-  self.sharedInstance = new
+unless ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'false'
+  require 'PassengerPref'
+else
+  class PrefPanePassenger
+    class << self
+      attr_accessor :sharedInstance
+    end
   
-  def applicationMarkedDirty(app)
+    def applicationMarkedDirty(app)
+    end
   end
 end
+PrefPanePassenger.sharedInstance = PrefPanePassenger.new
 
 class Hash
   def except(*keys)
@@ -25,14 +29,12 @@ describe "PassengerApplication, with a new application" do
   tests PassengerApplication
   
   def after_setup
-    @instance_to_be_tested = PassengerApplication.alloc.init
     passenger_app.stubs(:execute)
   end
   
   it "should initialize with empty path & host" do
     passenger_app.path.should == ''
     passenger_app.host.should == ''
-    passenger_app.base_uri.should == ''
     passenger_app.vhostname.should == '*:80'
     passenger_app.should.be.new_app
     assigns(:dirty).should.be false
@@ -111,7 +113,6 @@ describe "PassengerApplication, in general" do
     passenger_app.path.should == "/Users/het-manfred/rails code/blog"
     passenger_app.environment.should == PassengerApplication::DEVELOPMENT
     passenger_app.allow_mod_rewrite.should.be false
-    passenger_app.base_uri.should == ''
     passenger_app.vhostname.should == '*:80'
     
     passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/wiki.vhost.conf', __FILE__))
@@ -119,7 +120,6 @@ describe "PassengerApplication, in general" do
     passenger_app.path.should == "/Users/het-manfred/rails code/wiki"
     passenger_app.environment.should == PassengerApplication::PRODUCTION
     passenger_app.allow_mod_rewrite.should.be true
-    passenger_app.base_uri.should == '/rails/wiki'
     passenger_app.vhostname.should == 'het-manfreds-wiki.local:443'
     passenger_app.user_defined_data.should == %{
   <Location "/">
@@ -227,7 +227,6 @@ describe "PassengerApplication, in general" do
       'path' => passenger_app.path,
       'environment' => 'development',
       'allow_mod_rewrite' => false,
-      'base_uri' => '',
       'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "<directory \"/some/path\">\n  foo bar\n</directory>"
     }
@@ -269,7 +268,6 @@ describe "PassengerApplication, in general" do
     passenger_app.setValue_forKey('/some/path', 'path')
     passenger_app.setValue_forKey('production', 'environment')
     passenger_app.setValue_forKey(true, 'allow_mod_rewrite')
-    passenger_app.setValue_forKey('/rails/foo', 'base_uri')
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
@@ -278,7 +276,6 @@ describe "PassengerApplication, in general" do
       'path' => '/some/path',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
-      'base_uri' => '/rails/foo'
     }
     
     passenger_app.revert
@@ -289,8 +286,7 @@ describe "PassengerApplication, in general" do
       'host' => 'het-manfreds-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
       'environment' => 'development',
-      'allow_mod_rewrite' => false,
-      'base_uri' => ''
+      'allow_mod_rewrite' => false
     }
   end
   
@@ -299,20 +295,5 @@ describe "PassengerApplication, in general" do
     passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
-  end
-  
-  it "should parse the base uri from the host" do
-    passenger_app.setValue_forKey('foo.local/rails/foo', 'host')
-    passenger_app.host.should == 'foo.local'
-    passenger_app.base_uri.should == '/rails/foo'
-    
-    passenger_app.setValue_forKey('foo.local', 'host')
-    passenger_app.host.should == 'foo.local'
-    passenger_app.base_uri.should == ''
-  end
-  
-  it "should return the host plus the RailsBaseURI if the host is requested by the UI" do
-    passenger_app.setValue_forKey('foo.local/rails/foo', 'host')
-    passenger_app.valueForKey('host').should == 'foo.local/rails/foo'
   end
 end
