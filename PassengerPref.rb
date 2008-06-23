@@ -1,11 +1,3 @@
-#
-#  PassengerPref.m
-#  Passenger
-#
-#  Created by Eloy Duran on 5/8/08.
-#  Copyright (c) 2008 Eloy Duran. All rights reserved.
-#
-
 require 'osx/cocoa'
 include OSX
 
