@@ -1,0 +1,4 @@
+Strip color profile from icon with:
+
+  pngcrush -rem gAMA -rem cHRM -rem iCCP -rem sRGB icon.png icon.png.tmp
+  mv icon.png.tmp icon.png
