@@ -410,7 +410,7 @@ describe "PrefPanePassenger, with drag and drop support" do
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationNone
   end
   
-  it "should add an application to the applicationsController" do
+  it "should add valid applications to the applicationsController" do
     stub_pb_and_info_with_two_directories
     
     PassengerApplication.expects(:startApplications).times(0)
@@ -419,6 +419,7 @@ describe "PrefPanePassenger, with drag and drop support" do
     apps = applicationsController.content
     apps.map { |app| app.path }.should == @dirs
     apps.map { |app| app.host }.should == %w{ app1.local app2.local }
+    apps.all? { |app| app.valid? }.should.be true
   end
   
   it "should not allow directories to be dropped if not authorized" do

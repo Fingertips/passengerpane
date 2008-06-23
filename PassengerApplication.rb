@@ -94,9 +94,11 @@ class PassengerApplication < NSObject
   def initWithPath(path)
     if init
       mark_dirty!
+      
       @path = path
       set_default_host_from_path(path)
       
+      @valid = true
       set_original_values!
       self
     end
@@ -117,13 +119,15 @@ class PassengerApplication < NSObject
   def apply(save_config = nil)
     unless @valid
       p "Not applying changes to invalid Rails application: #{@path}"
-      return
+      return false
     end
     
     p "Applying changes to Rails application: #{@path}"
     (@new_app ? start : restart) unless save_config == false
     # todo: check if it went ok before assumin so.
     @new_app = self.dirty = self.valid = false
+    
+    true
   end
   
   def start

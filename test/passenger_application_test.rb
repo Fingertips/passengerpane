@@ -64,7 +64,9 @@ describe "PassengerApplication, with a new application" do
   end
   
   it "should set a default host name if initialized with initWithPath" do
-    PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp").host.should == 'railsapp.local'
+    app = PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp")
+    app.host.should == 'railsapp.local'
+    app.should.be.valid
   end
   
   it "should be valid if a path is set as it will also set the host" do
