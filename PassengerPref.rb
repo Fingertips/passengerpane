@@ -155,7 +155,7 @@ class PrefPanePassenger < NSPreferencePane
     if @dirty_apps and !@applicationsController.content.empty?
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'This service has unsaved changes'
-      alert.informativeText = 'Would you like to apply your changes before closing the Network preferences pane?'
+      alert.informativeText = 'Would you like to apply your changes before closing the Passenger preferences pane?'
       alert.addButtonWithTitle 'Apply'
       alert.addButtonWithTitle 'Cancel'
       alert.addButtonWithTitle 'Don’t Apply'
@@ -196,7 +196,8 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def path_for_browser
-    @applicationsController.selectedObjects.first.nil? ? OSX.NSHomeDirectory : @applicationsController.selectedObjects.first.path
+    app = @applicationsController.selectedObjects.first
+    app.nil? ? OSX.NSHomeDirectory : app.path
   end
   
   MODRAILS_URL = 'http://www.modrails.com'

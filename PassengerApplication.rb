@@ -131,7 +131,7 @@ class PassengerApplication < NSObject
   end
   
   def start
-    p "Starting Rails application (restarting Apache gracefully): #{@path}"
+    p "Starting Rails application: #{@path}"
     save_config!
   end
   
@@ -182,7 +182,7 @@ class PassengerApplication < NSObject
       'config_path' => config_path,
       'host' => @host.to_s,
       'path' => @path.to_s,
-      'environment' => @environment == DEVELOPMENT ? 'development' : 'production',
+      'environment' => (@environment == DEVELOPMENT ? 'development' : 'production'),
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
       'base_uri' => @base_uri,
       'vhostname' => @vhostname,
