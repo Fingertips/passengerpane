@@ -36,7 +36,7 @@ class ConfigInstaller
   
   CONF = "/private/etc/apache2/httpd.conf"
   def verify_httpd_conf
-    unless File.read(CONF).include? 'Added by the Passenger preferences pane'
+    unless File.read(CONF).include? 'Include /private/etc/apache2/passenger_pane_vhosts/*.conf'
       OSX::NSLog("Will try to append passenger pane vhosts conf to: #{CONF}")
       File.open(CONF, 'a') do |f|
         f << %{
