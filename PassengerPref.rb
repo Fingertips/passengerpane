@@ -15,9 +15,7 @@ class PrefPanePassenger < NSPreferencePane
   include SharedPassengerBehaviour
   
   ib_outlet :installPassengerWarning
-  
   ib_outlet :authorizationView
-  
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   
@@ -25,25 +23,11 @@ class PrefPanePassenger < NSPreferencePane
   
   def mainViewDidLoad
     self.class.sharedInstance = self
-    
     @authorized = @dropping_directories = @dirty_apps = false
     
     showPassengerWarning unless passenger_installed?
-    
-    @authorizationView.string = OSX::KAuthorizationRightExecute
-    @authorizationView.delegate = self
-    @authorizationView.updateStatus self
-    @authorizationView.autoupdate = true
-    
-    @applications = [].to_ns
-    @applicationsTableView.dataSource = self
-    @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
-    @applicationsTableView.setDraggingSourceOperationMask_forLocal(OSX::NSDragOperationGeneric, false)
-    
-    unless (existing_apps = PassengerApplication.existingApplications).empty?
-      @applicationsController.addObjects existing_apps
-      @applicationsController.selectedObjects = [existing_apps.last]
-    end
+    setup_authorization_view!
+    setup_applications!
   end
   
   def applicationMarkedDirty(app)
@@ -74,16 +58,16 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
+  def rbSetValue_forKey(value, key)
+    super
+    browse if !@dropping_directories and key == 'applications' and !value.empty? and value.last.new_app?
+  end
+  
   def showPassengerHelp(sender)
     OSX::HelpHelper.openHelpPage File.expand_path('../English.lproj/PassengerPaneHelp/PassengerPaneHelp.html', __FILE__)
   end
   
   # Select application directory panel
-  
-  def rbSetValue_forKey(value, key)
-    super
-    browse if !@dropping_directories and key == 'applications' and !value.empty? and value.last.new_app?
-  end
   
   def browse(sender = nil)
     panel = NSOpenPanel.openPanel
@@ -190,6 +174,25 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   private
+  
+  def setup_authorization_view!
+    @authorizationView.string = OSX::KAuthorizationRightExecute
+    @authorizationView.delegate = self
+    @authorizationView.updateStatus self
+    @authorizationView.autoupdate = true
+  end
+  
+  def setup_applications!
+    @applications = [].to_ns
+    @applicationsTableView.dataSource = self
+    @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
+    @applicationsTableView.setDraggingSourceOperationMask_forLocal(OSX::NSDragOperationGeneric, false)
+    
+    unless (existing_apps = PassengerApplication.existingApplications).empty?
+      @applicationsController.addObjects existing_apps
+      @applicationsController.selectedObjects = [existing_apps.last]
+    end
+  end
   
   def passenger_installed?
     `/usr/sbin/httpd -t -D DUMP_MODULES 2>&1`.include? 'passenger_module'
