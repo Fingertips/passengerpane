@@ -74,7 +74,7 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.removeObjects apps
   end
   
-  def showInstallPassengerHelp(sender)
+  def showPassengerHelp(sender)
     OSX::HelpHelper.openHelpPage File.expand_path('../English.lproj/PassengerPaneHelp/PassengerPaneHelp.html', __FILE__)
   end
   
