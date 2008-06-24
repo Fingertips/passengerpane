@@ -11,6 +11,7 @@
 		5186C3170E090B59008D8E1F /* HelpHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5186C3150E090B59008D8E1F /* HelpHelper.h */; };
 		5186C3180E090B59008D8E1F /* HelpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5186C3160E090B59008D8E1F /* HelpHelper.m */; };
 		5186C31F0E090C9C008D8E1F /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5186C31E0E090C9C008D8E1F /* Carbon.framework */; };
+		5189C6E70E111C3300B83EA5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 5189C6E60E111C3300B83EA5 /* LICENSE */; };
 		518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C7F550E06745E003A3ED0 /* Security.framework */; };
 		518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 518C7F720E06A668003A3ED0 /* Security.bridgesupport */; };
 		518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F740E06B665003A3ED0 /* SecurityHelper.h */; };
@@ -42,6 +43,7 @@
 		5186C3150E090B59008D8E1F /* HelpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpHelper.h; sourceTree = "<group>"; };
 		5186C3160E090B59008D8E1F /* HelpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpHelper.m; sourceTree = "<group>"; };
 		5186C31E0E090C9C008D8E1F /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+		5189C6E60E111C3300B83EA5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		518C7F550E06745E003A3ED0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		518C7F720E06A668003A3ED0 /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
 		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityHelper.h; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */,
 				F506C03D013D9D7901CA16C8 /* PassengerPref.m */,
+				5189C6E60E111C3300B83EA5 /* LICENSE */,
 				516B1B6D0DD3D344009ADB8E /* config_installer.rb */,
 			);
 			name = Classes;
@@ -238,6 +241,7 @@
 				76A8DCDF0E068B7000B133F1 /* icon.png in Resources */,
 				518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */,
 				51D16FE30E07DFA000A46A7D /* PassengerPaneHelp in Resources */,
+				5189C6E70E111C3300B83EA5 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
