@@ -41,7 +41,7 @@ class ConfigInstaller
       File.open(CONF, 'a') do |f|
         f << %{
 
-# Added by the Passenger preferences pane
+# Added by the Passenger preference pane
 # Make sure to include the Passenger configuration (the LoadModule,
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>

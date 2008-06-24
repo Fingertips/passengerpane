@@ -57,7 +57,7 @@ describe "ConfigInstaller" do
     File.expects(:open).with(conf, 'a').yields(file_mock)
     file_mock.expects(:<<).with(%{
 
-# Added by the Passenger preferences pane
+# Added by the Passenger preference pane
 # Make sure to include the Passenger configuration (the LoadModule,
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
@@ -73,7 +73,7 @@ describe "ConfigInstaller" do
     File.stubs(:read).with(conf).returns(%{
 Include /private/etc/apache2/other/*.conf
 
-# Added by the Passenger preferences pane
+# Added by the Passenger preference pane
 # Make sure to include the Passenger configuration (the LoadModule,
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
@@ -93,7 +93,7 @@ Include /private/etc/apache2/other/*.conf
     File.expects(:open).with(conf, 'a').yields(file_mock)
     file_mock.expects(:<<).with(%{
 
-# Added by the Passenger preferences pane
+# Added by the Passenger preference pane
 # Make sure to include the Passenger configuration (the LoadModule,
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
