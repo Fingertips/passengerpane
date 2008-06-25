@@ -5,9 +5,8 @@ task :run do
   sh "open build/Release/Passenger.prefPane"
 end
 
-desc 'This is the normal way to run the tests. The :test task will run all tests at the same time and fail because of recursive kvc stuff.'
+desc 'This is the normal way to run the tests. The :test_task will run all tests at the same time and fail because of recursive kvc stuff.'
 task :test_normal do
-  ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] = 'false'
   Dir.glob("test/*_test.rb").each do |test|
     sh "ruby #{test}"
   end
@@ -38,7 +37,13 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/*_test.rb']
   t.verbose = true
 end
-  
+
+desc 'This test task will run all tests at the same time and fail because of recursive kvc stuff.'
+task :test_together do
+  ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] = 'true'
+  Rake::Task['test'].invoke
+end
+
 desc "Generate Security.framework BridgeSupport file"
 task :bridgesupport do
   #sh "gen_bridge_metadata -f Security -e Security.BridgeSupport-exceptions.xml -o Security.bridgesupport"

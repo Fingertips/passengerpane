@@ -1,7 +1,7 @@
 require File.expand_path('../test_helper', __FILE__)
 require 'PassengerApplication'
 
-unless ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'false'
+if ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'true'
   require 'PassengerPref'
 else
   class PrefPanePassenger
@@ -49,9 +49,15 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
   end
   
-  it "should set the default host if a path is entered (probably via browse)" do
-    passenger_app.setValue_forKey('/Users/het-manfred/rails code/blog', 'path')
-    assigns(:host).should == 'blog.local'
+  it "should set the default host if a path is entered (probably via browse) and replace underscores with hyphens" do
+    passenger_app.setValue_forKey('/Users/het-manfred/rails code/my_supercool_blog', 'path')
+    assigns(:host).should == 'my-supercool-blog.local'
+  end
+  
+  it "should set a default host if initialized with initWithPath" do
+    app = PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp")
+    app.host.should == 'railsapp.local'
+    app.should.be.valid
   end
   
   it "should start the application for the first time" do
@@ -63,12 +69,6 @@ describe "PassengerApplication, with a new application" do
   it "should start the application by gracefully restarting apache" do
     passenger_app.expects(:save_config!).times(1)
     passenger_app.start
-  end
-  
-  it "should set a default host name if initialized with initWithPath" do
-    app = PassengerApplication.alloc.initWithPath("/some/path/to/RailsApp")
-    app.host.should == 'railsapp.local'
-    app.should.be.valid
   end
   
   it "should be valid if a path is set as it will also set the host" do
