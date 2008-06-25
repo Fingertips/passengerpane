@@ -187,6 +187,6 @@ class PassengerApplication < NSObject
   end
   
   def set_default_host_from_path(path)
-    self.host = "#{File.basename(path).downcase}.local"
+    self.host = "#{File.basename(path).downcase.gsub('_','-')}.local"
   end
 end
