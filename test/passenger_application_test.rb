@@ -1,18 +1,19 @@
 require File.expand_path('../test_helper', __FILE__)
-require 'PassengerApplication'
+require File.expand_path('../../PassengerApplication', __FILE__)
+require File.expand_path('../../PassengerPref.rb', __FILE__)
 
-if ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'true'
-  require 'PassengerPref'
-else
-  class PrefPanePassenger
-    class << self
-      attr_accessor :sharedInstance
-    end
-  
-    def applicationMarkedDirty(app)
-    end
-  end
-end
+# if ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'true'
+#   require 'PassengerPref'
+# else
+#   class PrefPanePassenger
+#     class << self
+#       attr_accessor :sharedInstance
+#     end
+#   
+#     def applicationMarkedDirty(app)
+#     end
+#   end
+# end
 PrefPanePassenger.sharedInstance = PrefPanePassenger.new
 
 class Hash
