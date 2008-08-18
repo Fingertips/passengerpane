@@ -1,0 +1,60 @@
+== PassengerPane
+
+A Mac OS X system preference pane which aids in quickly setting up Rails applications with Phusion Passenger.
+
+Features include:
+* Drag and drop support
+* Managing hostnames without cluttering /etc/hosts
+
+== Requirements
+
+=== PassengerPane
+Obviously required. Version 1.0 http://www.fngtps.com/files/2/2008/06/PassengerPrefPane-1.0.zip
+
+=== Phusion Passenger
+Also a no brainer. You'll need at least version 2.0.1.
+http://rubyforge.org/frs/?group_id=5873&release_id=23286
+
+=== RubyCocoa
+
+PassengerPane needs at least RubyCocoa 0.13.2, which can be acquired in the following ways:
+* Included on Mac OS X since version 10.5.2
+* Binary installer or source http://sourceforge.net/project/showfiles.php?group_id=44114&package_id=36578
+
+Note that if you wish to use a custom Ruby, not the default Apple Ruby, you will have to install RubyCocoa from source as well.
+See http://rubycocoa.sourceforge.net/GettingStarted for more info on this topic.
+
+=== Apache 2
+
+PassengerPane is designed to work with the default Apache 2 installation supplied by Apple on Mac OS X 10.5.
+There are reports of getting it to work with other installations, but this is not a planned feature as of yet.
+
+== Support
+
+Before creating a bug report, please check that you are using a RubyCocoa
+for your Ruby installation and have met all other requirements mentioned above.
+
+If the problem persist, or you have a feature request or better yet a patch, you can file a ticket at:
+http://fingertips.lighthouseapp.com/projects/13022
+
+== License
+
+Copyright (c) 2008 Fingertips, http://www.fngtps.com, Eloy Duran <eloy@fngtps.com>, Thijs van der Vossen <thijs@fngtps.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
