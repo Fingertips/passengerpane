@@ -2,18 +2,6 @@ require File.expand_path('../test_helper', __FILE__)
 require File.expand_path('../../PassengerApplication', __FILE__)
 require File.expand_path('../../PassengerPref.rb', __FILE__)
 
-# if ENV['TRY_TO_RUN_ALL_TESTS_TOGETHER'] == 'true'
-#   require 'PassengerPref'
-# else
-#   class PrefPanePassenger
-#     class << self
-#       attr_accessor :sharedInstance
-#     end
-#   
-#     def applicationMarkedDirty(app)
-#     end
-#   end
-# end
 PrefPanePassenger.sharedInstance = PrefPanePassenger.new
 
 class Hash
@@ -102,6 +90,9 @@ describe "PassengerApplication, in general" do
     @vhost = File.expand_path('../fixtures/blog.vhost.conf', __FILE__)
     @instance_to_be_tested = PassengerApplication.alloc.initWithFile(@vhost)
     
+    @tmp_dir = File.join(passenger_app.path, 'tmp')
+    File.stubs(:exist?).with(@tmp_dir).returns(true)
+    
     Kernel.stubs(:system)
   end
   
@@ -181,6 +172,13 @@ describe "PassengerApplication, in general" do
     passenger_app.apply
     assigns(:valid).should.be false
     assigns(:dirty).should.be true
+  end
+  
+  it "should create a tmp directory in the source root of the application before restarting if none exists" do
+    File.stubs(:exist?).with(@tmp_dir).returns(false)
+    
+    FileUtils.expects(:mkdir).with(@tmp_dir)
+    passenger_app.restart
   end
   
   it "should restart the application for an existing application" do

@@ -1,6 +1,7 @@
 require 'osx/cocoa'
 include OSX
 
+require 'fileutils'
 require 'yaml'
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 
@@ -136,7 +137,10 @@ class PassengerApplication < NSObject
     p "Restarting Rails application: #{@path}"
     execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml) unless @host == @original_values['host']
     save_config! if @dirty
-    Kernel.system("/usr/bin/touch '#{File.join(@path, 'tmp', 'restart.txt')}'")
+    
+    tmp_dir = File.join(@path, 'tmp')
+    FileUtils.mkdir(tmp_dir) unless File.exist?(tmp_dir)
+    Kernel.system("/usr/bin/touch '#{File.join(tmp_dir, 'restart.txt')}'")
   end
   
   def save_config!
