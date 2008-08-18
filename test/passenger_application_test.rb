@@ -114,6 +114,7 @@ describe "PassengerApplication, in general" do
   
   it "should parse the correct host & path from a vhost file" do
     passenger_app.host.should == "het-manfreds-blog.local"
+    passenger_app.aliases.should == "manfred-s-blog.local my-blog.local"
     passenger_app.path.should == "/Users/het-manfred/rails code/blog"
     passenger_app.environment.should == PassengerApplication::DEVELOPMENT
     passenger_app.allow_mod_rewrite.should.be false
@@ -121,6 +122,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/wiki.vhost.conf', __FILE__))
     passenger_app.host.should == "het-manfreds-wiki.local"
+    passenger_app.aliases.should == ""
     passenger_app.path.should == "/Users/het-manfred/rails code/wiki"
     passenger_app.environment.should == PassengerApplication::PRODUCTION
     passenger_app.allow_mod_rewrite.should.be true
@@ -151,6 +153,10 @@ describe "PassengerApplication, in general" do
   it "should mark the application as dirty if a value has changed" do
     assigns(:dirty).should.be false
     passenger_app.setValue_forKey('het-manfreds-blog.local', 'host')
+    assigns(:dirty).should.be true
+    
+    assigns(:dirty, false)
+    passenger_app.setValue_forKey('alias.local', 'aliases')
     assigns(:dirty).should.be true
   end
   
@@ -229,6 +235,7 @@ describe "PassengerApplication, in general" do
   
   it "should return it's attributes as a hash without NS classes" do
     assigns(:host, 'app.local'.to_ns)
+    assigns(:aliases, 'alias1.local alias2.local'.to_ns)
     assigns(:user_defined_data, "<directory \"/some/path\">\n  foo bar\n</directory>")
     assigns(:allow_mod_rewrite, false.to_ns)
     assigns(:vhostname, 'het-manfreds-wiki.local:443')
@@ -236,6 +243,7 @@ describe "PassengerApplication, in general" do
     passenger_app.to_hash.should == {
       'config_path' => passenger_app.config_path,
       'host' => 'app.local',
+      'aliases' => 'alias1.local alias2.local',
       'path' => passenger_app.path,
       'environment' => 'development',
       'allow_mod_rewrite' => false,
@@ -279,6 +287,7 @@ describe "PassengerApplication, in general" do
   
   it "should remember all the original values for the case that the user wants to revert" do
     passenger_app.setValue_forKey('foo.local', 'host')
+    passenger_app.setValue_forKey('', 'aliases')
     passenger_app.setValue_forKey('/some/path', 'path')
     passenger_app.setValue_forKey('production', 'environment')
     passenger_app.setValue_forKey(true, 'allow_mod_rewrite')
@@ -288,6 +297,7 @@ describe "PassengerApplication, in general" do
     passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'foo.local',
       'path' => '/some/path',
+      'aliases' => '',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
     }
@@ -298,6 +308,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'het-manfreds-blog.local',
+      'aliases' => 'manfred-s-blog.local my-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
       'environment' => 'development',
       'allow_mod_rewrite' => false
@@ -306,6 +317,13 @@ describe "PassengerApplication, in general" do
   
   it "should first remove a config and then add it again if the host has changed so we don't leave stale files/hosts" do
     passenger_app.setValue_forKey('foo.local', 'host')
+    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
+    passenger_app.expects(:save_config!)
+    passenger_app.apply
+  end
+  
+  it "should first remove a config and then add it again if the aliases have changed so we don't leave stale files/hosts" do
+    passenger_app.setValue_forKey('alias.local', 'aliases')
     passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
@@ -337,6 +355,16 @@ describe "PassengerApplication, in general" do
     passenger_app.should.not.be.revertable
     
     assigns(:original_values)['user_defined_data'] = ''
+    passenger_app.reload!
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
+    
+    assigns(:original_values)['aliases'] = nil
+    passenger_app.reload!
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
+    
+    assigns(:original_values)['aliases'] = ''
     passenger_app.reload!
     passenger_app.should.not.be.dirty
     passenger_app.should.not.be.revertable

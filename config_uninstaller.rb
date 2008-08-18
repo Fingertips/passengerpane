@@ -19,9 +19,11 @@ class ConfigUninstaller
   end
   
   def remove_from_hosts(index)
-    host = @data[index]['host']
-    OSX::NSLog("Will remove host: #{host}")
-    system "/usr/bin/dscl localhost -delete /Local/Default/Hosts/#{host.bypass_safe_level_1}"
+    server_name = @data[index]['host']
+    [server_name, *@data[index]['aliases'].split(' ')].each do |host|
+      OSX::NSLog("Will remove host: #{host}")
+      system "/usr/bin/dscl localhost -delete /Local/Default/Hosts/#{host.bypass_safe_level_1}"
+    end
   end
   
   def remove_vhost_conf(index)

@@ -12,6 +12,7 @@ describe "ConfigInstaller" do
     app = PassengerApplication.alloc.init
     app.stubs(:config_path).returns(@vhost_file)
     app.host = 'het-manfreds-blog.local'
+    app.aliases = 'manfred-s-blog.local my-blog.local'
     app.path = '/User/het-manfred/rails code/blog'
     app.environment = PassengerApplication::PRODUCTION
     app.allow_mod_rewrite = true
@@ -28,6 +29,7 @@ describe "ConfigInstaller" do
     @installer.data.should == [{
       'config_path' => @vhost_file,
       'host' => 'het-manfreds-blog.local',
+      'aliases' => 'manfred-s-blog.local my-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'allow_mod_rewrite' => true,
@@ -38,7 +40,49 @@ describe "ConfigInstaller" do
   
   it "should be able to add a new entry to the hosts" do
     @installer.expects(:system).with("/usr/bin/dscl localhost -create /Local/Default/Hosts/het-manfreds-blog.local IPAddress 127.0.0.1")
+    @installer.expects(:system).with("/usr/bin/dscl localhost -create /Local/Default/Hosts/manfred-s-blog.local IPAddress 127.0.0.1")
+    @installer.expects(:system).with("/usr/bin/dscl localhost -create /Local/Default/Hosts/my-blog.local IPAddress 127.0.0.1")
     @installer.add_to_hosts(0)
+  end
+  
+  it "should only add the main ServerName host to the hosts if there are no aliases" do
+    @installer.data[0]['aliases'] = ''
+    @installer.expects(:system).with("/usr/bin/dscl localhost -create /Local/Default/Hosts/het-manfreds-blog.local IPAddress 127.0.0.1")
+    @installer.add_to_hosts(0)
+  end
+  
+  it "should write the correct vhost file" do
+    @installer.create_vhost_conf(0)
+    File.read(@vhost_file).should == %{
+<VirtualHost het-manfreds-wiki.local:443>
+  ServerName het-manfreds-blog.local
+  ServerAlias manfred-s-blog.local my-blog.local
+  DocumentRoot "/User/het-manfred/rails code/blog/public"
+  RailsEnv production
+  RailsAllowModRewrite on
+  <directory \"/User/het-manfred/rails code/blog/public\">
+    Order allow,deny
+    Allow from all
+  </directory>
+</VirtualHost>
+}.sub(/^\n/, '')
+  end
+  
+  it "should not write the ServerAlias line if there are no aliases" do
+    @installer.data[0]['aliases'] = ''
+    @installer.create_vhost_conf(0)
+    File.read(@vhost_file).should == %{
+<VirtualHost het-manfreds-wiki.local:443>
+  ServerName het-manfreds-blog.local
+  DocumentRoot "/User/het-manfred/rails code/blog/public"
+  RailsEnv production
+  RailsAllowModRewrite on
+  <directory \"/User/het-manfred/rails code/blog/public\">
+    Order allow,deny
+    Allow from all
+  </directory>
+</VirtualHost>
+}.sub(/^\n/, '')
   end
   
   it "should check if the vhost directory exists, if not add it" do

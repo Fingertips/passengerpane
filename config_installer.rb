@@ -21,9 +21,11 @@ class ConfigInstaller
   end
   
   def add_to_hosts(index)
-    host = @data[index]['host']
-    OSX::NSLog("Will add host: #{host}")
-    system "/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host.bypass_safe_level_1} IPAddress 127.0.0.1"
+    server_name = @data[index]['host']
+    [server_name, *@data[index]['aliases'].split(' ')].each do |host|
+      OSX::NSLog("Will add host: #{host}")
+      system "/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host.bypass_safe_level_1} IPAddress 127.0.0.1"
+    end
   end
   
   VHOSTS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
@@ -58,7 +60,7 @@ class ConfigInstaller
     vhost = %{
 <VirtualHost #{app['vhostname']}>
   ServerName #{app['host']}
-  DocumentRoot "#{public_dir}"
+#{ "  ServerAlias #{app['aliases']}\n" unless app['aliases'].empty? }  DocumentRoot "#{public_dir}"
   RailsEnv #{app['environment']}
   RailsAllowModRewrite #{app['allow_mod_rewrite'] ? 'on' : 'off'}
 #{ "#{app['user_defined_data']}\n" unless app['user_defined_data'].empty? }</VirtualHost>

@@ -41,7 +41,7 @@ class PassengerApplication < NSObject
     end
   end
   
-  kvc_accessor :host, :path, :dirty, :valid, :revertable, :environment, :allow_mod_rewrite
+  kvc_accessor :host, :path, :aliases, :dirty, :valid, :revertable, :environment, :allow_mod_rewrite
   attr_accessor :user_defined_data, :vhostname
   
   def init
@@ -51,7 +51,7 @@ class PassengerApplication < NSObject
       
       @new_app = true
       @dirty = @valid = @revertable = false
-      @host, @path, @user_defined_data = '', '', ''
+      @host, @path, @aliases, @user_defined_data = '', '', '', ''
       @vhostname = '*:80'
       
       set_original_values!
@@ -108,7 +108,9 @@ class PassengerApplication < NSObject
   
   def restart(sender = nil)
     p "Restarting Rails application: #{@path}"
-    execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml) unless @host == @original_values['host']
+    if @host != @original_values['host'] || @aliases != @original_values['aliases']
+      execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml)
+    end
     save_config! if @dirty
     
     tmp_dir = File.join(@path, 'tmp')
@@ -158,6 +160,7 @@ class PassengerApplication < NSObject
     {
       'config_path' => config_path,
       'host' => @host.to_s,
+      'aliases' => @aliases.to_s,
       'path' => @path.to_s,
       'environment' => (@environment == DEVELOPMENT ? 'development' : 'production'),
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
@@ -173,6 +176,9 @@ class PassengerApplication < NSObject
     
     data.gsub!(/\n\s*ServerName\s+(.+)/, '')
     self.host = $1
+    
+    data.gsub!(/\n\s*ServerAlias\s+(.+)/, '')
+    self.aliases = $1 || ''
     
     data.gsub!(/\n\s*DocumentRoot\s+"(.+)\/public"/, '')
     self.path = $1
@@ -192,8 +198,8 @@ class PassengerApplication < NSObject
   
   def values_changed_after_load?
     @original_values.any? do |key, value|
-      # user_defined_data can be empty in a new app
-      if key == 'user_defined_data' && (value.nil? || value.empty?)
+      # user_defined_data and aliases can be empty
+      if %{ user_defined_data aliases }.include?(key) && (value.nil? || value.empty?)
         false
       else
         send(key) != value
@@ -202,7 +208,14 @@ class PassengerApplication < NSObject
   end
   
   def set_original_values!
-    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite, 'user_defined_data' => @user_defined_data }
+    @original_values = {
+      'host' => @host,
+      'aliases' => @aliases,
+      'path' => @path,
+      'environment' => @environment,
+      'allow_mod_rewrite' => @allow_mod_rewrite,
+      'user_defined_data' => @user_defined_data
+    }
   end
   
   def set_default_host_from_path(path)
