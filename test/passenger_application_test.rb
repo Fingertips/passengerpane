@@ -126,6 +126,7 @@ describe "PassengerApplication, in general" do
     passenger_app.allow_mod_rewrite.should.be true
     passenger_app.vhostname.should == 'het-manfreds-wiki.local:443'
     passenger_app.user_defined_data.should == %{
+  BindAddress 192.168.0.123
   <Location "/">
       AuthType Basic
       AuthName "Development Preview"

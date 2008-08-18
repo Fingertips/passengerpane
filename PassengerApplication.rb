@@ -171,22 +171,22 @@ class PassengerApplication < NSObject
   def load_data_from_vhost_file(file = config_path)
     data = File.read(file).strip
     
-    data.gsub!(/\s*ServerName\s+(.+)\n/, '')
+    data.gsub!(/\n\s*ServerName\s+(.+)/, '')
     self.host = $1
     
-    data.gsub!(/\s*DocumentRoot\s+"(.+)\/public"\n/, '')
+    data.gsub!(/\n\s*DocumentRoot\s+"(.+)\/public"/, '')
     self.path = $1
     
-    data.gsub!(/\s*RailsEnv\s+(development|production)\n/, '')
+    data.gsub!(/\n\s*RailsEnv\s+(development|production)/, '')
     self.environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
     
-    data.gsub!(/\s*RailsAllowModRewrite\s+(off|on)\n/, '')
+    data.gsub!(/\n\s*RailsAllowModRewrite\s+(off|on)/, '')
     self.allow_mod_rewrite = ($1 == 'on')
     
     data.gsub!(/<VirtualHost\s(.+?)>/, '')
     self.vhostname = $1
     
-    data.gsub!(/\s*<\/VirtualHost>\n*/, '')
+    data.gsub!(/\s*<\/VirtualHost>\n*/, '').gsub!(/^\n*/, '')
     @user_defined_data = data
   end
   
