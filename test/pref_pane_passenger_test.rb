@@ -40,40 +40,19 @@ module PrefPanePassengerSpecsHelper
   end
 end
 
-describe "PrefPanePassenger, while loading" do
+describe "PrefPanePassenger, while initializing" do
   tests PrefPanePassenger
   
   def after_setup
-    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
-               :applicationsTableView => OSX::NSTableView.alloc.init,
-               :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField,
+    ib_outlets :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField,
                :authorizationView => OSX::SFAuthorizationView.alloc.init
     
-    pref_pane.stubs(:passenger_installed?).returns(false)
+    pref_pane.stubs(:paneWillBecomeActive)
   end
   
-  it "should initialize an empty array which will hold the list of applications" do
+  it "should register itself as the sharedInstance" do
     pref_pane.mainViewDidLoad
-    apps = assigns(:applications)
-    apps.should.be.instance_of OSX::NSCFArray
-    apps.should.be.empty
-  end
-  
-  it "should enable the 'install passenger' warning in the UI if the Passenger Apache module isn't loaded" do
-    installPassengerWarning.hidden = true
-    pref_pane.mainViewDidLoad
-    installPassengerWarning.hidden?.should.be false
-  end
-  
-  it "should add existing applications found in #{SharedPassengerBehaviour::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
-    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
-    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
-    blog_app, paste_app = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
-    PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
-    
-    pref_pane.mainViewDidLoad
-    applicationsController.content.should == [blog_app, paste_app]
-    applicationsController.selectedObjects.should == [paste_app]
+    PrefPanePassenger.sharedInstance.should.be.instance_of PrefPanePassenger
   end
   
   it "should configure the authorization view" do
@@ -83,8 +62,75 @@ describe "PrefPanePassenger, while loading" do
     assigns(:authorized).should.be false
   end
   
-  it "should register itself as the sharedInstance" do
-    PrefPanePassenger.sharedInstance.should.be.instance_of PrefPanePassenger
+  it "should initialize an empty array which will hold the list of applications" do
+    pref_pane.mainViewDidLoad
+    apps = assigns(:applications)
+    apps.should.be.instance_of OSX::NSCFArray
+    apps.should.be.empty
+  end
+  
+  it "should register itself for notifications for if the System Preferences.app will be activated" do
+    OSX::NSNotificationCenter.defaultCenter.expects(:objc_send).with(
+      :addObserver, pref_pane,
+         :selector, 'paneWillBecomeActive:',
+             :name, OSX::NSApplicationWillBecomeActiveNotification,
+           :object, nil
+    )
+    pref_pane.mainViewDidLoad
+  end
+end
+
+describe "PrefPanePassenger, when about to be (re)displayed" do
+  tests PrefPanePassenger
+  
+  def after_setup
+    ib_outlets :applicationsController => OSX::NSArrayController.alloc.init,
+               :applicationsTableView => OSX::NSTableView.alloc.init,
+               :installPassengerWarning => OSX::InstallPassengerWarning.alloc.initWithTextField
+    
+    pref_pane.stubs(:passenger_installed?).returns(false)
+  end
+  
+  it "should enable the 'install passenger' warning in the UI if the Passenger Apache module isn't loaded" do
+    installPassengerWarning.hidden = true
+    pref_pane.paneWillBecomeActive
+    
+    installPassengerWarning.hidden?.should.be false
+  end
+  
+  it "should disable the 'install passenger' warning in the UI if the Passenger Apache module is loaded" do
+    pref_pane.stubs(:passenger_installed?).returns(true)
+    installPassengerWarning.hidden = false
+    pref_pane.paneWillBecomeActive
+    
+    installPassengerWarning.hidden?.should.be true
+  end
+  
+  it "should add existing applications found in #{SharedPassengerBehaviour::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
+    blog_app, paste_app = add_applications!
+    pref_pane.paneWillBecomeActive
+    
+    applicationsController.content.should == [blog_app, paste_app]
+    applicationsController.selectedObjects.should == [paste_app]
+  end
+  
+  it "should reload loaded applications from disk" do
+    blog_app, paste_app = add_applications!
+    pref_pane.paneWillBecomeActive
+    
+    blog_app.expects(:reload!)
+    paste_app.expects(:reload!)
+    pref_pane.willSelect
+  end
+  
+  private
+  
+  def add_applications!
+    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
+    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
+    apps = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
+    PassengerApplication.stubs(:existingApplications).returns(apps)
+    apps
   end
 end
 
@@ -245,6 +291,12 @@ describe "PrefPanePassenger, when applying changes" do
   
   def after_setup
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
+    pref_pane.stubs(:authorize!).returns(true)
+  end
+  
+  it "should show the authorizationView if necessary" do
+    pref_pane.expects(:authorize!).returns(true)
+    pref_pane.apply
   end
   
   it "should send the apply message to all the dirty applications" do
@@ -261,10 +313,12 @@ describe "PrefPanePassenger, when applying changes" do
     pref_pane.apply
   end
   
-  it "should set @dirty_apps to false once all unsaved apps received the apply message" do
+  it "should set @dirty_apps and @revertable_apps to false once all unsaved apps received the apply message" do
     assigns(:dirty_apps, true)
+    assigns(:revertable_apps, true)
     pref_pane.apply
     pref_pane.dirty_apps.should.be false
+    pref_pane.revertable_apps.should.be false
   end
 end
 
@@ -277,24 +331,26 @@ describe "PrefPanePassenger, when reverting changes" do
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
   end
   
-  it "should send the revert message to all the dirty applications" do
+  it "should send the revert message to all revertable applications" do
     apps = stub_app_controller_with_number_of_apps(3)
     
-    apps.first.stubs(:dirty?).returns(false)
+    apps.first.stubs(:revertable?).returns(false)
     apps.first.expects(:revert).times(0)
     
     apps[1..2].each do |app|
-      app.stubs(:dirty?).returns(true)
+      app.stubs(:revertable?).returns(true)
       app.expects(:revert).times(1)
     end
     
     pref_pane.revert
   end
   
-  it "should set @dirty_apps to false once all unsaved apps received the revert message" do
+  it "should set @dirty_apps and @revertable_apps to false once all unsaved apps received the revert message" do
     assigns(:dirty_apps, true)
+    assigns(:revertable_apps, true)
     pref_pane.revert
     pref_pane.dirty_apps.should.be false
+    pref_pane.revertable_apps.should.be false
   end
 end
 
@@ -332,6 +388,8 @@ describe "PrefPanePassenger, when using the directory browse panel" do
     pref_pane.stubs(:mainView).returns(mainView)
     window = stub('Main Window')
     mainView.stubs(:window).returns(window)
+    
+    PrefPanePassenger.any_instance.stubs(:applicationMarkedDirty)
   end
   
   it "should display the path to the currently selected application" do
@@ -515,6 +573,26 @@ describe "PrefPanePassenger, in general" do
     pref_pane.mainViewDidLoad
   end
   
+  it "should change the authorized state if a authorization request succeeds" do
+    authorizationView.authorization.expects(:objc_send).with(
+      :permitWithRight, OSX::KAuthorizationRightExecute,
+      :flags, (OSX::KAuthorizationFlagPreAuthorize | OSX::KAuthorizationFlagExtendRights | OSX::KAuthorizationFlagInteractionAllowed)
+    ).returns(0)
+    
+    pref_pane.expects(:authorizationViewDidAuthorize).times(1)
+    pref_pane.send(:authorize!).should.be true
+  end
+  
+  it "should not change the authorized state if a authorization request fails" do
+    authorizationView.authorization.expects(:objc_send).with(
+      :permitWithRight, OSX::KAuthorizationRightExecute,
+      :flags, (OSX::KAuthorizationFlagPreAuthorize | OSX::KAuthorizationFlagExtendRights | OSX::KAuthorizationFlagInteractionAllowed)
+    ).returns(60007)
+    
+    pref_pane.expects(:authorizationViewDidAuthorize).times(0)
+    pref_pane.send(:authorize!).should.be false
+  end
+  
   it "should forward delegate messages from the authorization view to the security helper" do
     authorization = stub('Authorization Ref')
     authorizationView.authorization.stubs(:authorizationRef).returns(authorization)
@@ -531,7 +609,6 @@ describe "PrefPanePassenger, in general" do
     app = PassengerApplication.alloc.init
     set_apps_controller_content([app])
     
-    pref_pane.dirty_apps.should.be false
     app.setValue_forKey('foo.local', 'host')
     pref_pane.dirty_apps.should.be true
   end

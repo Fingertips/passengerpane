@@ -41,7 +41,7 @@ class PassengerApplication < NSObject
     end
   end
   
-  kvc_accessor :host, :path, :dirty, :valid, :environment, :allow_mod_rewrite
+  kvc_accessor :host, :path, :dirty, :valid, :revertable, :environment, :allow_mod_rewrite
   attr_accessor :user_defined_data, :vhostname
   
   def init
@@ -50,7 +50,7 @@ class PassengerApplication < NSObject
       @allow_mod_rewrite = false
       
       @new_app = true
-      @dirty = @valid = false
+      @dirty = @valid = @revertable = false
       @host, @path, @user_defined_data = '', '', ''
       @vhostname = '*:80'
       
@@ -63,27 +63,7 @@ class PassengerApplication < NSObject
     if init
       @new_app = false
       @valid = false
-      
-      data = File.read(file).strip
-      
-      data.gsub!(/\s*ServerName\s+(.+)\n/, '')
-      @host = $1
-      
-      data.gsub!(/\s*DocumentRoot\s+"(.+)\/public"\n/, '')
-      @path = $1
-      
-      data.gsub!(/\s*RailsEnv\s+(development|production)\n/, '')
-      @environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
-      
-      data.gsub!(/\s*RailsAllowModRewrite\s+(off|on)\n/, '')
-      @allow_mod_rewrite = ($1 == 'on')
-      
-      data.gsub!(/<VirtualHost\s(.+?)>/, '')
-      @vhostname = $1
-      
-      data.gsub!(/\s*<\/VirtualHost>\n*/, '')
-      @user_defined_data = data
-      
+      load_data_from_vhost_file(file)
       set_original_values!
       self
     end
@@ -102,17 +82,10 @@ class PassengerApplication < NSObject
     end
   end
   
-  def new_app?
-    @new_app
-  end
-  
-  def dirty?
-    @dirty
-  end
-  
-  def valid?
-    @valid
-  end
+  def new_app?; @new_app; end
+  def dirty?;   @dirty;   end
+  def valid?;   @valid;   end
+  def revertable?; @revertable; end
   
   def apply(save_config = nil)
     unless @valid
@@ -122,7 +95,7 @@ class PassengerApplication < NSObject
     
     p "Applying changes to Rails application: #{@path}"
     (@new_app ? start : restart) unless save_config == false
-    # todo: check if it went ok before assumin so.
+    # todo: check if it went ok before assuming so.
     @new_app = self.dirty = self.valid = false
     
     true
@@ -143,6 +116,21 @@ class PassengerApplication < NSObject
     Kernel.system("/usr/bin/touch '#{File.join(tmp_dir, 'restart.txt')}'")
   end
   
+  def revert(sender = nil)
+    @original_values.each do |key, value|
+      send "#{key}=", value
+    end
+    self.valid = self.dirty = self.revertable = false
+  end
+  
+  def reload!
+    return if new_app?
+    load_data_from_vhost_file
+    mark_dirty! if did_values_change_after_load?
+    set_original_values!
+    self.valid = true
+  end
+  
   def save_config!
     p "Saving configuration: #{config_path}"
     execute '/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml
@@ -154,6 +142,7 @@ class PassengerApplication < NSObject
   
   def rbSetValue_forKey(value, key)
     super
+    self.revertable = true
     mark_dirty!
     set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
@@ -177,17 +166,43 @@ class PassengerApplication < NSObject
     }
   end
   
-  def revert(sender = nil)
-    @original_values.each do |key, value|
-      send "#{key}=", value
-    end
-    self.valid = self.dirty = false
-  end
-  
   private
   
+  def load_data_from_vhost_file(file = config_path)
+    data = File.read(file).strip
+    
+    data.gsub!(/\s*ServerName\s+(.+)\n/, '')
+    self.host = $1
+    
+    data.gsub!(/\s*DocumentRoot\s+"(.+)\/public"\n/, '')
+    self.path = $1
+    
+    data.gsub!(/\s*RailsEnv\s+(development|production)\n/, '')
+    self.environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
+    
+    data.gsub!(/\s*RailsAllowModRewrite\s+(off|on)\n/, '')
+    self.allow_mod_rewrite = ($1 == 'on')
+    
+    data.gsub!(/<VirtualHost\s(.+?)>/, '')
+    self.vhostname = $1
+    
+    data.gsub!(/\s*<\/VirtualHost>\n*/, '')
+    @user_defined_data = data
+  end
+  
+  def did_values_change_after_load?
+    @original_values.any? do |key, value|
+      # user_defined_data can be empty in a new app
+      if key == 'user_defined_data' && (value.nil? || value.empty?)
+        false
+      else
+        send(key) != value
+      end
+    end
+  end
+  
   def set_original_values!
-    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite }
+    @original_values = { 'host' => @host, 'path' => @path, 'environment' => @environment, 'allow_mod_rewrite' => @allow_mod_rewrite, 'user_defined_data' => @user_defined_data }
   end
   
   def set_default_host_from_path(path)

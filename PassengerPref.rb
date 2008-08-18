@@ -19,32 +19,48 @@ class PrefPanePassenger < NSPreferencePane
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   
-  kvc_accessor :applications, :authorized, :dirty_apps
+  kvc_accessor :applications, :authorized, :dirty_apps, :revertable_apps
   
   def mainViewDidLoad
     self.class.sharedInstance = self
-    @authorized = @dropping_directories = @dirty_apps = false
-    
-    showPassengerWarning unless passenger_installed?
     setup_authorization_view!
-    setup_applications!
+    setup_applications_table_view!
+    
+    OSX::NSNotificationCenter.defaultCenter.objc_send(
+      :addObserver, self,
+         :selector, 'paneWillBecomeActive:',
+             :name, OSX::NSApplicationWillBecomeActiveNotification,
+           :object, nil
+    )
+  end
+  
+  def paneWillBecomeActive(notification = nil)
+    willSelect
+  end
+  
+  def willSelect
+    @dropping_directories = @dirty_apps = @revertable_apps = false
+    setup_passenger_warning!
+    @applicationsController.content.empty? ? load_appications! : reload_appications!
   end
   
   def applicationMarkedDirty(app)
+    self.revertable_apps = @applicationsController.content.any? { |app| app.revertable? }
     self.dirty_apps = true
   end
   
-  def apply_or_revert(action)
-    @applicationsController.content.each { |app| app.send(action) if app.dirty? }
-    self.dirty_apps = false
-  end
-  
   def apply(sender = nil)
-    apply_or_revert :apply
+    if authorize!
+      @applicationsController.content.each { |app| app.apply if app.dirty? }
+      self.dirty_apps = self.revertable_apps = false
+    else
+      p "Unable to #{action} because authorization failed."
+    end
   end
   
   def revert(sender = nil)
-    apply_or_revert :revert
+    @applicationsController.content.each { |app| app.revert if app.revertable? }
+    self.dirty_apps = self.revertable_apps = false
   end
   
   def restart(sender = nil)
@@ -175,23 +191,39 @@ class PrefPanePassenger < NSPreferencePane
   
   private
   
+  def authorize!
+    result = @authorizationView.authorization.objc_send(
+      :permitWithRight, OSX::KAuthorizationRightExecute,
+      :flags, (OSX::KAuthorizationFlagPreAuthorize | OSX::KAuthorizationFlagExtendRights | OSX::KAuthorizationFlagInteractionAllowed)
+    ) == 0
+    authorizationViewDidAuthorize if result
+    result
+  end
+  
   def setup_authorization_view!
+    @authorized = false
     @authorizationView.string = OSX::KAuthorizationRightExecute
     @authorizationView.delegate = self
     @authorizationView.updateStatus self
     @authorizationView.autoupdate = true
   end
   
-  def setup_applications!
+  def setup_applications_table_view!
     @applications = [].to_ns
     @applicationsTableView.dataSource = self
     @applicationsTableView.registerForDraggedTypes [OSX::NSFilenamesPboardType]
     @applicationsTableView.setDraggingSourceOperationMask_forLocal(OSX::NSDragOperationGeneric, false)
-    
+  end
+  
+  def load_appications!
     unless (existing_apps = PassengerApplication.existingApplications).empty?
       @applicationsController.addObjects existing_apps
       @applicationsController.selectedObjects = [existing_apps.last]
     end
+  end
+  
+  def reload_appications!
+    @applicationsController.content.each { |app| app.reload! }
   end
   
   def passenger_installed?
@@ -204,24 +236,31 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   MODRAILS_URL = 'http://www.modrails.com'
-  def showPassengerWarning
-    text_field = @installPassengerWarning.subviews.first
-    
-    link_str = OSX::NSMutableAttributedString.alloc.initWithString(MODRAILS_URL)
-    range = OSX::NSMakeRange(0, MODRAILS_URL.length)
-    link_str.addAttribute_value_range OSX::NSLinkAttributeName, MODRAILS_URL, range
-    link_str.addAttribute_value_range OSX::NSForegroundColorAttributeName, OSX::NSColor.blueColor, range
-    link_str.addAttribute_value_range OSX::NSUnderlineStyleAttributeName, OSX::NSSingleUnderlineStyle, range
-    
-    text_parts = text_field.stringValue.split(MODRAILS_URL)
-    
-    str = OSX::NSMutableAttributedString.alloc.initWithString(text_parts.first)
-    str.appendAttributedString link_str
-    str.appendAttributedString OSX::NSAttributedString.alloc.initWithString(text_parts.last)
-    str.addAttribute_value_range OSX::NSFontAttributeName, OSX::NSFont.systemFontOfSize(11), OSX::NSMakeRange(0, str.length)
-    
-    text_field.attributedStringValue = str
-    
-    @installPassengerWarning.hidden = false
+  def setup_passenger_warning!
+    if passenger_installed?
+      @installPassengerWarning.hidden = true
+    else
+      unless @setup_passenger_warning
+        text_field = @installPassengerWarning.subviews.first
+        
+        link_str = OSX::NSMutableAttributedString.alloc.initWithString(MODRAILS_URL)
+        range = OSX::NSMakeRange(0, MODRAILS_URL.length)
+        link_str.addAttribute_value_range OSX::NSLinkAttributeName, MODRAILS_URL, range
+        link_str.addAttribute_value_range OSX::NSForegroundColorAttributeName, OSX::NSColor.blueColor, range
+        link_str.addAttribute_value_range OSX::NSUnderlineStyleAttributeName, OSX::NSSingleUnderlineStyle, range
+        
+        text_parts = text_field.stringValue.split(MODRAILS_URL)
+        
+        str = OSX::NSMutableAttributedString.alloc.initWithString(text_parts.first)
+        str.appendAttributedString link_str
+        str.appendAttributedString OSX::NSAttributedString.alloc.initWithString(text_parts.last)
+        str.addAttribute_value_range OSX::NSFontAttributeName, OSX::NSFont.systemFontOfSize(11), OSX::NSMakeRange(0, str.length)
+        
+        text_field.attributedStringValue = str
+        @setup_passenger_warning = true
+      end
+      
+      @installPassengerWarning.hidden = false
+    end
   end
 end

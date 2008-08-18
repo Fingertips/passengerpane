@@ -2,8 +2,6 @@ require File.expand_path('../test_helper', __FILE__)
 require File.expand_path('../../PassengerApplication', __FILE__)
 require File.expand_path('../../PassengerPref.rb', __FILE__)
 
-PrefPanePassenger.sharedInstance = PrefPanePassenger.new
-
 class Hash
   def except(*keys)
     copy = dup
@@ -14,10 +12,13 @@ class Hash
   end
 end
 
+PrefPanePassenger.sharedInstance = PrefPanePassenger.new
+
 describe "PassengerApplication, with a new application" do
   tests PassengerApplication
   
   def after_setup
+    PrefPanePassenger.any_instance.stubs(:applicationMarkedDirty)
     passenger_app.stubs(:execute)
   end
   
@@ -81,6 +82,16 @@ describe "PassengerApplication, with a new application" do
     passenger_app.to_hash['user_defined_data'].should == string
     assigns(:user_defined_data).should == string
   end
+  
+  it "should not try to reload if it gets the reload message" do
+    passenger_app.expects(:load_data_from_vhost_file).times(0)
+    passenger_app.should.be.new_app
+    passenger_app.should.not.be.valid
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
+    
+    passenger_app.reload!
+  end
 end
 
 describe "PassengerApplication, in general" do
@@ -93,6 +104,7 @@ describe "PassengerApplication, in general" do
     @tmp_dir = File.join(passenger_app.path, 'tmp')
     File.stubs(:exist?).with(@tmp_dir).returns(true)
     
+    PrefPanePassenger.any_instance.stubs(:applicationMarkedDirty)
     Kernel.stubs(:system)
   end
   
@@ -257,9 +269,11 @@ describe "PassengerApplication, in general" do
     app1.should.not.be.new_app
     app1.should.not.be.valid
     app1.should.not.be.dirty
+    app1.should.not.be.revertable
     app2.should.not.be.new_app
     app2.should.not.be.valid
     app2.should.not.be.dirty
+    app2.should.not.be.revertable
   end
   
   it "should remember all the original values for the case that the user wants to revert" do
@@ -277,10 +291,10 @@ describe "PassengerApplication, in general" do
       'allow_mod_rewrite' => true,
     }
     
+    passenger_app.should.be.revertable
     passenger_app.revert
+    passenger_app.should.not.be.revertable
     
-    passenger_app.should.not.be.dirty
-    passenger_app.should.not.be.valid
     passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'het-manfreds-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
@@ -294,5 +308,36 @@ describe "PassengerApplication, in general" do
     passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
+  end
+  
+  it "should reload an application from disk and mark it dirty if values have changed, but don't make it revertable" do
+    data = File.read(@vhost).sub('development', 'production')
+    File.stubs(:read).with(@vhost).returns(data)
+    passenger_app.stubs(:config_path).returns(@vhost)
+    
+    passenger_app.reload!
+    passenger_app.environment.should.be PassengerApplication::PRODUCTION
+    passenger_app.should.be.dirty
+    passenger_app.should.not.be.revertable
+  end
+  
+  it "should reload an application from disk but don't mark it dirty if no values were changed" do
+    data = File.read(@vhost)
+    File.stubs(:read).with(@vhost).returns(data)
+    passenger_app.stubs(:config_path).returns(@vhost)
+    
+    passenger_app.reload!
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
+    
+    assigns(:original_values)['user_defined_data'] = nil
+    passenger_app.reload!
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
+    
+    assigns(:original_values)['user_defined_data'] = ''
+    passenger_app.reload!
+    passenger_app.should.not.be.dirty
+    passenger_app.should.not.be.revertable
   end
 end

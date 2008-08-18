@@ -19,7 +19,7 @@
     return self;
 }
 
-// Code from: http://kismac-ng.googlecode.com/svn/trunk/Subprojects/BIGeneric/BLAuthentication.m
+// Code from: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 -(BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments {
   char* args[30]; // can only handle 30 arguments to a given command
   OSStatus err = 0;
