@@ -126,7 +126,7 @@ class PassengerApplication < NSObject
   def reload!
     return if new_app?
     load_data_from_vhost_file
-    mark_dirty! if did_values_change_after_load?
+    mark_dirty! if values_changed_after_load?
     set_original_values!
     self.valid = true
   end
@@ -190,7 +190,7 @@ class PassengerApplication < NSObject
     @user_defined_data = data
   end
   
-  def did_values_change_after_load?
+  def values_changed_after_load?
     @original_values.any? do |key, value|
       # user_defined_data can be empty in a new app
       if key == 'user_defined_data' && (value.nil? || value.empty?)
