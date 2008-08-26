@@ -32,7 +32,7 @@ describe "ConfigUninstaller" do
   end
   
   it "should return the path to the vhost config" do
-    @uninstaller.config_path(0).should == "/private/etc/apache2/passenger_pane_vhosts/het-manfreds-blog.local.vhost.conf"
+    @uninstaller.config_path(0).should == "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/het-manfreds-blog.local.vhost.conf"
   end
   
   it "should remove the vhost config file" do
@@ -42,7 +42,7 @@ describe "ConfigUninstaller" do
   end
   
   it "should restart Apache" do
-    @uninstaller.expects(:system).with("/bin/launchctl stop org.apache.httpd")
+    @uninstaller.expects(:system).with(PassengerPaneConfig::APACHE_RESTART_COMMAND)
     @uninstaller.restart_apache!
   end
   

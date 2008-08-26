@@ -1,8 +1,6 @@
 module SharedPassengerBehaviour
   include OSX
   
-  PASSENGER_APPS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
-  
   def execute(command, *args)
     if OSX::SecurityHelper.sharedInstance.executeCommand_withArgs(command, args) == 0
       alert = OSX::NSAlert.alloc.init

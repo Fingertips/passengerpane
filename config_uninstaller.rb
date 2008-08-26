@@ -2,6 +2,7 @@
 
 require 'osx/cocoa'
 require 'yaml'
+require File.expand_path('../passenger_pane_config', __FILE__)
 
 class String
   def bypass_safe_level_1
@@ -32,11 +33,11 @@ class ConfigUninstaller
   end
   
   def config_path(index)
-    "/private/etc/apache2/passenger_pane_vhosts/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
+    "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
   end
   
   def restart_apache!
-    system "/bin/launchctl stop org.apache.httpd"
+    system PassengerPaneConfig::APACHE_RESTART_COMMAND
   end
   
   def uninstall!

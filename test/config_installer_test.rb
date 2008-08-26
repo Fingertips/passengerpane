@@ -86,19 +86,17 @@ describe "ConfigInstaller" do
   end
   
   it "should check if the vhost directory exists, if not add it" do
-    dir = "/private/etc/apache2/passenger_pane_vhosts"
-    File.expects(:exist?).with(dir).returns(false)
-    FileUtils.expects(:mkdir_p).with(dir)
+    File.expects(:exist?).with(PassengerPaneConfig::PASSENGER_APPS_DIR).returns(false)
+    FileUtils.expects(:mkdir_p).with(PassengerPaneConfig::PASSENGER_APPS_DIR)
     
     @installer.verify_vhost_conf
   end
   
   it "should check if our configuration to load the vhosts has been added to the apache conf yet" do
-    conf = "/private/etc/apache2/httpd.conf"
-    File.stubs(:read).with(conf).returns("Include /private/etc/apache2/other/*.conf")
+    File.stubs(:read).with(PassengerPaneConfig::HTTPD_CONF).returns("Include #{PassengerPaneConfig::APACHE_DIR}/other/*.conf")
     
     file_mock = mock("Apache conf")
-    File.expects(:open).with(conf, 'a').yields(file_mock)
+    File.expects(:open).with(PassengerPaneConfig::HTTPD_CONF, 'a').yields(file_mock)
     file_mock.expects(:<<).with(%{
 
 # Added by the Passenger preference pane
@@ -106,23 +104,22 @@ describe "ConfigInstaller" do
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
   NameVirtualHost *:80
-  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+  Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf
 </IfModule>})
 
     @installer.verify_httpd_conf
   end
   
   it "should not add the vhosts configuration to the apache conf if it's in there already" do
-    conf = "/private/etc/apache2/httpd.conf"
-    File.stubs(:read).with(conf).returns(%{
-Include /private/etc/apache2/other/*.conf
+    File.stubs(:read).with(PassengerPaneConfig::HTTPD_CONF).returns(%{
+Include #{PassengerPaneConfig::APACHE_DIR}/other/*.conf
 
 # Added by the Passenger preference pane
 # Make sure to include the Passenger configuration (the LoadModule,
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
   NameVirtualHost *:80
-  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+  Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf
 </IfModule>})
     
     File.expects(:open).times(0)
@@ -130,11 +127,10 @@ Include /private/etc/apache2/other/*.conf
   end
   
   it "should not check if our configuration to load the vhosts has been added to the apache conf yet" do
-    conf = "/private/etc/apache2/httpd.conf"
-    File.stubs(:read).with(conf).returns("Include /private/etc/apache2/other/*.conf")
+    File.stubs(:read).with(PassengerPaneConfig::HTTPD_CONF).returns("Include #{PassengerPaneConfig::APACHE_DIR}/other/*.conf")
     
     file_mock = mock("Apache conf")
-    File.expects(:open).with(conf, 'a').yields(file_mock)
+    File.expects(:open).with(PassengerPaneConfig::HTTPD_CONF, 'a').yields(file_mock)
     file_mock.expects(:<<).with(%{
 
 # Added by the Passenger preference pane
@@ -142,14 +138,14 @@ Include /private/etc/apache2/other/*.conf
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
   NameVirtualHost *:80
-  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+  Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf
 </IfModule>})
     
     @installer.verify_httpd_conf
   end
   
   it "should restart Apache" do
-    @installer.expects(:system).with("sudo /bin/launchctl stop org.apache.httpd")
+    @installer.expects(:system).with(PassengerPaneConfig::APACHE_RESTART_COMMAND)
     @installer.restart_apache!
   end
   

@@ -142,7 +142,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should return the path to the config file" do
-    passenger_app.config_path.should == File.join(SharedPassengerBehaviour::PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
+    passenger_app.config_path.should == File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
   end
   
   it "should be able to save the config file" do
@@ -255,7 +255,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should load existing applications" do
-    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
+    dir = PassengerPaneConfig::PASSENGER_APPS_DIR
     blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
     blog_app, paste_app = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
     

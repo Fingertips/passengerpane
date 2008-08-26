@@ -3,6 +3,7 @@
 require 'osx/cocoa'
 require 'yaml'
 require 'fileutils'
+require File.expand_path('../passenger_pane_config', __FILE__)
 
 class String
   def bypass_safe_level_1
@@ -28,19 +29,17 @@ class ConfigInstaller
     end
   end
   
-  VHOSTS_DIR = "/private/etc/apache2/passenger_pane_vhosts"
   def verify_vhost_conf
-    unless File.exist? VHOSTS_DIR
-      OSX::NSLog("Will create directory: #{VHOSTS_DIR}")
-      FileUtils.mkdir_p VHOSTS_DIR
+    unless File.exist? PassengerPaneConfig::PASSENGER_APPS_DIR
+      OSX::NSLog("Will create directory: #{PassengerPaneConfig::PASSENGER_APPS_DIR}")
+      FileUtils.mkdir_p PassengerPaneConfig::PASSENGER_APPS_DIR
     end
   end
   
-  CONF = "/private/etc/apache2/httpd.conf"
   def verify_httpd_conf
-    unless File.read(CONF).include? 'Include /private/etc/apache2/passenger_pane_vhosts/*.conf'
-      OSX::NSLog("Will try to append passenger pane vhosts conf to: #{CONF}")
-      File.open(CONF, 'a') do |f|
+    unless File.read(PassengerPaneConfig::HTTPD_CONF).include? "Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf"
+      OSX::NSLog("Will try to append passenger pane vhosts conf to: #{PassengerPaneConfig::HTTPD_CONF}")
+      File.open(PassengerPaneConfig::HTTPD_CONF, 'a') do |f|
         f << %{
 
 # Added by the Passenger preference pane
@@ -48,7 +47,7 @@ class ConfigInstaller
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
   NameVirtualHost *:80
-  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+  Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf
 </IfModule>}
       end
     end
@@ -71,7 +70,7 @@ class ConfigInstaller
   end
   
   def restart_apache!
-    system "sudo /bin/launchctl stop org.apache.httpd"
+    system PassengerPaneConfig::APACHE_RESTART_COMMAND
   end
   
   def install!

@@ -3,6 +3,7 @@ include OSX
 
 require 'fileutils'
 require 'yaml'
+require File.expand_path('../passenger_pane_config', __FILE__)
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 
 class PassengerApplication < NSObject
@@ -18,7 +19,7 @@ class PassengerApplication < NSObject
     include SharedPassengerBehaviour
     
     def existingApplications
-      Dir.glob(File.join(PASSENGER_APPS_DIR, '*.vhost.conf')).map do |app|
+      Dir.glob(File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, '*.vhost.conf')).map do |app|
         PassengerApplication.alloc.initWithFile(app)
       end
     end
@@ -139,7 +140,7 @@ class PassengerApplication < NSObject
   end
   
   def config_path
-    File.join(PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
+    File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
   end
   
   def rbSetValue_forKey(value, key)

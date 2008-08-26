@@ -106,7 +106,7 @@ describe "PrefPanePassenger, when about to be (re)displayed" do
     installPassengerWarning.hidden?.should.be true
   end
   
-  it "should add existing applications found in #{SharedPassengerBehaviour::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
+  it "should add existing applications found in #{PassengerPaneConfig::PASSENGER_APPS_DIR} to the array controller: applicationsController" do
     blog_app, paste_app = add_applications!
     pref_pane.paneWillBecomeActive
     
@@ -126,7 +126,7 @@ describe "PrefPanePassenger, when about to be (re)displayed" do
   private
   
   def add_applications!
-    dir = SharedPassengerBehaviour::PASSENGER_APPS_DIR
+    dir = PassengerPaneConfig::PASSENGER_APPS_DIR
     blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
     apps = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
     PassengerApplication.stubs(:existingApplications).returns(apps)

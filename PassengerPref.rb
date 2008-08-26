@@ -4,6 +4,7 @@ include OSX
 OSX.require_framework 'PreferencePanes'
 OSX.load_bridge_support_file File.expand_path('../Security.bridgesupport', __FILE__)
 
+require File.expand_path('../passenger_pane_config', __FILE__)
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
 
