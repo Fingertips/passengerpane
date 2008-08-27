@@ -1,5 +1,5 @@
 module PassengerPaneConfig
-  APACHE_RESTART_COMMAND = "sudo /opt/local/apache2/bin/apachectl restart"
+  APACHE_RESTART_COMMAND = "/opt/local/apache2/bin/apachectl restart"
   APACHE_DIR = "/opt/local/apache2"
   HTTPD_CONF = File.join(APACHE_DIR, 'conf', 'httpd.conf')
   PASSENGER_APPS_DIR = File.join(APACHE_DIR, 'conf', 'passenger_pane_vhosts')
