@@ -228,7 +228,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def passenger_installed?
-    `/usr/sbin/httpd -t -D DUMP_MODULES 2>&1`.include? 'passenger_module'
+    `#{PassengerPaneConfig::HTTPD_BIN} -t -D DUMP_MODULES 2>&1`.include? 'passenger_module'
   end
   
   def path_for_browser
