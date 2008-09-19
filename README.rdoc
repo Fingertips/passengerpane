@@ -9,7 +9,7 @@ Features include:
 == Requirements
 
 === PassengerPane
-Obviously required. Version 1.0 http://www.fngtps.com/files/2/2008/06/PassengerPrefPane-1.0.zip
+Obviously required. Version 1.1 http://superalloy.nl/misc_files/passenger_pane/PassengerPane-1.1.tgz
 
 === Phusion Passenger
 Also a no brainer. You'll need at least version 2.0.1.
@@ -27,15 +27,33 @@ See http://rubycocoa.sourceforge.net/GettingStarted for more info on this topic.
 === Apache 2
 
 PassengerPane is designed to work with the default Apache 2 installation supplied by Apple on Mac OS X 10.5.
-There are reports of getting it to work with other installations, but this is not a planned feature as of yet.
+
+Included with the archive you'll find a file called "passenger_pane_config.rb.ports",
+this file should be a drop in replacement to work with Apache 2 as installed by MacPorts.
+Replace Passenger.prefPane/Contents/Resources/passenger_pane_config.rb with this file or your own custom config.
 
 == Support
 
 Before creating a bug report, please check that you are using a RubyCocoa
-for your Ruby installation and have met all other requirements mentioned above.
+matching your Ruby installation and have met all other requirements mentioned above.
 
 If the problem persist, or you have a feature request or better yet a patch, you can file a ticket at:
 http://fingertips.lighthouseapp.com/projects/13022
+
+== Changelog
+
+=== v1.1
+
+* Honor custom environments that a user might have set.
+* Fixed problem with restarting Apache. After saving an application Apache should now automatically be restarted. Thanks to Ciarán Walsh.
+* Added support for ServerAlias and add those entries to the hosts db.
+* Reload the applications from disk when the preference pane is brought back to the front.
+  Any changes made to the vhosts from elsewhere will be reflected in the UI.
+* Moved all hardcoded paths into a config module. Added a config for Apache 2 as installed by MacPorts. Thanks to Ciarán Walsh.
+* The host table list was editable. Thanks to Ciarán Walsh.
+* Fixed bugs in parsing custom user defined data in vhosts.
+* Create a tmp dir before touching restart.txt if none exists.
+* Replace underscores with hyphens in hostnames. Thanks to Bryan Liles.
 
 == License
 
