@@ -2,3 +2,4 @@ build
 .DS_Store
 Passenger.xcodeproj/*.mode1v3
 Passenger.xcodeproj/*.pbxuser
+pkg

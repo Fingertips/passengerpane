@@ -5,6 +5,26 @@ task :run do
   sh "open build/Release/Passenger.prefPane"
 end
 
+task :clean do
+  sh 'rm -rf build/'
+  sh 'rm -rf pkg'
+end
+
+task :release => :clean do
+  require 'osx/cocoa'
+  version = OSX::NSDictionary.dictionaryWithContentsOfFile('Info.plist')['CFBundleVersion'].to_s
+  name = "PassengerPane-#{version}"
+  pkg_dir = "pkg/#{name}"
+  
+  sh "xcodebuild"
+  sh "mkdir -p #{pkg_dir}"
+  sh "cp -R build/Release/Passenger.prefPane #{pkg_dir}"
+  %w{ LICENSE README.rdoc passenger_pane_config.rb.ports }.each do |file|
+    sh "cp #{file} #{pkg_dir}"
+  end
+  sh "cd pkg/ && tar -czvf #{name}.tgz #{name}/"
+end
+
 require 'rake/testtask'
 Rake::TestTask.new do |t|
   t.libs << "test"
