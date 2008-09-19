@@ -137,6 +137,7 @@ class PassengerApplication < NSObject
   def save_config!
     p "Saving configuration: #{config_path}"
     execute '/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml
+    set_original_values!
   end
   
   def config_path
@@ -147,6 +148,7 @@ class PassengerApplication < NSObject
     super
     self.revertable = true
     mark_dirty!
+    @custom_environment = nil if key == 'environment'
     set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
   end
@@ -163,7 +165,7 @@ class PassengerApplication < NSObject
       'host' => @host.to_s,
       'aliases' => @aliases.to_s,
       'path' => @path.to_s,
-      'environment' => (@environment == DEVELOPMENT ? 'development' : 'production'),
+      'environment' => (@environment.nil? ? @custom_environment : (@environment == DEVELOPMENT ? 'development' : 'production')),
       'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
       'vhostname' => @vhostname,
       'user_defined_data' => @user_defined_data
@@ -184,8 +186,13 @@ class PassengerApplication < NSObject
     data.gsub!(/\n\s*DocumentRoot\s+"(.+)\/public"/, '')
     self.path = $1
     
-    data.gsub!(/\n\s*RailsEnv\s+(development|production)/, '')
-    self.environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
+    data.gsub!(/\n\s*RailsEnv\s+(\w+)/, '')
+    if %w{ development production }.include?($1)
+      self.environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
+    else
+      self.environment = nil
+      @custom_environment = $1
+    end
     
     data.gsub!(/\n\s*RailsAllowModRewrite\s+(off|on)/, '')
     self.allow_mod_rewrite = ($1 == 'on')
@@ -213,7 +220,7 @@ class PassengerApplication < NSObject
       'host' => @host,
       'aliases' => @aliases,
       'path' => @path,
-      'environment' => @environment,
+      'environment' => @custom_environment || @environment,
       'allow_mod_rewrite' => @allow_mod_rewrite,
       'user_defined_data' => @user_defined_data
     }

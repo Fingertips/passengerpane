@@ -370,3 +370,48 @@ describe "PassengerApplication, in general" do
     passenger_app.should.not.be.revertable
   end
 end
+
+describe "PassengerApplication, when dealing with custom environments" do
+  tests PassengerApplication
+  
+  def after_setup
+    @vhost = File.expand_path('../fixtures/staging.vhost.conf', __FILE__)
+    @instance_to_be_tested = PassengerApplication.alloc.initWithFile(@vhost)
+    
+    @tmp_dir = File.join(passenger_app.path, 'tmp')
+    File.stubs(:exist?).with(@tmp_dir).returns(true)
+    
+    passenger_app.stubs(:execute)
+    PrefPanePassenger.any_instance.stubs(:applicationMarkedDirty)
+    Kernel.stubs(:system)
+  end
+  
+  it "should set the environment variable that the UI is bound to to nil, so that there's no selection" do
+    passenger_app.environment.should.be nil
+  end
+  
+  it "should not leave any custom environment declaration in the user defined data" do
+    passenger_app.user_defined_data.should.not.include 'RailsEnv staging'    
+  end
+  
+  it "should have stored the custom environment name and added to the original_values" do
+    assigns(:custom_environment).should == 'staging'
+    assigns(:original_values)['environment'].should == 'staging'
+  end
+  
+  it "should return the custom environment in it's hash representation" do
+    passenger_app.to_hash['environment'].should == 'staging'
+  end
+  
+  it "should return the new environment setting if the user has selected one of production|development" do
+    passenger_app.setValue_forKey(PassengerApplication::PRODUCTION, 'environment')
+    passenger_app.to_hash['environment'].should == 'production'
+    assigns(:custom_environment).should.be nil
+  end
+  
+  it "should reset the original_values after saving an application where the user has switched from a custom env to production|development" do
+    passenger_app.setValue_forKey(PassengerApplication::PRODUCTION, 'environment')
+    passenger_app.apply
+    assigns(:original_values)['environment'].should == PassengerApplication::PRODUCTION
+  end
+end
