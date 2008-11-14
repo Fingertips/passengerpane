@@ -32,7 +32,7 @@ describe "ConfigUninstaller" do
   end
   
   it "should return the path to the vhost config" do
-    @uninstaller.config_path(0).should == "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/het-manfreds-blog.local.vhost.conf"
+    @uninstaller.config_path(0).should == "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/het-manfreds-blog.local.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}"
   end
   
   it "should remove the vhost config file" do

@@ -142,7 +142,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should return the path to the config file" do
-    passenger_app.config_path.should == File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "het-manfreds-blog.local.vhost.conf")
+    passenger_app.config_path.should == File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "het-manfreds-blog.local.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")
   end
   
   it "should be able to save the config file" do
@@ -256,10 +256,11 @@ describe "PassengerApplication, in general" do
   
   it "should load existing applications" do
     dir = PassengerPaneConfig::PASSENGER_APPS_DIR
-    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
+    ext = PassengerPaneConfig::PASSENGER_APPS_EXTENSION
+    blog, paste = ["#{dir}/blog.#{ext}", "#{dir}/paste.#{ext}"]
     blog_app, paste_app = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
     
-    Dir.stubs(:glob).with("#{dir}/*.vhost.conf").returns([blog, paste])
+    Dir.stubs(:glob).with("#{dir}/*.#{ext}").returns([blog, paste])
     PassengerApplication.any_instance.stubs(:initWithFile).with(blog).returns(blog_app)
     PassengerApplication.any_instance.stubs(:initWithFile).with(paste).returns(paste_app)
     

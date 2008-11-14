@@ -33,7 +33,7 @@ class ConfigUninstaller
   end
   
   def config_path(index)
-    "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/#{@data[index]['host'].bypass_safe_level_1}.vhost.conf"
+    "#{PassengerPaneConfig::PASSENGER_APPS_DIR}/#{@data[index]['host'].bypass_safe_level_1}.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}"
   end
   
   def restart_apache!

@@ -127,7 +127,8 @@ describe "PrefPanePassenger, when about to be (re)displayed" do
   
   def add_applications!
     dir = PassengerPaneConfig::PASSENGER_APPS_DIR
-    blog, paste = ["#{dir}/blog.vhost.conf", "#{dir}/paste.vhost.conf"]
+    ext = PassengerPaneConfig::PASSENGER_APPS_EXTENSION
+    blog, paste = ["#{dir}/blog.#{ext}", "#{dir}/paste.#{ext}"]
     apps = stub("PassengerApplication: blog"), stub("PassengerApplication: paste")
     PassengerApplication.stubs(:existingApplications).returns(apps)
     apps
