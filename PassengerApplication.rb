@@ -19,7 +19,7 @@ class PassengerApplication < NSObject
     include SharedPassengerBehaviour
     
     def existingApplications
-      Dir.glob(File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, '*.vhost.conf')).map do |app|
+      Dir.glob(File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "*.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")).map do |app|
         PassengerApplication.alloc.initWithFile(app)
       end
     end
@@ -141,7 +141,7 @@ class PassengerApplication < NSObject
   end
   
   def config_path
-    File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "#{@host}.vhost.conf")
+    File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "#{@host}.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")
   end
   
   def rbSetValue_forKey(value, key)

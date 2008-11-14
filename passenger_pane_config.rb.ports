@@ -4,4 +4,5 @@ module PassengerPaneConfig
   HTTPD_CONF = File.join(APACHE_DIR, 'conf', 'httpd.conf')
   APACHE_RESTART_COMMAND = "#{File.join(APACHE_DIR, "bin", "apachectl")} restart"
   PASSENGER_APPS_DIR = File.join(APACHE_DIR, 'conf', 'passenger_pane_vhosts')
+  PASSENGER_APPS_EXTENSION = ".vhost.conf"
 end
