@@ -8,6 +8,14 @@ require File.expand_path('../passenger_pane_config', __FILE__)
 require File.expand_path('../shared_passenger_behaviour', __FILE__)
 require File.expand_path('../PassengerApplication', __FILE__)
 
+if RUBY_VERSION == "1.8.7" && OSX::RUBYCOCOA_VERSION == "0.13.2"
+  class OSX::NSArray
+    def count
+      oc_count
+    end
+  end
+end
+
 class PrefPanePassenger < NSPreferencePane
   class << self
     attr_accessor :sharedInstance
