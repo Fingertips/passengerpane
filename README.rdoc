@@ -9,7 +9,7 @@ Features include:
 == Requirements
 
 === PassengerPane
-Obviously required. Version 1.1 http://superalloy.nl/misc_files/passenger_pane/PassengerPane-1.1.tgz
+Obviously required. Version 1.2 http://www.fngtps.com/files/2/2008/12/PassengerPane-1.2.tgz
 
 === Phusion Passenger
 Also a no brainer. You'll need at least version 2.0.1.
@@ -41,6 +41,13 @@ If the problem persist, or you have a feature request or better yet a patch, you
 http://fingertips.lighthouseapp.com/projects/13022
 
 == Changelog
+
+=== v1.2
+
+* Rack support. Thanks to Kematzy for the original suggestion/work.
+* Fixed "issue" people had with the default non-vhost based directory not working anymore. Thanks to "spike" for debugging this.
+* Made the vhost config file extension configurable as well. Patch by Felipe Mathies.
+* Backported RubyCocoa + Ruby 1.8.7 fix. Patch by Grant Hollingworth.
 
 === v1.1
 
