@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">352.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="230"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -260,7 +260,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="205507675">
 												<int key="NSCellFlags">68288064</int>
 												<int key="NSCellFlags2">272761856</int>
-												<string key="NSContents">To view the Rails application</string>
+												<string key="NSContents">To view the application</string>
 												<object class="NSFont" key="NSSupport" id="26">
 													<string key="NSName">LucidaGrande</string>
 													<double key="NSSize">1.100000e+01</double>
@@ -280,7 +280,7 @@
 											<object class="NSTextFieldCell" key="NSCell" id="28651055">
 												<int key="NSCellFlags">68288064</int>
 												<int key="NSCellFlags2">272761856</int>
-												<string key="NSContents">For the Rails application files</string>
+												<string key="NSContents">For the application files</string>
 												<reference key="NSSupport" ref="26"/>
 												<reference key="NSControlView" ref="631300605"/>
 												<reference key="NSBackgroundColor" ref="211713244"/>
@@ -802,7 +802,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<object class="NSTextFieldCell" key="NSCell" id="26323044">
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">4194304</int>
-								<string key="NSContents">Passenger makes it easy to deploy and run Ruby on Rails. Click the add button, or drag a Rails application folder into the list below.</string>
+								<string key="NSContents">Passenger makes it easy to deploy and run Ruby on Rails and Rack applications. Click the add button, or drag an application folder into the list below.</string>
 								<reference key="NSSupport" ref="829849519"/>
 								<reference key="NSControlView" ref="1040168125"/>
 								<reference key="NSBackgroundColor" ref="211713244"/>
@@ -2072,9 +2072,9 @@ dHRwOi8vd3d3Lm1vZHJhaWxzLmNvbSBmb3IgaW5zdGFsbGF0aW9uIGluc3RydWN0aW9ucy4</string>
 					</object>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{325, 473}, {668, 438}}</string>
+					<string>{{278, 521}, {668, 438}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{325, 473}, {668, 438}}</string>
+					<string>{{278, 521}, {668, 438}}</string>
 					<reference ref="9"/>
 					<string>{{-5, 388}, {668, 438}}</string>
 					<reference ref="9"/>
