@@ -12,6 +12,9 @@ class PassengerApplication < NSObject
   CONFIG_UNINSTALLER = File.expand_path('../config_uninstaller.rb', __FILE__)
   CONFIG_INSTALLER   = File.expand_path('../config_installer.rb', __FILE__)
   
+  RAILS = 'rails'
+  RACK = 'rack'
+  
   DEVELOPMENT = 0
   PRODUCTION = 1
   
@@ -81,6 +84,10 @@ class PassengerApplication < NSObject
       set_original_values!
       self
     end
+  end
+  
+  def application_type
+    @application_type ||= check_application_type
   end
   
   def new_app?; @new_app; end
@@ -161,6 +168,7 @@ class PassengerApplication < NSObject
   def to_hash
     @user_defined_data = "  <directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </directory>" if @new_app
     {
+      'app_type' => application_type,
       'config_path' => config_path,
       'host' => @host.to_s,
       'aliases' => @aliases.to_s,
@@ -173,6 +181,11 @@ class PassengerApplication < NSObject
   end
   
   private
+  
+  def check_application_type
+    env_file = File.join(@path, 'config', 'environment.rb')
+    (File.exist?(env_file) and File.read(env_file) =~ /Rails::Initializer/) ? RAILS : RACK
+  end
   
   def load_data_from_vhost_file(file = config_path)
     data = File.read(file).strip

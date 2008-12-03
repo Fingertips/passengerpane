@@ -94,10 +94,36 @@ describe "PassengerApplication, with a new application" do
   end
 end
 
+describe "PassengerApplication#application_type" do
+  before do
+    @vhost = File.expand_path('../fixtures/blog.vhost.conf', __FILE__)
+    @passenger_app = PassengerApplication.alloc.initWithFile(@vhost)
+  end
+  
+  it "should recognize it as a Rails application if there's a config/environment.rb file, which contains `Rails::Initializer'" do
+    File.stubs(:exist?).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns(true)
+    File.stubs(:read).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns("Rails::Initializer.run do |config|\nend")
+    @passenger_app.application_type.should == PassengerApplication::RAILS
+  end
+  
+  it "should recognize it as a Rack application if there's a config/environment.rb file, but doesn't contain the string `Rails::Initializer'" do
+    File.stubs(:exist?).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns(true)
+    File.stubs(:read).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns("Foo bar")
+    @passenger_app.application_type.should == PassengerApplication::RACK
+  end
+  
+  it "should recognize it as a Rack application if there's no config/environment.rb file" do
+    File.stubs(:exist?).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns(false)
+    @passenger_app.application_type.should == PassengerApplication::RACK
+  end
+end
+
 describe "PassengerApplication, in general" do
   tests PassengerApplication
   
   def after_setup
+    PassengerApplication.any_instance.stubs(:application_type).returns(PassengerApplication::RAILS)
+    
     @vhost = File.expand_path('../fixtures/blog.vhost.conf', __FILE__)
     @instance_to_be_tested = PassengerApplication.alloc.initWithFile(@vhost)
     
@@ -241,6 +267,7 @@ describe "PassengerApplication, in general" do
     assigns(:vhostname, 'het-manfreds-wiki.local:443')
     
     passenger_app.to_hash.should == {
+      'app_type' => 'rails',
       'config_path' => passenger_app.config_path,
       'host' => 'app.local',
       'aliases' => 'alias1.local alias2.local',
@@ -295,7 +322,7 @@ describe "PassengerApplication, in general" do
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
-    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
+    passenger_app.to_hash.except('app_type', 'config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'foo.local',
       'path' => '/some/path',
       'aliases' => '',
@@ -307,7 +334,7 @@ describe "PassengerApplication, in general" do
     passenger_app.revert
     passenger_app.should.not.be.revertable
     
-    passenger_app.to_hash.except('config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
+    passenger_app.to_hash.except('app_type', 'config_path', 'user_defined_data', 'new_app', 'vhostname').should == {
       'host' => 'het-manfreds-blog.local',
       'aliases' => 'manfred-s-blog.local my-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
@@ -376,6 +403,8 @@ describe "PassengerApplication, when dealing with custom environments" do
   tests PassengerApplication
   
   def after_setup
+    PassengerApplication.any_instance.stubs(:application_type).returns(PassengerApplication::RAILS)
+    
     @vhost = File.expand_path('../fixtures/staging.vhost.conf', __FILE__)
     @instance_to_be_tested = PassengerApplication.alloc.initWithFile(@vhost)
     
