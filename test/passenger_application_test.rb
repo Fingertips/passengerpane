@@ -163,6 +163,11 @@ describe "PassengerApplication, in general" do
   </Location>}.sub(/^\n/, '')
   end
   
+  it "should parse the correct environment from a Rack app vhost file" do
+    passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/franky.vhost.conf', __FILE__))
+    passenger_app.environment.should == PassengerApplication::PRODUCTION
+  end
+  
   it "should set @new_app to false" do
     assigns(:new_app).should.be false
   end

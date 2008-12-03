@@ -199,12 +199,12 @@ class PassengerApplication < NSObject
     data.gsub!(/\n\s*DocumentRoot\s+"(.+)\/public"/, '')
     self.path = $1
     
-    data.gsub!(/\n\s*RailsEnv\s+(\w+)/, '')
-    if %w{ development production }.include?($1)
-      self.environment = ($1 == 'development' ? DEVELOPMENT : PRODUCTION)
+    data.gsub!(/\n\s*(Rails|Rack)Env\s+(\w+)/, '')
+    if %w{ development production }.include?($2)
+      self.environment = ($2 == 'development' ? DEVELOPMENT : PRODUCTION)
     else
       self.environment = nil
-      @custom_environment = $1
+      @custom_environment = $2
     end
     
     data.gsub!(/\n\s*RailsAllowModRewrite\s+(off|on)/, '')
