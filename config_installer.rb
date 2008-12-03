@@ -59,14 +59,16 @@ class ConfigInstaller
   def create_vhost_conf(index)
     app = @data[index]
     public_dir = File.join(app['path'], 'public')
-    vhost = %{
-<VirtualHost #{app['vhostname']}>
-  ServerName #{app['host']}
-#{ "  ServerAlias #{app['aliases']}\n" unless app['aliases'].empty? }  DocumentRoot "#{public_dir}"
-  RailsEnv #{app['environment']}
-  RailsAllowModRewrite #{app['allow_mod_rewrite'] ? 'on' : 'off'}
-#{ "#{app['user_defined_data']}\n" unless app['user_defined_data'].empty? }</VirtualHost>
-}.sub(/^\n/, '')
+    vhost = [
+      "<VirtualHost #{app['vhostname']}>",
+      "  ServerName #{app['host']}",
+      ("  ServerAlias #{app['aliases']}" unless app['aliases'].empty?),
+      "  DocumentRoot \"#{public_dir}\"",
+      "  #{app['app_type'].capitalize}Env #{app['environment']}",
+      ("  RailsAllowModRewrite " << (app['allow_mod_rewrite'] ? 'on' : 'off') if app['app_type'] == 'rails'),
+      (app['user_defined_data'] unless app['user_defined_data'].empty?),
+      "</VirtualHost>"
+    ].compact.join("\n")
     
     OSX::NSLog("Will write vhost file: #{app['config_path']}\nData: #{vhost}")
     File.open(app['config_path'].bypass_safe_level_1, 'w') { |f| f << vhost }

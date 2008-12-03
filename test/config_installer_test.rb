@@ -9,16 +9,17 @@ describe "ConfigInstaller" do
     FileUtils.mkdir_p @tmp
     @vhost_file = File.join(@tmp, 'test.vhost.conf')
     
-    app = PassengerApplication.alloc.init
-    app.stubs(:config_path).returns(@vhost_file)
-    app.host = 'het-manfreds-blog.local'
-    app.aliases = 'manfred-s-blog.local my-blog.local'
-    app.path = '/User/het-manfred/rails code/blog'
-    app.environment = PassengerApplication::PRODUCTION
-    app.allow_mod_rewrite = true
-    app.vhostname = 'het-manfreds-wiki.local:443'
+    @app = PassengerApplication.alloc.init
+    @app.stubs(:application_type).returns(PassengerApplication::RAILS)
+    @app.stubs(:config_path).returns(@vhost_file)
+    @app.host = 'het-manfreds-blog.local'
+    @app.aliases = 'manfred-s-blog.local my-blog.local'
+    @app.path = '/User/het-manfred/rails code/blog'
+    @app.environment = PassengerApplication::PRODUCTION
+    @app.allow_mod_rewrite = true
+    @app.vhostname = 'het-manfreds-wiki.local:443'
     
-    @installer = ConfigInstaller.new([app.to_hash].to_yaml)
+    @installer = ConfigInstaller.new([@app.to_hash].to_yaml)
   end
   
   after do
@@ -27,6 +28,7 @@ describe "ConfigInstaller" do
   
   it "should initialize" do
     @installer.data.should == [{
+      'app_type' => PassengerApplication::RAILS,
       'config_path' => @vhost_file,
       'host' => 'het-manfreds-blog.local',
       'aliases' => 'manfred-s-blog.local my-blog.local',
@@ -51,7 +53,7 @@ describe "ConfigInstaller" do
     @installer.add_to_hosts(0)
   end
   
-  it "should write the correct vhost file" do
+  it "should write the correct vhost file for a Rails application" do
     @installer.create_vhost_conf(0)
     File.read(@vhost_file).should == %{
 <VirtualHost het-manfreds-wiki.local:443>
@@ -64,8 +66,25 @@ describe "ConfigInstaller" do
     Order allow,deny
     Allow from all
   </directory>
-</VirtualHost>
-}.sub(/^\n/, '')
+</VirtualHost>}.sub(/^\n/, '')
+  end
+  
+  it "should write the correct vhost file for a Rack application" do
+    @app.stubs(:application_type).returns(PassengerApplication::RACK)
+    @installer = ConfigInstaller.new([@app.to_hash].to_yaml)
+    
+    @installer.create_vhost_conf(0)
+    File.read(@vhost_file).should == %{
+<VirtualHost het-manfreds-wiki.local:443>
+  ServerName het-manfreds-blog.local
+  ServerAlias manfred-s-blog.local my-blog.local
+  DocumentRoot "/User/het-manfred/rails code/blog/public"
+  RackEnv production
+  <directory \"/User/het-manfred/rails code/blog/public\">
+    Order allow,deny
+    Allow from all
+  </directory>
+</VirtualHost>}.sub(/^\n/, '')
   end
   
   it "should not write the ServerAlias line if there are no aliases" do
@@ -81,8 +100,7 @@ describe "ConfigInstaller" do
     Order allow,deny
     Allow from all
   </directory>
-</VirtualHost>
-}.sub(/^\n/, '')
+</VirtualHost>}.sub(/^\n/, '')
   end
   
   it "should check if the vhost directory exists, if not add it" do
