@@ -47,6 +47,9 @@ class ConfigInstaller
 # PassengerRoot, and PassengerRuby directives) before this section.
 <IfModule passenger_module>
   NameVirtualHost *:80
+  <VirtualHost *:80>
+    ServerName _default_
+  </VirtualHost>
   Include #{PassengerPaneConfig::PASSENGER_APPS_DIR}/*.conf
 </IfModule>}
       end
