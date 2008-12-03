@@ -16,7 +16,6 @@ describe "ConfigInstaller" do
     @app.aliases = 'manfred-s-blog.local my-blog.local'
     @app.path = '/User/het-manfred/rails code/blog'
     @app.environment = PassengerApplication::PRODUCTION
-    @app.allow_mod_rewrite = true
     @app.vhostname = 'het-manfreds-wiki.local:443'
     
     @installer = ConfigInstaller.new([@app.to_hash].to_yaml)
@@ -34,7 +33,6 @@ describe "ConfigInstaller" do
       'aliases' => 'manfred-s-blog.local my-blog.local',
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
-      'allow_mod_rewrite' => true,
       'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "  <directory \"/User/het-manfred/rails code/blog/public\">\n    Order allow,deny\n    Allow from all\n  </directory>"
     }]
@@ -61,7 +59,6 @@ describe "ConfigInstaller" do
   ServerAlias manfred-s-blog.local my-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
-  RailsAllowModRewrite on
   <directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all
@@ -95,7 +92,6 @@ describe "ConfigInstaller" do
   ServerName het-manfreds-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
-  RailsAllowModRewrite on
   <directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all

@@ -143,7 +143,6 @@ describe "PassengerApplication, in general" do
     passenger_app.aliases.should == "manfred-s-blog.local my-blog.local"
     passenger_app.path.should == "/Users/het-manfred/rails code/blog"
     passenger_app.environment.should == PassengerApplication::DEVELOPMENT
-    passenger_app.allow_mod_rewrite.should.be false
     passenger_app.vhostname.should == '*:80'
     
     passenger_app = PassengerApplication.alloc.initWithFile(File.expand_path('../fixtures/wiki.vhost.conf', __FILE__))
@@ -151,7 +150,6 @@ describe "PassengerApplication, in general" do
     passenger_app.aliases.should == ""
     passenger_app.path.should == "/Users/het-manfred/rails code/wiki"
     passenger_app.environment.should == PassengerApplication::PRODUCTION
-    passenger_app.allow_mod_rewrite.should.be true
     passenger_app.vhostname.should == 'het-manfreds-wiki.local:443'
     passenger_app.user_defined_data.should == %{
   BindAddress 192.168.0.123
@@ -268,7 +266,6 @@ describe "PassengerApplication, in general" do
     assigns(:host, 'app.local'.to_ns)
     assigns(:aliases, 'alias1.local alias2.local'.to_ns)
     assigns(:user_defined_data, "<directory \"/some/path\">\n  foo bar\n</directory>")
-    assigns(:allow_mod_rewrite, false.to_ns)
     assigns(:vhostname, 'het-manfreds-wiki.local:443')
     
     passenger_app.to_hash.should == {
@@ -278,7 +275,6 @@ describe "PassengerApplication, in general" do
       'aliases' => 'alias1.local alias2.local',
       'path' => passenger_app.path,
       'environment' => 'development',
-      'allow_mod_rewrite' => false,
       'vhostname' => 'het-manfreds-wiki.local:443',
       'user_defined_data' => "<directory \"/some/path\">\n  foo bar\n</directory>"
     }
@@ -323,7 +319,6 @@ describe "PassengerApplication, in general" do
     passenger_app.setValue_forKey('', 'aliases')
     passenger_app.setValue_forKey('/some/path', 'path')
     passenger_app.setValue_forKey('production', 'environment')
-    passenger_app.setValue_forKey(true, 'allow_mod_rewrite')
     
     passenger_app.should.be.dirty
     passenger_app.should.be.valid
@@ -331,8 +326,7 @@ describe "PassengerApplication, in general" do
       'host' => 'foo.local',
       'path' => '/some/path',
       'aliases' => '',
-      'environment' => 'production',
-      'allow_mod_rewrite' => true,
+      'environment' => 'production'
     }
     
     passenger_app.should.be.revertable
@@ -343,8 +337,7 @@ describe "PassengerApplication, in general" do
       'host' => 'het-manfreds-blog.local',
       'aliases' => 'manfred-s-blog.local my-blog.local',
       'path' => '/Users/het-manfred/rails code/blog',
-      'environment' => 'development',
-      'allow_mod_rewrite' => false
+      'environment' => 'development'
     }
   end
   

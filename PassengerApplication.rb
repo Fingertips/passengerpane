@@ -45,13 +45,12 @@ class PassengerApplication < NSObject
     end
   end
   
-  kvc_accessor :host, :path, :aliases, :dirty, :valid, :revertable, :environment, :allow_mod_rewrite
+  kvc_accessor :host, :path, :aliases, :dirty, :valid, :revertable, :environment
   attr_accessor :user_defined_data, :vhostname
   
   def init
     if super_init
       @environment = DEVELOPMENT
-      @allow_mod_rewrite = false
       
       @new_app = true
       @dirty = @valid = @revertable = false
@@ -174,7 +173,6 @@ class PassengerApplication < NSObject
       'aliases' => @aliases.to_s,
       'path' => @path.to_s,
       'environment' => (@environment.nil? ? @custom_environment : (@environment == DEVELOPMENT ? 'development' : 'production')),
-      'allow_mod_rewrite' => (@allow_mod_rewrite == true || @allow_mod_rewrite == 1),
       'vhostname' => @vhostname,
       'user_defined_data' => @user_defined_data
     }
@@ -207,9 +205,6 @@ class PassengerApplication < NSObject
       @custom_environment = $2
     end
     
-    data.gsub!(/\n\s*RailsAllowModRewrite\s+(off|on)/, '')
-    self.allow_mod_rewrite = ($1 == 'on')
-    
     data.gsub!(/<VirtualHost\s(.+?)>/, '')
     self.vhostname = $1
     
@@ -234,7 +229,6 @@ class PassengerApplication < NSObject
       'aliases' => @aliases,
       'path' => @path,
       'environment' => @custom_environment || @environment,
-      'allow_mod_rewrite' => @allow_mod_rewrite,
       'user_defined_data' => @user_defined_data
     }
   end
