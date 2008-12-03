@@ -48,6 +48,7 @@ http://fingertips.lighthouseapp.com/projects/13022
 * Fixed "issue" people had with the default non-vhost based directory not working anymore. Thanks to "spike" for debugging this.
 * Made the vhost config file extension configurable as well. Patch by Felipe Mathies.
 * Backported RubyCocoa + Ruby 1.8.7 fix. Patch by Grant Hollingworth.
+* Removed the "Allow mod rewrite rules" checkbox, we found it's not worth the UI real estate.
 
 === v1.1
 
