@@ -3,6 +3,8 @@ module SharedPassengerBehaviour
   
   def execute(command, *args)
     if OSX::SecurityHelper.sharedInstance.executeCommand_withArgs(command, args) == 0
+      p "The command that failed was: `#{command} #{args.map { |arg| arg.inspect }.join(' ')}'"
+      
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'Your changes couldn’t be saved'
       alert.informativeText = "See the Console log for details.\nYou can file a bug report at:\nhttp://fingertips.lighthouseapp.com/projects/13022"
