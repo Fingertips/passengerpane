@@ -1,1 +1,2 @@
 - Don't show 'No Selection' in the text fields.
+- Merge the Aliases text field into the Address field and add documentation about this to the help html file.
