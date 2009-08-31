@@ -1,0 +1,3556 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+  <depends_on path='/System/Library/Frameworks/CoreServices.framework'/>
+  <depends_on path='/System/Library/Frameworks/SystemConfiguration.framework'/>
+  <depends_on path='/System/Library/Frameworks/CoreFoundation.framework'/>
+  <struct name='NSAffineTransformStruct' type='{_NSAffineTransformStruct=&quot;m11&quot;f&quot;m12&quot;f&quot;m21&quot;f&quot;m22&quot;f&quot;tX&quot;f&quot;tY&quot;f}'/>
+  <struct name='NSDecimal' opaque='true' type='{_NSDecimal=&quot;_exponent&quot;b8&quot;_length&quot;b4&quot;_isNegative&quot;b1&quot;_isCompact&quot;b1&quot;_reserved&quot;b18&quot;_mantissa&quot;[8S]}'/>
+  <struct name='NSHashEnumerator' type='{_NSHashEnumerator=&quot;_pi&quot;I&quot;_si&quot;I&quot;_bs&quot;^v}'/>
+  <struct name='NSHashTableCallBacks' type='{_NSHashTableCallBacks=&quot;hash&quot;^?&quot;isEqual&quot;^?&quot;retain&quot;^?&quot;release&quot;^?&quot;describe&quot;^?}'/>
+  <struct name='NSMapEnumerator' type='{_NSMapEnumerator=&quot;_pi&quot;I&quot;_si&quot;I&quot;_bs&quot;^v}'/>
+  <struct name='NSMapTableKeyCallBacks' type='{_NSMapTableKeyCallBacks=&quot;hash&quot;^?&quot;isEqual&quot;^?&quot;retain&quot;^?&quot;release&quot;^?&quot;describe&quot;^?&quot;notAKeyMarker&quot;^v}'/>
+  <struct name='NSMapTableValueCallBacks' type='{_NSMapTableValueCallBacks=&quot;retain&quot;^?&quot;release&quot;^?&quot;describe&quot;^?}'/>
+  <struct name='NSPoint' type='{_NSPoint=&quot;x&quot;f&quot;y&quot;f}'/>
+  <struct name='NSRange' type='{_NSRange=&quot;location&quot;I&quot;length&quot;I}'/>
+  <struct name='NSRect' type='{_NSRect=&quot;origin&quot;{_NSPoint=&quot;x&quot;f&quot;y&quot;f}&quot;size&quot;{_NSSize=&quot;width&quot;f&quot;height&quot;f}}'/>
+  <struct name='NSSize' type='{_NSSize=&quot;width&quot;f&quot;height&quot;f}'/>
+  <struct name='NSSwappedDouble' type='{_NSSwappedDouble=&quot;v&quot;Q}'/>
+  <struct name='NSSwappedFloat' type='{_NSSwappedFloat=&quot;v&quot;L}'/>
+  <opaque name='NSZone' type='^{_NSZone=}'/>
+  <constant name='NSAMPMDesignation' type='@'/>
+  <constant name='NSAppleEventManagerWillProcessFirstEventNotification' type='@'/>
+  <constant name='NSAppleEventTimeOutDefault' type='d'/>
+  <constant name='NSAppleEventTimeOutNone' type='d'/>
+  <constant name='NSAppleScriptErrorAppName' type='@'/>
+  <constant name='NSAppleScriptErrorBriefMessage' type='@'/>
+  <constant name='NSAppleScriptErrorMessage' type='@'/>
+  <constant name='NSAppleScriptErrorNumber' type='@'/>
+  <constant name='NSAppleScriptErrorRange' type='@'/>
+  <constant name='NSArgumentDomain' type='@'/>
+  <constant name='NSAverageKeyValueOperator' type='@'/>
+  <constant name='NSBuddhistCalendar' type='@'/>
+  <constant name='NSBundleDidLoadNotification' type='@'/>
+  <constant name='NSCharacterConversionException' type='@'/>
+  <constant name='NSChineseCalendar' type='@'/>
+  <constant name='NSClassDescriptionNeededForClassNotification' type='@'/>
+  <constant name='NSCocoaErrorDomain' type='@'/>
+  <constant name='NSConnectionDidDieNotification' type='@'/>
+  <constant name='NSConnectionDidInitializeNotification' type='@'/>
+  <constant name='NSConnectionReplyMode' type='@'/>
+  <constant name='NSCountKeyValueOperator' type='@'/>
+  <constant name='NSCurrencySymbol' type='@'/>
+  <constant name='NSDateFormatString' type='@'/>
+  <constant name='NSDateTimeOrdering' type='@'/>
+  <constant name='NSDeallocateZombies' type='B'/>
+  <constant name='NSDebugEnabled' type='B'/>
+  <constant name='NSDecimalDigits' type='@'/>
+  <constant name='NSDecimalNumberDivideByZeroException' type='@'/>
+  <constant name='NSDecimalNumberExactnessException' type='@'/>
+  <constant name='NSDecimalNumberOverflowException' type='@'/>
+  <constant name='NSDecimalNumberUnderflowException' type='@'/>
+  <constant name='NSDecimalSeparator' type='@'/>
+  <constant name='NSDefaultRunLoopMode' type='@'/>
+  <constant name='NSDestinationInvalidException' type='@'/>
+  <constant name='NSDidBecomeSingleThreadedNotification' type='@'/>
+  <constant name='NSDistinctUnionOfArraysKeyValueOperator' type='@'/>
+  <constant name='NSDistinctUnionOfObjectsKeyValueOperator' type='@'/>
+  <constant name='NSDistinctUnionOfSetsKeyValueOperator' type='@'/>
+  <constant name='NSEarlierTimeDesignations' type='@'/>
+  <constant name='NSErrorFailingURLStringKey' type='@'/>
+  <constant name='NSFTPPropertyActiveTransferModeKey' type='@'/>
+  <constant name='NSFTPPropertyFTPProxy' type='@'/>
+  <constant name='NSFTPPropertyFileOffsetKey' type='@'/>
+  <constant name='NSFTPPropertyUserLoginKey' type='@'/>
+  <constant name='NSFTPPropertyUserPasswordKey' type='@'/>
+  <constant name='NSFailedAuthenticationException' type='@'/>
+  <constant name='NSFileAppendOnly' type='@'/>
+  <constant name='NSFileBusy' type='@'/>
+  <constant name='NSFileCreationDate' type='@'/>
+  <constant name='NSFileDeviceIdentifier' type='@'/>
+  <constant name='NSFileExtensionHidden' type='@'/>
+  <constant name='NSFileGroupOwnerAccountID' type='@'/>
+  <constant name='NSFileGroupOwnerAccountName' type='@'/>
+  <constant name='NSFileHFSCreatorCode' type='@'/>
+  <constant name='NSFileHFSTypeCode' type='@'/>
+  <constant name='NSFileHandleConnectionAcceptedNotification' type='@'/>
+  <constant name='NSFileHandleDataAvailableNotification' type='@'/>
+  <constant name='NSFileHandleNotificationDataItem' type='@'/>
+  <constant name='NSFileHandleNotificationFileHandleItem' type='@'/>
+  <constant name='NSFileHandleNotificationMonitorModes' type='@'/>
+  <constant name='NSFileHandleOperationException' type='@'/>
+  <constant name='NSFileHandleReadCompletionNotification' type='@'/>
+  <constant name='NSFileHandleReadToEndOfFileCompletionNotification' type='@'/>
+  <constant name='NSFileImmutable' type='@'/>
+  <constant name='NSFileModificationDate' type='@'/>
+  <constant name='NSFileOwnerAccountID' type='@'/>
+  <constant name='NSFileOwnerAccountName' type='@'/>
+  <constant name='NSFilePathErrorKey' type='@'/>
+  <constant name='NSFilePosixPermissions' type='@'/>
+  <constant name='NSFileReferenceCount' type='@'/>
+  <constant name='NSFileSize' type='@'/>
+  <constant name='NSFileSystemFileNumber' type='@'/>
+  <constant name='NSFileSystemFreeNodes' type='@'/>
+  <constant name='NSFileSystemFreeSize' type='@'/>
+  <constant name='NSFileSystemNodes' type='@'/>
+  <constant name='NSFileSystemNumber' type='@'/>
+  <constant name='NSFileSystemSize' type='@'/>
+  <constant name='NSFileType' type='@'/>
+  <constant name='NSFileTypeBlockSpecial' type='@'/>
+  <constant name='NSFileTypeCharacterSpecial' type='@'/>
+  <constant name='NSFileTypeDirectory' type='@'/>
+  <constant name='NSFileTypeRegular' type='@'/>
+  <constant name='NSFileTypeSocket' type='@'/>
+  <constant name='NSFileTypeSymbolicLink' type='@'/>
+  <constant name='NSFileTypeUnknown' type='@'/>
+  <constant name='NSFoundationVersionNumber' type='d'/>
+  <constant name='NSGenericException' type='@'/>
+  <constant name='NSGlobalDomain' type='@'/>
+  <constant name='NSGregorianCalendar' type='@'/>
+  <constant name='NSHTTPCookieComment' type='@'/>
+  <constant name='NSHTTPCookieCommentURL' type='@'/>
+  <constant name='NSHTTPCookieDiscard' type='@'/>
+  <constant name='NSHTTPCookieDomain' type='@'/>
+  <constant name='NSHTTPCookieExpires' type='@'/>
+  <constant name='NSHTTPCookieManagerAcceptPolicyChangedNotification' type='@'/>
+  <constant name='NSHTTPCookieManagerCookiesChangedNotification' type='@'/>
+  <constant name='NSHTTPCookieMaximumAge' type='@'/>
+  <constant name='NSHTTPCookieName' type='@'/>
+  <constant name='NSHTTPCookieOriginURL' type='@'/>
+  <constant name='NSHTTPCookiePath' type='@'/>
+  <constant name='NSHTTPCookiePort' type='@'/>
+  <constant name='NSHTTPCookieSecure' type='@'/>
+  <constant name='NSHTTPCookieValue' type='@'/>
+  <constant name='NSHTTPCookieVersion' type='@'/>
+  <constant name='NSHTTPPropertyErrorPageDataKey' type='@'/>
+  <constant name='NSHTTPPropertyHTTPProxy' type='@'/>
+  <constant name='NSHTTPPropertyRedirectionHeadersKey' type='@'/>
+  <constant name='NSHTTPPropertyServerHTTPVersionKey' type='@'/>
+  <constant name='NSHTTPPropertyStatusCodeKey' type='@'/>
+  <constant name='NSHTTPPropertyStatusReasonKey' type='@'/>
+  <constant name='NSHangOnUncaughtException' type='B'/>
+  <constant name='NSHebrewCalendar' type='@'/>
+  <constant name='NSHourNameDesignations' type='@'/>
+  <constant name='NSInconsistentArchiveException' type='@'/>
+  <constant name='NSIntHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSIntMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSIntMapValueCallBacks' type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+  <constant name='NSInternalInconsistencyException' type='@'/>
+  <constant name='NSInternationalCurrencyString' type='@'/>
+  <constant name='NSInvalidArchiveOperationException' type='@'/>
+  <constant name='NSInvalidArgumentException' type='@'/>
+  <constant name='NSInvalidReceivePortException' type='@'/>
+  <constant name='NSInvalidSendPortException' type='@'/>
+  <constant name='NSInvalidUnarchiveOperationException' type='@'/>
+  <constant name='NSIsNilTransformerName' type='@'/>
+  <constant name='NSIsNotNilTransformerName' type='@'/>
+  <constant name='NSIslamicCalendar' type='@'/>
+  <constant name='NSIslamicCivilCalendar' type='@'/>
+  <constant name='NSJapaneseCalendar' type='@'/>
+  <constant name='NSKeepAllocationStatistics' type='B'/>
+  <constant name='NSKeyValueChangeIndexesKey' type='@'/>
+  <constant name='NSKeyValueChangeKindKey' type='@'/>
+  <constant name='NSKeyValueChangeNewKey' type='@'/>
+  <constant name='NSKeyValueChangeOldKey' type='@'/>
+  <constant name='NSLaterTimeDesignations' type='@'/>
+  <constant name='NSLoadedClasses' type='@'/>
+  <constant name='NSLocalNotificationCenterType' type='@'/>
+  <constant name='NSLocaleCalendar' type='@'/>
+  <constant name='NSLocaleCollationIdentifier' type='@'/>
+  <constant name='NSLocaleCountryCode' type='@'/>
+  <constant name='NSLocaleCurrencyCode' type='@'/>
+  <constant name='NSLocaleCurrencySymbol' type='@'/>
+  <constant name='NSLocaleDecimalSeparator' type='@'/>
+  <constant name='NSLocaleExemplarCharacterSet' type='@'/>
+  <constant name='NSLocaleGroupingSeparator' type='@'/>
+  <constant name='NSLocaleIdentifier' type='@'/>
+  <constant name='NSLocaleLanguageCode' type='@'/>
+  <constant name='NSLocaleMeasurementSystem' type='@'/>
+  <constant name='NSLocaleScriptCode' type='@'/>
+  <constant name='NSLocaleUsesMetricSystem' type='@'/>
+  <constant name='NSLocaleVariantCode' type='@'/>
+  <constant name='NSLocalizedDescriptionKey' type='@'/>
+  <constant name='NSLocalizedFailureReasonErrorKey' type='@'/>
+  <constant name='NSLocalizedRecoveryOptionsErrorKey' type='@'/>
+  <constant name='NSLocalizedRecoverySuggestionErrorKey' type='@'/>
+  <constant name='NSMachErrorDomain' type='@'/>
+  <constant name='NSMallocException' type='@'/>
+  <constant name='NSMaximumKeyValueOperator' type='@'/>
+  <constant name='NSMetadataQueryDidFinishGatheringNotification' type='@'/>
+  <constant name='NSMetadataQueryDidStartGatheringNotification' type='@'/>
+  <constant name='NSMetadataQueryDidUpdateNotification' type='@'/>
+  <constant name='NSMetadataQueryGatheringProgressNotification' type='@'/>
+  <constant name='NSMetadataQueryLocalComputerScope' type='@'/>
+  <constant name='NSMetadataQueryNetworkScope' type='@'/>
+  <constant name='NSMetadataQueryResultContentRelevanceAttribute' type='@'/>
+  <constant name='NSMetadataQueryUserHomeScope' type='@'/>
+  <constant name='NSMinimumKeyValueOperator' type='@'/>
+  <constant name='NSMonthNameArray' type='@'/>
+  <constant name='NSNegateBooleanTransformerName' type='@'/>
+  <constant name='NSNegativeCurrencyFormatString' type='@'/>
+  <constant name='NSNetServicesErrorCode' type='@'/>
+  <constant name='NSNetServicesErrorDomain' type='@'/>
+  <constant name='NSNextDayDesignations' type='@'/>
+  <constant name='NSNextNextDayDesignations' type='@'/>
+  <constant name='NSNonOwnedPointerHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSNonOwnedPointerMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSNonOwnedPointerMapValueCallBacks' type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+  <constant name='NSNonOwnedPointerOrNullMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSNonRetainedObjectHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSNonRetainedObjectMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSNonRetainedObjectMapValueCallBacks' type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+  <constant name='NSOSStatusErrorDomain' type='@'/>
+  <constant name='NSObjectHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSObjectInaccessibleException' type='@'/>
+  <constant name='NSObjectMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSObjectMapValueCallBacks' type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+  <constant name='NSObjectNotAvailableException' type='@'/>
+  <constant name='NSOldStyleException' type='@'/>
+  <constant name='NSOperationNotSupportedForKeyException' type='@'/>
+  <constant name='NSOwnedObjectIdentityHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSOwnedPointerHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSOwnedPointerMapKeyCallBacks' type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+  <constant name='NSOwnedPointerMapValueCallBacks' type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+  <constant name='NSPOSIXErrorDomain' type='@'/>
+  <constant name='NSParseErrorException' type='@'/>
+  <constant name='NSPointerToStructHashCallBacks' type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+  <constant name='NSPortDidBecomeInvalidNotification' type='@'/>
+  <constant name='NSPortReceiveException' type='@'/>
+  <constant name='NSPortSendException' type='@'/>
+  <constant name='NSPortTimeoutException' type='@'/>
+  <constant name='NSPositiveCurrencyFormatString' type='@'/>
+  <constant name='NSPriorDayDesignations' type='@'/>
+  <constant name='NSRangeException' type='@'/>
+  <constant name='NSRecoveryAttempterErrorKey' type='@'/>
+  <constant name='NSRegistrationDomain' type='@'/>
+  <constant name='NSShortDateFormatString' type='@'/>
+  <constant name='NSShortMonthNameArray' type='@'/>
+  <constant name='NSShortTimeDateFormatString' type='@'/>
+  <constant name='NSShortWeekDayNameArray' type='@'/>
+  <constant name='NSStreamDataWrittenToMemoryStreamKey' type='@'/>
+  <constant name='NSStreamFileCurrentOffsetKey' type='@'/>
+  <constant name='NSStreamSOCKSErrorDomain' type='@'/>
+  <constant name='NSStreamSOCKSProxyConfigurationKey' type='@'/>
+  <constant name='NSStreamSOCKSProxyHostKey' type='@'/>
+  <constant name='NSStreamSOCKSProxyPasswordKey' type='@'/>
+  <constant name='NSStreamSOCKSProxyPortKey' type='@'/>
+  <constant name='NSStreamSOCKSProxyUserKey' type='@'/>
+  <constant name='NSStreamSOCKSProxyVersion4' type='@'/>
+  <constant name='NSStreamSOCKSProxyVersion5' type='@'/>
+  <constant name='NSStreamSOCKSProxyVersionKey' type='@'/>
+  <constant name='NSStreamSocketSSLErrorDomain' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelKey' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelNegotiatedSSL' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelNone' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelSSLv2' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelSSLv3' type='@'/>
+  <constant name='NSStreamSocketSecurityLevelTLSv1' type='@'/>
+  <constant name='NSStringEncodingErrorKey' type='@'/>
+  <constant name='NSSumKeyValueOperator' type='@'/>
+  <constant name='NSTaskDidTerminateNotification' type='@'/>
+  <constant name='NSThisDayDesignations' type='@'/>
+  <constant name='NSThousandsSeparator' type='@'/>
+  <constant name='NSThreadWillExitNotification' type='@'/>
+  <constant name='NSTimeDateFormatString' type='@'/>
+  <constant name='NSTimeFormatString' type='@'/>
+  <constant name='NSURLAuthenticationMethodDefault' type='@'/>
+  <constant name='NSURLAuthenticationMethodHTMLForm' type='@'/>
+  <constant name='NSURLAuthenticationMethodHTTPBasic' type='@'/>
+  <constant name='NSURLAuthenticationMethodHTTPDigest' type='@'/>
+  <constant name='NSURLCredentialStorageChangedNotification' type='@'/>
+  <constant name='NSURLErrorDomain' type='@'/>
+  <constant name='NSURLErrorKey' type='@'/>
+  <constant name='NSURLFileScheme' type='@'/>
+  <constant name='NSURLProtectionSpaceFTPProxy' type='@'/>
+  <constant name='NSURLProtectionSpaceHTTPProxy' type='@'/>
+  <constant name='NSURLProtectionSpaceHTTPSProxy' type='@'/>
+  <constant name='NSURLProtectionSpaceSOCKSProxy' type='@'/>
+  <constant name='NSUnarchiveFromDataTransformerName' type='@'/>
+  <constant name='NSUndefinedKeyException' type='@'/>
+  <constant name='NSUnderlyingErrorKey' type='@'/>
+  <constant name='NSUndoManagerCheckpointNotification' type='@'/>
+  <constant name='NSUndoManagerDidOpenUndoGroupNotification' type='@'/>
+  <constant name='NSUndoManagerDidRedoChangeNotification' type='@'/>
+  <constant name='NSUndoManagerDidUndoChangeNotification' type='@'/>
+  <constant name='NSUndoManagerWillCloseUndoGroupNotification' type='@'/>
+  <constant name='NSUndoManagerWillRedoChangeNotification' type='@'/>
+  <constant name='NSUndoManagerWillUndoChangeNotification' type='@'/>
+  <constant name='NSUnionOfArraysKeyValueOperator' type='@'/>
+  <constant name='NSUnionOfObjectsKeyValueOperator' type='@'/>
+  <constant name='NSUnionOfSetsKeyValueOperator' type='@'/>
+  <constant name='NSUserDefaultsDidChangeNotification' type='@'/>
+  <constant name='NSWeekDayNameArray' type='@'/>
+  <constant name='NSWillBecomeMultiThreadedNotification' type='@'/>
+  <constant name='NSXMLParserErrorDomain' type='@'/>
+  <constant name='NSYearMonthWeekDesignations' type='@'/>
+  <constant name='NSZeroPoint' type='{_NSPoint=ff}'/>
+  <constant name='NSZeroRect' type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  <constant name='NSZeroSize' type='{_NSSize=ff}'/>
+  <constant name='NSZombieEnabled' type='B'/>
+  <enum name='NSASCIIStringEncoding' value='1'/>
+  <enum name='NSAdminApplicationDirectory' value='4'/>
+  <enum name='NSAllApplicationsDirectory' value='100'/>
+  <enum name='NSAllDomainsMask' value='65535'/>
+  <enum name='NSAllLibrariesDirectory' value='101'/>
+  <enum name='NSAllPredicateModifier' value='1'/>
+  <enum name='NSAnchoredSearch' value='8'/>
+  <enum name='NSAndPredicateType' value='1'/>
+  <enum name='NSAnyPredicateModifier' value='2'/>
+  <enum name='NSApplicationDirectory' value='1'/>
+  <enum name='NSApplicationSupportDirectory' value='14'/>
+  <enum name='NSArgumentEvaluationScriptError' value='3'/>
+  <enum name='NSArgumentsWrongScriptError' value='6'/>
+  <enum name='NSAtomicWrite' value='1'/>
+  <enum name='NSBackwardsSearch' value='4'/>
+  <enum name='NSBeginsWithComparison' value='5'/>
+  <enum name='NSBeginsWithPredicateOperatorType' value='8'/>
+  <enum name='NSCachesDirectory' value='13'/>
+  <enum name='NSCalculationDivideByZero' value='4'/>
+  <enum name='NSCalculationLossOfPrecision' value='1'/>
+  <enum name='NSCalculationNoError' value='0'/>
+  <enum name='NSCalculationOverflow' value='3'/>
+  <enum name='NSCalculationUnderflow' value='2'/>
+  <enum name='NSCannotCreateScriptCommandError' value='10'/>
+  <enum name='NSCaseInsensitivePredicateOption' value='1'/>
+  <enum name='NSCaseInsensitiveSearch' value='1'/>
+  <enum name='NSConstantValueExpressionType' value='0'/>
+  <enum name='NSContainerSpecifierError' value='2'/>
+  <enum name='NSContainsComparison' value='7'/>
+  <enum name='NSCoreServiceDirectory' value='10'/>
+  <enum name='NSCustomSelectorPredicateOperatorType' value='11'/>
+  <enum name='NSDateFormatterBehavior10_0' value='1000'/>
+  <enum name='NSDateFormatterBehavior10_4' value='1040'/>
+  <enum name='NSDateFormatterBehaviorDefault' value='0'/>
+  <enum name='NSDateFormatterFullStyle' value='4'/>
+  <enum name='NSDateFormatterLongStyle' value='3'/>
+  <enum name='NSDateFormatterMediumStyle' value='2'/>
+  <enum name='NSDateFormatterNoStyle' value='0'/>
+  <enum name='NSDateFormatterShortStyle' value='1'/>
+  <enum name='NSDayCalendarUnit' value='16'/>
+  <enum name='NSDecimalMaxSize' value='8'/>
+  <enum name='NSDecimalNoScale' value='32767'/>
+  <enum name='NSDemoApplicationDirectory' value='2'/>
+  <enum name='NSDesktopDirectory' value='12'/>
+  <enum name='NSDeveloperApplicationDirectory' value='3'/>
+  <enum name='NSDeveloperDirectory' value='6'/>
+  <enum name='NSDiacriticInsensitivePredicateOption' value='2'/>
+  <enum name='NSDirectPredicateModifier' value='0'/>
+  <enum name='NSDocumentDirectory' value='9'/>
+  <enum name='NSDocumentationDirectory' value='8'/>
+  <enum name='NSEndsWithComparison' value='6'/>
+  <enum name='NSEndsWithPredicateOperatorType' value='9'/>
+  <enum name='NSEqualToComparison' value='0'/>
+  <enum name='NSEqualToPredicateOperatorType' value='4'/>
+  <enum name='NSEraCalendarUnit' value='2'/>
+  <enum name='NSEvaluatedObjectExpressionType' value='1'/>
+  <enum name='NSEverySubelement' value='1'/>
+  <enum name='NSFileErrorMaximum' value='1023'/>
+  <enum name='NSFileErrorMinimum' value='0'/>
+  <enum name='NSFileLockingError' value='255'/>
+  <enum name='NSFileNoSuchFileError' value='4'/>
+  <enum name='NSFileReadCorruptFileError' value='259'/>
+  <enum name='NSFileReadInapplicableStringEncodingError' value='261'/>
+  <enum name='NSFileReadInvalidFileNameError' value='258'/>
+  <enum name='NSFileReadNoPermissionError' value='257'/>
+  <enum name='NSFileReadNoSuchFileError' value='260'/>
+  <enum name='NSFileReadUnknownError' value='256'/>
+  <enum name='NSFileReadUnsupportedSchemeError' value='262'/>
+  <enum name='NSFileWriteInapplicableStringEncodingError' value='517'/>
+  <enum name='NSFileWriteInvalidFileNameError' value='514'/>
+  <enum name='NSFileWriteNoPermissionError' value='513'/>
+  <enum name='NSFileWriteOutOfSpaceError' value='640'/>
+  <enum name='NSFileWriteUnknownError' value='512'/>
+  <enum name='NSFileWriteUnsupportedSchemeError' value='518'/>
+  <enum name='NSFormattingError' value='2048'/>
+  <enum name='NSFormattingErrorMaximum' value='2559'/>
+  <enum name='NSFormattingErrorMinimum' value='2048'/>
+  <enum name='NSFoundationVersionNumber10_0' value='397.39999999999998'/>
+  <enum name='NSFoundationVersionNumber10_1' value='425.00000000000000'/>
+  <enum name='NSFoundationVersionNumber10_2' value='462.00000000000000'/>
+  <enum name='NSFoundationVersionNumber10_3' value='500.00000000000000'/>
+  <enum name='NSFoundationVersionNumber10_3_2' value='500.30000000000001'/>
+  <enum name='NSFoundationVersionNumber10_3_3' value='500.54000000000002'/>
+  <enum name='NSFoundationVersionNumber10_3_4' value='500.56000000000000'/>
+  <enum name='NSFoundationVersionWithFileManagerResourceForkSupport' value='412'/>
+  <enum name='NSFunctionExpressionType' value='4'/>
+  <enum name='NSGreaterThanComparison' value='4'/>
+  <enum name='NSGreaterThanOrEqualToComparison' value='3'/>
+  <enum name='NSGreaterThanOrEqualToPredicateOperatorType' value='3'/>
+  <enum name='NSGreaterThanPredicateOperatorType' value='2'/>
+  <enum name='NSHPUXOperatingSystem' value='4'/>
+  <enum name='NSHTTPCookieAcceptPolicyAlways' value='0'/>
+  <enum name='NSHTTPCookieAcceptPolicyNever' value='1'/>
+  <enum name='NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain' value='2'/>
+  <enum name='NSHourCalendarUnit' value='32'/>
+  <enum name='NSISO2022JPStringEncoding' value='21'/>
+  <enum name='NSISOLatin1StringEncoding' value='5'/>
+  <enum name='NSISOLatin2StringEncoding' value='9'/>
+  <enum name='NSInPredicateOperatorType' value='10'/>
+  <enum name='NSIndexSubelement' value='0'/>
+  <enum name='NSInternalScriptError' value='8'/>
+  <enum name='NSInternalSpecifierError' value='5'/>
+  <enum name='NSInvalidIndexSpecifierError' value='4'/>
+  <enum name='NSJapaneseEUCStringEncoding' value='3'/>
+  <enum name='NSKeyPathExpressionType' value='3'/>
+  <enum name='NSKeySpecifierEvaluationScriptError' value='2'/>
+  <enum name='NSKeyValueChangeInsertion' value='2'/>
+  <enum name='NSKeyValueChangeRemoval' value='3'/>
+  <enum name='NSKeyValueChangeReplacement' value='4'/>
+  <enum name='NSKeyValueChangeSetting' value='1'/>
+  <enum name='NSKeyValueIntersectSetMutation' value='3'/>
+  <enum name='NSKeyValueMinusSetMutation' value='2'/>
+  <enum name='NSKeyValueObservingOptionNew' value='1'/>
+  <enum name='NSKeyValueObservingOptionOld' value='2'/>
+  <enum name='NSKeyValueSetSetMutation' value='4'/>
+  <enum name='NSKeyValueUnionSetMutation' value='1'/>
+  <enum name='NSKeyValueValidationError' value='1024'/>
+  <enum name='NSLessThanComparison' value='2'/>
+  <enum name='NSLessThanOrEqualToComparison' value='1'/>
+  <enum name='NSLessThanOrEqualToPredicateOperatorType' value='1'/>
+  <enum name='NSLessThanPredicateOperatorType' value='0'/>
+  <enum name='NSLibraryDirectory' value='5'/>
+  <enum name='NSLikePredicateOperatorType' value='7'/>
+  <enum name='NSLiteralSearch' value='2'/>
+  <enum name='NSLocalDomainMask' value='2'/>
+  <enum name='NSMACHOperatingSystem' value='5'/>
+  <enum name='NSMacOSRomanStringEncoding' value='30'/>
+  <enum name='NSMappedRead' value='1'/>
+  <enum name='NSMatchesPredicateOperatorType' value='6'/>
+  <enum name='NSMaxXEdge' value='2'/>
+  <enum name='NSMaxYEdge' value='3'/>
+  <enum name='NSMaximumStringLength' value='2147483646'/>
+  <enum name='NSMiddleSubelement' value='2'/>
+  <enum name='NSMinXEdge' value='0'/>
+  <enum name='NSMinYEdge' value='1'/>
+  <enum name='NSMinuteCalendarUnit' value='64'/>
+  <enum name='NSMonthCalendarUnit' value='8'/>
+  <enum name='NSNEXTSTEPStringEncoding' value='2'/>
+  <enum name='NSNetServicesActivityInProgress' value='-72003'/>
+  <enum name='NSNetServicesBadArgumentError' value='-72004'/>
+  <enum name='NSNetServicesCancelledError' value='-72005'/>
+  <enum name='NSNetServicesCollisionError' value='-72001'/>
+  <enum name='NSNetServicesInvalidError' value='-72006'/>
+  <enum name='NSNetServicesNotFoundError' value='-72002'/>
+  <enum name='NSNetServicesTimeoutError' value='-72007'/>
+  <enum name='NSNetServicesUnknownError' value='-72000'/>
+  <enum name='NSNetworkDomainMask' value='4'/>
+  <enum name='NSNoScriptError' value='0'/>
+  <enum name='NSNoSpecifierError' value='0'/>
+  <enum name='NSNoSubelement' value='4'/>
+  <enum name='NSNoTopLevelContainersSpecifierError' value='1'/>
+  <enum name='NSNonLossyASCIIStringEncoding' value='7'/>
+  <enum name='NSNotEqualToPredicateOperatorType' value='5'/>
+  <enum name='NSNotFound' value='2147483647'/>
+  <enum name='NSNotPredicateType' value='0'/>
+  <enum name='NSNotificationCoalescingOnName' value='1'/>
+  <enum name='NSNotificationCoalescingOnSender' value='2'/>
+  <enum name='NSNotificationDeliverImmediately' value='1'/>
+  <enum name='NSNotificationNoCoalescing' value='0'/>
+  <enum name='NSNotificationPostToAllSessions' value='2'/>
+  <enum name='NSNotificationSuspensionBehaviorCoalesce' value='2'/>
+  <enum name='NSNotificationSuspensionBehaviorDeliverImmediately' value='4'/>
+  <enum name='NSNotificationSuspensionBehaviorDrop' value='1'/>
+  <enum name='NSNotificationSuspensionBehaviorHold' value='3'/>
+  <enum name='NSNumberFormatterBehavior10_0' value='1000'/>
+  <enum name='NSNumberFormatterBehavior10_4' value='1040'/>
+  <enum name='NSNumberFormatterBehaviorDefault' value='0'/>
+  <enum name='NSNumberFormatterCurrencyStyle' value='2'/>
+  <enum name='NSNumberFormatterDecimalStyle' value='1'/>
+  <enum name='NSNumberFormatterNoStyle' value='0'/>
+  <enum name='NSNumberFormatterPadAfterPrefix' value='1'/>
+  <enum name='NSNumberFormatterPadAfterSuffix' value='3'/>
+  <enum name='NSNumberFormatterPadBeforePrefix' value='0'/>
+  <enum name='NSNumberFormatterPadBeforeSuffix' value='2'/>
+  <enum name='NSNumberFormatterPercentStyle' value='3'/>
+  <enum name='NSNumberFormatterRoundCeiling' value='0'/>
+  <enum name='NSNumberFormatterRoundDown' value='2'/>
+  <enum name='NSNumberFormatterRoundFloor' value='1'/>
+  <enum name='NSNumberFormatterRoundHalfDown' value='5'/>
+  <enum name='NSNumberFormatterRoundHalfEven' value='4'/>
+  <enum name='NSNumberFormatterRoundHalfUp' value='6'/>
+  <enum name='NSNumberFormatterRoundUp' value='3'/>
+  <enum name='NSNumberFormatterScientificStyle' value='4'/>
+  <enum name='NSNumberFormatterSpellOutStyle' value='5'/>
+  <enum name='NSNumericSearch' value='64'/>
+  <enum name='NSOSF1OperatingSystem' value='7'/>
+  <enum name='NSObjCArrayType' value='91'/>
+  <enum name='NSObjCBitfield' value='98'/>
+  <enum name='NSObjCBoolType' value='66'/>
+  <enum name='NSObjCCharType' value='99'/>
+  <enum name='NSObjCDoubleType' value='100'/>
+  <enum name='NSObjCFloatType' value='102'/>
+  <enum name='NSObjCLongType' value='108'/>
+  <enum name='NSObjCLonglongType' value='113'/>
+  <enum name='NSObjCNoType' value='0'/>
+  <enum name='NSObjCObjectType' value='64'/>
+  <enum name='NSObjCPointerType' value='94'/>
+  <enum name='NSObjCSelectorType' value='58'/>
+  <enum name='NSObjCShortType' value='115'/>
+  <enum name='NSObjCStringType' value='42'/>
+  <enum name='NSObjCStructType' value='123'/>
+  <enum name='NSObjCUnionType' value='40'/>
+  <enum name='NSObjCVoidType' value='118'/>
+  <enum name='NSObjectAutoreleasedEvent' value='3'/>
+  <enum name='NSObjectExtraRefDecrementedEvent' value='5'/>
+  <enum name='NSObjectExtraRefIncrementedEvent' value='4'/>
+  <enum name='NSObjectInternalRefDecrementedEvent' value='7'/>
+  <enum name='NSObjectInternalRefIncrementedEvent' value='6'/>
+  <enum name='NSOpenStepUnicodeReservedBase' value='62464'/>
+  <enum name='NSOperationNotSupportedForKeyScriptError' value='9'/>
+  <enum name='NSOperationNotSupportedForKeySpecifierError' value='6'/>
+  <enum name='NSOrPredicateType' value='2'/>
+  <enum name='NSOrderedAscending' value='-1'/>
+  <enum name='NSOrderedDescending' value='1'/>
+  <enum name='NSOrderedSame' value='0'/>
+  <enum name='NSPositionAfter' value='0'/>
+  <enum name='NSPositionBefore' value='1'/>
+  <enum name='NSPositionBeginning' value='2'/>
+  <enum name='NSPositionEnd' value='3'/>
+  <enum name='NSPositionReplace' value='4'/>
+  <enum name='NSPostASAP' value='2'/>
+  <enum name='NSPostNow' value='3'/>
+  <enum name='NSPostWhenIdle' value='1'/>
+  <enum name='NSPropertyListBinaryFormat_v1_0' value='200'/>
+  <enum name='NSPropertyListImmutable' value='0'/>
+  <enum name='NSPropertyListMutableContainers' value='1'/>
+  <enum name='NSPropertyListMutableContainersAndLeaves' value='2'/>
+  <enum name='NSPropertyListOpenStepFormat' value='1'/>
+  <enum name='NSPropertyListXMLFormat_v1_0' value='100'/>
+  <enum name='NSProprietaryStringEncoding' value='65536'/>
+  <enum name='NSRandomSubelement' value='3'/>
+  <enum name='NSReceiverEvaluationScriptError' value='1'/>
+  <enum name='NSReceiversCantHandleCommandScriptError' value='4'/>
+  <enum name='NSRelativeAfter' value='0'/>
+  <enum name='NSRelativeBefore' value='1'/>
+  <enum name='NSRequiredArgumentsMissingScriptError' value='5'/>
+  <enum name='NSRoundBankers' value='3'/>
+  <enum name='NSRoundDown' value='1'/>
+  <enum name='NSRoundPlain' value='0'/>
+  <enum name='NSRoundUp' value='2'/>
+  <enum name='NSSaveOptionsAsk' value='2'/>
+  <enum name='NSSaveOptionsNo' value='1'/>
+  <enum name='NSSaveOptionsYes' value='0'/>
+  <enum name='NSScannedOption' value='1'/>
+  <enum name='NSSecondCalendarUnit' value='128'/>
+  <enum name='NSShiftJISStringEncoding' value='8'/>
+  <enum name='NSSolarisOperatingSystem' value='3'/>
+  <enum name='NSStreamEventEndEncountered' value='16'/>
+  <enum name='NSStreamEventErrorOccurred' value='8'/>
+  <enum name='NSStreamEventHasBytesAvailable' value='2'/>
+  <enum name='NSStreamEventHasSpaceAvailable' value='4'/>
+  <enum name='NSStreamEventNone' value='0'/>
+  <enum name='NSStreamEventOpenCompleted' value='1'/>
+  <enum name='NSStreamStatusAtEnd' value='5'/>
+  <enum name='NSStreamStatusClosed' value='6'/>
+  <enum name='NSStreamStatusError' value='7'/>
+  <enum name='NSStreamStatusNotOpen' value='0'/>
+  <enum name='NSStreamStatusOpen' value='2'/>
+  <enum name='NSStreamStatusOpening' value='1'/>
+  <enum name='NSStreamStatusReading' value='3'/>
+  <enum name='NSStreamStatusWriting' value='4'/>
+  <enum name='NSSunOSOperatingSystem' value='6'/>
+  <enum name='NSSymbolStringEncoding' value='6'/>
+  <enum name='NSSystemDomainMask' value='8'/>
+  <enum name='NSTimeIntervalSince1970' value='978307200.00000000'/>
+  <enum name='NSURLCacheStorageAllowed' value='0'/>
+  <enum name='NSURLCacheStorageAllowedInMemoryOnly' value='1'/>
+  <enum name='NSURLCacheStorageNotAllowed' value='2'/>
+  <enum name='NSURLCredentialPersistenceForSession' value='1'/>
+  <enum name='NSURLCredentialPersistenceNone' value='0'/>
+  <enum name='NSURLCredentialPersistencePermanent' value='2'/>
+  <enum name='NSURLErrorBadServerResponse' value='-1011'/>
+  <enum name='NSURLErrorBadURL' value='-1000'/>
+  <enum name='NSURLErrorCancelled' value='-999'/>
+  <enum name='NSURLErrorCannotCloseFile' value='-3002'/>
+  <enum name='NSURLErrorCannotConnectToHost' value='-1004'/>
+  <enum name='NSURLErrorCannotCreateFile' value='-3000'/>
+  <enum name='NSURLErrorCannotFindHost' value='-1003'/>
+  <enum name='NSURLErrorCannotLoadFromNetwork' value='-2000'/>
+  <enum name='NSURLErrorCannotMoveFile' value='-3005'/>
+  <enum name='NSURLErrorCannotOpenFile' value='-3001'/>
+  <enum name='NSURLErrorCannotRemoveFile' value='-3004'/>
+  <enum name='NSURLErrorCannotWriteToFile' value='-3003'/>
+  <enum name='NSURLErrorClientCertificateRejected' value='-1205'/>
+  <enum name='NSURLErrorDNSLookupFailed' value='-1006'/>
+  <enum name='NSURLErrorDownloadDecodingFailedMidStream' value='-3006'/>
+  <enum name='NSURLErrorDownloadDecodingFailedToComplete' value='-3007'/>
+  <enum name='NSURLErrorFileDoesNotExist' value='-1100'/>
+  <enum name='NSURLErrorFileIsDirectory' value='-1101'/>
+  <enum name='NSURLErrorHTTPTooManyRedirects' value='-1007'/>
+  <enum name='NSURLErrorNetworkConnectionLost' value='-1005'/>
+  <enum name='NSURLErrorNoPermissionsToReadFile' value='-1102'/>
+  <enum name='NSURLErrorNotConnectedToInternet' value='-1009'/>
+  <enum name='NSURLErrorRedirectToNonExistentLocation' value='-1010'/>
+  <enum name='NSURLErrorResourceUnavailable' value='-1008'/>
+  <enum name='NSURLErrorSecureConnectionFailed' value='-1200'/>
+  <enum name='NSURLErrorServerCertificateHasBadDate' value='-1201'/>
+  <enum name='NSURLErrorServerCertificateHasUnknownRoot' value='-1203'/>
+  <enum name='NSURLErrorServerCertificateNotYetValid' value='-1204'/>
+  <enum name='NSURLErrorServerCertificateUntrusted' value='-1202'/>
+  <enum name='NSURLErrorTimedOut' value='-1001'/>
+  <enum name='NSURLErrorUnknown' value='-1'/>
+  <enum name='NSURLErrorUnsupportedURL' value='-1002'/>
+  <enum name='NSURLErrorUserAuthenticationRequired' value='-1013'/>
+  <enum name='NSURLErrorUserCancelledAuthentication' value='-1012'/>
+  <enum name='NSURLErrorZeroByteResource' value='-1014'/>
+  <enum name='NSURLHandleLoadFailed' value='3'/>
+  <enum name='NSURLHandleLoadInProgress' value='2'/>
+  <enum name='NSURLHandleLoadSucceeded' value='1'/>
+  <enum name='NSURLHandleNotLoaded' value='0'/>
+  <enum name='NSURLRequestReloadIgnoringCacheData' value='1'/>
+  <enum name='NSURLRequestReturnCacheDataDontLoad' value='3'/>
+  <enum name='NSURLRequestReturnCacheDataElseLoad' value='2'/>
+  <enum name='NSURLRequestUseProtocolCachePolicy' value='0'/>
+  <enum name='NSUTF8StringEncoding' value='4'/>
+  <enum name='NSUncachedRead' value='2'/>
+  <enum name='NSUndefinedDateComponent' value='2147483647'/>
+  <enum name='NSUndoCloseGroupingRunLoopOrdering' value='350000'/>
+  <enum name='NSUnicodeStringEncoding' value='10'/>
+  <enum name='NSUnknownKeyScriptError' value='7'/>
+  <enum name='NSUnknownKeySpecifierError' value='3'/>
+  <enum name='NSUserCancelledError' value='3072'/>
+  <enum name='NSUserDirectory' value='7'/>
+  <enum name='NSUserDomainMask' value='1'/>
+  <enum name='NSValidationErrorMaximum' value='2047'/>
+  <enum name='NSValidationErrorMinimum' value='1024'/>
+  <enum name='NSVariableExpressionType' value='2'/>
+  <enum name='NSWeekCalendarUnit' value='256'/>
+  <enum name='NSWeekdayCalendarUnit' value='512'/>
+  <enum name='NSWeekdayOrdinalCalendarUnit' value='1024'/>
+  <enum name='NSWindows95OperatingSystem' value='2'/>
+  <enum name='NSWindowsCP1250StringEncoding' value='15'/>
+  <enum name='NSWindowsCP1251StringEncoding' value='11'/>
+  <enum name='NSWindowsCP1252StringEncoding' value='12'/>
+  <enum name='NSWindowsCP1253StringEncoding' value='13'/>
+  <enum name='NSWindowsCP1254StringEncoding' value='14'/>
+  <enum name='NSWindowsNTOperatingSystem' value='1'/>
+  <enum name='NSWrapCalendarComponents' value='1'/>
+  <enum name='NSXMLAttributeCDATAKind' value='6'/>
+  <enum name='NSXMLAttributeDeclarationKind' value='10'/>
+  <enum name='NSXMLAttributeEntitiesKind' value='11'/>
+  <enum name='NSXMLAttributeEntityKind' value='10'/>
+  <enum name='NSXMLAttributeEnumerationKind' value='14'/>
+  <enum name='NSXMLAttributeIDKind' value='7'/>
+  <enum name='NSXMLAttributeIDRefKind' value='8'/>
+  <enum name='NSXMLAttributeIDRefsKind' value='9'/>
+  <enum name='NSXMLAttributeKind' value='3'/>
+  <enum name='NSXMLAttributeNMTokenKind' value='12'/>
+  <enum name='NSXMLAttributeNMTokensKind' value='13'/>
+  <enum name='NSXMLAttributeNotationKind' value='15'/>
+  <enum name='NSXMLCommentKind' value='6'/>
+  <enum name='NSXMLDTDKind' value='8'/>
+  <enum name='NSXMLDocumentHTMLKind' value='2'/>
+  <enum name='NSXMLDocumentIncludeContentTypeDeclaration' value='262144'/>
+  <enum name='NSXMLDocumentKind' value='1'/>
+  <enum name='NSXMLDocumentTextKind' value='3'/>
+  <enum name='NSXMLDocumentTidyHTML' value='512'/>
+  <enum name='NSXMLDocumentTidyXML' value='1024'/>
+  <enum name='NSXMLDocumentValidate' value='8192'/>
+  <enum name='NSXMLDocumentXHTMLKind' value='1'/>
+  <enum name='NSXMLDocumentXInclude' value='65536'/>
+  <enum name='NSXMLDocumentXMLKind' value='0'/>
+  <enum name='NSXMLElementDeclarationAnyKind' value='18'/>
+  <enum name='NSXMLElementDeclarationElementKind' value='20'/>
+  <enum name='NSXMLElementDeclarationEmptyKind' value='17'/>
+  <enum name='NSXMLElementDeclarationKind' value='11'/>
+  <enum name='NSXMLElementDeclarationMixedKind' value='19'/>
+  <enum name='NSXMLElementDeclarationUndefinedKind' value='16'/>
+  <enum name='NSXMLElementKind' value='2'/>
+  <enum name='NSXMLEntityDeclarationKind' value='9'/>
+  <enum name='NSXMLEntityGeneralKind' value='1'/>
+  <enum name='NSXMLEntityParameterKind' value='4'/>
+  <enum name='NSXMLEntityParsedKind' value='2'/>
+  <enum name='NSXMLEntityPredefined' value='5'/>
+  <enum name='NSXMLEntityUnparsedKind' value='3'/>
+  <enum name='NSXMLInvalidKind' value='0'/>
+  <enum name='NSXMLNamespaceKind' value='4'/>
+  <enum name='NSXMLNodeCompactEmptyElement' value='4'/>
+  <enum name='NSXMLNodeExpandEmptyElement' value='2'/>
+  <enum name='NSXMLNodeIsCDATA' value='1'/>
+  <enum name='NSXMLNodeOptionsNone' value='0'/>
+  <enum name='NSXMLNodePreserveAll' value='-1048546'/>
+  <enum name='NSXMLNodePreserveAttributeOrder' value='2097152'/>
+  <enum name='NSXMLNodePreserveCDATA' value='16777216'/>
+  <enum name='NSXMLNodePreserveCharacterReferences' value='134217728'/>
+  <enum name='NSXMLNodePreserveDTD' value='67108864'/>
+  <enum name='NSXMLNodePreserveEmptyElements' value='6'/>
+  <enum name='NSXMLNodePreserveEntities' value='4194304'/>
+  <enum name='NSXMLNodePreserveNamespaceOrder' value='1048576'/>
+  <enum name='NSXMLNodePreservePrefixes' value='8388608'/>
+  <enum name='NSXMLNodePreserveQuotes' value='24'/>
+  <enum name='NSXMLNodePreserveWhitespace' value='33554432'/>
+  <enum name='NSXMLNodePrettyPrint' value='131072'/>
+  <enum name='NSXMLNodeUseDoubleQuotes' value='16'/>
+  <enum name='NSXMLNodeUseSingleQuotes' value='8'/>
+  <enum name='NSXMLNotationDeclarationKind' value='12'/>
+  <enum name='NSXMLParserAttributeHasNoValueError' value='41'/>
+  <enum name='NSXMLParserAttributeListNotFinishedError' value='51'/>
+  <enum name='NSXMLParserAttributeListNotStartedError' value='50'/>
+  <enum name='NSXMLParserAttributeNotFinishedError' value='40'/>
+  <enum name='NSXMLParserAttributeNotStartedError' value='39'/>
+  <enum name='NSXMLParserAttributeRedefinedError' value='42'/>
+  <enum name='NSXMLParserCDATANotFinishedError' value='63'/>
+  <enum name='NSXMLParserCharacterRefAtEOFError' value='10'/>
+  <enum name='NSXMLParserCharacterRefInDTDError' value='13'/>
+  <enum name='NSXMLParserCharacterRefInEpilogError' value='12'/>
+  <enum name='NSXMLParserCharacterRefInPrologError' value='11'/>
+  <enum name='NSXMLParserCommentContainsDoubleHyphenError' value='80'/>
+  <enum name='NSXMLParserCommentNotFinishedError' value='45'/>
+  <enum name='NSXMLParserConditionalSectionNotFinishedError' value='59'/>
+  <enum name='NSXMLParserConditionalSectionNotStartedError' value='58'/>
+  <enum name='NSXMLParserDOCTYPEDeclNotFinishedError' value='61'/>
+  <enum name='NSXMLParserDelegateAbortedParseError' value='512'/>
+  <enum name='NSXMLParserDocumentStartError' value='3'/>
+  <enum name='NSXMLParserElementContentDeclNotFinishedError' value='55'/>
+  <enum name='NSXMLParserElementContentDeclNotStartedError' value='54'/>
+  <enum name='NSXMLParserEmptyDocumentError' value='4'/>
+  <enum name='NSXMLParserEncodingNotSupportedError' value='32'/>
+  <enum name='NSXMLParserEntityBoundaryError' value='90'/>
+  <enum name='NSXMLParserEntityIsExternalError' value='29'/>
+  <enum name='NSXMLParserEntityIsParameterError' value='30'/>
+  <enum name='NSXMLParserEntityNotFinishedError' value='37'/>
+  <enum name='NSXMLParserEntityNotStartedError' value='36'/>
+  <enum name='NSXMLParserEntityRefAtEOFError' value='14'/>
+  <enum name='NSXMLParserEntityRefInDTDError' value='17'/>
+  <enum name='NSXMLParserEntityRefInEpilogError' value='16'/>
+  <enum name='NSXMLParserEntityRefInPrologError' value='15'/>
+  <enum name='NSXMLParserEntityRefLoopError' value='89'/>
+  <enum name='NSXMLParserEntityReferenceMissingSemiError' value='23'/>
+  <enum name='NSXMLParserEntityReferenceWithoutNameError' value='22'/>
+  <enum name='NSXMLParserEntityValueRequiredError' value='84'/>
+  <enum name='NSXMLParserEqualExpectedError' value='75'/>
+  <enum name='NSXMLParserExternalStandaloneEntityError' value='82'/>
+  <enum name='NSXMLParserExternalSubsetNotFinishedError' value='60'/>
+  <enum name='NSXMLParserExtraContentError' value='86'/>
+  <enum name='NSXMLParserGTRequiredError' value='73'/>
+  <enum name='NSXMLParserInternalError' value='1'/>
+  <enum name='NSXMLParserInvalidCharacterError' value='9'/>
+  <enum name='NSXMLParserInvalidCharacterInEntityError' value='87'/>
+  <enum name='NSXMLParserInvalidCharacterRefError' value='8'/>
+  <enum name='NSXMLParserInvalidConditionalSectionError' value='83'/>
+  <enum name='NSXMLParserInvalidDecimalCharacterRefError' value='7'/>
+  <enum name='NSXMLParserInvalidEncodingError' value='81'/>
+  <enum name='NSXMLParserInvalidEncodingNameError' value='79'/>
+  <enum name='NSXMLParserInvalidHexCharacterRefError' value='6'/>
+  <enum name='NSXMLParserInvalidURIError' value='91'/>
+  <enum name='NSXMLParserLTRequiredError' value='72'/>
+  <enum name='NSXMLParserLTSlashRequiredError' value='74'/>
+  <enum name='NSXMLParserLessThanSymbolInAttributeError' value='38'/>
+  <enum name='NSXMLParserLiteralNotFinishedError' value='44'/>
+  <enum name='NSXMLParserLiteralNotStartedError' value='43'/>
+  <enum name='NSXMLParserMisplacedCDATAEndStringError' value='62'/>
+  <enum name='NSXMLParserMisplacedXMLDeclarationError' value='64'/>
+  <enum name='NSXMLParserMixedContentDeclNotFinishedError' value='53'/>
+  <enum name='NSXMLParserMixedContentDeclNotStartedError' value='52'/>
+  <enum name='NSXMLParserNAMERequiredError' value='68'/>
+  <enum name='NSXMLParserNMTOKENRequiredError' value='67'/>
+  <enum name='NSXMLParserNamespaceDeclarationError' value='35'/>
+  <enum name='NSXMLParserNoDTDError' value='94'/>
+  <enum name='NSXMLParserNotWellBalancedError' value='85'/>
+  <enum name='NSXMLParserNotationNotFinishedError' value='49'/>
+  <enum name='NSXMLParserNotationNotStartedError' value='48'/>
+  <enum name='NSXMLParserOutOfMemoryError' value='2'/>
+  <enum name='NSXMLParserPCDATARequiredError' value='69'/>
+  <enum name='NSXMLParserParsedEntityRefAtEOFError' value='18'/>
+  <enum name='NSXMLParserParsedEntityRefInEpilogError' value='20'/>
+  <enum name='NSXMLParserParsedEntityRefInInternalError' value='88'/>
+  <enum name='NSXMLParserParsedEntityRefInInternalSubsetError' value='21'/>
+  <enum name='NSXMLParserParsedEntityRefInPrologError' value='19'/>
+  <enum name='NSXMLParserParsedEntityRefMissingSemiError' value='25'/>
+  <enum name='NSXMLParserParsedEntityRefNoNameError' value='24'/>
+  <enum name='NSXMLParserPrematureDocumentEndError' value='5'/>
+  <enum name='NSXMLParserProcessingInstructionNotFinishedError' value='47'/>
+  <enum name='NSXMLParserProcessingInstructionNotStartedError' value='46'/>
+  <enum name='NSXMLParserPublicIdentifierRequiredError' value='71'/>
+  <enum name='NSXMLParserSeparatorRequiredError' value='66'/>
+  <enum name='NSXMLParserSpaceRequiredError' value='65'/>
+  <enum name='NSXMLParserStandaloneValueError' value='78'/>
+  <enum name='NSXMLParserStringNotClosedError' value='34'/>
+  <enum name='NSXMLParserStringNotStartedError' value='33'/>
+  <enum name='NSXMLParserTagNameMismatchError' value='76'/>
+  <enum name='NSXMLParserURIFragmentError' value='92'/>
+  <enum name='NSXMLParserURIRequiredError' value='70'/>
+  <enum name='NSXMLParserUndeclaredEntityError' value='26'/>
+  <enum name='NSXMLParserUnfinishedTagError' value='77'/>
+  <enum name='NSXMLParserUnknownEncodingError' value='31'/>
+  <enum name='NSXMLParserUnparsedEntityError' value='28'/>
+  <enum name='NSXMLParserXMLDeclNotFinishedError' value='57'/>
+  <enum name='NSXMLParserXMLDeclNotStartedError' value='56'/>
+  <enum name='NSXMLProcessingInstructionKind' value='5'/>
+  <enum name='NSXMLTextKind' value='7'/>
+  <enum name='NSYearCalendarUnit' value='4'/>
+  <enum name='NS_BigEndian' value='2'/>
+  <enum name='NS_LittleEndian' value='1'/>
+  <enum name='NS_UNICHAR_IS_EIGHT_BIT' value='0'/>
+  <enum name='NS_UnknownByteOrder' value='0'/>
+  <enum name='Nil' value='0'/>
+  <enum name='nil' value='0'/>
+  <function name='NSAllHashTableObjects'>
+    <arg type='^{_NSHashTable=}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSAllMapTableKeys'>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSAllMapTableValues'>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSAllocateCollectable'>
+    <arg type='L'/>
+    <arg type='L'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSAllocateMemoryPages'>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSAllocateObject'>
+    <arg type='#'/>
+    <arg type='I'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSClassFromString'>
+    <arg type='@'/>
+    <retval type='#'/>
+  </function>
+  <function name='NSCompareHashTables'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^{_NSHashTable=}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSCompareMapTables'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSContainsRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSConvertHostDoubleToSwapped' inline='true'>
+    <arg type='d'/>
+    <retval type='{_NSSwappedDouble=Q}'/>
+  </function>
+  <function name='NSConvertHostFloatToSwapped' inline='true'>
+    <arg type='f'/>
+    <retval type='{_NSSwappedFloat=L}'/>
+  </function>
+  <function name='NSConvertSwappedDoubleToHost' inline='true'>
+    <arg type='{_NSSwappedDouble=Q}'/>
+    <retval type='d'/>
+  </function>
+  <function name='NSConvertSwappedFloatToHost' inline='true'>
+    <arg type='{_NSSwappedFloat=L}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSCopyHashTableWithZone'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='^{_NSHashTable=}'/>
+  </function>
+  <function name='NSCopyMapTableWithZone'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='^{_NSMapTable=}'/>
+  </function>
+  <function name='NSCopyMemoryPages'>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='I'/>
+  </function>
+  <function name='NSCopyObject'>
+    <arg type='@'/>
+    <arg type='I'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSCountFrames'>
+    <retval type='I'/>
+  </function>
+  <function name='NSCountHashTable'>
+    <arg type='^{_NSHashTable=}'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSCountMapTable'>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSCreateHashTable'>
+    <arg type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+    <arg type='I'/>
+    <retval type='^{_NSHashTable=}'/>
+  </function>
+  <function name='NSCreateHashTableWithZone'>
+    <arg type='{_NSHashTableCallBacks=^?^?^?^?^?}'/>
+    <arg type='I'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='^{_NSHashTable=}'/>
+  </function>
+  <function name='NSCreateMapTable'>
+    <arg type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+    <arg type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+    <arg type='I'/>
+    <retval type='^{_NSMapTable=}'/>
+  </function>
+  <function name='NSCreateMapTableWithZone'>
+    <arg type='{_NSMapTableKeyCallBacks=^?^?^?^?^?^v}'/>
+    <arg type='{_NSMapTableValueCallBacks=^?^?^?}'/>
+    <arg type='I'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='^{_NSMapTable=}'/>
+  </function>
+  <function name='NSCreateZone'>
+    <arg type='I'/>
+    <arg type='I'/>
+    <arg type='B'/>
+    <retval type='^{_NSZone=}'/>
+  </function>
+  <function name='NSDeallocateMemoryPages'>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='I'/>
+  </function>
+  <function name='NSDeallocateObject'>
+    <arg type='@'/>
+  </function>
+  <function name='NSDecimalAdd'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalCompact'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+  </function>
+  <function name='NSDecimalCompare'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalCopy'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+  </function>
+  <function name='NSDecimalDivide'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalIsNotANumber' inline='true'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSDecimalMultiply'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalMultiplyByPowerOf10'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='s'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalNormalize'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalPower'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='I'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecimalRound'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <arg type='i'/>
+  </function>
+  <function name='NSDecimalString'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='@'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSDecimalSubtract'>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' type_modifier='n'/>
+    <arg type='i'/>
+    <retval type='i'/>
+  </function>
+  <function name='NSDecrementExtraRefCountWasZero'>
+    <arg type='@'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSDefaultMallocZone'>
+    <retval type='^{_NSZone=}'/>
+  </function>
+  <function name='NSDivideRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='^{_NSRect={_NSPoint=ff}{_NSSize=ff}}' type_modifier='o'/>
+    <arg type='^{_NSRect={_NSPoint=ff}{_NSSize=ff}}' type_modifier='o'/>
+    <arg type='f'/>
+    <arg type='i'/>
+  </function>
+  <function name='NSEndHashTableEnumeration'>
+    <arg type='^{_NSMapEnumerator=II^v}' type_modifier='n'/>
+  </function>
+  <function name='NSEndMapTableEnumeration'>
+    <arg type='^{_NSMapEnumerator=II^v}' type_modifier='n'/>
+  </function>
+  <function name='NSEnumerateHashTable'>
+    <arg type='^{_NSHashTable=}'/>
+    <retval type='{_NSMapEnumerator=II^v}'/>
+  </function>
+  <function name='NSEnumerateMapTable'>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='{_NSMapEnumerator=II^v}'/>
+  </function>
+  <function name='NSEqualPoints'>
+    <arg type='{_NSPoint=ff}'/>
+    <arg type='{_NSPoint=ff}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSEqualRanges' inline='true'>
+    <arg type='{_NSRange=II}'/>
+    <arg type='{_NSRange=II}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSEqualRects'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSEqualSizes'>
+    <arg type='{_NSSize=ff}'/>
+    <arg type='{_NSSize=ff}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSExtraRefCount'>
+    <arg type='@'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSFileTypeForHFSTypeCode'>
+    <arg type='L'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSFrameAddress'>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSFreeHashTable'>
+    <arg type='^{_NSHashTable=}'/>
+  </function>
+  <function name='NSFreeMapTable'>
+    <arg type='^{_NSMapTable=}'/>
+  </function>
+  <function name='NSFullUserName'>
+    <retval type='@'/>
+  </function>
+  <function name='NSGetSizeAndAlignment'>
+    <arg type='*' type_modifier='o'/>
+    <arg type='^I' type_modifier='o'/>
+    <arg type='^I' type_modifier='o'/>
+    <retval type='*'/>
+  </function>
+  <function name='NSGetUncaughtExceptionHandler'>
+    <retval function_pointer='true' type='^?'>
+      <arg type='@'/>
+      <retval type='v'/>
+    </retval>
+  </function>
+  <function name='NSHFSTypeCodeFromFileType'>
+    <arg type='@'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSHFSTypeOfFile'>
+    <arg type='@'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSHashGet'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSHashInsert'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSHashInsertIfAbsent'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSHashInsertKnownAbsent'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSHashRemove'>
+    <arg type='^{_NSHashTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSHeight' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSHomeDirectory'>
+    <retval type='@'/>
+  </function>
+  <function name='NSHomeDirectoryForUser'>
+    <arg type='@'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSHostByteOrder' inline='true'>
+    <retval type='I'/>
+  </function>
+  <function name='NSIncrementExtraRefCount'>
+    <arg type='@'/>
+  </function>
+  <function name='NSInsetRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='f'/>
+    <arg type='f'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSIntegralRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSIntersectionRange'>
+    <arg type='{_NSRange=II}'/>
+    <arg type='{_NSRange=II}'/>
+    <retval type='{_NSRange=II}'/>
+  </function>
+  <function name='NSIntersectionRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSIntersectsRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSIsEmptyRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSIsFreedObject'>
+    <arg type='@'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSLocationInRange' inline='true'>
+    <arg type='I'/>
+    <arg type='{_NSRange=II}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSLog' variadic='true'>
+    <arg printf_format='true' type='@'/>
+  </function>
+  <function name='NSLogPageSize'>
+    <retval type='I'/>
+  </function>
+  <function name='NSLogv'>
+    <arg type='@'/>
+    <arg type='*'/>
+  </function>
+  <function name='NSMakePoint' inline='true'>
+    <arg type='f'/>
+    <arg type='f'/>
+    <retval type='{_NSPoint=ff}'/>
+  </function>
+  <function name='NSMakeRange' inline='true'>
+    <arg type='I'/>
+    <arg type='I'/>
+    <retval type='{_NSRange=II}'/>
+  </function>
+  <function name='NSMakeRect' inline='true'>
+    <arg type='f'/>
+    <arg type='f'/>
+    <arg type='f'/>
+    <arg type='f'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSMakeSize' inline='true'>
+    <arg type='f'/>
+    <arg type='f'/>
+    <retval type='{_NSSize=ff}'/>
+  </function>
+  <function name='NSMapGet'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSMapInsert'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSMapInsertIfAbsent'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSMapInsertKnownAbsent'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSMapMember'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^^v' type_modifier='o'/>
+    <arg type='^^v' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSMapRemove'>
+    <arg type='^{_NSMapTable=}'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSMaxRange' inline='true'>
+    <arg type='{_NSRange=II}'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSMaxX' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMaxY' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMidX' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMidY' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMinX' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMinY' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSMouseInRect'>
+    <arg type='{_NSPoint=ff}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='B'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSNextHashEnumeratorItem'>
+    <arg type='^{_NSMapEnumerator=II^v}' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSNextMapEnumeratorPair'>
+    <arg type='^{_NSMapEnumerator=II^v}' type_modifier='n'/>
+    <arg type='^^v' type_modifier='o'/>
+    <arg type='^^v' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSOffsetRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='f'/>
+    <arg type='f'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSOpenStepRootDirectory'>
+    <retval type='@'/>
+  </function>
+  <function name='NSPageSize'>
+    <retval type='I'/>
+  </function>
+  <function name='NSPointFromString'>
+    <arg type='@'/>
+    <retval type='{_NSPoint=ff}'/>
+  </function>
+  <function name='NSPointInRect'>
+    <arg type='{_NSPoint=ff}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSRangeFromString'>
+    <arg type='@'/>
+    <retval type='{_NSRange=II}'/>
+  </function>
+  <function name='NSRealMemoryAvailable'>
+    <retval type='I'/>
+  </function>
+  <function name='NSReallocateCollectable'>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='L'/>
+    <arg type='L'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSRecordAllocationEvent' variadic='true'>
+    <arg type='i'/>
+  </function>
+  <function name='NSRectFromString'>
+    <arg type='@'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSRecycleZone'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+  </function>
+  <function name='NSResetHashTable'>
+    <arg type='^{_NSHashTable=}'/>
+  </function>
+  <function name='NSResetMapTable'>
+    <arg type='^{_NSMapTable=}'/>
+  </function>
+  <function name='NSReturnAddress'>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSRoundDownToMultipleOfPageSize'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSRoundUpToMultipleOfPageSize'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSearchPathForDirectoriesInDomains'>
+    <arg type='i'/>
+    <arg type='i'/>
+    <arg type='B'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSSelectorFromString'>
+    <arg type='@'/>
+    <retval type=':'/>
+  </function>
+  <function name='NSSetUncaughtExceptionHandler'>
+    <arg function_pointer='true' type='^?' type_modifier='n'>
+      <arg type='@'/>
+      <retval type='v'/>
+    </arg>
+  </function>
+  <function name='NSSetZoneName'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <arg type='@'/>
+  </function>
+  <function name='NSShouldRetainWithZone'>
+    <arg type='@'/>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NSSizeFromString'>
+    <arg type='@'/>
+    <retval type='{_NSSize=ff}'/>
+  </function>
+  <function name='NSStringFromClass'>
+    <arg type='#'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromHashTable'>
+    <arg type='^{_NSHashTable=}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromMapTable'>
+    <arg type='^{_NSMapTable=}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromPoint'>
+    <arg type='{_NSPoint=ff}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromRange'>
+    <arg type='{_NSRange=II}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromSelector'>
+    <arg type=':'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSStringFromSize'>
+    <arg type='{_NSSize=ff}'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSSwapBigDoubleToHost' inline='true'>
+    <arg type='{_NSSwappedDouble=Q}'/>
+    <retval type='d'/>
+  </function>
+  <function name='NSSwapBigFloatToHost' inline='true'>
+    <arg type='{_NSSwappedFloat=L}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSSwapBigIntToHost' inline='true'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSwapBigLongLongToHost' inline='true'>
+    <arg type='Q'/>
+    <retval type='Q'/>
+  </function>
+  <function name='NSSwapBigLongToHost' inline='true'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSSwapBigShortToHost' inline='true'>
+    <arg type='S'/>
+    <retval type='S'/>
+  </function>
+  <function name='NSSwapDouble' inline='true'>
+    <arg type='{_NSSwappedDouble=Q}'/>
+    <retval type='{_NSSwappedDouble=Q}'/>
+  </function>
+  <function name='NSSwapFloat' inline='true'>
+    <arg type='{_NSSwappedFloat=L}'/>
+    <retval type='{_NSSwappedFloat=L}'/>
+  </function>
+  <function name='NSSwapHostDoubleToBig' inline='true'>
+    <arg type='d'/>
+    <retval type='{_NSSwappedDouble=Q}'/>
+  </function>
+  <function name='NSSwapHostDoubleToLittle' inline='true'>
+    <arg type='d'/>
+    <retval type='{_NSSwappedDouble=Q}'/>
+  </function>
+  <function name='NSSwapHostFloatToBig' inline='true'>
+    <arg type='f'/>
+    <retval type='{_NSSwappedFloat=L}'/>
+  </function>
+  <function name='NSSwapHostFloatToLittle' inline='true'>
+    <arg type='f'/>
+    <retval type='{_NSSwappedFloat=L}'/>
+  </function>
+  <function name='NSSwapHostIntToBig' inline='true'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSwapHostIntToLittle' inline='true'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSwapHostLongLongToBig' inline='true'>
+    <arg type='Q'/>
+    <retval type='Q'/>
+  </function>
+  <function name='NSSwapHostLongLongToLittle' inline='true'>
+    <arg type='Q'/>
+    <retval type='Q'/>
+  </function>
+  <function name='NSSwapHostLongToBig' inline='true'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSSwapHostLongToLittle' inline='true'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSSwapHostShortToBig' inline='true'>
+    <arg type='S'/>
+    <retval type='S'/>
+  </function>
+  <function name='NSSwapHostShortToLittle' inline='true'>
+    <arg type='S'/>
+    <retval type='S'/>
+  </function>
+  <function name='NSSwapInt' inline='true'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSwapLittleDoubleToHost' inline='true'>
+    <arg type='{_NSSwappedDouble=Q}'/>
+    <retval type='d'/>
+  </function>
+  <function name='NSSwapLittleFloatToHost' inline='true'>
+    <arg type='{_NSSwappedFloat=L}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSSwapLittleIntToHost' inline='true'>
+    <arg type='I'/>
+    <retval type='I'/>
+  </function>
+  <function name='NSSwapLittleLongLongToHost' inline='true'>
+    <arg type='Q'/>
+    <retval type='Q'/>
+  </function>
+  <function name='NSSwapLittleLongToHost' inline='true'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSSwapLittleShortToHost' inline='true'>
+    <arg type='S'/>
+    <retval type='S'/>
+  </function>
+  <function name='NSSwapLong' inline='true'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NSSwapLongLong' inline='true'>
+    <arg type='Q'/>
+    <retval type='Q'/>
+  </function>
+  <function name='NSSwapShort' inline='true'>
+    <arg type='S'/>
+    <retval type='S'/>
+  </function>
+  <function name='NSTemporaryDirectory'>
+    <retval type='@'/>
+  </function>
+  <function name='NSUnionRange'>
+    <arg type='{_NSRange=II}'/>
+    <arg type='{_NSRange=II}'/>
+    <retval type='{_NSRange=II}'/>
+  </function>
+  <function name='NSUnionRect'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+  </function>
+  <function name='NSUserName'>
+    <retval type='@'/>
+  </function>
+  <function name='NSWidth' inline='true'>
+    <arg type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}'/>
+    <retval type='f'/>
+  </function>
+  <function name='NSZoneCalloc'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <arg type='I'/>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSZoneFree'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NSZoneFromPointer'>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='^{_NSZone=}'/>
+  </function>
+  <function name='NSZoneMalloc'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NSZoneName'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <retval type='@'/>
+  </function>
+  <function name='NSZoneRealloc'>
+    <arg type='^{_NSZone=}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='I'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NXReadNSObjectFromCoder'>
+    <arg type='@'/>
+    <retval type='@'/>
+  </function>
+  <class name='NSAppleEventDescriptor'>
+    <method selector='booleanValue'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='descriptorWithBoolean:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method class_method='true' selector='descriptorWithDescriptorType:bytes:length:'>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+    <method selector='initWithAEDescNoCopy:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method selector='initWithDescriptorType:bytes:length:'>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSAppleScript'>
+    <method selector='compileAndReturnError:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='isCompiled'>
+      <retval type='B'/>
+    </method>
+    <method selector='executeAndReturnError:'>
+      <arg index='0' type_modifier='o'/>
+    </method>
+    <method selector='executeAppleEvent:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='initWithContentsOfURL:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSArchiver'>
+    <method class_method='true' selector='archiveRootObject:toFile:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSArray'>
+    <method class_method='true' variadic='true' selector='arrayWithObjects:'/>
+    <method selector='containsObject:'>
+      <retval type='B'/>
+    </method>
+    <method selector='initWithArray:copyItems:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method variadic='true' selector='initWithObjects:'/>
+    <method selector='isEqualToArray:'>
+      <retval type='B'/>
+    </method>
+    <method selector='sortedArrayUsingFunction:context:'>
+      <arg function_pointer='true' type='^?' index='0' type_modifier='n'>
+        <arg type='@'/>
+        <arg type='@'/>
+        <arg type='^v'/>
+        <retval type='i'/>
+      </arg>
+      <arg index='1' type_modifier='n'/>
+    </method>
+    <method selector='sortedArrayUsingFunction:context:hint:'>
+      <arg function_pointer='true' type='^?' index='0' type_modifier='n'>
+        <arg type='@'/>
+        <arg type='@'/>
+        <arg type='^v'/>
+        <retval type='i'/>
+      </arg>
+      <arg index='1' type_modifier='n'/>
+    </method>
+    <method selector='writeToFile:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='addObserver:forKeyPath:options:context:'>
+      <arg index='3' type_modifier='n'/>
+    </method>
+    <method selector='addObserver:toObjectsAtIndexes:forKeyPath:options:context:'>
+      <arg index='4' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='arrayWithObjects:count:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method ignore='true' suggestion='Call the usual object accessors.' selector='getObjects:'/>
+    <method ignore='true' suggestion='Call the usual object accessors.' selector='getObjects:range:'/>
+    <method selector='initWithObjects:count:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='makeObjectsPerformSelector:'>
+      <arg sel_of_type='@8@0:4' index='0'/>
+    </method>
+    <method selector='makeObjectsPerformSelector:withObject:'>
+      <arg sel_of_type='v12@0:4@8' index='0'/>
+    </method>
+    <method selector='sortedArrayUsingSelector:'>
+      <arg sel_of_type='i12@0:4@8' index='0'/>
+    </method>
+  </class>
+  <class name='NSAssertionHandler'>
+    <method variadic='true' selector='handleFailureInFunction:file:lineNumber:description:'>
+      <arg printf_format='true' index='3'/>
+    </method>
+    <method variadic='true' selector='handleFailureInMethod:object:file:lineNumber:description:'>
+      <arg printf_format='true' index='4'/>
+    </method>
+  </class>
+  <class name='NSAttributedString'>
+    <method selector='isEqualToAttributedString:'>
+      <retval type='B'/>
+    </method>
+    <method selector='attribute:atIndex:effectiveRange:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='attribute:atIndex:longestEffectiveRange:inRange:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='attributesAtIndex:effectiveRange:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='attributesAtIndex:longestEffectiveRange:inRange:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSAutoreleasePool'>
+    <method class_method='true' selector='enableFreedObjectCheck:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method class_method='true' selector='enableRelease:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSBundle'>
+    <method selector='isLoaded'>
+      <retval type='B'/>
+    </method>
+    <method selector='load'>
+      <retval type='B'/>
+    </method>
+    <method selector='loadAndReturnError:'>
+      <arg index='0' type_modifier='o'/>
+    </method>
+    <method selector='preflightAndReturnError:'>
+      <arg index='0' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSCharacterSet'>
+    <method selector='characterIsMember:'>
+      <retval type='B'/>
+    </method>
+    <method selector='hasMemberInPlane:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isSupersetOfSet:'>
+      <retval type='B'/>
+    </method>
+    <method selector='longCharacterIsMember:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSCoder'>
+    <method selector='allowsKeyedCoding'>
+      <retval type='B'/>
+    </method>
+    <method selector='containsValueForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='decodeBoolForKey:'>
+      <retval type='B'/>
+    </method>
+    <method ignore='true' variadic='true' suggestion='Call decodeValueOfObjCType:at: several times.' selector='decodeValuesOfObjCTypes:'/>
+    <method selector='encodeBool:forKey:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method ignore='true' variadic='true' suggestion='Call encodeValueOfObjCType:at: several times.' selector='encodeValuesOfObjCTypes:'/>
+    <method selector='decodeArrayOfObjCType:count:at:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+      <arg index='2' type_modifier='n'/>
+    </method>
+    <method selector='decodeBytesForKey:returnedLength:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='decodeBytesWithReturnedLength:'>
+      <arg index='0' type_modifier='o'/>
+    </method>
+    <method selector='decodeValueOfObjCType:at:'>
+      <arg index='1' type_modifier='n'/>
+    </method>
+    <method selector='encodeArrayOfObjCType:count:at:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+      <arg index='2' type_modifier='n'/>
+    </method>
+    <method selector='encodeBytes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='encodeBytes:length:forKey:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='encodeValueOfObjCType:at:'>
+      <arg index='1' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSConditionLock'>
+    <method selector='lockBeforeDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='lockWhenCondition:beforeDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='tryLock'>
+      <retval type='B'/>
+    </method>
+    <method selector='tryLockWhenCondition:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSConnection'>
+    <method selector='independentConversationQueueing'>
+      <retval type='B'/>
+    </method>
+    <method selector='isValid'>
+      <retval type='B'/>
+    </method>
+    <method selector='multipleThreadsEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='registerName:'>
+      <retval type='B'/>
+    </method>
+    <method selector='registerName:withNameServer:'>
+      <retval type='B'/>
+    </method>
+    <method selector='setIndependentConversationQueueing:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSData'>
+    <method ignore='true' class_method='true' suggestion='Call dataWithBytes:length:.' selector='dataWithBytesNoCopy:length:freeWhenDone:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method ignore='true' suggestion='Call initWithBytes:length:.' selector='initWithBytesNoCopy:length:freeWhenDone:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='isEqualToData:'>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToFile:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToFile:options:error:'>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:options:error:'>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='dataWithBytes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method ignore='true' class_method='true' suggestion='Call dataWithBytes:length:.' selector='dataWithBytesNoCopy:length:'/>
+    <method class_method='true' selector='dataWithContentsOfFile:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='dataWithContentsOfURL:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method ignore='true' suggestion='Call bytes or getBytes:length:.' selector='getBytes:'/>
+    <method selector='getBytes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='o'/>
+    </method>
+    <method ignore='true' suggestion='Call bytes or getBytes:length:.' selector='getBytes:range:'/>
+    <method selector='initWithBytes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method ignore='true' suggestion='Call initWithBytes:length:.' selector='initWithBytesNoCopy:length:'/>
+    <method selector='initWithContentsOfFile:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithContentsOfURL:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSDate'>
+    <method selector='isEqualToDate:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSDateFormatter'>
+    <method selector='allowsNaturalLanguage'>
+      <retval type='B'/>
+    </method>
+    <method selector='generatesCalendarDates'>
+      <retval type='B'/>
+    </method>
+    <method selector='getObjectValue:forString:range:error:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='N'/>
+      <arg index='3' type_modifier='N'/>
+      <retval type='B'/>
+    </method>
+    <method selector='initWithDateFormat:allowNaturalLanguage:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='isLenient'>
+      <retval type='B'/>
+    </method>
+    <method selector='setGeneratesCalendarDates:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setLenient:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSDecimalNumber'>
+    <method class_method='true' selector='decimalNumberWithDecimal:'>
+      <arg type='{_NSDecimal=b8b4b1b1b18[8S]}' index='0'/>
+    </method>
+    <method class_method='true' selector='decimalNumberWithMantissa:exponent:isNegative:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='decimalValue'>
+      <retval type='{_NSDecimal=b8b4b1b1b18[8S]}'/>
+    </method>
+    <method selector='initWithDecimal:'>
+      <arg type='{_NSDecimal=b8b4b1b1b18[8S]}' index='0'/>
+    </method>
+    <method selector='initWithMantissa:exponent:isNegative:'>
+      <arg type='B' index='2'/>
+    </method>
+  </class>
+  <class name='NSDecimalNumberHandler'>
+    <method class_method='true' selector='decimalNumberHandlerWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:'>
+      <arg type='B' index='2'/>
+      <arg type='B' index='3'/>
+      <arg type='B' index='4'/>
+      <arg type='B' index='5'/>
+    </method>
+    <method selector='initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:'>
+      <arg type='B' index='2'/>
+      <arg type='B' index='3'/>
+      <arg type='B' index='4'/>
+      <arg type='B' index='5'/>
+    </method>
+  </class>
+  <class name='NSDictionary'>
+    <method class_method='true' variadic='true' selector='dictionaryWithObjectsAndKeys:'/>
+    <method selector='fileExtensionHidden'>
+      <retval type='B'/>
+    </method>
+    <method selector='fileIsAppendOnly'>
+      <retval type='B'/>
+    </method>
+    <method selector='fileIsImmutable'>
+      <retval type='B'/>
+    </method>
+    <method selector='initWithDictionary:copyItems:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method variadic='true' selector='initWithObjectsAndKeys:'/>
+    <method selector='isEqualToDictionary:'>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToFile:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='dictionaryWithObjects:forKeys:count:'>
+      <arg c_array_length_in_arg='2' index='0' type_modifier='n'/>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+    <method selector='getObjects:andKeys:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='initWithObjects:forKeys:count:'>
+      <arg c_array_length_in_arg='2' index='0' type_modifier='n'/>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+    <method selector='keysSortedByValueUsingSelector:'>
+      <arg sel_of_type='i12@0:4@8' index='0'/>
+    </method>
+  </class>
+  <class name='NSDistributedLock'>
+    <method selector='tryLock'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSDistributedNotificationCenter'>
+    <method selector='postNotificationName:object:userInfo:deliverImmediately:'>
+      <arg type='B' index='3'/>
+    </method>
+    <method selector='setSuspended:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='suspended'>
+      <retval type='B'/>
+    </method>
+    <method selector='addObserver:selector:name:object:'>
+      <arg sel_of_type='v12@0:4@8' index='1'/>
+    </method>
+    <method selector='addObserver:selector:name:object:suspensionBehavior:'>
+      <arg sel_of_type='v12@0:4@8' index='1'/>
+    </method>
+  </class>
+  <class name='NSException'>
+    <method class_method='true' variadic='true' selector='raise:format:'>
+      <arg printf_format='true' index='1'/>
+    </method>
+  </class>
+  <class name='NSFileHandle'>
+    <method selector='initWithFileDescriptor:closeOnDealloc:'>
+      <arg type='B' index='1'/>
+    </method>
+  </class>
+  <class name='NSFileManager'>
+    <method selector='changeCurrentDirectoryPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='changeFileAttributes:atPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='contentsEqualAtPath:andPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='copyPath:toPath:handler:'>
+      <retval type='B'/>
+    </method>
+    <method selector='createDirectoryAtPath:attributes:'>
+      <retval type='B'/>
+    </method>
+    <method selector='createFileAtPath:contents:attributes:'>
+      <retval type='B'/>
+    </method>
+    <method selector='createSymbolicLinkAtPath:pathContent:'>
+      <retval type='B'/>
+    </method>
+    <method selector='fileAttributesAtPath:traverseLink:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='fileExistsAtPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='fileExistsAtPath:isDirectory:'>
+      <arg type='^B' index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='isDeletableFileAtPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isExecutableFileAtPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isReadableFileAtPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isWritableFileAtPath:'>
+      <retval type='B'/>
+    </method>
+    <method selector='linkPath:toPath:handler:'>
+      <retval type='B'/>
+    </method>
+    <method selector='movePath:toPath:handler:'>
+      <retval type='B'/>
+    </method>
+    <method selector='removeFileAtPath:handler:'>
+      <retval type='B'/>
+    </method>
+    <method selector='attributesOfFileSystemForPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='attributesOfItemAtPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='contentsOfDirectoryAtPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='copyItemAtPath:toPath:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='createDirectoryAtPath:withIntermediateDirectories:attributes:error:'>
+      <arg index='3' type_modifier='o'/>
+    </method>
+    <method selector='createSymbolicLinkAtPath:withDestinationPath:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='destinationOfSymbolicLinkAtPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='linkItemAtPath:toPath:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='moveItemAtPath:toPath:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='removeItemAtPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='setAttributes:ofItemAtPath:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='stringWithFileSystemRepresentation:length:'>
+      <arg c_array_of_fixed_length='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='subpathsOfDirectoryAtPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSFormatter'>
+    <method selector='getObjectValue:forString:errorDescription:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='isPartialStringValid:newEditingString:errorDescription:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='isPartialStringValid:proposedSelectedRange:originalString:originalSelectedRange:errorDescription:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+      <arg index='4' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSHTTPCookie'>
+    <method selector='isSecure'>
+      <retval type='B'/>
+    </method>
+    <method selector='isSessionOnly'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSHost'>
+    <method selector='isEqualToHost:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='isHostCacheEnabled'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='setHostCacheEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSIndexSet'>
+    <method selector='containsIndex:'>
+      <retval type='B'/>
+    </method>
+    <method selector='containsIndexes:'>
+      <retval type='B'/>
+    </method>
+    <method selector='containsIndexesInRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='intersectsIndexesInRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqualToIndexSet:'>
+      <retval type='B'/>
+    </method>
+    <method selector='getIndexes:maxCount:inIndexRange:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+      <arg index='2' type_modifier='N'/>
+    </method>
+  </class>
+  <class name='NSInputStream'>
+    <method ignore='true' selector='getBuffer:length:'>
+      <retval type='B'/>
+    </method>
+    <method selector='hasBytesAvailable'>
+      <retval type='B'/>
+    </method>
+    <method selector='read:maxLength:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSInvocation'>
+    <method selector='argumentsRetained'>
+      <retval type='B'/>
+    </method>
+    <method ignore='true' selector='getArgument:atIndex:'/>
+    <method ignore='true' selector='getReturnValue:'/>
+    <method selector='setArgument:atIndex:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method selector='setReturnValue:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSKeyedArchiver'>
+    <method class_method='true' selector='archiveRootObject:toFile:'>
+      <retval type='B'/>
+    </method>
+    <method selector='encodeBool:forKey:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='encodeBytes:length:forKey:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSKeyedUnarchiver'>
+    <method selector='containsValueForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='decodeBoolForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='decodeBytesForKey:returnedLength:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSLock'>
+    <method selector='lockBeforeDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='tryLock'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSMachBootstrapServer'>
+    <method selector='registerPort:name:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSMetadataQuery'>
+    <method selector='isGathering'>
+      <retval type='B'/>
+    </method>
+    <method selector='isStarted'>
+      <retval type='B'/>
+    </method>
+    <method selector='isStopped'>
+      <retval type='B'/>
+    </method>
+    <method selector='startQuery'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSMethodSignature'>
+    <method selector='isOneway'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSMutableArray'>
+    <method selector='sortUsingFunction:context:'>
+      <arg function_pointer='true' type='^?' index='0' type_modifier='n'>
+        <arg type='@'/>
+        <arg type='@'/>
+        <arg type='^v'/>
+        <retval type='i'/>
+      </arg>
+      <arg index='1' type_modifier='n'/>
+    </method>
+    <method selector='removeObjectsFromIndices:numIndices:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='sortUsingSelector:'>
+      <arg sel_of_type='i12@0:4@8' index='0'/>
+    </method>
+  </class>
+  <class name='NSMutableString'>
+    <method variadic='true' selector='appendFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+  </class>
+  <class name='NSMutableURLRequest'>
+    <method selector='setHTTPShouldHandleCookies:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSNetService'>
+    <method selector='getInputStream:outputStream:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='setTXTRecordData:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSNumber'>
+    <method selector='boolValue'>
+      <retval type='B'/>
+    </method>
+    <method selector='decimalValue'>
+      <retval type='{_NSDecimal=b8b4b1b1b18[8S]}'/>
+    </method>
+    <method selector='initWithBool:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='isEqualToNumber:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='numberWithBool:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSNumberFormatter'>
+    <method selector='allowsFloats'>
+      <retval type='B'/>
+    </method>
+    <method selector='alwaysShowsDecimalSeparator'>
+      <retval type='B'/>
+    </method>
+    <method selector='generatesDecimalNumbers'>
+      <retval type='B'/>
+    </method>
+    <method selector='getObjectValue:forString:range:error:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='N'/>
+      <arg index='3' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='hasThousandSeparators'>
+      <retval type='B'/>
+    </method>
+    <method selector='localizesFormat'>
+      <retval type='B'/>
+    </method>
+    <method selector='setAllowsFloats:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setAlwaysShowsDecimalSeparator:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setGeneratesDecimalNumbers:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setHasThousandSeparators:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setLocalizesFormat:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setUsesGroupingSeparator:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='usesGroupingSeparator'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSObject'>
+    <method class_method='true' selector='accessInstanceVariablesDirectly'>
+      <retval type='B'/>
+    </method>
+    <method selector='attemptRecoveryFromError:optionIndex:'>
+      <retval type='B'/>
+    </method>
+    <method selector='authenticateComponents:withData:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='automaticallyNotifiesObserversForKey:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='conformsToProtocol:'>
+      <arg index='0' type_modifier='n'/>
+      <retval type='B'/>
+    </method>
+    <method selector='conformsToProtocol:'>
+      <retval type='B'/>
+    </method>
+    <method selector='connection:handleRequest:'>
+      <retval type='B'/>
+    </method>
+    <method selector='connection:shouldMakeNewConnection:'>
+      <retval type='B'/>
+    </method>
+    <method selector='doesContain:'>
+      <retval type='B'/>
+    </method>
+    <method selector='download:shouldDecodeSourceDataOfMIMEType:'>
+      <retval type='B'/>
+    </method>
+    <method selector='fileManager:shouldProceedAfterError:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='instancesRespondToSelector:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isCaseInsensitiveLike:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqual:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isGreaterThan:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isGreaterThanOrEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isKindOfClass:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isLessThan:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isLessThanOrEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isLike:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isMemberOfClass:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isNotEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isProxy'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='isSubclassOfClass:'>
+      <retval type='B'/>
+    </method>
+    <method selector='makeNewConnection:sender:'>
+      <retval type='B'/>
+    </method>
+    <method selector='netServiceBrowser:didFindDomain:moreComing:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='netServiceBrowser:didFindService:moreComing:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='netServiceBrowser:didRemoveDomain:moreComing:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='netServiceBrowser:didRemoveService:moreComing:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='performSelectorOnMainThread:withObject:waitUntilDone:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='performSelectorOnMainThread:withObject:waitUntilDone:modes:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='respondsToSelector:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingBeginsWith:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingContains:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingEndsWith:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingIsEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingIsGreaterThan:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingIsGreaterThanOrEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingIsLessThan:'>
+      <retval type='B'/>
+    </method>
+    <method selector='scriptingIsLessThanOrEqualTo:'>
+      <retval type='B'/>
+    </method>
+    <method selector='spellServer:findMisspelledWordInString:language:wordCount:countOnly:'>
+      <arg type='B' index='4'/>
+      <arg index='3' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='useStoredAccessor'>
+      <retval type='B'/>
+    </method>
+    <method selector='validateValue:forKey:error:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='validateValue:forKeyPath:error:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='addObserver:forKeyPath:options:context:'>
+      <arg index='3' type_modifier='n'/>
+    </method>
+    <method selector='attemptRecoveryFromError:optionIndex:delegate:didRecoverSelector:contextInfo:'>
+      <arg sel_of_type='v16@0:4B8^v12' index='3'/>
+      <arg index='4' type_modifier='n'/>
+    </method>
+    <method selector='countByEnumeratingWithState:objects:count:'>
+      <arg index='0' type_modifier='n'/>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+    <method selector='handleMachMessage:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method selector='observeValueForKeyPath:ofObject:change:context:'>
+      <arg index='3' type_modifier='n'/>
+    </method>
+    <method selector='setObservationInfo:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method selector='spellServer:checkGrammarInString:language:details:'>
+      <arg index='3' type_modifier='o'/>
+    </method>
+    <method selector='performSelector:'>
+      <arg sel_of_type='@8@0:4' index='0'/>
+    </method>
+    <method selector='performSelector:withObject:'>
+      <arg sel_of_type='v12@0:4@8' index='0'/>
+    </method>
+    <method selector='performSelector:withObject:withObject:'>
+      <arg sel_of_type='@16@0:4@8@12' index='0'/>
+    </method>
+  </class>
+  <class name='NSOutputStream'>
+    <method selector='hasSpaceAvailable'>
+      <retval type='B'/>
+    </method>
+    <method selector='initToFileAtPath:append:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method class_method='true' selector='outputStreamToFileAtPath:append:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='initToBuffer:capacity:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='outputStreamToBuffer:capacity:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='o'/>
+    </method>
+    <method selector='write:maxLength:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSPort'>
+    <method selector='isValid'>
+      <retval type='B'/>
+    </method>
+    <method selector='sendBeforeDate:components:from:reserved:'>
+      <retval type='B'/>
+    </method>
+    <method selector='sendBeforeDate:msgid:components:from:reserved:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='allocWithZone:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSPortCoder'>
+    <method selector='isBycopy'>
+      <retval type='B'/>
+    </method>
+    <method selector='isByref'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSPortMessage'>
+    <method selector='sendBeforeDate:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSPortNameServer'>
+    <method selector='registerPort:name:'>
+      <retval type='B'/>
+    </method>
+    <method selector='removePortForName:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSPositionalSpecifier'>
+    <method selector='insertionReplaces'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSPredicate'>
+    <method selector='evaluateWithObject:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' variadic='true' selector='predicateWithFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method class_method='true' selector='predicateWithValue:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='NSPropertyListSerialization'>
+    <method class_method='true' selector='propertyList:isValidForFormat:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='dataFromPropertyList:format:errorDescription:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='propertyListFromData:mutabilityOption:format:errorDescription:'>
+      <arg index='2' type_modifier='o'/>
+      <arg index='3' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSProxy'>
+    <method class_method='true' selector='respondsToSelector:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='allocWithZone:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSRecursiveLock'>
+    <method selector='lockBeforeDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='tryLock'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSRunLoop'>
+    <method selector='runMode:beforeDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='performSelector:target:argument:order:modes:'>
+      <arg sel_of_type='v12@0:4@8' index='0'/>
+    </method>
+  </class>
+  <class name='NSScanner'>
+    <method selector='caseSensitive'>
+      <retval type='B'/>
+    </method>
+    <method selector='isAtEnd'>
+      <retval type='B'/>
+    </method>
+    <method selector='scanCharactersFromSet:intoString:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanDecimal:'>
+      <arg type='^{_NSDecimal=b8b4b1b1b18[8S]}' index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanDouble:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanFloat:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanHexInt:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanInt:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanLongLong:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanString:intoString:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanUpToCharactersFromSet:intoString:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='scanUpToString:intoString:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='setCaseSensitive:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='scanInteger:'>
+      <arg index='0' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSScriptClassDescription'>
+    <method selector='isLocationRequiredToCreateForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isReadOnlyKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='matchesAppleEventCode:'>
+      <retval type='B'/>
+    </method>
+    <method selector='supportsCommand:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSScriptCommand'>
+    <method selector='isWellFormed'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSScriptCommandDescription'>
+    <method selector='isOptionalArgumentWithName:'>
+      <retval type='B'/>
+    </method>
+    <method selector='createCommandInstanceWithZone:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSScriptObjectSpecifier'>
+    <method selector='containerIsObjectBeingTested'>
+      <retval type='B'/>
+    </method>
+    <method selector='containerIsRangeContainerObject'>
+      <retval type='B'/>
+    </method>
+    <method selector='setContainerIsObjectBeingTested:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setContainerIsRangeContainerObject:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='indicesOfObjectsByEvaluatingWithContainer:count:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSScriptWhoseTest'>
+    <method selector='isTrue'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSSet'>
+    <method selector='containsObject:'>
+      <retval type='B'/>
+    </method>
+    <method variadic='true' selector='initWithObjects:'/>
+    <method selector='initWithSet:copyItems:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='intersectsSet:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqualToSet:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isSubsetOfSet:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' variadic='true' selector='setWithObjects:'/>
+    <method selector='addObserver:forKeyPath:options:context:'>
+      <arg index='3' type_modifier='n'/>
+    </method>
+    <method selector='initWithObjects:count:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='setWithObjects:count:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='makeObjectsPerformSelector:'>
+      <arg sel_of_type='@8@0:4' index='0'/>
+    </method>
+    <method selector='makeObjectsPerformSelector:withObject:'>
+      <arg sel_of_type='v12@0:4@8' index='0'/>
+    </method>
+  </class>
+  <class name='NSSocketPortNameServer'>
+    <method selector='registerPort:name:'>
+      <retval type='B'/>
+    </method>
+    <method selector='registerPort:name:nameServerPortNumber:'>
+      <retval type='B'/>
+    </method>
+    <method selector='removePortForName:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSSortDescriptor'>
+    <method selector='ascending'>
+      <retval type='B'/>
+    </method>
+    <method selector='initWithKey:ascending:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='initWithKey:ascending:selector:'>
+      <arg type='B' index='1'/>
+      <arg sel_of_type='i12@0:4@8' index='2'/>
+    </method>
+  </class>
+  <class name='NSSpellServer'>
+    <method selector='isWordInUserDictionaries:caseSensitive:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='registerLanguage:byVendor:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSStream'>
+    <method selector='setProperty:forKey:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='getStreamsToHost:port:inputStream:outputStream:'>
+      <arg index='2' type_modifier='o'/>
+      <arg index='3' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSString'>
+    <method selector='canBeConvertedToEncoding:'>
+      <retval type='B'/>
+    </method>
+    <method selector='completePathIntoString:caseSensitive:matchesIntoArray:filterTypes:'>
+      <arg type='B' index='1'/>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='dataUsingEncoding:allowLossyConversion:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='getCString:maxLength:encoding:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='getFileSystemRepresentation:maxLength:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='hasPrefix:'>
+      <retval type='B'/>
+    </method>
+    <method selector='hasSuffix:'>
+      <retval type='B'/>
+    </method>
+    <method ignore='true' suggestion='Call initWithBytes:length:encoding:.' selector='initWithBytesNoCopy:length:encoding:freeWhenDone:'>
+      <arg type='B' index='3'/>
+    </method>
+    <method selector='initWithCStringNoCopy:length:freeWhenDone:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method ignore='true' suggestion='Call initWithCharacters:length:.' selector='initWithCharactersNoCopy:length:freeWhenDone:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method variadic='true' selector='initWithFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method variadic='true' selector='initWithFormat:locale:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method selector='isAbsolutePath'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqualToString:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' variadic='true' selector='localizedStringWithFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method variadic='true' selector='stringByAppendingFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method class_method='true' variadic='true' selector='stringWithFormat:'>
+      <arg printf_format='true' index='0'/>
+    </method>
+    <method selector='writeToFile:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToFile:atomically:encoding:error:'>
+      <arg type='B' index='1'/>
+      <arg index='3' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:atomically:'>
+      <arg type='B' index='1'/>
+      <retval type='B'/>
+    </method>
+    <method selector='writeToURL:atomically:encoding:error:'>
+      <arg type='B' index='1'/>
+      <arg index='3' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='getBytes:maxLength:usedLength:encoding:options:range:remainingRange:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <arg index='6' type_modifier='o'/>
+    </method>
+    <method ignore='true' selector='getCharacters:'/>
+    <method ignore='true' selector='getCharacters:range:'/>
+    <method selector='getLineStart:end:contentsEnd:forRange:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='getParagraphStart:end:contentsEnd:forRange:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithBytes:length:encoding:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='initWithCString:length:'>
+      <arg c_array_of_fixed_length='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='initWithCharacters:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='initWithContentsOfFile:encoding:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithContentsOfFile:usedEncoding:error:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithContentsOfURL:encoding:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithContentsOfURL:usedEncoding:error:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='stringWithCString:length:'>
+      <arg c_array_of_fixed_length='1' index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='stringWithCharacters:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='stringWithContentsOfFile:encoding:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='stringWithContentsOfFile:usedEncoding:error:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='stringWithContentsOfURL:encoding:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method class_method='true' selector='stringWithContentsOfURL:usedEncoding:error:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSTask'>
+    <method selector='isRunning'>
+      <retval type='B'/>
+    </method>
+    <method selector='resume'>
+      <retval type='B'/>
+    </method>
+    <method selector='suspend'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSThread'>
+    <method class_method='true' selector='isMultiThreaded'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='setThreadPriority:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='detachNewThreadSelector:toTarget:withObject:'>
+      <arg sel_of_type='v12@0:4@8' index='0'/>
+    </method>
+    <method selector='initWithTarget:selector:object:'>
+      <arg sel_of_type='v12@0:4@8' index='1'/>
+    </method>
+  </class>
+  <class name='NSTimeZone'>
+    <method selector='isDaylightSavingTime'>
+      <retval type='B'/>
+    </method>
+    <method selector='isDaylightSavingTimeForDate:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEqualToTimeZone:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSTimer'>
+    <method selector='initWithFireDate:interval:target:selector:userInfo:repeats:'>
+      <arg type='B' index='5'/>
+    </method>
+    <method selector='isValid'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='scheduledTimerWithTimeInterval:invocation:repeats:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method class_method='true' selector='scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:'>
+      <arg type='B' index='4'/>
+    </method>
+    <method class_method='true' selector='timerWithTimeInterval:invocation:repeats:'>
+      <arg type='B' index='2'/>
+    </method>
+    <method class_method='true' selector='timerWithTimeInterval:target:selector:userInfo:repeats:'>
+      <arg type='B' index='4'/>
+      <arg sel_of_type='v12@0:4@8' index='2'/>
+    </method>
+    <method selector='initWithFireDate:interval:target:selector:userInfo:repeats
+:'>
+      <arg sel_of_type='v12@0:4@8' index='3'/>
+    </method>
+    <method class_method='true' selector='scheduledTimerWithTimeInterval:target:
+selector:userInfo:repeats:'>
+      <arg sel_of_type='v12@0:4@8' index='2'/>
+    </method>
+  </class>
+  <class name='NSURL'>
+    <method selector='URLHandleUsingCache:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='isFileURL'>
+      <retval type='B'/>
+    </method>
+    <method selector='loadResourceDataNotifyingClient:usingCache:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='resourceDataUsingCache:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setProperty:forKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='setResourceData:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSURLConnection'>
+    <method class_method='true' selector='canHandleRequest:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='sendSynchronousRequest:returningResponse:error:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSURLCredential'>
+    <method selector='hasPassword'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSURLDownload'>
+    <method class_method='true' selector='canResumeDownloadDecodedWithEncodingMIMEType:'>
+      <retval type='B'/>
+    </method>
+    <method selector='deletesFileUponFailure'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDeletesFileUponFailure:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setDestination:allowOverwrite:'>
+      <arg type='B' index='1'/>
+    </method>
+  </class>
+  <class name='NSURLHandle'>
+    <method class_method='true' selector='canInitWithURL:'>
+      <retval type='B'/>
+    </method>
+    <method selector='didLoadBytes:loadComplete:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='initWithURL:cached:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='writeData:'>
+      <retval type='B'/>
+    </method>
+    <method selector='writeProperty:forKey:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSURLProtectionSpace'>
+    <method selector='isProxy'>
+      <retval type='B'/>
+    </method>
+    <method selector='receivesCredentialSecurely'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSURLProtocol'>
+    <method class_method='true' selector='canInitWithRequest:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='registerClass:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='requestIsCacheEquivalent:toRequest:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSURLRequest'>
+    <method selector='HTTPShouldHandleCookies'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSUnarchiver'>
+    <method selector='isAtEnd'>
+      <retval type='B'/>
+    </method>
+    <method selector='setObjectZone:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSUndoManager'>
+    <method selector='canRedo'>
+      <retval type='B'/>
+    </method>
+    <method selector='canUndo'>
+      <retval type='B'/>
+    </method>
+    <method selector='groupsByEvent'>
+      <retval type='B'/>
+    </method>
+    <method selector='isRedoing'>
+      <retval type='B'/>
+    </method>
+    <method selector='isUndoRegistrationEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='isUndoing'>
+      <retval type='B'/>
+    </method>
+    <method selector='setGroupsByEvent:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='registerUndoWithTarget:selector:object:'>
+      <arg sel_of_type='v12@0:4@8' index='1'/>
+    </method>
+  </class>
+  <class name='NSUserDefaults'>
+    <method selector='boolForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='objectIsForcedForKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='objectIsForcedForKey:inDomain:'>
+      <retval type='B'/>
+    </method>
+    <method selector='setBool:forKey:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='synchronize'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSValue'>
+    <method selector='isEqualToValue:'>
+      <retval type='B'/>
+    </method>
+    <method ignore='true' selector='getValue:'/>
+    <method selector='initWithBytes:objCType:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='value:withObjCType:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='valueWithBytes:objCType:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='valueWithPointer:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSValueTransformer'>
+    <method class_method='true' selector='allowsReverseTransformation'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSXMLDTDNode'>
+    <method selector='isExternal'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='NSXMLDocument'>
+    <method selector='isStandalone'>
+      <retval type='B'/>
+    </method>
+    <method selector='setStandalone:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='validateAndReturnError:'>
+      <arg index='0' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='initWithContentsOfURL:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithData:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithXMLString:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='objectByApplyingXSLT:arguments:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='objectByApplyingXSLTAtURL:arguments:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='objectByApplyingXSLTString:arguments:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSXMLElement'>
+    <method selector='normalizeAdjacentTextNodesPreservingCDATA:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='initWithXMLString:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSXMLNode'>
+    <method selector='canonicalXMLStringPreservingComments:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setStringValue:resolvingEntities:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='nodesForXPath:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='objectsForXQuery:constants:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='objectsForXQuery:error:'>
+      <arg index='1' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSXMLParser'>
+    <method selector='parse'>
+      <retval type='B'/>
+    </method>
+    <method selector='setShouldProcessNamespaces:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setShouldReportNamespacePrefixes:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setShouldResolveExternalEntities:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='shouldProcessNamespaces'>
+      <retval type='B'/>
+    </method>
+    <method selector='shouldReportNamespacePrefixes'>
+      <retval type='B'/>
+    </method>
+    <method selector='shouldResolveExternalEntities'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <informal_protocol name='NSArchiverCallback'>
+    <method type='#8@0:4' selector='classForArchiver'/>
+    <method type='@12@0:4@8' selector='replacementObjectForArchiver:'/>
+  </informal_protocol>
+  <informal_protocol name='NSClassDescriptionPrimitives'>
+    <method type='@8@0:4' selector='attributeKeys'/>
+    <method type='@8@0:4' selector='classDescription'/>
+    <method type='@12@0:4@8' selector='inverseForRelationshipKey:'/>
+    <method type='@8@0:4' selector='toManyRelationshipKeys'/>
+    <method type='@8@0:4' selector='toOneRelationshipKeys'/>
+  </informal_protocol>
+  <informal_protocol name='NSComparisonMethods'>
+    <method type='B12@0:4@8' selector='doesContain:'/>
+    <method type='B12@0:4@8' selector='isCaseInsensitiveLike:'/>
+    <method type='B12@0:4@8' selector='isEqualTo:'/>
+    <method type='B12@0:4@8' selector='isGreaterThan:'/>
+    <method type='B12@0:4@8' selector='isGreaterThanOrEqualTo:'/>
+    <method type='B12@0:4@8' selector='isLessThan:'/>
+    <method type='B12@0:4@8' selector='isLessThanOrEqualTo:'/>
+    <method type='B12@0:4@8' selector='isLike:'/>
+    <method type='B12@0:4@8' selector='isNotEqualTo:'/>
+  </informal_protocol>
+  <informal_protocol name='NSConnectionDelegateMethods'>
+    <method type='B16@0:4@8@12' selector='authenticateComponents:withData:'/>
+    <method type='@12@0:4@8' selector='authenticationDataForComponents:'/>
+    <method type='B16@0:4@8@12' selector='connection:shouldMakeNewConnection:'/>
+    <method type='@12@0:4@8' selector='createConversationForConnection:'/>
+    <method type='B16@0:4@8@12' selector='makeNewConnection:sender:'/>
+  </informal_protocol>
+  <informal_protocol name='NSCopyLinkMoveHandler'>
+    <method type='B16@0:4@8@12' selector='fileManager:shouldProceedAfterError:'/>
+    <method type='v16@0:4@8@12' selector='fileManager:willProcessPath:'/>
+  </informal_protocol>
+  <informal_protocol name='NSDelayedPerforming'>
+    <method class_method='true' type='v12@0:4@8' selector='cancelPreviousPerformRequestsWithTarget:'/>
+    <method class_method='true' type='v20@0:4@8:12@16' selector='cancelPreviousPerformRequestsWithTarget:selector:object:'/>
+    <method type='v24@0:4:8@12d16' selector='performSelector:withObject:afterDelay:'/>
+    <method type='v28@0:4:8@12d16@24' selector='performSelector:withObject:afterDelay:inModes:'/>
+  </informal_protocol>
+  <informal_protocol name='NSDeprecatedKeyValueCoding'>
+    <method type='@12@0:4@8' selector='handleQueryWithUnboundKey:'/>
+    <method type='v16@0:4@8@12' selector='handleTakeValue:forUnboundKey:'/>
+    <method type='@12@0:4@8' selector='storedValueForKey:'/>
+    <method type='v16@0:4@8@12' selector='takeStoredValue:forKey:'/>
+    <method type='v16@0:4@8@12' selector='takeValue:forKey:'/>
+    <method type='v16@0:4@8@12' selector='takeValue:forKeyPath:'/>
+    <method type='v12@0:4@8' selector='takeValuesFromDictionary:'/>
+    <method type='v12@0:4@8' selector='unableToSetNilForKey:'/>
+    <method class_method='true' type='B8@0:4' selector='useStoredAccessor'/>
+    <method type='@12@0:4@8' selector='valuesForKeys:'/>
+  </informal_protocol>
+  <informal_protocol name='NSDistantObjectRequestMethods'>
+    <method type='B16@0:4@8@12' selector='connection:handleRequest:'/>
+  </informal_protocol>
+  <informal_protocol name='NSDistributedObjects'>
+    <method type='#8@0:4' selector='classForPortCoder'/>
+    <method type='@12@0:4@8' selector='replacementObjectForPortCoder:'/>
+  </informal_protocol>
+  <informal_protocol name='NSErrorRecoveryAttempting'>
+    <method type='B16@0:4@8I12' selector='attemptRecoveryFromError:optionIndex:'/>
+    <method type='v28@0:4@8I12@16:20^v24' selector='attemptRecoveryFromError:optionIndex:delegate:didRecoverSelector:contextInfo:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyValueCoding'>
+    <method class_method='true' type='B8@0:4' selector='accessInstanceVariablesDirectly'/>
+    <method type='@12@0:4@8' selector='dictionaryWithValuesForKeys:'/>
+    <method type='@12@0:4@8' selector='mutableArrayValueForKey:'/>
+    <method type='@12@0:4@8' selector='mutableArrayValueForKeyPath:'/>
+    <method type='@12@0:4@8' selector='mutableSetValueForKey:'/>
+    <method type='@12@0:4@8' selector='mutableSetValueForKeyPath:'/>
+    <method type='v12@0:4@8' selector='setNilValueForKey:'/>
+    <method type='v16@0:4@8@12' selector='setValue:forKey:'/>
+    <method type='v16@0:4@8@12' selector='setValue:forKeyPath:'/>
+    <method type='v16@0:4@8@12' selector='setValue:forUndefinedKey:'/>
+    <method type='v12@0:4@8' selector='setValuesForKeysWithDictionary:'/>
+    <method type='B20@0:4^@8@12^@16' selector='validateValue:forKey:error:'/>
+    <method type='B20@0:4^@8@12^@16' selector='validateValue:forKeyPath:error:'/>
+    <method type='@12@0:4@8' selector='valueForKey:'/>
+    <method type='@12@0:4@8' selector='valueForKeyPath:'/>
+    <method type='@12@0:4@8' selector='valueForUndefinedKey:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyValueObserverNotification'>
+    <method type='v20@0:4i8@12@16' selector='didChange:valuesAtIndexes:forKey:'/>
+    <method type='v12@0:4@8' selector='didChangeValueForKey:'/>
+    <method type='v20@0:4@8i12@16' selector='didChangeValueForKey:withSetMutation:usingObjects:'/>
+    <method type='v20@0:4i8@12@16' selector='willChange:valuesAtIndexes:forKey:'/>
+    <method type='v12@0:4@8' selector='willChangeValueForKey:'/>
+    <method type='v20@0:4@8i12@16' selector='willChangeValueForKey:withSetMutation:usingObjects:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyValueObserverRegistration'>
+    <method type='v24@0:4@8@12I16^v20' selector='addObserver:forKeyPath:options:context:'/>
+    <method type='v16@0:4@8@12' selector='removeObserver:forKeyPath:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyValueObserving'>
+    <method type='v24@0:4@8@12@16^v20' selector='observeValueForKeyPath:ofObject:change:context:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyValueObservingCustomization'>
+    <method class_method='true' type='B12@0:4@8' selector='automaticallyNotifiesObserversForKey:'/>
+    <method type='^v8@0:4' selector='observationInfo'/>
+    <method class_method='true' type='v16@0:4@8@12' selector='setKeys:triggerChangeNotificationsForDependentKey:'/>
+    <method type='v12@0:4^v8' selector='setObservationInfo:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyedArchiverDelegate'>
+    <method type='v16@0:4@8@12' selector='archiver:didEncodeObject:'/>
+    <method type='@16@0:4@8@12' selector='archiver:willEncodeObject:'/>
+    <method type='v20@0:4@8@12@16' selector='archiver:willReplaceObject:withObject:'/>
+    <method type='v12@0:4@8' selector='archiverDidFinish:'/>
+    <method type='v12@0:4@8' selector='archiverWillFinish:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyedArchiverObjectSubstitution'>
+    <method class_method='true' type='@8@0:4' selector='classFallbacksForKeyedArchiver'/>
+    <method type='#8@0:4' selector='classForKeyedArchiver'/>
+    <method type='@12@0:4@8' selector='replacementObjectForKeyedArchiver:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyedUnarchiverDelegate'>
+    <method type='#20@0:4@8@12@16' selector='unarchiver:cannotDecodeObjectOfClassName:originalClasses:'/>
+    <method type='@16@0:4@8@12' selector='unarchiver:didDecodeObject:'/>
+    <method type='v20@0:4@8@12@16' selector='unarchiver:willReplaceObject:withObject:'/>
+    <method type='v12@0:4@8' selector='unarchiverDidFinish:'/>
+    <method type='v12@0:4@8' selector='unarchiverWillFinish:'/>
+  </informal_protocol>
+  <informal_protocol name='NSKeyedUnarchiverObjectSubstitution'>
+    <method class_method='true' type='#8@0:4' selector='classForKeyedUnarchiver'/>
+  </informal_protocol>
+  <informal_protocol name='NSMachPortDelegateMethods'>
+    <method type='v12@0:4^v8' selector='handleMachMessage:'/>
+  </informal_protocol>
+  <informal_protocol name='NSMainThreadPerformAdditions'>
+    <method type='v20@0:4:8@12B16' selector='performSelectorOnMainThread:withObject:waitUntilDone:'/>
+    <method type='v24@0:4:8@12B16@20' selector='performSelectorOnMainThread:withObject:waitUntilDone:modes:'/>
+  </informal_protocol>
+  <informal_protocol name='NSMetadataQueryDelegate'>
+    <method type='@16@0:4@8@12' selector='metadataQuery:replacementObjectForResultObject:'/>
+    <method type='@20@0:4@8@12@16' selector='metadataQuery:replacementValueForAttribute:value:'/>
+  </informal_protocol>
+  <informal_protocol name='NSNetServiceBrowserDelegateMethods'>
+    <method type='v20@0:4@8@12B16' selector='netServiceBrowser:didFindDomain:moreComing:'/>
+    <method type='v20@0:4@8@12B16' selector='netServiceBrowser:didFindService:moreComing:'/>
+    <method type='v16@0:4@8@12' selector='netServiceBrowser:didNotSearch:'/>
+    <method type='v20@0:4@8@12B16' selector='netServiceBrowser:didRemoveDomain:moreComing:'/>
+    <method type='v20@0:4@8@12B16' selector='netServiceBrowser:didRemoveService:moreComing:'/>
+    <method type='v12@0:4@8' selector='netServiceBrowserDidStopSearch:'/>
+    <method type='v12@0:4@8' selector='netServiceBrowserWillSearch:'/>
+  </informal_protocol>
+  <informal_protocol name='NSNetServiceDelegateMethods'>
+    <method type='v16@0:4@8@12' selector='netService:didNotPublish:'/>
+    <method type='v16@0:4@8@12' selector='netService:didNotResolve:'/>
+    <method type='v16@0:4@8@12' selector='netService:didUpdateTXTRecordData:'/>
+    <method type='v12@0:4@8' selector='netServiceDidPublish:'/>
+    <method type='v12@0:4@8' selector='netServiceDidResolveAddress:'/>
+    <method type='v12@0:4@8' selector='netServiceDidStop:'/>
+    <method type='v12@0:4@8' selector='netServiceWillPublish:'/>
+    <method type='v12@0:4@8' selector='netServiceWillResolve:'/>
+  </informal_protocol>
+  <informal_protocol name='NSPortDelegateMethods'>
+    <method type='v12@0:4@8' selector='handlePortMessage:'/>
+  </informal_protocol>
+  <informal_protocol name='NSScriptClassDescription'>
+    <method type='L8@0:4' selector='classCode'/>
+    <method type='@8@0:4' selector='className'/>
+  </informal_protocol>
+  <informal_protocol name='NSScriptKeyValueCoding'>
+    <method type='@16@0:4@8@12' selector='coerceValue:forKey:'/>
+    <method type='v20@0:4@8I12@16' selector='insertValue:atIndex:inPropertyWithKey:'/>
+    <method type='v16@0:4@8@12' selector='insertValue:inPropertyWithKey:'/>
+    <method type='v16@0:4I8@12' selector='removeValueAtIndex:fromPropertyWithKey:'/>
+    <method type='v20@0:4I8@12@16' selector='replaceValueAtIndex:inPropertyWithKey:withValue:'/>
+    <method type='@16@0:4I8@12' selector='valueAtIndex:inPropertyWithKey:'/>
+    <method type='@16@0:4@8@12' selector='valueWithName:inPropertyWithKey:'/>
+    <method type='@16@0:4@8@12' selector='valueWithUniqueID:inPropertyWithKey:'/>
+  </informal_protocol>
+  <informal_protocol name='NSScriptObjectSpecifiers'>
+    <method type='@12@0:4@8' selector='indicesOfObjectsByEvaluatingObjectSpecifier:'/>
+    <method type='@8@0:4' selector='objectSpecifier'/>
+  </informal_protocol>
+  <informal_protocol name='NSScripting'>
+    <method type='@8@0:4' selector='scriptingProperties'/>
+    <method type='v12@0:4@8' selector='setScriptingProperties:'/>
+  </informal_protocol>
+  <informal_protocol name='NSScriptingComparisonMethods'>
+    <method type='B12@0:4@8' selector='scriptingBeginsWith:'/>
+    <method type='B12@0:4@8' selector='scriptingContains:'/>
+    <method type='B12@0:4@8' selector='scriptingEndsWith:'/>
+    <method type='B12@0:4@8' selector='scriptingIsEqualTo:'/>
+    <method type='B12@0:4@8' selector='scriptingIsGreaterThan:'/>
+    <method type='B12@0:4@8' selector='scriptingIsGreaterThanOrEqualTo:'/>
+    <method type='B12@0:4@8' selector='scriptingIsLessThan:'/>
+    <method type='B12@0:4@8' selector='scriptingIsLessThanOrEqualTo:'/>
+  </informal_protocol>
+  <informal_protocol name='NSSpellServerDelegate'>
+    <method type='v20@0:4@8@12@16' selector='spellServer:didForgetWord:inLanguage:'/>
+    <method type='v20@0:4@8@12@16' selector='spellServer:didLearnWord:inLanguage:'/>
+    <method type='{_NSRange=II}28@0:4@8@12@16^i20B24' selector='spellServer:findMisspelledWordInString:language:wordCount:countOnly:'/>
+    <method type='@28@0:4@8{_NSRange=II}12@20@24' selector='spellServer:suggestCompletionsForPartialWordRange:inString:language:'/>
+    <method type='@20@0:4@8@12@16' selector='spellServer:suggestGuessesForWord:inLanguage:'/>
+  </informal_protocol>
+  <informal_protocol name='NSStreamDelegateEventExtensions'>
+    <method type='v16@0:4@8i12' selector='stream:handleEvent:'/>
+  </informal_protocol>
+  <informal_protocol name='NSURLClient'>
+    <method type='v16@0:4@8@12' selector='URL:resourceDataDidBecomeAvailable:'/>
+    <method type='v16@0:4@8@12' selector='URL:resourceDidFailLoadingWithReason:'/>
+    <method type='v12@0:4@8' selector='URLResourceDidCancelLoading:'/>
+    <method type='v12@0:4@8' selector='URLResourceDidFinishLoading:'/>
+  </informal_protocol>
+  <informal_protocol name='NSURLConnectionDelegate'>
+    <method type='v16@0:4@8@12' selector='connection:didCancelAuthenticationChallenge:'/>
+    <method type='v16@0:4@8@12' selector='connection:didFailWithError:'/>
+    <method type='v16@0:4@8@12' selector='connection:didReceiveAuthenticationChallenge:'/>
+    <method type='v16@0:4@8@12' selector='connection:didReceiveData:'/>
+    <method type='v16@0:4@8@12' selector='connection:didReceiveResponse:'/>
+    <method type='@16@0:4@8@12' selector='connection:willCacheResponse:'/>
+    <method type='@20@0:4@8@12@16' selector='connection:willSendRequest:redirectResponse:'/>
+    <method type='v12@0:4@8' selector='connectionDidFinishLoading:'/>
+  </informal_protocol>
+  <informal_protocol name='NSURLDownloadDelegate'>
+    <method type='v16@0:4@8@12' selector='download:decideDestinationWithSuggestedFilename:'/>
+    <method type='v16@0:4@8@12' selector='download:didCancelAuthenticationChallenge:'/>
+    <method type='v16@0:4@8@12' selector='download:didCreateDestination:'/>
+    <method type='v16@0:4@8@12' selector='download:didFailWithError:'/>
+    <method type='v16@0:4@8@12' selector='download:didReceiveAuthenticationChallenge:'/>
+    <method type='v16@0:4@8I12' selector='download:didReceiveDataOfLength:'/>
+    <method type='v16@0:4@8@12' selector='download:didReceiveResponse:'/>
+    <method type='B16@0:4@8@12' selector='download:shouldDecodeSourceDataOfMIMEType:'/>
+    <method type='v24@0:4@8@12q16' selector='download:willResumeWithResponse:fromByte:'/>
+    <method type='@20@0:4@8@12@16' selector='download:willSendRequest:redirectResponse:'/>
+    <method type='v12@0:4@8' selector='downloadDidBegin:'/>
+    <method type='v12@0:4@8' selector='downloadDidFinish:'/>
+  </informal_protocol>
+  <informal_protocol name='NSXMLParserDelegateEventAdditions'>
+    <method type='v24@0:4@8@12@16@20' selector='parser:didEndElement:namespaceURI:qualifiedName:'/>
+    <method type='v16@0:4@8@12' selector='parser:didEndMappingPrefix:'/>
+    <method type='v28@0:4@8@12@16@20@24' selector='parser:didStartElement:namespaceURI:qualifiedName:attributes:'/>
+    <method type='v20@0:4@8@12@16' selector='parser:didStartMappingPrefix:toURI:'/>
+    <method type='v28@0:4@8@12@16@20@24' selector='parser:foundAttributeDeclarationWithName:forElement:type:defaultValue:'/>
+    <method type='v16@0:4@8@12' selector='parser:foundCDATA:'/>
+    <method type='v16@0:4@8@12' selector='parser:foundCharacters:'/>
+    <method type='v16@0:4@8@12' selector='parser:foundComment:'/>
+    <method type='v20@0:4@8@12@16' selector='parser:foundElementDeclarationWithName:model:'/>
+    <method type='v24@0:4@8@12@16@20' selector='parser:foundExternalEntityDeclarationWithName:publicID:systemID:'/>
+    <method type='v16@0:4@8@12' selector='parser:foundIgnorableWhitespace:'/>
+    <method type='v20@0:4@8@12@16' selector='parser:foundInternalEntityDeclarationWithName:value:'/>
+    <method type='v24@0:4@8@12@16@20' selector='parser:foundNotationDeclarationWithName:publicID:systemID:'/>
+    <method type='v20@0:4@8@12@16' selector='parser:foundProcessingInstructionWithTarget:data:'/>
+    <method type='v28@0:4@8@12@16@20@24' selector='parser:foundUnparsedEntityDeclarationWithName:publicID:systemID:notationName:'/>
+    <method type='v16@0:4@8@12' selector='parser:parseErrorOccurred:'/>
+    <method type='@20@0:4@8@12@16' selector='parser:resolveExternalEntityName:systemID:'/>
+    <method type='v16@0:4@8@12' selector='parser:validationErrorOccurred:'/>
+    <method type='v12@0:4@8' selector='parserDidEndDocument:'/>
+    <method type='v12@0:4@8' selector='parserDidStartDocument:'/>
+  </informal_protocol>
+  <class name='NSAppleEventManager'>
+    <method selector='dispatchRawAppleEvent:withRawReply:handlerRefCon:'>
+      <arg index='0' type_modifier='n'/>
+      <arg index='1' type_modifier='o'/>
+    </method>
+    <method selector='setEventHandler:andSelector:forEventClass:andEventID:'>
+      <arg sel_of_type='v16@0:4@8@12' index='1'/>
+    </method>
+  </class>
+  <class name='NSCalendar'>
+    <method selector='rangeOfUnit:startDate:interval:forDate:'>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSCalendarDate'>
+    <method selector='years:months:days:hours:minutes:seconds:sinceDate:'>
+      <arg index='0' type_modifier='o'/>
+      <arg index='1' type_modifier='o'/>
+      <arg index='2' type_modifier='o'/>
+      <arg index='3' type_modifier='o'/>
+      <arg index='4' type_modifier='o'/>
+      <arg index='5' type_modifier='o'/>
+    </method>
+  </class>
+  <class name='NSComparisonPredicate'>
+    <method selector='initWithLeftExpression:rightExpression:customSelector:'>
+      <arg sel_of_type='B12@0:4@8' index='2'/>
+    </method>
+    <method class_method='true' selector='predicateWithLeftExpression:rightExpression:customSelector:'>
+      <arg sel_of_type='B12@0:4@8' index='2'/>
+    </method>
+  </class>
+  <class name='NSDistantObject'>
+    <method selector='setProtocolForProxy:'>
+      <arg index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSIndexPath'>
+    <method ignore='true' suggestion='Call the usual accessors.' selector='getIndexes:'/>
+    <method class_method='true' selector='indexPathWithIndexes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method selector='initWithIndexes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSMutableData'>
+    <method selector='appendBytes:length:'>
+      <arg c_array_length_in_arg='1' index='0' type_modifier='n'/>
+    </method>
+    <method ignore='true' suggestion='Call replaceBytesInRange:withBytes:length:.' selector='replaceBytesInRange:withBytes:'/>
+    <method selector='replaceBytesInRange:withBytes:length:'>
+      <arg c_array_length_in_arg='2' index='1' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSNotificationCenter'>
+    <method selector='addObserver:selector:name:object:'>
+      <arg sel_of_type='v12@0:4@8' index='1'/>
+    </method>
+  </class>
+  <class name='NSProtocolChecker'>
+    <method selector='initWithTarget:protocol:'>
+      <arg index='1' type_modifier='n'/>
+    </method>
+    <method class_method='true' selector='protocolCheckerWithTarget:protocol:'>
+      <arg index='1' type_modifier='n'/>
+    </method>
+  </class>
+  <class name='NSScriptCoercionHandler'>
+    <method selector='registerCoercer:selector:toConvertFromClass:toClass:'>
+      <arg sel_of_type='@16@0:4@8#12' index='1'/>
+    </method>
+  </class>
+  <class name='NSXMLDTD'>
+    <method selector='initWithContentsOfURL:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+    <method selector='initWithData:options:error:'>
+      <arg index='2' type_modifier='o'/>
+    </method>
+  </class>
+</signatures>

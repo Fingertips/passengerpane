@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/AE.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreGraphics.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/CoreText.framework'/>
+  <depends_on path='/System/Library/Frameworks/CoreServices.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/FindByContent.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LaunchServices.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework'/>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ImageIO.framework'/>
+</signatures>

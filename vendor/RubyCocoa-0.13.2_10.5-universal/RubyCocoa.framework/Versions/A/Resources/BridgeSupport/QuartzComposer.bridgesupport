@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+  <depends_on path='/System/Library/Frameworks/Foundation.framework'/>
+  <depends_on path='/System/Library/Frameworks/AppKit.framework'/>
+  <depends_on path='/System/Library/Frameworks/OpenGL.framework'/>
+  <depends_on path='/System/Library/Frameworks/QuartzCore.framework'/>
+  <depends_on path='/System/Library/Frameworks/IOKit.framework'/>
+  <constant name='QCCompositionAttributeCopyrightKey' type='@'/>
+  <constant name='QCCompositionAttributeDescriptionKey' type='@'/>
+  <constant name='QCCompositionAttributeNameKey' type='@'/>
+  <constant name='QCPortAttributeMaximumValueKey' type='@'/>
+  <constant name='QCPortAttributeMinimumValueKey' type='@'/>
+  <constant name='QCPortAttributeNameKey' type='@'/>
+  <constant name='QCPortAttributeTypeKey' type='@'/>
+  <constant name='QCPortTypeBoolean' type='@'/>
+  <constant name='QCPortTypeColor' type='@'/>
+  <constant name='QCPortTypeImage' type='@'/>
+  <constant name='QCPortTypeIndex' type='@'/>
+  <constant name='QCPortTypeNumber' type='@'/>
+  <constant name='QCPortTypeString' type='@'/>
+  <constant name='QCPortTypeStructure' type='@'/>
+  <constant name='QCRendererEventKey' type='@'/>
+  <constant name='QCRendererMouseLocationKey' type='@'/>
+  <constant name='QCViewDidStartRenderingNotification' type='@'/>
+  <constant name='QCViewDidStopRenderingNotification' type='@'/>
+  <class name='QCRenderer'>
+    <method selector='renderAtTime:arguments:'>
+      <retval type='B'/>
+    </method>
+    <method selector='setValue:forInputKey:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='QCView'>
+    <method selector='autostartsRendering'>
+      <retval type='B'/>
+    </method>
+    <method selector='isRendering'>
+      <retval type='B'/>
+    </method>
+    <method selector='loadCompositionFromFile:'>
+      <retval type='B'/>
+    </method>
+    <method selector='setAutostartsRendering:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setValue:forInputKey:'>
+      <retval type='B'/>
+    </method>
+    <method selector='startRendering'>
+      <retval type='B'/>
+    </method>
+  </class>
+</signatures>

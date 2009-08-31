@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+  <depends_on path='/System/Library/Frameworks/Foundation.framework'/>
+  <depends_on path='/System/Library/Frameworks/AddressBook.framework'/>
+  <constant name='IMCapabilityAudioConference' type='@'/>
+  <constant name='IMCapabilityDirectIM' type='@'/>
+  <constant name='IMCapabilityFileSharing' type='@'/>
+  <constant name='IMCapabilityFileTransfer' type='@'/>
+  <constant name='IMCapabilityText' type='@'/>
+  <constant name='IMCapabilityVideoConference' type='@'/>
+  <constant name='IMPersonAVBusyKey' type='@'/>
+  <constant name='IMPersonCapabilitiesKey' type='@'/>
+  <constant name='IMPersonEmailKey' type='@'/>
+  <constant name='IMPersonFirstNameKey' type='@'/>
+  <constant name='IMPersonIdleSinceKey' type='@'/>
+  <constant name='IMPersonInfoChangedNotification' type='@'/>
+  <constant name='IMPersonLastNameKey' type='@'/>
+  <constant name='IMPersonPictureDataKey' type='@'/>
+  <constant name='IMPersonScreenNameKey' type='@'/>
+  <constant name='IMPersonServiceNameKey' type='@'/>
+  <constant name='IMPersonStatusChangedNotification' type='@'/>
+  <constant name='IMPersonStatusKey' type='@'/>
+  <constant name='IMPersonStatusMessageKey' type='@'/>
+  <constant name='IMServiceStatusChangedNotification' type='@'/>
+  <constant name='IMStatusImagesChangedAppearanceNotification' type='@'/>
+  <enum name='IMPersonStatusAvailable' value='4'/>
+  <enum name='IMPersonStatusAway' value='3'/>
+  <enum name='IMPersonStatusIdle' value='2'/>
+  <enum name='IMPersonStatusOffline' value='1'/>
+  <enum name='IMPersonStatusUnknown' value='0'/>
+</signatures>

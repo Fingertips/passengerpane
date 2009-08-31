@@ -1,0 +1,1301 @@
+<?xml version='1.0'?>
+<!DOCTYPE signatures SYSTEM "file://localhost/System/Library/DTDs/BridgeSupport.dtd">
+<signatures version='0.9'>
+  <depends_on path='/System/Library/Frameworks/ApplicationServices.framework'/>
+  <depends_on path='/System/Library/Frameworks/Carbon.framework'/>
+  <depends_on path='/System/Library/Frameworks/Cocoa.framework'/>
+  <depends_on path='/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/JavaScriptCore.framework'/>
+  <depends_on path='/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework'/>
+  <depends_on path='/System/Library/Frameworks/Security.framework'/>
+  <struct name='NPByteRange' type='{_NPByteRange=&quot;offset&quot;i&quot;length&quot;I&quot;next&quot;^{_NPByteRange}}'/>
+  <struct name='NPClass' type='{NPClass=&quot;structVersion&quot;I&quot;allocate&quot;^?&quot;deallocate&quot;^?&quot;invalidate&quot;^?&quot;hasMethod&quot;^?&quot;invoke&quot;^?&quot;invokeDefault&quot;^?&quot;hasProperty&quot;^?&quot;getProperty&quot;^?&quot;setProperty&quot;^?&quot;removeProperty&quot;^?}'/>
+  <struct name='NPEmbedPrint' type='{_NPEmbedPrint=&quot;window&quot;{_NPWindow=&quot;window&quot;^v&quot;x&quot;i&quot;y&quot;i&quot;width&quot;I&quot;height&quot;I&quot;clipRect&quot;{_NPRect=&quot;top&quot;S&quot;left&quot;S&quot;bottom&quot;S&quot;right&quot;S}&quot;type&quot;i}&quot;platformPrint&quot;^v}'/>
+  <struct name='NPFullPrint' type='{_NPFullPrint=&quot;pluginPrinted&quot;C&quot;printOne&quot;C&quot;platformPrint&quot;^v}'/>
+  <struct name='NPNetscapeFuncs' type='{_NPNetscapeFuncs=&quot;size&quot;S&quot;version&quot;S&quot;geturl&quot;^?&quot;posturl&quot;^?&quot;requestread&quot;^?&quot;newstream&quot;^?&quot;write&quot;^?&quot;destroystream&quot;^?&quot;status&quot;^?&quot;uagent&quot;^?&quot;memalloc&quot;^?&quot;memfree&quot;^?&quot;memflush&quot;^?&quot;reloadplugins&quot;^?&quot;getJavaEnv&quot;^?&quot;getJavaPeer&quot;^?&quot;geturlnotify&quot;^?&quot;posturlnotify&quot;^?&quot;getvalue&quot;^?&quot;setvalue&quot;^?&quot;invalidaterect&quot;^?&quot;invalidateregion&quot;^?&quot;forceredraw&quot;^?&quot;getstringidentifier&quot;^?&quot;getstringidentifiers&quot;^?&quot;getintidentifier&quot;^?&quot;identifierisstring&quot;^?&quot;utf8fromidentifier&quot;^?&quot;intfromidentifier&quot;^?&quot;createobject&quot;^?&quot;retainobject&quot;^?&quot;releaseobject&quot;^?&quot;invoke&quot;^?&quot;invokeDefault&quot;^?&quot;evaluate&quot;^?&quot;getproperty&quot;^?&quot;setproperty&quot;^?&quot;removeproperty&quot;^?&quot;hasproperty&quot;^?&quot;hasmethod&quot;^?&quot;releasevariantvalue&quot;^?&quot;setexception&quot;^?}'/>
+  <struct name='NPObject' type='{NPObject=&quot;_class&quot;^{NPClass}&quot;referenceCount&quot;I}'/>
+  <struct name='NPP_t' type='{_NPP=&quot;pdata&quot;^v&quot;ndata&quot;^v}'/>
+  <struct name='NPPluginFuncs' type='{_NPPluginFuncs=&quot;size&quot;S&quot;version&quot;S&quot;newp&quot;^?&quot;destroy&quot;^?&quot;setwindow&quot;^?&quot;newstream&quot;^?&quot;destroystream&quot;^?&quot;asfile&quot;^?&quot;writeready&quot;^?&quot;write&quot;^?&quot;print&quot;^?&quot;event&quot;^?&quot;urlnotify&quot;^?&quot;javaClass&quot;^v&quot;getvalue&quot;^?&quot;setvalue&quot;^?}'/>
+  <struct name='NPPrint' type='{_NPPrint=&quot;mode&quot;S&quot;print&quot;(?=&quot;fullPrint&quot;{_NPFullPrint=&quot;pluginPrinted&quot;C&quot;printOne&quot;C&quot;platformPrint&quot;^v}&quot;embedPrint&quot;{_NPEmbedPrint=&quot;window&quot;{_NPWindow=&quot;window&quot;^v&quot;x&quot;i&quot;y&quot;i&quot;width&quot;I&quot;height&quot;I&quot;clipRect&quot;{_NPRect=&quot;top&quot;S&quot;left&quot;S&quot;bottom&quot;S&quot;right&quot;S}&quot;type&quot;i}&quot;platformPrint&quot;^v})}'/>
+  <struct name='NPRect' type='{_NPRect=&quot;top&quot;S&quot;left&quot;S&quot;bottom&quot;S&quot;right&quot;S}'/>
+  <struct name='NPSavedData' type='{_NPSavedData=&quot;len&quot;i&quot;buf&quot;^v}'/>
+  <struct name='NPStream' type='{_NPStream=&quot;pdata&quot;^v&quot;ndata&quot;^v&quot;url&quot;*&quot;end&quot;I&quot;lastmodified&quot;I&quot;notifyData&quot;^v}'/>
+  <struct name='NPString' type='{_NPString=&quot;UTF8Characters&quot;*&quot;UTF8Length&quot;I}'/>
+  <struct name='NPVariant' type='{_NPVariant=&quot;type&quot;i&quot;value&quot;(?=&quot;boolValue&quot;B&quot;intValue&quot;i&quot;doubleValue&quot;d&quot;stringValue&quot;{_NPString=&quot;UTF8Characters&quot;*&quot;UTF8Length&quot;I}&quot;objectValue&quot;^{NPObject})}'/>
+  <struct name='NPWindow' type='{_NPWindow=&quot;window&quot;^v&quot;x&quot;i&quot;y&quot;i&quot;width&quot;I&quot;height&quot;I&quot;clipRect&quot;{_NPRect=&quot;top&quot;S&quot;left&quot;S&quot;bottom&quot;S&quot;right&quot;S}&quot;type&quot;i}'/>
+  <struct name='NP_Port' type='{NP_Port=&quot;port&quot;^{OpaqueGrafPtr}&quot;portx&quot;i&quot;porty&quot;i}'/>
+  <constant name='DOMEventException' type='@'/>
+  <constant name='DOMException' type='@'/>
+  <constant name='DOMRangeException' type='@'/>
+  <constant name='WebActionButtonKey' type='@'/>
+  <constant name='WebActionElementKey' type='@'/>
+  <constant name='WebActionModifierFlagsKey' type='@'/>
+  <constant name='WebActionNavigationTypeKey' type='@'/>
+  <constant name='WebActionOriginalURLKey' type='@'/>
+  <constant name='WebArchivePboardType' type='@'/>
+  <constant name='WebElementDOMNodeKey' type='@'/>
+  <constant name='WebElementFrameKey' type='@'/>
+  <constant name='WebElementImageAltStringKey' type='@'/>
+  <constant name='WebElementImageKey' type='@'/>
+  <constant name='WebElementImageRectKey' type='@'/>
+  <constant name='WebElementImageURLKey' type='@'/>
+  <constant name='WebElementIsSelectedKey' type='@'/>
+  <constant name='WebElementLinkLabelKey' type='@'/>
+  <constant name='WebElementLinkTargetFrameKey' type='@'/>
+  <constant name='WebElementLinkTitleKey' type='@'/>
+  <constant name='WebElementLinkURLKey' type='@'/>
+  <constant name='WebHistoryAllItemsRemovedNotification' type='@'/>
+  <constant name='WebHistoryItemChangedNotification' type='@'/>
+  <constant name='WebHistoryItemsAddedNotification' type='@'/>
+  <constant name='WebHistoryItemsKey' type='@'/>
+  <constant name='WebHistoryItemsRemovedNotification' type='@'/>
+  <constant name='WebHistoryLoadedNotification' type='@'/>
+  <constant name='WebHistorySavedNotification' type='@'/>
+  <constant name='WebKitErrorDomain' type='@'/>
+  <constant name='WebKitErrorMIMETypeKey' type='@'/>
+  <constant name='WebKitErrorPlugInNameKey' type='@'/>
+  <constant name='WebKitErrorPlugInPageURLStringKey' type='@'/>
+  <constant name='WebPlugInAttributesKey' type='@'/>
+  <constant name='WebPlugInBaseURLKey' type='@'/>
+  <constant name='WebPlugInContainerKey' type='@'/>
+  <constant name='WebPlugInContainingElementKey' type='@'/>
+  <constant name='WebPreferencesChangedNotification' type='@'/>
+  <constant name='WebViewDidBeginEditingNotification' type='@'/>
+  <constant name='WebViewDidChangeNotification' type='@'/>
+  <constant name='WebViewDidChangeSelectionNotification' type='@'/>
+  <constant name='WebViewDidChangeTypingStyleNotification' type='@'/>
+  <constant name='WebViewDidEndEditingNotification' type='@'/>
+  <constant name='WebViewProgressEstimateChangedNotification' type='@'/>
+  <constant name='WebViewProgressFinishedNotification' type='@'/>
+  <constant name='WebViewProgressStartedNotification' type='@'/>
+  <enum name='DOM_ADDITION' value='2'/>
+  <enum name='DOM_ATTRIBUTE_NODE' value='2'/>
+  <enum name='DOM_AT_TARGET' value='2'/>
+  <enum name='DOM_BAD_BOUNDARYPOINTS_ERR' value='1'/>
+  <enum name='DOM_BUBBLING_PHASE' value='3'/>
+  <enum name='DOM_CAPTURING_PHASE' value='1'/>
+  <enum name='DOM_CDATA_SECTION_NODE' value='4'/>
+  <enum name='DOM_CHARSET_RULE' value='2'/>
+  <enum name='DOM_COMMENT_NODE' value='8'/>
+  <enum name='DOM_CSS_ATTR' value='22'/>
+  <enum name='DOM_CSS_CM' value='6'/>
+  <enum name='DOM_CSS_COUNTER' value='23'/>
+  <enum name='DOM_CSS_CUSTOM' value='3'/>
+  <enum name='DOM_CSS_DEG' value='11'/>
+  <enum name='DOM_CSS_DIMENSION' value='18'/>
+  <enum name='DOM_CSS_EMS' value='3'/>
+  <enum name='DOM_CSS_EXS' value='4'/>
+  <enum name='DOM_CSS_GRAD' value='13'/>
+  <enum name='DOM_CSS_HZ' value='16'/>
+  <enum name='DOM_CSS_IDENT' value='21'/>
+  <enum name='DOM_CSS_IN' value='8'/>
+  <enum name='DOM_CSS_INHERIT' value='0'/>
+  <enum name='DOM_CSS_KHZ' value='17'/>
+  <enum name='DOM_CSS_MM' value='7'/>
+  <enum name='DOM_CSS_MS' value='14'/>
+  <enum name='DOM_CSS_NUMBER' value='1'/>
+  <enum name='DOM_CSS_PC' value='10'/>
+  <enum name='DOM_CSS_PERCENTAGE' value='2'/>
+  <enum name='DOM_CSS_PRIMITIVE_VALUE' value='1'/>
+  <enum name='DOM_CSS_PT' value='9'/>
+  <enum name='DOM_CSS_PX' value='5'/>
+  <enum name='DOM_CSS_RAD' value='12'/>
+  <enum name='DOM_CSS_RECT' value='24'/>
+  <enum name='DOM_CSS_RGBCOLOR' value='25'/>
+  <enum name='DOM_CSS_S' value='15'/>
+  <enum name='DOM_CSS_STRING' value='19'/>
+  <enum name='DOM_CSS_UNKNOWN' value='0'/>
+  <enum name='DOM_CSS_URI' value='20'/>
+  <enum name='DOM_CSS_VALUE_LIST' value='2'/>
+  <enum name='DOM_DOCUMENT_FRAGMENT_NODE' value='11'/>
+  <enum name='DOM_DOCUMENT_NODE' value='9'/>
+  <enum name='DOM_DOCUMENT_TYPE_NODE' value='10'/>
+  <enum name='DOM_DOMSTRING_SIZE_ERR' value='2'/>
+  <enum name='DOM_ELEMENT_NODE' value='1'/>
+  <enum name='DOM_END_TO_END' value='2'/>
+  <enum name='DOM_END_TO_START' value='3'/>
+  <enum name='DOM_ENTITY_NODE' value='6'/>
+  <enum name='DOM_ENTITY_REFERENCE_NODE' value='5'/>
+  <enum name='DOM_FILTER_ACCEPT' value='1'/>
+  <enum name='DOM_FILTER_REJECT' value='2'/>
+  <enum name='DOM_FILTER_SKIP' value='3'/>
+  <enum name='DOM_FONT_FACE_RULE' value='5'/>
+  <enum name='DOM_HIERARCHY_REQUEST_ERR' value='3'/>
+  <enum name='DOM_IMPORT_RULE' value='3'/>
+  <enum name='DOM_INDEX_SIZE_ERR' value='1'/>
+  <enum name='DOM_INUSE_ATTRIBUTE_ERR' value='10'/>
+  <enum name='DOM_INVALID_ACCESS_ERR' value='15'/>
+  <enum name='DOM_INVALID_CHARACTER_ERR' value='5'/>
+  <enum name='DOM_INVALID_MODIFICATION_ERR' value='13'/>
+  <enum name='DOM_INVALID_NODE_TYPE_ERR' value='2'/>
+  <enum name='DOM_INVALID_STATE_ERR' value='11'/>
+  <enum name='DOM_MEDIA_RULE' value='4'/>
+  <enum name='DOM_MODIFICATION' value='1'/>
+  <enum name='DOM_NAMESPACE_ERR' value='14'/>
+  <enum name='DOM_NOTATION_NODE' value='12'/>
+  <enum name='DOM_NOT_FOUND_ERR' value='8'/>
+  <enum name='DOM_NOT_SUPPORTED_ERR' value='9'/>
+  <enum name='DOM_NO_DATA_ALLOWED_ERR' value='6'/>
+  <enum name='DOM_NO_MODIFICATION_ALLOWED_ERR' value='7'/>
+  <enum name='DOM_PAGE_RULE' value='6'/>
+  <enum name='DOM_PROCESSING_INSTRUCTION_NODE' value='7'/>
+  <enum name='DOM_REMOVAL' value='3'/>
+  <enum name='DOM_SHOW_ALL' value='-1'/>
+  <enum name='DOM_SHOW_ATTRIBUTE' value='2'/>
+  <enum name='DOM_SHOW_CDATA_SECTION' value='8'/>
+  <enum name='DOM_SHOW_COMMENT' value='128'/>
+  <enum name='DOM_SHOW_DOCUMENT' value='256'/>
+  <enum name='DOM_SHOW_DOCUMENT_FRAGMENT' value='1024'/>
+  <enum name='DOM_SHOW_DOCUMENT_TYPE' value='512'/>
+  <enum name='DOM_SHOW_ELEMENT' value='1'/>
+  <enum name='DOM_SHOW_ENTITY' value='32'/>
+  <enum name='DOM_SHOW_ENTITY_REFERENCE' value='16'/>
+  <enum name='DOM_SHOW_NOTATION' value='2048'/>
+  <enum name='DOM_SHOW_PROCESSING_INSTRUCTION' value='64'/>
+  <enum name='DOM_SHOW_TEXT' value='4'/>
+  <enum name='DOM_START_TO_END' value='1'/>
+  <enum name='DOM_START_TO_START' value='0'/>
+  <enum name='DOM_STYLE_RULE' value='1'/>
+  <enum name='DOM_SYNTAX_ERR' value='12'/>
+  <enum name='DOM_TEXT_NODE' value='3'/>
+  <enum name='DOM_UNKNOWN_RULE' value='0'/>
+  <enum name='DOM_UNSPECIFIED_EVENT_TYPE_ERR' value='0'/>
+  <enum name='DOM_WRONG_DOCUMENT_ERR' value='4'/>
+  <enum name='FALSE' value='0'/>
+  <enum name='NPERR_BASE' value='0'/>
+  <enum name='NPERR_FILE_NOT_FOUND' value='11'/>
+  <enum name='NPERR_GENERIC_ERROR' value='1'/>
+  <enum name='NPERR_INCOMPATIBLE_VERSION_ERROR' value='8'/>
+  <enum name='NPERR_INVALID_FUNCTABLE_ERROR' value='3'/>
+  <enum name='NPERR_INVALID_INSTANCE_ERROR' value='2'/>
+  <enum name='NPERR_INVALID_PARAM' value='9'/>
+  <enum name='NPERR_INVALID_PLUGIN_DIR_ERROR' value='7'/>
+  <enum name='NPERR_INVALID_PLUGIN_ERROR' value='6'/>
+  <enum name='NPERR_INVALID_URL' value='10'/>
+  <enum name='NPERR_MODULE_LOAD_FAILED_ERROR' value='4'/>
+  <enum name='NPERR_NO_DATA' value='12'/>
+  <enum name='NPERR_NO_ERROR' value='0'/>
+  <enum name='NPERR_OUT_OF_MEMORY_ERROR' value='5'/>
+  <enum name='NPERR_STREAM_NOT_SEEKABLE' value='13'/>
+  <enum name='NPNVDOMElement' value='16777227'/>
+  <enum name='NPNVDOMWindow' value='16777228'/>
+  <enum name='NPNVPluginElementNPObject' value='16'/>
+  <enum name='NPNVSupportsXEmbedBool' value='14'/>
+  <enum name='NPNVToolkit' value='16777229'/>
+  <enum name='NPNVWindowNPObject' value='15'/>
+  <enum name='NPNVasdEnabledBool' value='5'/>
+  <enum name='NPNVisOfflineBool' value='6'/>
+  <enum name='NPNVjavascriptEnabledBool' value='4'/>
+  <enum name='NPNVnetscapeWindow' value='3'/>
+  <enum name='NPNVserviceManager' value='16777226'/>
+  <enum name='NPNVxDisplay' value='1'/>
+  <enum name='NPNVxtAppContext' value='2'/>
+  <enum name='NPPVjavaClass' value='5'/>
+  <enum name='NPPVjavascriptPushCallerBool' value='12'/>
+  <enum name='NPPVpluginDescriptionString' value='2'/>
+  <enum name='NPPVpluginKeepLibraryInMemory' value='13'/>
+  <enum name='NPPVpluginNameString' value='1'/>
+  <enum name='NPPVpluginNeedsXEmbed' value='14'/>
+  <enum name='NPPVpluginScriptableIID' value='11'/>
+  <enum name='NPPVpluginScriptableInstance' value='16777226'/>
+  <enum name='NPPVpluginScriptableNPObject' value='15'/>
+  <enum name='NPPVpluginTimerInterval' value='7'/>
+  <enum name='NPPVpluginTransparentBool' value='4'/>
+  <enum name='NPPVpluginWindowBool' value='3'/>
+  <enum name='NPPVpluginWindowSize' value='6'/>
+  <enum name='NPRES_BASE' value='0'/>
+  <enum name='NPRES_DONE' value='0'/>
+  <enum name='NPRES_NETWORK_ERR' value='1'/>
+  <enum name='NPRES_USER_BREAK' value='2'/>
+  <enum name='NPVERS_68K_HAS_LIVECONNECT' value='11'/>
+  <enum name='NPVERS_HAS_LIVECONNECT' value='9'/>
+  <enum name='NPVERS_HAS_NOTIFICATION' value='9'/>
+  <enum name='NPVERS_HAS_STREAMOUTPUT' value='8'/>
+  <enum name='NPVERS_HAS_WINDOWLESS' value='11'/>
+  <enum name='NPVERS_WIN16_HAS_LIVECONNECT' value='9'/>
+  <enum name='NPVariantType_Bool' value='2'/>
+  <enum name='NPVariantType_Double' value='4'/>
+  <enum name='NPVariantType_Int32' value='3'/>
+  <enum name='NPVariantType_Null' value='1'/>
+  <enum name='NPVariantType_Object' value='6'/>
+  <enum name='NPVariantType_String' value='5'/>
+  <enum name='NPVariantType_Void' value='0'/>
+  <enum name='NPWindowTypeDrawable' value='2'/>
+  <enum name='NPWindowTypeWindow' value='1'/>
+  <enum name='NP_ABI_GCC3_MASK' value='268435456'/>
+  <enum name='NP_ABI_MACHO_MASK' value='16777216'/>
+  <enum name='NP_ABI_MASK' value='16777216'/>
+  <enum name='NP_ASFILE' value='3'/>
+  <enum name='NP_ASFILEONLY' value='4'/>
+  <enum name='NP_CLASS_STRUCT_VERSION' value='1'/>
+  <enum name='NP_EMBED' value='1'/>
+  <enum name='NP_FULL' value='2'/>
+  <enum name='NP_MAXREADY' value='2147483647'/>
+  <enum name='NP_NORMAL' value='1'/>
+  <enum name='NP_SEEK' value='2'/>
+  <enum name='NP_VERSION_MAJOR' value='0'/>
+  <enum name='NP_VERSION_MINOR' value='14'/>
+  <enum name='TRUE' value='1'/>
+  <enum name='WebDragDestinationActionAny' value='-1'/>
+  <enum name='WebDragDestinationActionDHTML' value='1'/>
+  <enum name='WebDragDestinationActionEdit' value='2'/>
+  <enum name='WebDragDestinationActionLoad' value='4'/>
+  <enum name='WebDragDestinationActionNone' value='0'/>
+  <enum name='WebDragSourceActionAny' value='-1'/>
+  <enum name='WebDragSourceActionDHTML' value='1'/>
+  <enum name='WebDragSourceActionImage' value='2'/>
+  <enum name='WebDragSourceActionLink' value='4'/>
+  <enum name='WebDragSourceActionNone' value='0'/>
+  <enum name='WebDragSourceActionSelection' value='8'/>
+  <enum name='WebJNIReturnTypeBoolean' value='3'/>
+  <enum name='WebJNIReturnTypeByte' value='4'/>
+  <enum name='WebJNIReturnTypeChar' value='5'/>
+  <enum name='WebJNIReturnTypeDouble' value='10'/>
+  <enum name='WebJNIReturnTypeFloat' value='9'/>
+  <enum name='WebJNIReturnTypeInt' value='7'/>
+  <enum name='WebJNIReturnTypeInvalid' value='0'/>
+  <enum name='WebJNIReturnTypeLong' value='8'/>
+  <enum name='WebJNIReturnTypeObject' value='2'/>
+  <enum name='WebJNIReturnTypeShort' value='6'/>
+  <enum name='WebJNIReturnTypeVoid' value='1'/>
+  <enum name='WebKitErrorCannotFindPlugIn' value='200'/>
+  <enum name='WebKitErrorCannotLoadPlugIn' value='201'/>
+  <enum name='WebKitErrorCannotShowMIMEType' value='100'/>
+  <enum name='WebKitErrorCannotShowURL' value='101'/>
+  <enum name='WebKitErrorFrameLoadInterruptedByPolicyChange' value='102'/>
+  <enum name='WebKitErrorJavaUnavailable' value='202'/>
+  <enum name='WebMenuItemTagCopy' value='8'/>
+  <enum name='WebMenuItemTagCopyImageToClipboard' value='6'/>
+  <enum name='WebMenuItemTagCopyLinkToClipboard' value='3'/>
+  <enum name='WebMenuItemTagCut' value='13'/>
+  <enum name='WebMenuItemTagDownloadImageToDisk' value='5'/>
+  <enum name='WebMenuItemTagDownloadLinkToDisk' value='2'/>
+  <enum name='WebMenuItemTagGoBack' value='9'/>
+  <enum name='WebMenuItemTagGoForward' value='10'/>
+  <enum name='WebMenuItemTagIgnoreSpelling' value='17'/>
+  <enum name='WebMenuItemTagLearnSpelling' value='18'/>
+  <enum name='WebMenuItemTagNoGuessesFound' value='16'/>
+  <enum name='WebMenuItemTagOpenFrameInNewWindow' value='7'/>
+  <enum name='WebMenuItemTagOpenImageInNewWindow' value='4'/>
+  <enum name='WebMenuItemTagOpenLinkInNewWindow' value='1'/>
+  <enum name='WebMenuItemTagOther' value='19'/>
+  <enum name='WebMenuItemTagPaste' value='14'/>
+  <enum name='WebMenuItemTagReload' value='12'/>
+  <enum name='WebMenuItemTagSpellingGuess' value='15'/>
+  <enum name='WebMenuItemTagStop' value='11'/>
+  <enum name='WebNavigationTypeBackForward' value='2'/>
+  <enum name='WebNavigationTypeFormResubmitted' value='4'/>
+  <enum name='WebNavigationTypeFormSubmitted' value='1'/>
+  <enum name='WebNavigationTypeLinkClicked' value='0'/>
+  <enum name='WebNavigationTypeOther' value='5'/>
+  <enum name='WebNavigationTypeReload' value='3'/>
+  <enum name='WebViewInsertActionDropped' value='2'/>
+  <enum name='WebViewInsertActionPasted' value='1'/>
+  <enum name='WebViewInsertActionTyped' value='0'/>
+  <enum name='adjustCursorEvent' value='33'/>
+  <enum name='getFocusEvent' value='31'/>
+  <enum name='loseFocusEvent' value='32'/>
+  <function name='HIWebViewCreate'>
+    <arg type='^^{OpaqueControlRef}' type_modifier='n'/>
+    <retval type='l'/>
+  </function>
+  <function name='NPN_CreateObject'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPClass=I^?^?^?^?^?^?^?^?^?^?}' type_modifier='n'/>
+    <retval type='^{NPObject=^{NPClass}I}'/>
+  </function>
+  <function name='NPN_DestroyStream'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='s'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_Evaluate'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^{_NPString=*I}' type_modifier='n'/>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_ForceRedraw'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+  </function>
+  <function name='NPN_GetIntIdentifier'>
+    <arg type='i'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NPN_GetJavaEnv'>
+    <retval type='^v'/>
+  </function>
+  <function name='NPN_GetJavaPeer'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NPN_GetProperty'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_GetStringIdentifier'>
+    <arg type='*'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NPN_GetStringIdentifiers'>
+    <arg c_array_length_in_arg='1' type='^*' type_modifier='n'/>
+    <arg type='i'/>
+    <arg c_array_length_in_arg='1' type='^^v' type_modifier='o'/>
+  </function>
+  <function name='NPN_GetURL'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='*'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_GetURLNotify'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='*'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_GetValue'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='i'/>
+    <arg type='^v' type_modifier='o'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_HasMethod'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_HasProperty'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_IdentifierIsString'>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_IntFromIdentifier'>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='i'/>
+  </function>
+  <function name='NPN_InvalidateRect'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPRect=SSSS}' type_modifier='n'/>
+  </function>
+  <function name='NPN_InvalidateRegion'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{OpaqueRgnHandle=}' type_modifier='n'/>
+  </function>
+  <function name='NPN_Invoke'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg c_array_length_in_arg='4' type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='n'/>
+    <arg type='I'/>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_InvokeDefault'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg c_array_length_in_arg='3' type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='n'/>
+    <arg type='I'/>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='o'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_MemAlloc'>
+    <arg type='L'/>
+    <retval type='^v'/>
+  </function>
+  <function name='NPN_MemFlush'>
+    <arg type='L'/>
+    <retval type='L'/>
+  </function>
+  <function name='NPN_MemFree'>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NPN_NewStream'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='*'/>
+    <arg type='^^{_NPStream}' type_modifier='o'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_PostURL'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='*'/>
+    <arg type='L'/>
+    <arg type='*'/>
+    <arg type='C'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_PostURLNotify'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='*'/>
+    <arg type='L'/>
+    <arg type='*'/>
+    <arg type='C'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_ReleaseObject'>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+  </function>
+  <function name='NPN_ReleaseVariantValue'>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='n'/>
+  </function>
+  <function name='NPN_ReloadPlugins'>
+    <arg type='C'/>
+  </function>
+  <function name='NPN_RemoveProperty'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_RequestRead'>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='^{_NPByteRange=iI^{_NPByteRange}}' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_RetainObject'>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <retval type='^{NPObject=^{NPClass}I}'/>
+  </function>
+  <function name='NPN_SetException'>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='*'/>
+  </function>
+  <function name='NPN_SetProperty'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{NPObject=^{NPClass}I}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <arg type='^{_NPVariant=i(?=Bid{_NPString=*I}^{NPObject})}' type_modifier='n'/>
+    <retval type='B'/>
+  </function>
+  <function name='NPN_SetValue'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='i'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPN_Status'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+  </function>
+  <function name='NPN_UTF8FromIdentifier'>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='*'/>
+  </function>
+  <function name='NPN_UserAgent'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <retval type='*'/>
+  </function>
+  <function name='NPN_Version'>
+    <arg type='^i' type_modifier='o'/>
+    <arg type='^i' type_modifier='o'/>
+    <arg type='^i' type_modifier='o'/>
+    <arg type='^i' type_modifier='o'/>
+  </function>
+  <function name='NPN_Write'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='l'/>
+    <arg c_array_length_in_arg='2' type='^v' type_modifier='n'/>
+    <retval type='l'/>
+  </function>
+  <function name='NPP_Destroy'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^^{_NPSavedData}' type_modifier='o'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_DestroyStream'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='s'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_GetJavaClass'>
+    <retval type='^v'/>
+  </function>
+  <function name='NPP_GetValue'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='i'/>
+    <arg type='^v' type_modifier='o'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_HandleEvent'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_Initialize'>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_New'>
+    <arg type='*'/>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='S'/>
+    <arg type='s'/>
+    <arg c_array_length_in_arg='3' type='^*' type_modifier='n'/>
+    <arg c_array_length_in_arg='3' type='^*' type_modifier='n'/>
+    <arg type='^{_NPSavedData=i^v}' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_NewStream'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='C'/>
+    <arg type='^S' type_modifier='N'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_Print'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPPrint=S(?={_NPFullPrint=CC^v}{_NPEmbedPrint={_NPWindow=^viiII{_NPRect=SSSS}i}^v})}' type_modifier='o'/>
+  </function>
+  <function name='NPP_SetValue'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='i'/>
+    <arg type='^v' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_SetWindow'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPWindow=^viiII{_NPRect=SSSS}i}' type_modifier='n'/>
+    <retval type='s'/>
+  </function>
+  <function name='NPP_Shutdown'/>
+  <function name='NPP_StreamAsFile'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='o'/>
+    <arg type='*'/>
+  </function>
+  <function name='NPP_URLNotify'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='*'/>
+    <arg type='s'/>
+    <arg type='^v' type_modifier='n'/>
+  </function>
+  <function name='NPP_Write'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <arg type='l'/>
+    <arg type='l'/>
+    <arg type='^v' c_array_of_fixed_length='3' type_modifier='n'/>
+    <retval type='l'/>
+  </function>
+  <function name='NPP_WriteReady'>
+    <arg type='^{_NPP=^v^v}' type_modifier='n'/>
+    <arg type='^{_NPStream=^v^v*II^v}' type_modifier='n'/>
+    <retval type='l'/>
+  </function>
+  <function name='WebInitForCarbon'/>
+  <class name='DOMAttr'>
+    <method selector='specified'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMDocument'>
+    <method selector='createNodeIterator::::'>
+      <arg type='B' index='3'/>
+    </method>
+    <method selector='createTreeWalker::::'>
+      <arg type='B' index='3'/>
+    </method>
+    <method selector='importNode::'>
+      <arg type='B' index='1'/>
+    </method>
+  </class>
+  <class name='DOMElement'>
+    <method selector='hasAttribute:'>
+      <retval type='B'/>
+    </method>
+    <method selector='hasAttributeNS::'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMEvent'>
+    <method selector='bubbles'>
+      <retval type='B'/>
+    </method>
+    <method selector='cancelable'>
+      <retval type='B'/>
+    </method>
+    <method selector='initEvent:::'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+    </method>
+  </class>
+  <class name='DOMHTMLAreaElement'>
+    <method selector='noHref'>
+      <retval type='B'/>
+    </method>
+    <method selector='setNoHref:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLButtonElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLDListElement'>
+    <method selector='compact'>
+      <retval type='B'/>
+    </method>
+    <method selector='setCompact:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLDirectoryElement'>
+    <method selector='compact'>
+      <retval type='B'/>
+    </method>
+    <method selector='setCompact:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLElement'>
+    <method selector='isContentEditable'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMHTMLFrameElement'>
+    <method selector='noResize'>
+      <retval type='B'/>
+    </method>
+    <method selector='setNoResize:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLHRElement'>
+    <method selector='noShade'>
+      <retval type='B'/>
+    </method>
+    <method selector='setNoShade:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLImageElement'>
+    <method selector='isMap'>
+      <retval type='B'/>
+    </method>
+    <method selector='setIsMap:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLInputElement'>
+    <method selector='checked'>
+      <retval type='B'/>
+    </method>
+    <method selector='defaultChecked'>
+      <retval type='B'/>
+    </method>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='readOnly'>
+      <retval type='B'/>
+    </method>
+    <method selector='setChecked:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setDefaultChecked:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setReadOnly:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLLinkElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLMenuElement'>
+    <method selector='compact'>
+      <retval type='B'/>
+    </method>
+    <method selector='setCompact:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLOListElement'>
+    <method selector='compact'>
+      <retval type='B'/>
+    </method>
+    <method selector='setCompact:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLObjectElement'>
+    <method selector='declare'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDeclare:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLOptGroupElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLOptionElement'>
+    <method selector='defaultSelected'>
+      <retval type='B'/>
+    </method>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='selected'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDefaultSelected:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setSelected:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLScriptElement'>
+    <method selector='defer'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDefer:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLSelectElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='multiple'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setMultiple:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLStyleElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLTableCellElement'>
+    <method selector='noWrap'>
+      <retval type='B'/>
+    </method>
+    <method selector='setNoWrap:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLTextAreaElement'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='readOnly'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setReadOnly:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMHTMLUListElement'>
+    <method selector='compact'>
+      <retval type='B'/>
+    </method>
+    <method selector='setCompact:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMImplementation'>
+    <method selector='hasFeature::'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMMouseEvent'>
+    <method selector='altKey'>
+      <retval type='B'/>
+    </method>
+    <method selector='ctrlKey'>
+      <retval type='B'/>
+    </method>
+    <method selector='initMouseEvent:::::::::::::::'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+      <arg type='B' index='9'/>
+      <arg type='B' index='10'/>
+      <arg type='B' index='11'/>
+      <arg type='B' index='12'/>
+    </method>
+    <method selector='metaKey'>
+      <retval type='B'/>
+    </method>
+    <method selector='shiftKey'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMMutationEvent'>
+    <method selector='initMutationEvent::::::::'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+    </method>
+  </class>
+  <class name='DOMNode'>
+    <method selector='cloneNode:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='hasAttributes'>
+      <retval type='B'/>
+    </method>
+    <method selector='hasChildNodes'>
+      <retval type='B'/>
+    </method>
+    <method selector='isSupported::'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMNodeIterator'>
+    <method selector='expandEntityReferences'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMRange'>
+    <method selector='collapse:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='collapsed'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMStyleSheet'>
+    <method selector='disabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setDisabled:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='DOMTreeWalker'>
+    <method selector='expandEntityReferences'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='DOMUIEvent'>
+    <method selector='initUIEvent:::::'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+    </method>
+  </class>
+  <class name='NSObject'>
+    <method selector='addEventListener:::'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='canProvideDocumentSource'>
+      <retval type='B'/>
+    </method>
+    <method selector='dispatchEvent:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='isKeyExcludedFromWebScript:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='isSelectorExcludedFromWebScript:'>
+      <retval type='B'/>
+    </method>
+    <method selector='removeEventListener:::'>
+      <arg type='B' index='2'/>
+    </method>
+    <method selector='searchFor:direction:caseSensitive:wrap:'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+      <arg type='B' index='3'/>
+      <retval type='B'/>
+    </method>
+    <method selector='setNeedsLayout:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='supportsTextEncoding'>
+      <retval type='B'/>
+    </method>
+    <method selector='webPlugInCallJava:isStatic:returnType:method:arguments:callingURL:exceptionDescription:'>
+      <arg type='B' index='1'/>
+      <arg index='0' type_modifier='n'/>
+      <arg index='3' type_modifier='n'/>
+      <arg index='4' c_array_of_variable_length='true' type_modifier='n'/>
+      <arg index='6' type_modifier='o'/>
+    </method>
+    <method selector='webPlugInSetIsSelected:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='webView:doCommandBySelector:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:runJavaScriptConfirmPanelWithMessage:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:setResizable:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='webView:setStatusBarVisible:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='webView:setToolbarsVisible:'>
+      <arg type='B' index='1'/>
+    </method>
+    <method selector='webView:shouldApplyStyle:toElementsInDOMRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldBeginEditingInDOMRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldChangeSelectedDOMRange:toDOMRange:affinity:stillSelecting:'>
+      <arg type='B' index='4'/>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldChangeTypingStyle:toStyle:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldDeleteDOMRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldEndEditingInDOMRange:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldInsertNode:replacingDOMRange:givenAction:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldInsertText:replacingDOMRange:givenAction:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:shouldPerformAction:fromSender:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webView:validateUserInterfaceItem:defaultValidation:'>
+      <arg type='B' index='2'/>
+      <retval type='B'/>
+    </method>
+    <method selector='webViewAreToolbarsVisible:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webViewIsResizable:'>
+      <retval type='B'/>
+    </method>
+    <method selector='webViewIsStatusBarVisible:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebBackForwardList'>
+    <method selector='containsItem:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebDataSource'>
+    <method selector='isLoading'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebFrameView'>
+    <method selector='allowsScrolling'>
+      <retval type='B'/>
+    </method>
+    <method selector='setAllowsScrolling:'>
+      <arg type='B' index='0'/>
+    </method>
+  </class>
+  <class name='WebHistory'>
+    <method selector='loadFromURL:error:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+    <method selector='saveToURL:error:'>
+      <arg index='1' type_modifier='o'/>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebPreferences'>
+    <method selector='allowsAnimatedImageLooping'>
+      <retval type='B'/>
+    </method>
+    <method selector='allowsAnimatedImages'>
+      <retval type='B'/>
+    </method>
+    <method selector='arePlugInsEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='autosaves'>
+      <retval type='B'/>
+    </method>
+    <method selector='isJavaEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='isJavaScriptEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='javaScriptCanOpenWindowsAutomatically'>
+      <retval type='B'/>
+    </method>
+    <method selector='loadsImagesAutomatically'>
+      <retval type='B'/>
+    </method>
+    <method selector='privateBrowsingEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='setAllowsAnimatedImageLooping:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setAllowsAnimatedImages:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setAutosaves:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setJavaEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setJavaScriptCanOpenWindowsAutomatically:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setJavaScriptEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setLoadsImagesAutomatically:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setPlugInsEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setPrivateBrowsingEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setShouldPrintBackgrounds:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setTabsToLinks:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setUserStyleSheetEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='shouldPrintBackgrounds'>
+      <retval type='B'/>
+    </method>
+    <method selector='tabsToLinks'>
+      <retval type='B'/>
+    </method>
+    <method selector='userStyleSheetEnabled'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebScriptObject'>
+    <method class_method='true' selector='throwException:'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <class name='WebView'>
+    <method selector='canGoBack'>
+      <retval type='B'/>
+    </method>
+    <method selector='canGoForward'>
+      <retval type='B'/>
+    </method>
+    <method selector='canMakeTextLarger'>
+      <retval type='B'/>
+    </method>
+    <method selector='canMakeTextSmaller'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='canShowMIMEType:'>
+      <retval type='B'/>
+    </method>
+    <method class_method='true' selector='canShowMIMETypeAsHTML:'>
+      <retval type='B'/>
+    </method>
+    <method selector='goBack'>
+      <retval type='B'/>
+    </method>
+    <method selector='goForward'>
+      <retval type='B'/>
+    </method>
+    <method selector='goToBackForwardItem:'>
+      <retval type='B'/>
+    </method>
+    <method selector='isContinuousSpellCheckingEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='isEditable'>
+      <retval type='B'/>
+    </method>
+    <method selector='searchFor:direction:caseSensitive:wrap:'>
+      <arg type='B' index='1'/>
+      <arg type='B' index='2'/>
+      <arg type='B' index='3'/>
+      <retval type='B'/>
+    </method>
+    <method selector='setContinuousSpellCheckingEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setEditable:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setMaintainsBackForwardList:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='setSmartInsertDeleteEnabled:'>
+      <arg type='B' index='0'/>
+    </method>
+    <method selector='smartInsertDeleteEnabled'>
+      <retval type='B'/>
+    </method>
+    <method selector='supportsTextEncoding'>
+      <retval type='B'/>
+    </method>
+  </class>
+  <informal_protocol name='WebDownloadDelegate'>
+    <method type='@12@0:4@8' selector='downloadWindowForAuthenticationSheet:'/>
+  </informal_protocol>
+  <informal_protocol name='WebFrameLoadDelegate'>
+    <method type='v16@0:4@8@12' selector='webView:didCancelClientRedirectForFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:didChangeLocationWithinPageForFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:didCommitLoadForFrame:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:didFailLoadWithError:forFrame:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:didFailProvisionalLoadWithError:forFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:didFinishLoadForFrame:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:didReceiveIcon:forFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:didReceiveServerRedirectForProvisionalLoadForFrame:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:didReceiveTitle:forFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:didStartProvisionalLoadForFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:willCloseFrame:'/>
+    <method type='v32@0:4@8@12d16@24@28' selector='webView:willPerformClientRedirectToURL:delay:fireDate:forFrame:'/>
+    <method type='v16@0:4@8@12' selector='webView:windowScriptObjectAvailable:'/>
+  </informal_protocol>
+  <informal_protocol name='WebJavaPlugIn'>
+    <method type='(jvalue=CBSsiqfd^{_jobject})36@0:4^{_jobject=}8c12i16^{_jmethodID=}20^(jvalue=CcSsiqfd^{_jobject})24@28^@32' selector='webPlugInCallJava:isStatic:returnType:method:arguments:callingURL:exceptionDescription:'/>
+    <method type='^{_jobject=}8@0:4' selector='webPlugInGetApplet'/>
+  </informal_protocol>
+  <informal_protocol name='WebPlugIn'>
+    <method type='@8@0:4' selector='objectForWebScript'/>
+    <method type='v8@0:4' selector='webPlugInDestroy'/>
+    <method type='v8@0:4' selector='webPlugInInitialize'/>
+    <method type='v12@0:4B8' selector='webPlugInSetIsSelected:'/>
+    <method type='v8@0:4' selector='webPlugInStart'/>
+    <method type='v8@0:4' selector='webPlugInStop'/>
+  </informal_protocol>
+  <informal_protocol name='WebPlugInContainer'>
+    <method type='@8@0:4' selector='webFrame'/>
+    <method type='v16@0:4@8@12' selector='webPlugInContainerLoadRequest:inFrame:'/>
+    <method type='@8@0:4' selector='webPlugInContainerSelectionColor'/>
+    <method type='v12@0:4@8' selector='webPlugInContainerShowStatus:'/>
+  </informal_protocol>
+  <informal_protocol name='WebPolicyDelegate'>
+    <method type='v28@0:4@8@12@16@20@24' selector='webView:decidePolicyForMIMEType:request:frame:decisionListener:'/>
+    <method type='v28@0:4@8@12@16@20@24' selector='webView:decidePolicyForNavigationAction:request:frame:decisionListener:'/>
+    <method type='v28@0:4@8@12@16@20@24' selector='webView:decidePolicyForNewWindowAction:request:newFrameName:decisionListener:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:unableToImplementPolicyWithError:frame:'/>
+  </informal_protocol>
+  <informal_protocol name='WebResourceLoadDelegate'>
+    <method type='@20@0:4@8@12@16' selector='webView:identifierForInitialRequest:fromDataSource:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:plugInFailedWithError:dataSource:'/>
+    <method type='v24@0:4@8@12@16@20' selector='webView:resource:didCancelAuthenticationChallenge:fromDataSource:'/>
+    <method type='v24@0:4@8@12@16@20' selector='webView:resource:didFailLoadingWithError:fromDataSource:'/>
+    <method type='v20@0:4@8@12@16' selector='webView:resource:didFinishLoadingFromDataSource:'/>
+    <method type='v24@0:4@8@12@16@20' selector='webView:resource:didReceiveAuthenticationChallenge:fromDataSource:'/>
+    <method type='v24@0:4@8@12I16@20' selector='webView:resource:didReceiveContentLength:fromDataSource:'/>
+    <method type='v24@0:4@8@12@16@20' selector='webView:resource:didReceiveResponse:fromDataSource:'/>
+    <method type='@28@0:4@8@12@16@20@24' selector='webView:resource:willSendRequest:redirectResponse:fromDataSource:'/>
+  </informal_protocol>
+  <informal_protocol name='WebScripting'>
+    <method type='v8@0:4' selector='finalizeForWebScript'/>
+    <method type='@12@0:4@8' selector='invokeDefaultMethodWithArguments:'/>
+    <method type='@16@0:4@8@12' selector='invokeUndefinedMethodFromWebScript:withArguments:'/>
+    <method class_method='true' type='B12@0:4r*8' selector='isKeyExcludedFromWebScript:'/>
+    <method class_method='true' type='B12@0:4:8' selector='isSelectorExcludedFromWebScript:'/>
+    <method class_method='true' type='@12@0:4r*8' selector='webScriptNameForKey:'/>
+    <method class_method='true' type='@12@0:4:8' selector='webScriptNameForSelector:'/>
+  </informal_protocol>
+  <informal_protocol name='WebUIDelegate'>
+    <method type='@20@0:4@8@12@16' selector='webView:contextMenuItemsForElement:defaultMenuItems:'/>
+    <method type='@16@0:4@8@12' selector='webView:createWebViewWithRequest:'/>
+    <method type='I16@0:4@8@12' selector='webView:dragDestinationActionMaskForDraggingInfo:'/>
+    <method type='I20@0:4@8{_NSPoint=ff}12' selector='webView:dragSourceActionMaskForPoint:'/>
+    <method type='v16@0:4@8@12' selector='webView:makeFirstResponder:'/>
+    <method type='v20@0:4@8@12I16' selector='webView:mouseDidMoveOverElement:modifierFlags:'/>
+    <method type='v16@0:4@8@12' selector='webView:runJavaScriptAlertPanelWithMessage:'/>
+    <method type='B16@0:4@8@12' selector='webView:runJavaScriptConfirmPanelWithMessage:'/>
+    <method type='@20@0:4@8@12@16' selector='webView:runJavaScriptTextInputPanelWithPrompt:defaultText:'/>
+    <method type='v16@0:4@8@12' selector='webView:runOpenPanelForFileButtonWithResultListener:'/>
+    <method type='v28@0:4@8{_NSRect={_NSPoint=ff}{_NSSize=ff}}12' selector='webView:setContentRect:'/>
+    <method type='v28@0:4@8{_NSRect={_NSPoint=ff}{_NSSize=ff}}12' selector='webView:setFrame:'/>
+    <method type='v16@0:4@8B12' selector='webView:setResizable:'/>
+    <method type='v16@0:4@8B12' selector='webView:setStatusBarVisible:'/>
+    <method type='v16@0:4@8@12' selector='webView:setStatusText:'/>
+    <method type='v16@0:4@8B12' selector='webView:setToolbarsVisible:'/>
+    <method type='B20@0:4@8:12@16' selector='webView:shouldPerformAction:fromSender:'/>
+    <method type='B20@0:4@8@12B16' selector='webView:validateUserInterfaceItem:defaultValidation:'/>
+    <method type='v20@0:4@8i12@16' selector='webView:willPerformDragDestinationAction:forDraggingInfo:'/>
+    <method type='v28@0:4@8i12{_NSPoint=ff}16@24' selector='webView:willPerformDragSourceAction:fromPoint:withPasteboard:'/>
+    <method type='B12@0:4@8' selector='webViewAreToolbarsVisible:'/>
+    <method type='v12@0:4@8' selector='webViewClose:'/>
+    <method type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}12@0:4@8' selector='webViewContentRect:'/>
+    <method type='@12@0:4@8' selector='webViewFirstResponder:'/>
+    <method type='v12@0:4@8' selector='webViewFocus:'/>
+    <method type='{_NSRect={_NSPoint=ff}{_NSSize=ff}}12@0:4@8' selector='webViewFrame:'/>
+    <method type='B12@0:4@8' selector='webViewIsResizable:'/>
+    <method type='B12@0:4@8' selector='webViewIsStatusBarVisible:'/>
+    <method type='v12@0:4@8' selector='webViewShow:'/>
+    <method type='@12@0:4@8' selector='webViewStatusText:'/>
+    <method type='v12@0:4@8' selector='webViewUnfocus:'/>
+  </informal_protocol>
+  <informal_protocol name='WebViewEditingDelegate'>
+    <method type='@12@0:4@8' selector='undoManagerForWebView:'/>
+    <method type='B16@0:4@8:12' selector='webView:doCommandBySelector:'/>
+    <method type='B20@0:4@8@12@16' selector='webView:shouldApplyStyle:toElementsInDOMRange:'/>
+    <method type='B16@0:4@8@12' selector='webView:shouldBeginEditingInDOMRange:'/>
+    <method type='B28@0:4@8@12@16i20B24' selector='webView:shouldChangeSelectedDOMRange:toDOMRange:affinity:stillSelecting:'/>
+    <method type='B20@0:4@8@12@16' selector='webView:shouldChangeTypingStyle:toStyle:'/>
+    <method type='B16@0:4@8@12' selector='webView:shouldDeleteDOMRange:'/>
+    <method type='B16@0:4@8@12' selector='webView:shouldEndEditingInDOMRange:'/>
+    <method type='B24@0:4@8@12@16i20' selector='webView:shouldInsertNode:replacingDOMRange:givenAction:'/>
+    <method type='B24@0:4@8@12@16i20' selector='webView:shouldInsertText:replacingDOMRange:givenAction:'/>
+    <method type='v12@0:4@8' selector='webViewDidBeginEditing:'/>
+    <method type='v12@0:4@8' selector='webViewDidChange:'/>
+    <method type='v12@0:4@8' selector='webViewDidChangeSelection:'/>
+    <method type='v12@0:4@8' selector='webViewDidChangeTypingStyle:'/>
+    <method type='v12@0:4@8' selector='webViewDidEndEditing:'/>
+  </informal_protocol>
+</signatures>

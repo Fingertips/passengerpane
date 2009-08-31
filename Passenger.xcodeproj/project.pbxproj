@@ -22,6 +22,7 @@
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
 		51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B919130E0172C200F45803 /* config_uninstaller.rb */; };
 		51D16FE30E07DFA000A46A7D /* PassengerPaneHelp in Resources */ = {isa = PBXBuildFile; fileRef = 51D16FDD0E07DFA000A46A7D /* PassengerPaneHelp */; };
+		51DA08CB104C025000C8C106 /* RubyCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */; };
 		76A8DCDF0E068B7000B133F1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A8DCDE0E068B7000B133F1 /* icon.png */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -33,6 +34,20 @@
 		9648B5EC0D195BF200DC73E2 /* PassengerPref.rb in Resources */ = {isa = PBXBuildFile; fileRef = 9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */; };
 		9648B5F00D195C2F00DC73E2 /* Pref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9648B5EE0D195C2F00DC73E2 /* Pref.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		51DA08CA104BFFFE00C8C106 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				51DA08CB104C025000C8C106 /* RubyCocoa.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -58,7 +73,7 @@
 		76A8DCDE0E068B7000B133F1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
-		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = /Library/Frameworks/RubyCocoa.framework; sourceTree = "<absolute>"; };
+		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = "vendor/RubyCocoa-0.13.2_10.5-universal/RubyCocoa.framework"; sourceTree = "<group>"; };
 		9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerPref.rb; sourceTree = "<group>"; };
 		9648B5EF0D195C2F00DC73E2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PassengerPref.xib; sourceTree = "<group>"; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
@@ -199,6 +214,7 @@
 				8D202CF00486D31800D8A456 /* Sources */,
 				8D202CF20486D31800D8A456 /* Frameworks */,
 				8D202CF50486D31800D8A456 /* Rez */,
+				51DA08CA104BFFFE00C8C106 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
