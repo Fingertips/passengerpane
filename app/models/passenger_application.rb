@@ -165,7 +165,7 @@ class PassengerApplication < NSObject
   end
   
   def to_hash
-    @user_defined_data = "  <directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </directory>" if @new_app
+    @user_defined_data = "  <Directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </Directory>" if @new_app
     {
       'app_type' => application_type,
       'config_path' => config_path,

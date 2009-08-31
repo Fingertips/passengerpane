@@ -72,10 +72,10 @@ describe "PassengerApplication, with a new application" do
     passenger_app.setValue_forKey('/some/path/to/rails/app', 'path')
     
     string = %{
-  <directory "/some/path/to/rails/app/public">
+  <Directory "/some/path/to/rails/app/public">
     Order allow,deny
     Allow from all
-  </directory>}.sub(/^\n/, '')
+  </Directory>}.sub(/^\n/, '')
     
     passenger_app.to_hash['user_defined_data'].should == string
     assigns(:user_defined_data).should == string
@@ -263,7 +263,7 @@ describe "PassengerApplication, in general" do
   it "should return it's attributes as a hash without NS classes" do
     assigns(:host, 'app.local'.to_ns)
     assigns(:aliases, 'alias1.local alias2.local'.to_ns)
-    assigns(:user_defined_data, "<directory \"/some/path\">\n  foo bar\n</directory>")
+    assigns(:user_defined_data, "<Directory \"/some/path\">\n  foo bar\n</Directory>")
     assigns(:vhostname, 'het-manfreds-wiki.local:443')
     
     passenger_app.to_hash.should == {
@@ -274,7 +274,7 @@ describe "PassengerApplication, in general" do
       'path' => passenger_app.path,
       'environment' => 'development',
       'vhostname' => 'het-manfreds-wiki.local:443',
-      'user_defined_data' => "<directory \"/some/path\">\n  foo bar\n</directory>"
+      'user_defined_data' => "<Directory \"/some/path\">\n  foo bar\n</Directory>"
     }
     
     passenger_app.to_hash.to_yaml.should.not.include 'NSCF'

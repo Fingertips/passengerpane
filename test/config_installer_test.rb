@@ -31,7 +31,7 @@ describe "ConfigInstaller" do
       'path' => '/User/het-manfred/rails code/blog',
       'environment' => 'production',
       'vhostname' => 'het-manfreds-wiki.local:443',
-      'user_defined_data' => "  <directory \"/User/het-manfred/rails code/blog/public\">\n    Order allow,deny\n    Allow from all\n  </directory>"
+      'user_defined_data' => "  <Directory \"/User/het-manfred/rails code/blog/public\">\n    Order allow,deny\n    Allow from all\n  </Directory>"
     }]
   end
   
@@ -56,10 +56,10 @@ describe "ConfigInstaller" do
   ServerAlias manfred-s-blog.local my-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
-  <directory \"/User/het-manfred/rails code/blog/public\">
+  <Directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all
-  </directory>
+  </Directory>
 </VirtualHost>}.sub(/^\n/, '')
   end
   
@@ -74,10 +74,10 @@ describe "ConfigInstaller" do
   ServerAlias manfred-s-blog.local my-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RackEnv production
-  <directory \"/User/het-manfred/rails code/blog/public\">
+  <Directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all
-  </directory>
+  </Directory>
 </VirtualHost>}.sub(/^\n/, '')
   end
   
@@ -89,10 +89,10 @@ describe "ConfigInstaller" do
   ServerName het-manfreds-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
-  <directory \"/User/het-manfred/rails code/blog/public\">
+  <Directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all
-  </directory>
+  </Directory>
 </VirtualHost>}.sub(/^\n/, '')
   end
   
