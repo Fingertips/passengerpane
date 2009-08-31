@@ -215,6 +215,7 @@
 				8D202CF20486D31800D8A456 /* Frameworks */,
 				8D202CF50486D31800D8A456 /* Rez */,
 				51DA08CA104BFFFE00C8C106 /* Copy Frameworks */,
+				51195FED104C1D80009D4368 /* Update install_name */,
 			);
 			buildRules = (
 			);
@@ -276,6 +277,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXRezBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51195FED104C1D80009D4368 /* Update install_name */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update install_name";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "install_name_tool -change \\\n \"/System/Library/Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa\" \\\n \"@loader_path/../Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa\" \\\n \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D202CF00486D31800D8A456 /* Sources */ = {
