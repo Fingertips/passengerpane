@@ -152,8 +152,14 @@ class PassengerApplication < NSObject
     super
     self.revertable = true
     mark_dirty!
-    @custom_environment = nil if key == 'environment'
-    set_default_host_from_path(@path) if key == 'path' && (@host.nil? || @host.empty?) && (!@path.nil? && !@path.empty?)
+    
+    case key
+    when 'path'
+      path_was_updated!
+    when 'environment'
+      @custom_environment = nil
+    end
+    
     self.valid = (!@host.nil? && !@host.empty? && !@path.nil? && !@path.empty?)
   end
   
@@ -177,6 +183,10 @@ class PassengerApplication < NSObject
   end
   
   private
+  
+  def blank?(value)
+    value.nil? || value.empty?
+  end
   
   def check_application_type
     env_file = File.join(@path, 'config', 'environment.rb')
@@ -229,6 +239,18 @@ class PassengerApplication < NSObject
       'environment' => @custom_environment || @environment,
       'user_defined_data' => @user_defined_data
     }
+  end
+  
+  def path_was_updated!
+    unless blank?(@path)
+      set_default_host_from_path(@path) if blank?(@host)
+      update_path_in_user_defined_data!
+    end
+  end
+  
+  def update_path_in_user_defined_data!
+    old_path = @original_values['path']
+    @user_defined_data = @user_defined_data.gsub(old_path, @path) unless old_path == @path
   end
   
   def set_default_host_from_path(path)

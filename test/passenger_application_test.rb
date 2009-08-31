@@ -353,6 +353,15 @@ describe "PassengerApplication, in general" do
     passenger_app.apply
   end
   
+  it "should update the @user_defined_data when the path is changed" do
+    old_path = passenger_app.path
+    new_path = '/updated/path/to/blog'
+    
+    passenger_app.setValue_forKey(new_path, 'path')
+    passenger_app.user_defined_data.should.not.include old_path
+    passenger_app.user_defined_data.should.include new_path
+  end
+  
   it "should reload an application from disk and mark it dirty if values have changed, but don't make it revertable" do
     data = File.read(@vhost).sub('development', 'production')
     File.stubs(:read).with(@vhost).returns(data)
@@ -417,7 +426,7 @@ describe "PassengerApplication, when dealing with custom environments" do
   end
   
   it "should not leave any custom environment declaration in the user defined data" do
-    passenger_app.user_defined_data.should.not.include 'RailsEnv staging'    
+    passenger_app.user_defined_data.should.not.include 'RailsEnv staging'
   end
   
   it "should have stored the custom environment name and added to the original_values" do
