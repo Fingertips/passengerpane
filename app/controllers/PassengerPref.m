@@ -6,5 +6,5 @@
 
 static void __attribute__((constructor)) loadRubyPrefPane(void)
 {
-	RBBundleInit("PassengerPref.rb", [PassengerLoader class], nil);
+	RBBundleInit("passenger_pref.rb", [PassengerLoader class], nil);
 }

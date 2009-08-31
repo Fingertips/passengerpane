@@ -2,7 +2,7 @@
 
 require 'osx/cocoa'
 require 'yaml'
-require File.expand_path('../passenger_pane_config', __FILE__)
+require File.expand_path('../passenger_pane_config', __FILE__) unless ENV['TESTING_PASSENGER_PREF']
 
 class String
   def bypass_safe_level_1

@@ -1,5 +1,4 @@
 require File.expand_path('../test_helper', __FILE__)
-require 'config_uninstaller'
 
 describe "ConfigUninstaller" do
   before do

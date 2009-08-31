@@ -1,7 +1,4 @@
 require File.expand_path('../test_helper', __FILE__)
-require 'config_installer'
-require 'yaml'
-require File.expand_path('../../PassengerApplication', __FILE__)
 
 describe "ConfigInstaller" do
   before do

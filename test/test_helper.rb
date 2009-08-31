@@ -12,7 +12,7 @@ end
 
 $: << File.expand_path('../../', __FILE__)
 
-require File.expand_path('../../shared_passenger_behaviour', __FILE__)
+require File.expand_path('../../app/utils/shared_passenger_behaviour', __FILE__)
 module SharedPassengerBehaviour
   # Silencio!
   def p(obj); end
@@ -43,3 +43,6 @@ class OSX::SecurityHelper
     @authorized
   end
 end
+
+ENV['TESTING_PASSENGER_PREF'] = 'true'
+require File.expand_path('../../app/controllers/passenger_pref', __FILE__)

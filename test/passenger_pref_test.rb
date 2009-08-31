@@ -1,5 +1,4 @@
 require File.expand_path('../test_helper', __FILE__)
-require File.expand_path('../../PassengerPref', __FILE__)
 
 def OSX._ignore_ns_override; true; end
 

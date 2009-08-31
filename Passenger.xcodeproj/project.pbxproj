@@ -16,7 +16,7 @@
 		518C7F730E06A668003A3ED0 /* Security.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 518C7F720E06A668003A3ED0 /* Security.bridgesupport */; };
 		518C7F760E06B665003A3ED0 /* SecurityHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 518C7F740E06B665003A3ED0 /* SecurityHelper.h */; };
 		518C7F770E06B665003A3ED0 /* SecurityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 518C7F750E06B665003A3ED0 /* SecurityHelper.m */; };
-		519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */; };
+		519DFB9F0DFDD825008A42FE /* passenger_application.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFB9E0DFDD825008A42FE /* passenger_application.rb */; };
 		519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */ = {isa = PBXBuildFile; fileRef = 519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */; };
 		51A703B10E648641006A1E26 /* passenger_pane_config.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51A703B00E648641006A1E26 /* passenger_pane_config.rb */; };
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
@@ -31,7 +31,7 @@
 		8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F506C035013D953901CA16C8 /* PreferencePanes.framework */; };
 		9648B5E80D195BC700DC73E2 /* RubyCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */; };
-		9648B5EC0D195BF200DC73E2 /* PassengerPref.rb in Resources */ = {isa = PBXBuildFile; fileRef = 9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */; };
+		9648B5EC0D195BF200DC73E2 /* passenger_pref.rb in Resources */ = {isa = PBXBuildFile; fileRef = 9648B5EB0D195BF200DC73E2 /* passenger_pref.rb */; };
 		9648B5F00D195C2F00DC73E2 /* Pref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9648B5EE0D195C2F00DC73E2 /* Pref.xib */; };
 /* End PBXBuildFile section */
 
@@ -55,30 +55,30 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger_Prefix.pch; sourceTree = "<group>"; };
-		516B1B6D0DD3D344009ADB8E /* config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_installer.rb; sourceTree = "<group>"; };
-		5186C3150E090B59008D8E1F /* HelpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpHelper.h; sourceTree = "<group>"; };
-		5186C3160E090B59008D8E1F /* HelpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpHelper.m; sourceTree = "<group>"; };
+		516B1B6D0DD3D344009ADB8E /* config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = config_installer.rb; path = app/scripts/config_installer.rb; sourceTree = "<group>"; };
+		5186C3150E090B59008D8E1F /* HelpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpHelper.h; path = app/utils/HelpHelper.h; sourceTree = "<group>"; };
+		5186C3160E090B59008D8E1F /* HelpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpHelper.m; path = app/utils/HelpHelper.m; sourceTree = "<group>"; };
 		5186C31E0E090C9C008D8E1F /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		5189C6E60E111C3300B83EA5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		518C7F550E06745E003A3ED0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
-		518C7F720E06A668003A3ED0 /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Security.bridgesupport; sourceTree = "<group>"; };
-		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityHelper.h; sourceTree = "<group>"; };
-		518C7F750E06B665003A3ED0 /* SecurityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityHelper.m; sourceTree = "<group>"; };
-		519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerApplication.rb; sourceTree = "<group>"; };
-		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = shared_passenger_behaviour.rb; sourceTree = "<group>"; };
-		51A703B00E648641006A1E26 /* passenger_pane_config.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = passenger_pane_config.rb; sourceTree = "<group>"; };
-		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Alerts.icns; sourceTree = "<group>"; };
-		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = config_uninstaller.rb; sourceTree = "<group>"; };
+		518C7F720E06A668003A3ED0 /* Security.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Security.bridgesupport; path = resources/Security.bridgesupport; sourceTree = "<group>"; };
+		518C7F740E06B665003A3ED0 /* SecurityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SecurityHelper.h; path = app/utils/SecurityHelper.h; sourceTree = "<group>"; };
+		518C7F750E06B665003A3ED0 /* SecurityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SecurityHelper.m; path = app/utils/SecurityHelper.m; sourceTree = "<group>"; };
+		519DFB9E0DFDD825008A42FE /* passenger_application.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = passenger_application.rb; path = app/models/passenger_application.rb; sourceTree = "<group>"; };
+		519DFBA70DFE8EAF008A42FE /* shared_passenger_behaviour.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = shared_passenger_behaviour.rb; path = app/utils/shared_passenger_behaviour.rb; sourceTree = "<group>"; };
+		51A703B00E648641006A1E26 /* passenger_pane_config.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = passenger_pane_config.rb; path = app/config/passenger_pane_config.rb; sourceTree = "<group>"; };
+		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Alerts.icns; path = resources/Alerts.icns; sourceTree = "<group>"; };
+		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = config_uninstaller.rb; path = app/scripts/config_uninstaller.rb; sourceTree = "<group>"; };
 		51D16FDE0E07DFA000A46A7D /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PassengerPaneHelp; sourceTree = "<group>"; };
-		76A8DCDE0E068B7000B133F1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		76A8DCDE0E068B7000B133F1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = resources/icon.png; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
 		9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RubyCocoa.framework; path = "vendor/RubyCocoa-0.13.2_10.5-universal/RubyCocoa.framework"; sourceTree = "<group>"; };
-		9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PassengerPref.rb; sourceTree = "<group>"; };
+		9648B5EB0D195BF200DC73E2 /* passenger_pref.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = passenger_pref.rb; path = app/controllers/passenger_pref.rb; sourceTree = "<group>"; };
 		9648B5EF0D195C2F00DC73E2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/PassengerPref.xib; sourceTree = "<group>"; };
 		F506C035013D953901CA16C8 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = /System/Library/Frameworks/PreferencePanes.framework; sourceTree = "<absolute>"; };
-		F506C03D013D9D7901CA16C8 /* PassengerPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassengerPref.m; sourceTree = "<group>"; };
-		F506C040013D9D8001CA16C8 /* PassengerPref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PassengerPref.tiff; sourceTree = "<group>"; };
+		F506C03D013D9D7901CA16C8 /* PassengerPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PassengerPref.m; path = app/controllers/PassengerPref.m; sourceTree = "<group>"; };
+		F506C040013D9D8001CA16C8 /* PassengerPref.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = PassengerPref.tiff; path = resources/PassengerPref.tiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +121,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				519DFB9E0DFDD825008A42FE /* PassengerApplication.rb */,
+				519DFB9E0DFDD825008A42FE /* passenger_application.rb */,
 				518C7F720E06A668003A3ED0 /* Security.bridgesupport */,
 				5186C3150E090B59008D8E1F /* HelpHelper.h */,
 				5186C3160E090B59008D8E1F /* HelpHelper.m */,
@@ -143,7 +143,7 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9648B5EB0D195BF200DC73E2 /* PassengerPref.rb */,
+				9648B5EB0D195BF200DC73E2 /* passenger_pref.rb */,
 				F506C03D013D9D7901CA16C8 /* PassengerPref.m */,
 				5189C6E60E111C3300B83EA5 /* LICENSE */,
 				516B1B6D0DD3D344009ADB8E /* config_installer.rb */,
@@ -250,10 +250,10 @@
 			files = (
 				8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */,
 				8D202CEE0486D31800D8A456 /* PassengerPref.tiff in Resources */,
-				9648B5EC0D195BF200DC73E2 /* PassengerPref.rb in Resources */,
+				9648B5EC0D195BF200DC73E2 /* passenger_pref.rb in Resources */,
 				9648B5F00D195C2F00DC73E2 /* Pref.xib in Resources */,
 				516B1B6E0DD3D344009ADB8E /* config_installer.rb in Resources */,
-				519DFB9F0DFDD825008A42FE /* PassengerApplication.rb in Resources */,
+				519DFB9F0DFDD825008A42FE /* passenger_application.rb in Resources */,
 				519DFBA90DFE8EAF008A42FE /* shared_passenger_behaviour.rb in Resources */,
 				51B9190D0E01523900F45803 /* Alerts.icns in Resources */,
 				51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */,

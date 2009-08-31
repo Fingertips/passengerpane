@@ -1,6 +1,4 @@
 require File.expand_path('../test_helper', __FILE__)
-require File.expand_path('../../PassengerApplication', __FILE__)
-require File.expand_path('../../PassengerPref.rb', __FILE__)
 
 class Hash
   def except(*keys)
