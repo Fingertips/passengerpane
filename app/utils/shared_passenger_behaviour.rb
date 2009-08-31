@@ -3,7 +3,7 @@ module SharedPassengerBehaviour
   
   def execute(command, *args)
     if OSX::SecurityHelper.sharedInstance.executeCommand_withArgs(command, args) == 0
-      p "The command that failed was: `#{command} #{args.map { |arg| arg.inspect }.join(' ')}'"
+      log "The command that failed was: `#{command} #{args.map { |arg| arg.inspect }.join(' ')}'"
       
       alert = OSX::NSAlert.alloc.init
       alert.messageText = 'Your changes couldn’t be saved'
@@ -21,8 +21,8 @@ module SharedPassengerBehaviour
   end
   module_function :execute
   
-  def p(obj)
+  def log(obj)
     NSLog(obj.is_a?(String) ? obj : obj.inspect)
   end
-  module_function :p
+  module_function :log
 end

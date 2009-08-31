@@ -3,8 +3,6 @@ include OSX
 
 require 'fileutils'
 require 'yaml'
-# require File.expand_path('../passenger_pane_config', __FILE__)
-# require File.expand_path('../shared_passenger_behaviour', __FILE__)
 
 class PassengerApplication < NSObject
   include SharedPassengerBehaviour
@@ -29,14 +27,14 @@ class PassengerApplication < NSObject
     
     def startApplications(apps)
       data = serializedApplicationsData(apps)
-      p "Starting Rails applications:\n#{data}"
+      log "Starting Rails applications:\n#{data}"
       execute '/usr/bin/ruby', CONFIG_INSTALLER, data
       apps.each { |app| app.apply(false) }
     end
     
     def removeApplications(apps)
       data = serializedApplicationsData(apps)
-      p "Removing applications: #{data}"
+      log "Removing applications: #{data}"
       execute '/usr/bin/ruby', CONFIG_UNINSTALLER, data
     end
     
@@ -96,11 +94,11 @@ class PassengerApplication < NSObject
   
   def apply(save_config = nil)
     unless @valid
-      p "Not applying changes to invalid Rails application: #{@path}"
+      log "Not applying changes to invalid Rails application: #{@path}"
       return false
     end
     
-    p "Applying changes to Rails application: #{@path}"
+    log "Applying changes to Rails application: #{@path}"
     (@new_app ? start : restart) unless save_config == false
     # todo: check if it went ok before assuming so.
     @new_app = self.dirty = self.valid = false
@@ -109,12 +107,12 @@ class PassengerApplication < NSObject
   end
   
   def start
-    p "Starting Rails application: #{@path}"
+    log "Starting Rails application: #{@path}"
     save_config!
   end
   
   def restart(sender = nil)
-    p "Restarting Rails application: #{@path}"
+    log "Restarting Rails application: #{@path}"
     if @host != @original_values['host'] || @aliases != @original_values['aliases']
       execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml)
     end
@@ -141,7 +139,7 @@ class PassengerApplication < NSObject
   end
   
   def save_config!
-    p "Saving configuration: #{config_path}"
+    log "Saving configuration: #{config_path}"
     execute '/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml
     set_original_values!
   end

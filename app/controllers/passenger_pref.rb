@@ -68,7 +68,7 @@ class PrefPanePassenger < NSPreferencePane
       @applicationsController.content.each { |app| app.apply if app.dirty? }
       self.dirty_apps = self.revertable_apps = false
     else
-      p "Unable to #{action} because authorization failed."
+      log "Unable to #{action} because authorization failed."
     end
   end
   
