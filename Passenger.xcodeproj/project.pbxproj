@@ -291,7 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "install_name_tool -change \\\n \"/System/Library/Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa\" \\\n \"@loader_path/../Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa\" \\\n \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_PATH\"";
+			shellScript = "rake prefpane:change_ruycocoa_framework_location";
 		};
 /* End PBXShellScriptBuildPhase section */
 

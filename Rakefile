@@ -1,8 +1,24 @@
-task :default => :run
+task :default => "prefpane:run"
 
-task :run do
-  sh "xcodebuild"
-  sh "open build/Release/Passenger.prefPane"
+namespace :prefpane do
+  BUILD = "build/Release/Passenger.prefPane"
+  BIN = File.join(BUILD, 'Contents/MacOS/Passenger')
+  
+  task :build do
+    sh "xcodebuild -configuration Release"
+  end
+  
+  # Make sure that the prefpane searches inside the bundle for the RubyCocoa framework.
+  #
+  # This task is invoked from the xcode project post build script.
+  task :change_ruycocoa_framework_location do
+    current = `/usr/bin/otool -L #{BIN}`.match(/^\t(.+RubyCocoa).+$/)[1]
+    sh "/usr/bin/install_name_tool -change '#{current}' '@loader_path/../Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa' '#{BIN}'"
+  end
+  
+  task :run => :build do
+    sh "open #{BUILD}"
+  end
 end
 
 task :clean do
