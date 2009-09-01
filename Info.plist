@@ -30,5 +30,9 @@
 	<string>Passenger</string>
 	<key>NSPrincipalClass</key>
 	<string>PrefPanePassenger</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>Passenger.help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>index</string>
 </dict>
 </plist>
