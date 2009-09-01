@@ -9,6 +9,7 @@ class PassengerApplication < NSObject
   
   CONFIG_UNINSTALLER = File.expand_path('../config_uninstaller.rb', __FILE__)
   CONFIG_INSTALLER   = File.expand_path('../config_installer.rb', __FILE__)
+  HOSTS_INSTALLER    = File.expand_path('../hosts_installer.rb', __FILE__)
   
   RAILS = 'rails'
   RACK = 'rack'
@@ -19,10 +20,21 @@ class PassengerApplication < NSObject
   class << self
     include SharedPassengerBehaviour
     
+    VHOSTS_GLOB = File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "*.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")
+    
     def existingApplications
-      Dir.glob(File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "*.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")).map do |app|
+      @existingApplications ||= Dir.glob(VHOSTS_GLOB).map do |app|
         PassengerApplication.alloc.initWithFile(app)
       end
+    end
+    
+    def allApplicationHostsExist?
+      hosts = `/usr/bin/dscl localhost -list /Local/Default/Hosts`.split("\n")
+      existingApplications.all? { |app| hosts.include? app.host }
+    end
+    
+    def registerAllHosts
+      execute '/usr/bin/ruby', HOSTS_INSTALLER, *existingApplications.map { |app| "'#{app.host}'" }
     end
     
     def startApplications(apps)

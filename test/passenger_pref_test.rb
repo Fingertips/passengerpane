@@ -122,6 +122,11 @@ describe "PrefPanePassenger, when about to be (re)displayed" do
     pref_pane.willSelect
   end
   
+  it "should check if all hosts are registered after displaying" do
+    pref_pane.expects(:verify_application_hosts!)
+    pref_pane.didSelect
+  end
+  
   private
   
   def add_applications!
@@ -162,6 +167,53 @@ Loaded Modules:
 Syntax OK})
 
     pref_pane.send(:passenger_installed?).should.be false
+  end
+end
+
+describe "PrefPanePassenger, when verifying all hosts" do
+  tests PrefPanePassenger
+  
+  def after_setup
+    pref_pane.mainView.stubs(:window).returns(OSX::NSWindow.alloc)
+  end
+  
+  it "should not show an alert if all hosts are registered" do
+    PassengerApplication.stubs(:allApplicationHostsExist?).returns(true)
+    OSX::NSAlert.expects(:alloc).never
+    pref_pane.send(:verify_application_hosts!)
+  end
+  
+  it "should show an alert if not all hosts are registered" do
+    PassengerApplication.stubs(:allApplicationHostsExist?).returns(false)
+    
+    alert = OSX.NSAlert.alloc
+    OSX::NSAlert.expects(:alloc).returns(alert)
+    alert.expects(:addButtonWithTitle).with('Cancel')
+    alert.expects(:addButtonWithTitle).with('Register hostnames')
+    alert.expects(:objc_send).with(
+      :beginSheetModalForWindow, pref_pane.mainView.window,
+      :modalDelegate, pref_pane,
+      :didEndSelector, 'unregisteredHostsAlertDidEnd:returnCode:contextInfo:',
+      :contextInfo, nil
+    )
+    
+    pref_pane.send(:verify_application_hosts!)
+  end
+  
+  it "should not do anything else but close the panel when the user clicks the Cancel button" do
+    alert = stub('NSAlert', :window => mock('NSAlert window'))
+    alert.window.expects(:orderOut).with(pref_pane)
+    
+    pref_pane.unregisteredHostsAlertDidEnd_returnCode_contextInfo(alert, PrefPanePassenger::CANCEL, nil)
+  end
+  
+  it "should tell PassengerApplication to register all hosts when the user clicks the OK button" do
+    alert = stub('NSAlert', :window => mock('NSAlert window'))
+    alert.window.expects(:orderOut).with(pref_pane)
+    
+    pref_pane.expects(:authorize!)
+    PassengerApplication.expects(:registerAllHosts)
+    pref_pane.unregisteredHostsAlertDidEnd_returnCode_contextInfo(alert, PrefPanePassenger::APPLY, nil)
   end
 end
 

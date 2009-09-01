@@ -293,6 +293,31 @@ describe "PassengerApplication, in general" do
     PassengerApplication.existingApplications.should == [blog_app, paste_app]
   end
   
+  it "should verify if the hostnames of all the existing applications exist" do
+    blog_app, paste_app = stub("PassengerApplication: blog", :host => 'blog.local'), stub("PassengerApplication: paste", :host => 'paste.local')
+    PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
+    
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("")
+    PassengerApplication.allApplicationHostsExist?.should.be false
+    
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("paste.local")
+    PassengerApplication.allApplicationHostsExist?.should.be false
+    
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local")
+    PassengerApplication.allApplicationHostsExist?.should.be false
+    
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local\npaste.local")
+    PassengerApplication.allApplicationHostsExist?.should.be true
+  end
+  
+  it "should register all hosts" do
+    blog_app, paste_app = stub("PassengerApplication: blog", :host => 'blog.local'), stub("PassengerApplication: paste", :host => 'paste.local')
+    PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
+    
+    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'paste.local'")
+    PassengerApplication.registerAllHosts
+  end
+  
   it "should start multiple applications at once" do
     app1 = PassengerApplication.alloc.initWithPath('/rails/app1'.to_ns)
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)

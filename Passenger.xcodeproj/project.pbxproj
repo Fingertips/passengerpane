@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511960C3104D5741009D4368 /* hosts_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 511960C2104D5741009D4368 /* hosts_installer.rb */; };
 		516B1B6E0DD3D344009ADB8E /* config_installer.rb in Resources */ = {isa = PBXBuildFile; fileRef = 516B1B6D0DD3D344009ADB8E /* config_installer.rb */; };
 		5186C3170E090B59008D8E1F /* HelpHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 5186C3150E090B59008D8E1F /* HelpHelper.h */; };
 		5186C3180E090B59008D8E1F /* HelpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5186C3160E090B59008D8E1F /* HelpHelper.m */; };
@@ -55,6 +56,7 @@
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Passenger_Prefix.pch; sourceTree = "<group>"; };
+		511960C2104D5741009D4368 /* hosts_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = hosts_installer.rb; path = app/scripts/hosts_installer.rb; sourceTree = "<group>"; };
 		516B1B6D0DD3D344009ADB8E /* config_installer.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = config_installer.rb; path = app/scripts/config_installer.rb; sourceTree = "<group>"; };
 		5186C3150E090B59008D8E1F /* HelpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpHelper.h; path = app/utils/HelpHelper.h; sourceTree = "<group>"; };
 		5186C3160E090B59008D8E1F /* HelpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelpHelper.m; path = app/utils/HelpHelper.m; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				511960C2104D5741009D4368 /* hosts_installer.rb */,
 				519DFB9E0DFDD825008A42FE /* passenger_application.rb */,
 				518C7F720E06A668003A3ED0 /* Security.bridgesupport */,
 				5186C3150E090B59008D8E1F /* HelpHelper.h */,
@@ -263,6 +266,7 @@
 				51D16FE30E07DFA000A46A7D /* PassengerPaneHelp in Resources */,
 				5189C6E70E111C3300B83EA5 /* LICENSE in Resources */,
 				51A703B10E648641006A1E26 /* passenger_pane_config.rb in Resources */,
+				511960C3104D5741009D4368 /* hosts_installer.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -58,6 +58,10 @@ class PrefPanePassenger < NSPreferencePane
     @applicationsController.content.empty? ? load_appications! : reload_appications!
   end
   
+  def didSelect
+    verify_application_hosts!
+  end
+  
   def applicationMarkedDirty(app)
     self.revertable_apps = @applicationsController.content.any? { |app| app.revertable? }
     self.dirty_apps = true
@@ -184,6 +188,8 @@ class PrefPanePassenger < NSPreferencePane
     OSX::NSUnselectNow
   end
   
+  # Alert panel handlers
+  
   APPLY = OSX::NSAlertFirstButtonReturn
   CANCEL = OSX::NSAlertSecondButtonReturn
   DONT_APPLY = OSX::NSAlertThirdButtonReturn
@@ -201,6 +207,14 @@ class PrefPanePassenger < NSPreferencePane
       revert
     end
     replyToShouldUnselect true
+  end
+  
+  def unregisteredHostsAlertDidEnd_returnCode_contextInfo(alert, returnCode, contextInfo)
+    alert.window.orderOut(self)
+    if returnCode == APPLY
+      authorize!
+      PassengerApplication.registerAllHosts
+    end
   end
   
   private
@@ -233,6 +247,22 @@ class PrefPanePassenger < NSPreferencePane
     unless (existing_apps = PassengerApplication.existingApplications).empty?
       @applicationsController.addObjects existing_apps
       @applicationsController.selectedObjects = [existing_apps.last]
+    end
+  end
+  
+  def verify_application_hosts!
+    unless PassengerApplication.allApplicationHostsExist?
+      alert = OSX::NSAlert.alloc.init
+      alert.messageText = 'Do you want to register missing hostnames?'
+      alert.informativeText = 'Some of the hostnames for your applications are not registered. This means you will not be able to reach them from your browser.'
+      alert.addButtonWithTitle('Register hostnames')
+      alert.addButtonWithTitle('Cancel')
+      alert.objc_send(
+        :beginSheetModalForWindow, mainView.window,
+        :modalDelegate, self,
+        :didEndSelector, 'unregisteredHostsAlertDidEnd:returnCode:contextInfo:',
+        :contextInfo, nil
+      )
     end
   end
   
