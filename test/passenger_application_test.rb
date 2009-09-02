@@ -172,6 +172,10 @@ describe "PassengerApplication, in general" do
     passenger_app.config_path.should == File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "het-manfreds-blog.local.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")
   end
   
+  it "should return the host and aliases as an array" do
+    passenger_app.hosts.should == %w{ het-manfreds-blog.local manfred-s-blog.local my-blog.local }
+  end
+  
   it "should be able to save the config file" do
     passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [passenger_app.to_hash].to_yaml)
     passenger_app.save_config!
@@ -293,9 +297,16 @@ describe "PassengerApplication, in general" do
     PassengerApplication.existingApplications.should == [blog_app, paste_app]
   end
   
-  it "should verify if the hostnames of all the existing applications exist" do
-    blog_app, paste_app = stub("PassengerApplication: blog", :host => 'blog.local'), stub("PassengerApplication: paste", :host => 'paste.local')
+  it "should return all hosts, including aliases, of all applications" do
+    blog_app  = stub("PassengerApplication: blog",  :hosts => %w{ blog.local  assets1.blog.local  assets2.blog.local })
+    paste_app = stub("PassengerApplication: paste", :hosts => %w{ paste.local assets1.paste.local assets2.paste.local })
     PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
+    
+    PassengerApplication.allHosts.should == blog_app.hosts + paste_app.hosts
+  end
+  
+  it "should verify if the hostnames of all the existing applications exist" do
+    PassengerApplication.stubs(:allHosts).returns(%w{ blog.local assets.blog.local paste.local })
     
     PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("")
     PassengerApplication.allApplicationHostsExist?.should.be false
@@ -303,18 +314,16 @@ describe "PassengerApplication, in general" do
     PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("paste.local")
     PassengerApplication.allApplicationHostsExist?.should.be false
     
-    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local")
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local\npaste.local")
     PassengerApplication.allApplicationHostsExist?.should.be false
     
-    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local\npaste.local")
+    PassengerApplication.expects(:`).with('/usr/bin/dscl localhost -list /Local/Default/Hosts').returns("blog.local\ntwitterapp.local\npaste.local\nassets.blog.local")
     PassengerApplication.allApplicationHostsExist?.should.be true
   end
   
   it "should register all hosts" do
-    blog_app, paste_app = stub("PassengerApplication: blog", :host => 'blog.local'), stub("PassengerApplication: paste", :host => 'paste.local')
-    PassengerApplication.stubs(:existingApplications).returns([blog_app, paste_app])
-    
-    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'paste.local'")
+    PassengerApplication.stubs(:allHosts).returns(%w{ blog.local assets.blog.local paste.local })
+    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'assets.blog.local'", "'paste.local'")
     PassengerApplication.registerAllHosts
   end
   

@@ -28,13 +28,17 @@ class PassengerApplication < NSObject
       end
     end
     
+    def allHosts
+      @allHosts ||= existingApplications.map { |app| app.hosts }.flatten
+    end
+    
     def allApplicationHostsExist?
       hosts = `/usr/bin/dscl localhost -list /Local/Default/Hosts`.split("\n")
-      existingApplications.all? { |app| hosts.include? app.host }
+      (hosts & allHosts).sort == allHosts.sort
     end
     
     def registerAllHosts
-      execute '/usr/bin/ruby', HOSTS_INSTALLER, *existingApplications.map { |app| "'#{app.host}'" }
+      execute '/usr/bin/ruby', HOSTS_INSTALLER, *allHosts.map { |host| "'#{host}'" }
     end
     
     def startApplications(apps)
@@ -103,6 +107,10 @@ class PassengerApplication < NSObject
   def dirty?;   @dirty;   end
   def valid?;   @valid;   end
   def revertable?; @revertable; end
+  
+  def hosts
+    [host] + aliases.split(" ")
+  end
   
   def apply(save_config = nil)
     unless @valid
