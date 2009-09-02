@@ -188,8 +188,7 @@ describe "PrefPanePassenger, when verifying all hosts" do
     
     alert = OSX.NSAlert.alloc
     OSX::NSAlert.expects(:alloc).returns(alert)
-    alert.expects(:addButtonWithTitle).with('Cancel')
-    alert.expects(:addButtonWithTitle).with('Register hostnames')
+    alert.expects(:addButtonWithTitle).with('Update hosts')
     alert.expects(:objc_send).with(
       :beginSheetModalForWindow, pref_pane.mainView.window,
       :modalDelegate, pref_pane,
@@ -200,14 +199,7 @@ describe "PrefPanePassenger, when verifying all hosts" do
     pref_pane.send(:verify_application_hosts!)
   end
   
-  it "should not do anything else but close the panel when the user clicks the Cancel button" do
-    alert = stub('NSAlert', :window => mock('NSAlert window'))
-    alert.window.expects(:orderOut).with(pref_pane)
-    
-    pref_pane.unregisteredHostsAlertDidEnd_returnCode_contextInfo(alert, PrefPanePassenger::CANCEL, nil)
-  end
-  
-  it "should tell PassengerApplication to register all hosts when the user clicks the OK button" do
+  it "should tell PassengerApplication to register all hosts when the user clicks the Update button" do
     alert = stub('NSAlert', :window => mock('NSAlert window'))
     alert.window.expects(:orderOut).with(pref_pane)
     

@@ -213,10 +213,8 @@ class PrefPanePassenger < NSPreferencePane
   
   def unregisteredHostsAlertDidEnd_returnCode_contextInfo(alert, returnCode, contextInfo)
     alert.window.orderOut(self)
-    if returnCode == APPLY
-      authorize!
-      PassengerApplication.registerAllHosts
-    end
+    authorize!
+    PassengerApplication.registerAllHosts
   end
   
   private
@@ -255,10 +253,9 @@ class PrefPanePassenger < NSPreferencePane
   def verify_application_hosts!
     unless PassengerApplication.allApplicationHostsExist?
       alert = OSX::NSAlert.alloc.init
-      alert.messageText = 'Do you want to register missing hostnames?'
-      alert.informativeText = 'Some of the hostnames for your applications are not registered. This means you will not be able to reach them from your browser.'
-      alert.addButtonWithTitle('Register hostnames')
-      alert.addButtonWithTitle('Cancel')
+      alert.messageText = 'Passenger Preference Pane needs to update the hosts database.'
+      alert.informativeText = 'Not all application addresses are currently registered in the hosts database. Passenger Preference Pane needs to add these addresses before you can continue.'
+      alert.addButtonWithTitle('Update hosts')
       alert.objc_send(
         :beginSheetModalForWindow, mainView.window,
         :modalDelegate, self,
