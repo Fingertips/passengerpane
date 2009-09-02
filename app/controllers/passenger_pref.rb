@@ -40,6 +40,8 @@ class PrefPanePassenger < NSPreferencePane
     setup_authorization_view!
     setup_applications_table_view!
     
+    OSX::NSHelpManager.sharedHelpManager.registerBooksInBundle(bundle)
+    
     OSX::NSNotificationCenter.defaultCenter.objc_send(
       :addObserver, self,
          :selector, 'paneWillBecomeActive:',
@@ -98,19 +100,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def showPassengerHelp(sender)
-    # file = "help://#{File.expand_path('../English.lproj/PassengerPaneHelp/PassengerPaneHelp.html', __FILE__)}"
-    # log file
-    # OSX::HelpHelper.openHelpPage "file://#{File.expand_path('../English.lproj/PassengerPaneHelp/PassengerPaneHelp.html', __FILE__)}"
-    # OSX::NSWorkspace.sharedWorkspace.openURL(OSX::NSURL.URLWithString(file))
-    
-    path = File.expand_path('../../../', __FILE__)
-    log path
-    bundle = OSX::NSBundle.bundleWithPath(path)
-    log bundle.bundlePath
-    
-    manager = OSX::NSHelpManager.sharedHelpManager
-    manager.registerBooksInBundle(bundle)
-    manager.openHelpAnchor_inBook('main_passenger_help', 'PassengerPaneHelp')
+    OSX::NSHelpManager.sharedHelpManager.openHelpAnchor_inBook('main_passenger_help', 'PassengerPaneHelp')
   end
   
   # Select application directory panel

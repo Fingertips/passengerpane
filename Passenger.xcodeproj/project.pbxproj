@@ -23,7 +23,7 @@
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
 		51B919140E0172C200F45803 /* config_uninstaller.rb in Resources */ = {isa = PBXBuildFile; fileRef = 51B919130E0172C200F45803 /* config_uninstaller.rb */; };
 		51DA08CB104C025000C8C106 /* RubyCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9648B5E70D195BC700DC73E2 /* RubyCocoa.framework */; };
-		51EED84A104D7D4100AC7D3E /* Passenger.help in Resources */ = {isa = PBXBuildFile; fileRef = 51EED845104D7D4100AC7D3E /* Passenger.help */; };
+		51EED8C2104E561800AC7D3E /* PassengerPaneHelp in Resources */ = {isa = PBXBuildFile; fileRef = 51EED8B3104E561800AC7D3E /* PassengerPaneHelp */; };
 		76A8DCDF0E068B7000B133F1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A8DCDE0E068B7000B133F1 /* icon.png */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -71,7 +71,7 @@
 		51A703B00E648641006A1E26 /* passenger_pane_config.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = passenger_pane_config.rb; path = app/config/passenger_pane_config.rb; sourceTree = "<group>"; };
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Alerts.icns; path = resources/Alerts.icns; sourceTree = "<group>"; };
 		51B919130E0172C200F45803 /* config_uninstaller.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = config_uninstaller.rb; path = app/scripts/config_uninstaller.rb; sourceTree = "<group>"; };
-		51EED845104D7D4100AC7D3E /* Passenger.help */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Passenger.help; path = resources/Passenger.help; sourceTree = "<group>"; };
+		51EED8B4104E561800AC7D3E /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PassengerPaneHelp; sourceTree = "<group>"; };
 		76A8DCDE0E068B7000B133F1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = resources/icon.png; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +133,7 @@
 				51B9190C0E01523900F45803 /* Alerts.icns */,
 				9648B5EE0D195C2F00DC73E2 /* Pref.xib */,
 				8D202CF70486D31800D8A456 /* Info.plist */,
+				51EED8B3104E561800AC7D3E /* PassengerPaneHelp */,
 				76A8DCDE0E068B7000B133F1 /* icon.png */,
 				51EED833104D7B8F00AC7D3E /* Passenger.help */,
 				5186C31E0E090C9C008D8E1F /* Carbon.framework */,
@@ -180,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				8D202CF80486D31800D8A456 /* Passenger.prefPane */,
-				51EED845104D7D4100AC7D3E /* Passenger.help */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 				5189C6E70E111C3300B83EA5 /* LICENSE in Resources */,
 				51A703B10E648641006A1E26 /* passenger_pane_config.rb in Resources */,
 				511960C3104D5741009D4368 /* hosts_installer.rb in Resources */,
-				51EED84A104D7D4100AC7D3E /* Passenger.help in Resources */,
+				51EED8C2104E561800AC7D3E /* PassengerPaneHelp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +347,15 @@
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
+		};
+		51EED8B3104E561800AC7D3E /* PassengerPaneHelp */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51EED8B4104E561800AC7D3E /* English */,
+			);
+			name = PassengerPaneHelp;
+			path = ../..;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		9648B5EE0D195C2F00DC73E2 /* Pref.xib */ = {
 			isa = PBXVariantGroup;

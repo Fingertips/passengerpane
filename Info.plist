@@ -31,8 +31,17 @@
 	<key>NSPrincipalClass</key>
 	<string>PrefPanePassenger</string>
 	<key>CFBundleHelpBookFolder</key>
-	<string>Passenger.help</string>
+	<string>PassengerPaneHelp</string>
 	<key>CFBundleHelpBookName</key>
-	<string>index</string>
+	<string>PassengerPaneHelp</string>
+	<key>NSPrefPaneHelpAnchors</key>
+	<array>
+	 <dict>
+	   <key>title</key>
+	   <string>Passenger Preferences Help</string>
+	   <key>anchor</key>
+	   <string>main_passenger_help</string>
+	 </dict>
+	</array>
 </dict>
 </plist>
