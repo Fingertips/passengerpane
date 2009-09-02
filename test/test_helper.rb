@@ -44,5 +44,10 @@ class OSX::SecurityHelper
   end
 end
 
+class OSX::HelpHelper
+  def self.registerBooksInBundle(bundle)
+  end
+end
+
 ENV['TESTING_PASSENGER_PREF'] = 'true'
 require File.expand_path('../../app/controllers/passenger_pref', __FILE__)

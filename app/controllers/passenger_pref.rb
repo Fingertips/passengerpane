@@ -40,7 +40,7 @@ class PrefPanePassenger < NSPreferencePane
     setup_authorization_view!
     setup_applications_table_view!
     
-    OSX::NSHelpManager.sharedHelpManager.registerBooksInBundle(bundle)
+    OSX::HelpHelper.registerBooksInBundle(bundle)
     
     OSX::NSNotificationCenter.defaultCenter.objc_send(
       :addObserver, self,
