@@ -321,6 +321,12 @@ describe "PassengerApplication, in general" do
     PassengerApplication.allApplicationHostsExist?.should.be true
   end
   
+  it "should return that all hosts exist if there are no applications" do
+    PassengerApplication.stubs(:allHosts).returns([])
+    PassengerApplication.expects(:`).never
+    PassengerApplication.allApplicationHostsExist?.should.be true
+  end
+  
   it "should register all hosts" do
     PassengerApplication.stubs(:allHosts).returns(%w{ blog.local assets.blog.local paste.local })
     PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'assets.blog.local'", "'paste.local'")

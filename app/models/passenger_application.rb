@@ -33,6 +33,7 @@ class PassengerApplication < NSObject
     end
     
     def allApplicationHostsExist?
+      return true if allHosts.empty?
       hosts = `/usr/bin/dscl localhost -list /Local/Default/Hosts`.split("\n")
       (hosts & allHosts).sort == allHosts.sort
     end
