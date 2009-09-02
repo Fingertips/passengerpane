@@ -295,7 +295,7 @@ class PrefPanePassenger < NSPreferencePane
         link_str.addAttribute_value_range OSX::NSForegroundColorAttributeName, OSX::NSColor.blueColor, range
         link_str.addAttribute_value_range OSX::NSUnderlineStyleAttributeName, OSX::NSSingleUnderlineStyle, range
         
-        text_parts = text_field.stringValue.split(MODRAILS_URL)
+        text_parts = text_field.stringValue.to_s.split(MODRAILS_URL)
         
         str = OSX::NSMutableAttributedString.alloc.initWithString(text_parts.first)
         str.appendAttributedString link_str
