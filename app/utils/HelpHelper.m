@@ -3,13 +3,10 @@
 @implementation HelpHelper
  
 +(void)registerBooksInBundle:(NSBundle *)bundle {
-  // NSString *bundlePath = [bundle bundlePath];
-  const void *bundlePath = [[bundle bundlePath] UTF8String];
-  
   OSStatus err;
   FSRef fsref;
   
-  err = FSPathMakeRef(bundlePath, &fsref, NULL);
+  err = FSPathMakeRef([[bundle bundlePath] UTF8String], &fsref, NULL);
   if (err != noErr) {
     NSLog(@"Could not get path for bundle - Passenger.prefPane.\n");
     return;
