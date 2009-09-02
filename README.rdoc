@@ -1,63 +1,93 @@
 == PassengerPane
 
-A Mac OS X system preference pane which aids in quickly setting up Rails applications with Phusion Passenger.
+A Mac OS X system preference pane which aids in quickly setting up Rails
+applications with Phusion Passenger.
 
 Features include:
 * Drag and drop support
-* Managing hostnames without cluttering /etc/hosts
+* Managing hostnames without cluttering /etc/hosts. It uses Directory Services.
 
 == Requirements
 
 === PassengerPane
-Obviously required. Version 1.2 http://www.fngtps.com/files/2/2008/12/PassengerPane-1.2.tgz
+
+Obviously required. Version 1.3:
+http://www.fngtps.com/files/2/2008/12/PassengerPane-1.3.tgz
 
 === Phusion Passenger
-Also a no brainer. You'll need at least version 2.0.1.
-http://rubyforge.org/frs/?group_id=5873&release_id=23286
+
+Also a no brainer. You'll need at least version 2.0.1, or 2.2.5 for OS X 10.6:
+
+   $ gem install passenger
+   $ passenger-install-apache2-module
 
 === RubyCocoa
 
-PassengerPane needs at least RubyCocoa 0.13.2, which can be acquired in the following ways:
-* Included on Mac OS X since version 10.5.2
-* Binary installer or source http://sourceforge.net/project/showfiles.php?group_id=44114&package_id=36578
+PassengerPane comes bundled with RubyCocoa 0.13.2, nothing needs to be done by
+you, the user.
 
-Note that if you wish to use a custom Ruby, not the default Apple Ruby, you will have to install RubyCocoa from source as well.
-See http://rubycocoa.sourceforge.net/GettingStarted for more info on this topic.
+Unless you wish to use a custom Ruby, not the one that’s shipped with OS X, in
+which case you will have to install RubyCocoa from source as well.
+See http://rubycocoa.sourceforge.net/GettingStarted for more info.
 
 === Apache 2
 
-PassengerPane is designed to work with the default Apache 2 installation supplied by Apple on Mac OS X 10.5.
+PassengerPane is designed to work with the default Apache 2 installation
+supplied by Apple on Mac OS X 10.5 and 10.6.
 
-Included with the archive you'll find a file called "passenger_pane_config.rb.ports",
-this file should be a drop in replacement to work with Apache 2 as installed by MacPorts.
-Replace Passenger.prefPane/Contents/Resources/passenger_pane_config.rb with this file or your own custom config.
+Included with the archive you'll find a file called
+"passenger_pane_config.rb.ports", this file should be a drop in replacement to
+work with Apache 2 as installed by MacPorts. Replace
+Passenger.prefPane/Contents/Resources/passenger_pane_config.rb with this file
+or your own custom config.
 
 == Support
 
 Before creating a bug report, please check that you are using a RubyCocoa
-matching your Ruby installation and have met all other requirements mentioned above.
+matching your Ruby installation and have met all other requirements mentioned
+above.
 
-If the problem persist, or you have a feature request or better yet a patch, you can file a ticket at:
-http://fingertips.lighthouseapp.com/projects/13022
+If the problem persist, or you have a feature request or better yet a patch,
+you can file a ticket at: http://github.com/alloy/passengerpane/issues
 
 == Changelog
+
+=== v1.3
+
+* Mac OS X 10.6 support, although still in 32-bit mode:
+  * Bundle RubyCocoa.framework in the preference pane. (Ticket #2 & #8)
+  * Made the Apple Help work on both 10.5 and 10.6.
+* Added a check at launch, which verifies if all your application hostnames are
+  registered in the hosts database (Directory Services). If not, add them.
+  Obviously this is especially handy for people upgrading from 10.5 to 10.6,
+  but also comes in handy when editing vhsost by hand.
+* Added preference pane Info.plist keys so the help shows up in the Help menu.
+* Use proper capitalization for the Apache conf "Directory" directive.
+* When the user changes the path to an application, also replace this in the
+  @user_defined_data string. (Ticket #4)
+* Various source cleanups.
 
 === v1.2
 
 * Rack support. Thanks to Kematzy for the original suggestion/work.
-* Fixed "issue" people had with the default non-vhost based directory not working anymore. Thanks to "spike" for debugging this.
-* Made the vhost config file extension configurable as well. Patch by Felipe Mathies.
-* Backported RubyCocoa + Ruby 1.8.7 fix. Patch by Grant Hollingworth.
-* Removed the "Allow mod rewrite rules" checkbox, we found it's not worth the UI real estate.
+* Fixed "issue" people had with the default non-vhost based directory not
+  working anymore. Thanks to "spike" for debugging this.
+* Made the vhost config file extension configurable as well. By Felipe Mathies.
+* Backported RubyCocoa + Ruby 1.8.7 fix. By Grant Hollingworth.
+* Removed the "Allow mod rewrite rules" checkbox, we found it's not worth the
+  UI real estate.
 
 === v1.1
 
 * Honor custom environments that a user might have set.
-* Fixed problem with restarting Apache. After saving an application Apache should now automatically be restarted. Thanks to Ciarán Walsh.
+* Fixed problem with restarting Apache. After saving an application Apache
+  should now automatically be restarted. Thanks to Ciarán Walsh.
 * Added support for ServerAlias and add those entries to the hosts db.
-* Reload the applications from disk when the preference pane is brought back to the front.
+* Reload the applications from disk when the preference pane is brought back to
+  the front.
   Any changes made to the vhosts from elsewhere will be reflected in the UI.
-* Moved all hardcoded paths into a config module. Added a config for Apache 2 as installed by MacPorts. Thanks to Ciarán Walsh.
+* Moved all hardcoded paths into a config module. Added a config for Apache 2
+  as installed by MacPorts. Thanks to Ciarán Walsh.
 * The host table list was editable. Thanks to Ciarán Walsh.
 * Fixed bugs in parsing custom user defined data in vhosts.
 * Create a tmp dir before touching restart.txt if none exists.
@@ -65,22 +95,4 @@ http://fingertips.lighthouseapp.com/projects/13022
 
 == License
 
-Copyright (c) 2008 Fingertips, http://www.fngtps.com, Eloy Duran <eloy@fngtps.com>, Thijs van der Vossen <thijs@fngtps.com>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+See the LICENSE file.
