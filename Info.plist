@@ -25,7 +25,7 @@
 	<key>NSMainNibFile</key>
 	<string>PassengerPref</string>
 	<key>NSPrefPaneIconFile</key>
-	<string>PassengerPref.tiff</string>
+	<string>PassengerPref.icns</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Passenger</string>
 	<key>NSPrincipalClass</key>
