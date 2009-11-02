@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="230"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -559,7 +559,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<reference key="NSSuperview" ref="298054908"/>
 								</object>
 							</object>
-							<string key="NSFrame">{{238, 85}, {413, 268}}</string>
+							<string key="NSFrame">{{238, 89}, {413, 268}}</string>
 							<reference key="NSSuperview" ref="453226259"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
@@ -1568,10 +1568,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="36341174"/>
 							<reference ref="1040168125"/>
 							<reference ref="432233478"/>
-							<reference ref="510136812"/>
 							<reference ref="992940565"/>
 							<reference ref="615078570"/>
 							<reference ref="298054908"/>
+							<reference ref="510136812"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
 					</object>
