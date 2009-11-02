@@ -1,6 +1,13 @@
+Now
+
 - Add a tiny link to open the current application in the default browser right aligned inside the 'Address' text field. Use NSFollowLinkFreestandingTemplate with alpha 0.6, alpha 0.8 when hovering over the button and 1 when you click it.
-- Show a focus ring around the item list when you're about to drop a folder onto it.
+- Show a focus ring around the items list when you're about to drop a folder onto it.
 - When the panel is locked, also disable the labels inside the box.
-- Add some simple functionality to check if an update is available and direct the user to the download page.
+- Show the 'Drag a Rails or Rack application folder here' message when the items list is empty.
 - Don't show 'No Selection' in the text fields.
+
+Later
+
+- Find a nice way to combine clipping text and the link inside the 'Address' text field.
+- Add some simple functionality to check if an update is available and direct the user to the download page.
 - Merge the Aliases text field into the Address field and add documentation about this to the help html file.
