@@ -407,16 +407,11 @@ describe "PrefPanePassenger, when restarting applications" do
     ib_outlets :applicationsController => OSX::NSArrayController.alloc.init
   end
   
-  it "should send the restart message to all not new applications" do
+  it "should send the restart message to the selected application" do
     apps = stub_app_controller_with_number_of_apps(3)
-    
-    apps.first.stubs(:new_app?).returns(true)
-    apps.first.expects(:restart).times(0)
-    
-    apps[1..2].each do |app|
-      app.stubs(:new_app?).returns(false)
-      app.expects(:restart).times(1)
-    end
+    app = applicationsController.selectedObjects.first
+    app.expects(:restart)
+    (apps - [app]).each { |a| a.expects(:restart).times(0) }
     
     pref_pane.restart
   end
@@ -666,6 +661,6 @@ describe "PrefPanePassenger, in general" do
       url.absoluteString == "http://foo.local"
     end
     
-    pref_pane.openAddressInBrowser(nil)
+    pref_pane.openAddressInBrowser
   end
 end

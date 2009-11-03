@@ -86,7 +86,7 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def restart(sender = nil)
-    @applicationsController.content.each { |app| app.restart unless app.new_app? }
+    @applicationsController.selectedObjects.first.restart
   end
   
   def remove(sender = nil)
@@ -105,7 +105,7 @@ class PrefPanePassenger < NSPreferencePane
     OSX::NSHelpManager.sharedHelpManager.openHelpAnchor_inBook('main_passenger_help', 'PassengerPaneHelp')
   end
   
-  def openAddressInBrowser(sender)
+  def openAddressInBrowser(sender = nil)
     url = OSX::NSURL.URLWithString("http://#{@applicationsController.selectedObjects.first.host}")
     OSX::NSWorkspace.sharedWorkspace.openURL(url)
   end
