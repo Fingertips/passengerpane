@@ -525,7 +525,7 @@ describe "PrefPanePassenger, with drag and drop support" do
     assigns(:authorized, true)
     stub_pb_and_info_with_two_directories
     
-    applicationsTableView.expects(:setDropRow_dropOperation).with(0, OSX::NSTableViewDropAbove)
+    applicationsTableView.expects(:setDropRow_dropOperation).with(-1, OSX::NSTableViewDropOn)
     
     pref_pane.tableView_validateDrop_proposedRow_proposedDropOperation(nil, @info, nil, nil).should == OSX::NSDragOperationGeneric
   end

@@ -138,7 +138,7 @@ class PrefPanePassenger < NSPreferencePane
     
     files = info.draggingPasteboard.propertyListForType(OSX::NSFilenamesPboardType)
     if files.all? { |f| File.directory? f }
-      @applicationsTableView.setDropRow_dropOperation(@applicationsController.content.count, OSX::NSTableViewDropAbove)
+      @applicationsTableView.setDropRow_dropOperation(-1, OSX::NSTableViewDropOn)
       OSX::NSDragOperationGeneric
     else
       OSX::NSDragOperationNone
