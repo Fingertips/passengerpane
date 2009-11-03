@@ -396,10 +396,11 @@ describe "PassengerApplication, in general" do
   it "should update the @user_defined_data when the path is changed" do
     old_path = passenger_app.path
     new_path = '/updated/path/to/blog'
-    
     passenger_app.setValue_forKey(new_path, 'path')
-    passenger_app.user_defined_data.should.not.include old_path
-    passenger_app.user_defined_data.should.include new_path
+    
+    new_data_hash = passenger_app.to_hash
+    new_data_hash['user_defined_data'].should.not.include old_path
+    new_data_hash['user_defined_data'].should.include new_path
   end
   
   it "should reload an application from disk and mark it dirty if values have changed, but don't make it revertable" do

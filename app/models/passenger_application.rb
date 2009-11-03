@@ -190,7 +190,12 @@ class PassengerApplication < NSObject
   end
   
   def to_hash
-    @user_defined_data = "  <Directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </Directory>" if @new_app
+    if @new_app
+      @user_defined_data = "  <Directory \"#{File.join(@path.to_s, 'public')}\">\n    Order allow,deny\n    Allow from all\n  </Directory>"
+    else
+      update_path_in_user_defined_data!
+    end
+    
     {
       'app_type' => application_type,
       'config_path' => config_path,
@@ -254,18 +259,17 @@ class PassengerApplication < NSObject
   
   def set_original_values!
     @original_values = {
-      'host' => @host,
-      'aliases' => @aliases,
-      'path' => @path,
+      'host' => @host.dup,
+      'aliases' => @aliases.dup,
+      'path' => @path.dup,
       'environment' => @custom_environment || @environment,
       'user_defined_data' => @user_defined_data
     }
   end
   
   def path_was_updated!
-    unless blank?(@path)
-      set_default_host_from_path(@path) if blank?(@host)
-      update_path_in_user_defined_data!
+    if !blank?(@path) && blank?(@host)
+      set_default_host_from_path(@path)
     end
   end
   
