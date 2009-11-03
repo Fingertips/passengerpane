@@ -2,8 +2,6 @@ Now
 
 - Add a button to open the current application in the default browser.
 - Show a focus ring around the item list when you're about to drop a folder onto it.
-- When the panel is locked, also disable the labels inside the box and not only the fields.
-- Show the 'Drag a Rails or Rack application folder here' message when the item list is empty.
 - Don't show 'No Selection' in the text fields.
 
 Later

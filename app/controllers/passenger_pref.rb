@@ -33,10 +33,12 @@ class PrefPanePassenger < NSPreferencePane
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
   
-  kvc_accessor :applications, :authorized, :dirty_apps, :revertable_apps
+  kvc_accessor :applications, :authorized, :dirty_apps, :revertable_apps, :textFieldColor
   
   def mainViewDidLoad
     self.class.sharedInstance = self
+    
+    self.textFieldColor = OSX::NSColor.disabledControlTextColor
     setup_authorization_view!
     setup_applications_table_view!
     
@@ -160,11 +162,13 @@ class PrefPanePassenger < NSPreferencePane
   # SFAuthorizationView: TODO this should actualy move to the SecurityHelper, but for some reason in prototyping it didn't work, try again when everything is cleaned up.
   
   def authorizationViewDidAuthorize(authorizationView = nil)
+    self.textFieldColor = OSX::NSColor.blackColor
     OSX::SecurityHelper.sharedInstance.authorizationRef = @authorizationView.authorization.authorizationRef
     self.authorized = true
   end
   
   def authorizationViewDidDeauthorize(authorizationView = nil)
+    self.textFieldColor = OSX::NSColor.disabledControlTextColor
     OSX::SecurityHelper.sharedInstance.deauthorize
     self.authorized = false
   end
