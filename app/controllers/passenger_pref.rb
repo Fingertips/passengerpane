@@ -105,6 +105,11 @@ class PrefPanePassenger < NSPreferencePane
     OSX::NSHelpManager.sharedHelpManager.openHelpAnchor_inBook('main_passenger_help', 'PassengerPaneHelp')
   end
   
+  def openAddressInBrowser(sender)
+    url = OSX::NSURL.URLWithString("http://#{@applicationsController.selectedObjects.first.host}")
+    OSX::NSWorkspace.sharedWorkspace.openURL(url)
+  end
+  
   # Select application directory panel
   
   def browse(sender = nil)

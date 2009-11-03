@@ -656,4 +656,16 @@ describe "PrefPanePassenger, in general" do
     app.setValue_forKey('foo.local', 'host')
     pref_pane.dirty_apps.should.be true
   end
+  
+  it "should open the the url of the currently selected application" do
+    app = PassengerApplication.alloc.init
+    app.setValue_forKey('foo.local', 'host')
+    set_apps_controller_content([app])
+    
+    OSX::NSWorkspace.sharedWorkspace.expects(:openURL).with do |url|
+      url.absoluteString == "http://foo.local"
+    end
+    
+    pref_pane.openAddressInBrowser(nil)
+  end
 end
