@@ -1,4 +1,5 @@
 module PassengerPaneConfig
+  RUBY = "/opt/local/bin/ruby"
   APACHE_DIR = "/opt/local/apache2"
   HTTPD_BIN = File.join(APACHE_DIR, "bin", "httpd")
   HTTPD_CONF = File.join(APACHE_DIR, 'conf', 'httpd.conf')

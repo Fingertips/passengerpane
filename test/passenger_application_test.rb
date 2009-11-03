@@ -177,7 +177,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should be able to save the config file" do
-    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [passenger_app.to_hash].to_yaml)
+    passenger_app.expects(:execute).with(PassengerPaneConfig::RUBY, PassengerApplication::CONFIG_INSTALLER, [passenger_app.to_hash].to_yaml)
     passenger_app.save_config!
   end
   
@@ -260,7 +260,7 @@ describe "PassengerApplication, in general" do
   end
   
   it "should remove application(s)" do
-    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [passenger_app.to_hash].to_yaml)
+    PassengerApplication.expects(:execute).with(PassengerPaneConfig::RUBY, PassengerApplication::CONFIG_UNINSTALLER, [passenger_app.to_hash].to_yaml)
     PassengerApplication.removeApplications([passenger_app].to_ns)
   end
   
@@ -329,7 +329,7 @@ describe "PassengerApplication, in general" do
   
   it "should register all hosts" do
     PassengerApplication.stubs(:allHosts).returns(%w{ blog.local assets.blog.local paste.local })
-    PassengerApplication.expects(:execute).with('/usr/bin/ruby', PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'assets.blog.local'", "'paste.local'")
+    PassengerApplication.expects(:execute).with(PassengerPaneConfig::RUBY, PassengerApplication::HOSTS_INSTALLER, "'blog.local'", "'assets.blog.local'", "'paste.local'")
     PassengerApplication.registerAllHosts
   end
   
@@ -338,7 +338,7 @@ describe "PassengerApplication, in general" do
     app2 = PassengerApplication.alloc.initWithPath('/rails/app2'.to_ns)
     [app1, app2].each { |app| app.instance_variable_set(:@valid, true) }
     
-    PassengerApplication.expects(:execute).times(1).with('/usr/bin/ruby', PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
+    PassengerApplication.expects(:execute).times(1).with(PassengerPaneConfig::RUBY, PassengerApplication::CONFIG_INSTALLER, [app1.to_hash, app2.to_hash].to_yaml)
     
     PassengerApplication.startApplications [app1, app2].to_ns
     
@@ -381,14 +381,14 @@ describe "PassengerApplication, in general" do
   
   it "should first remove a config and then add it again if the host has changed so we don't leave stale files/hosts" do
     passenger_app.setValue_forKey('foo.local', 'host')
-    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
+    passenger_app.expects(:execute).with(PassengerPaneConfig::RUBY, PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
   end
   
   it "should first remove a config and then add it again if the aliases have changed so we don't leave stale files/hosts" do
     passenger_app.setValue_forKey('alias.local', 'aliases')
-    passenger_app.expects(:execute).with('/usr/bin/ruby', PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
+    passenger_app.expects(:execute).with(PassengerPaneConfig::RUBY, PassengerApplication::CONFIG_UNINSTALLER, [assigns(:original_values)].to_yaml)
     passenger_app.expects(:save_config!)
     passenger_app.apply
   end

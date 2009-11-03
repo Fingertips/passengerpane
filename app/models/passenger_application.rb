@@ -39,20 +39,20 @@ class PassengerApplication < NSObject
     end
     
     def registerAllHosts
-      execute '/usr/bin/ruby', HOSTS_INSTALLER, *allHosts.map { |host| "'#{host}'" }
+      execute PassengerPaneConfig::RUBY, HOSTS_INSTALLER, *allHosts.map { |host| "'#{host}'" }
     end
     
     def startApplications(apps)
       data = serializedApplicationsData(apps)
       log "Starting Rails applications:\n#{data}"
-      execute '/usr/bin/ruby', CONFIG_INSTALLER, data
+      execute PassengerPaneConfig::RUBY, CONFIG_INSTALLER, data
       apps.each { |app| app.apply(false) }
     end
     
     def removeApplications(apps)
       data = serializedApplicationsData(apps)
       log "Removing applications: #{data}"
-      execute '/usr/bin/ruby', CONFIG_UNINSTALLER, data
+      execute PassengerPaneConfig::RUBY, CONFIG_UNINSTALLER, data
     end
     
     def serializedApplicationsData(apps)
@@ -135,7 +135,7 @@ class PassengerApplication < NSObject
   def restart(sender = nil)
     log "Restarting Rails application: #{@path}"
     if @host != @original_values['host'] || @aliases != @original_values['aliases']
-      execute('/usr/bin/ruby', CONFIG_UNINSTALLER, [@original_values].to_yaml)
+      execute(PassengerPaneConfig::RUBY, CONFIG_UNINSTALLER, [@original_values].to_yaml)
     end
     save_config! if @dirty
     
@@ -161,7 +161,7 @@ class PassengerApplication < NSObject
   
   def save_config!
     log "Saving configuration: #{config_path}"
-    execute '/usr/bin/ruby', CONFIG_INSTALLER, [to_hash].to_yaml
+    execute PassengerPaneConfig::RUBY, CONFIG_INSTALLER, [to_hash].to_yaml
     set_original_values!
   end
   
