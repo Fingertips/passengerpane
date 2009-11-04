@@ -32,13 +32,14 @@ class PrefPanePassenger < NSPreferencePane
   ib_outlet :authorizationView
   ib_outlet :applicationsTableView
   ib_outlet :applicationsController
+  ib_outlet :openAddressInBrowserButton
   
   kvc_accessor :applications, :authorized, :dirty_apps, :revertable_apps, :textFieldColor
   
   def mainViewDidLoad
     self.class.sharedInstance = self
     
-    self.textFieldColor = OSX::NSColor.disabledControlTextColor
+    setup_ui_details!
     setup_authorization_view!
     setup_applications_table_view!
     
@@ -235,6 +236,14 @@ class PrefPanePassenger < NSPreferencePane
     ) == 0
     authorizationViewDidAuthorize if result
     result
+  end
+  
+  def setup_ui_details!
+    button_image = OSX::NSImage.alloc.initByReferencingFile(File.join(bundle.resourcePath, 'OpenInBrowserTemplate.tiff'))
+    button_image.template = true
+    @openAddressInBrowserButton.image = button_image
+    
+    self.textFieldColor = OSX::NSColor.disabledControlTextColor
   end
   
   def setup_authorization_view!

@@ -39,6 +39,12 @@ module PrefPanePassengerSpecsHelper
   end
 end
 
+# Global stubs
+class PrefPanePassenger
+  def setup_ui_details!
+  end
+end
+
 describe "PrefPanePassenger, while initializing" do
   tests PrefPanePassenger
   
