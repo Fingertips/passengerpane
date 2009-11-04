@@ -23,7 +23,7 @@ Also a no brainer. You'll need at least version 2.0.1, or 2.2.5 for OS X 10.6:
 
 === RubyCocoa
 
-PassengerPane comes bundled with RubyCocoa 0.13.2, nothing needs to be done by
+PassengerPane comes bundled with RubyCocoa 1.0.1, nothing needs to be done by
 you, the user.
 
 Unless you wish to use a custom Ruby, not the one that’s shipped with OS X, in
