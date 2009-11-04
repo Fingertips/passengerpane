@@ -28,6 +28,7 @@ class PrefPanePassenger < NSPreferencePane
   
   include SharedPassengerBehaviour
   
+  ib_outlet :labelImage
   ib_outlet :installPassengerWarning
   ib_outlet :authorizationView
   ib_outlet :applicationsTableView
@@ -239,7 +240,9 @@ class PrefPanePassenger < NSPreferencePane
   end
   
   def setup_ui_details!
-    button_image = OSX::NSImage.alloc.initByReferencingFile(File.join(bundle.resourcePath, 'OpenInBrowserTemplate.tiff'))
+    @labelImage.image = OSX::NSImage.alloc.initByReferencingFile(bundle.pathForImageResource('label'))
+    
+    button_image = OSX::NSImage.alloc.initByReferencingFile(bundle.pathForImageResource('OpenInBrowserTemplate'))
     button_image.template = true
     @openAddressInBrowserButton.image = button_image
     
@@ -302,7 +305,9 @@ class PrefPanePassenger < NSPreferencePane
       @installPassengerWarning.hidden = true
     else
       unless @setup_passenger_warning
-        text_field = @installPassengerWarning.subviews.first
+        text_field = @installPassengerWarning.subviews.find { |v| v.is_a?(OSX::NSTextField) }
+        image_view = @installPassengerWarning.subviews.find { |v| v.is_a?(OSX::NSImageView) }
+        image_view.image = OSX::NSImage.alloc.initByReferencingFile('/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertCautionIcon.icns')
         
         link_str = OSX::NSMutableAttributedString.alloc.initWithString(MODRAILS_URL)
         range = OSX::NSMakeRange(0, MODRAILS_URL.length)

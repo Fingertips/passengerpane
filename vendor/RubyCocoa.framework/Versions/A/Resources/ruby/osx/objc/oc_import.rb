@@ -58,7 +58,30 @@ module OSX
     end
   end
   module_function :_bundle_path_for_framework
-
+  
+  # The OSX::require_framework method imports Mac OS X frameworks and uses the
+  # BridgeSupport metadata to add Ruby entry points for the framework's Classes,
+  # methods, and Constants into the OSX module.
+  #
+  # The framework parameter is a reference to the framework that should be
+  # imported.  This may be a full path name to a particular framework, a shortcut,
+  # or a framework name.  The shortcuts are the keys listed in the
+  # <tt>QUICK_FRAMEWORKS</tt> hash.
+  #
+  # If a framework name (with no path) is given, then the method searches a number
+  # of directories.  Those directories (in search order) are:
+  #   1.  /System/Library/Frameworks
+  #   2.  /Library/Frameworks
+  #   3.  Any directories in the RUBYCOCOA_FRAMEWORK_PATHS array, if defined
+  #   4.  ENV['HOME']/Library/Frameworks, if the HOME environment variable is defined
+  #
+  # When using the search paths, the <tt>.framework</tt> file type extension should
+  # be omitted from the framework name passed to the method.
+  #
+  # If the method loads the framework successfully, it returns <tt>true</tt>.
+  # If the framework was already loaded the method returns <tt>false</tt>.
+  # If the method is unable to locate, or unable to load the framework then it
+  # raises an <tt>ArgumentError</tt>.
   def require_framework(framework)
     return false if framework_loaded?(framework)
     bundle, path = _bundle_path_for_framework(framework)
@@ -458,9 +481,7 @@ module OSX
     # invoked from setValue:forUndefinedKey: of a Cocoa object
     def rbSetValue_forKey(value, key)
       if m = kvc_setter_method(key.to_s)
-        willChangeValueForKey(key)
         send(m, value)
-        didChangeValueForKey(key)
       else
         kvc_accessor_notfound(key)
       end
@@ -501,14 +522,19 @@ module OSX
 
     def kvc_writer(*args)
       args.flatten.each do |key|
+	next if method_defined?(kvc_setter_wrapper(key))
         setter = key.to_s + '='
         attr_writer(key) unless method_defined?(setter)
         alias_method kvc_internal_setter(key), setter
         self.class_eval <<-EOE_KVC_WRITER,__FILE__,__LINE__+1
           def #{kvc_setter_wrapper(key)}(value)
-            willChangeValueForKey('#{key.to_s}')
-            send('#{kvc_internal_setter(key)}', value)
-            didChangeValueForKey('#{key.to_s}')
+	    if self.class.automaticallyNotifiesObserversForKey('#{key.to_s}')
+	      willChangeValueForKey('#{key.to_s}')
+	      send('#{kvc_internal_setter(key)}', value)
+	      didChangeValueForKey('#{key.to_s}')
+	    else
+	      send('#{kvc_internal_setter(key)}', value)
+	    end
           end
         EOE_KVC_WRITER
         alias_method setter, kvc_setter_wrapper(key)
@@ -587,25 +613,37 @@ module OSX
 
           def insertObject_in#{keyname}AtIndex(obj, index)
             indexes = OSX::NSIndexSet.indexSetWithIndex(index)
-            willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeInsertion, indexes, #{key.inspect})
-            @#{key.to_s}.insert(index, obj)
-            didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeInsertion, indexes, #{key.inspect})
+	    if self.class.automaticallyNotifiesObserversForKey('#{key.to_s}')
+	      willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeInsertion, indexes, #{key.inspect})
+	      @#{key.to_s}.insert(index, obj)
+	      didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeInsertion, indexes, #{key.inspect})
+	    else
+	      @#{key.to_s}.insert(index, obj)
+	    end
             nil
           end
 
           def removeObjectFrom#{keyname}AtIndex(index)
             indexes = OSX::NSIndexSet.indexSetWithIndex(index)
-            willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeRemoval, indexes, #{key.inspect})
-            @#{key.to_s}.delete_at(index)
-            didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeRemoval, indexes, #{key.inspect})
+	    if self.class.automaticallyNotifiesObserversForKey('#{key.to_s}')
+	      willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeRemoval, indexes, #{key.inspect})
+	      @#{key.to_s}.delete_at(index)
+	      didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeRemoval, indexes, #{key.inspect})
+	    else
+	      @#{key.to_s}.delete_at(index)
+	    end
             nil
           end
 
           def replaceObjectIn#{keyname}AtIndex_withObject(index, obj)
             indexes = OSX::NSIndexSet.indexSetWithIndex(index)
-            willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeReplacement, indexes, #{key.inspect})
-            @#{key.to_s}[index] = obj
-            didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeReplacement, indexes, #{key.inspect})
+	    if self.class.automaticallyNotifiesObserversForKey('#{key.to_s}')
+	      willChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeReplacement, indexes, #{key.inspect})
+	      @#{key.to_s}[index] = obj
+	      didChange_valuesAtIndexes_forKey(OSX::NSKeyValueChangeReplacement, indexes, #{key.inspect})
+	    else
+	      @#{key.to_s}[index] = obj
+	    end
             nil
           end
         EOT

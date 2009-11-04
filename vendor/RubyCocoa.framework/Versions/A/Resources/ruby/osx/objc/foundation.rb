@@ -10,3 +10,9 @@ require 'osx/objc/cocoa_macros'
 
 p = '/System/Library/BridgeSupport/libSystem.bridgesupport'
 OSX.load_bridge_support_file(p) if File.exist?(p)
+
+# FIXME: 10.6 Foundation.bridgesupport defines the value64 of NSNotFound as -1
+module OSX
+  remove_const(:NSNotFound)
+  NSNotFound = NSIntegerMax
+end

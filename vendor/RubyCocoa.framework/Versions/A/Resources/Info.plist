@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>RubyCocoa</string>
 	<key>CFBundleGetInfoString</key>
-	<string>RubyCocoa 0.13.2 Copyright (c) 2002 FUJIMOTO Hisakuni.</string>
+	<string>RubyCocoa 1.0.1 Copyright (c) 2002 FUJIMOTO Hisakuni.</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.apple.rubycocoa</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.13.2</string>
+	<string>1.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>0.13.2</string>
+	<string>1.0.1</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright (c) 2002 FUJIMOTO Hisakuni.</string>
 </dict>

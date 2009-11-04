@@ -20,7 +20,7 @@ module OSX
         rescue
         end
       end
-      raise NameError, "undefined method `#{mname}' for OSX:Module"
+      super
     end
   end
 
