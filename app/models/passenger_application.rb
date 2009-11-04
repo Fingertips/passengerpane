@@ -23,7 +23,7 @@ class PassengerApplication < NSObject
     VHOSTS_GLOB = File.join(PassengerPaneConfig::PASSENGER_APPS_DIR, "*.#{PassengerPaneConfig::PASSENGER_APPS_EXTENSION}")
     
     def existingApplications
-      @existingApplications ||= Dir.glob(VHOSTS_GLOB).map do |app|
+      Dir.glob(VHOSTS_GLOB).map do |app|
         PassengerApplication.alloc.initWithFile(app)
       end
     end
