@@ -1,9 +1,11 @@
 Now
 
 - Don't show 'No Selection' in the text fields.
+- Make sure the 'Restart' button is disabled when the selected item is dirty. To avoid confusion, both the 'Restart' and 'Open in browser' buttons should be disabled when the 'Apply' button is enabled and vice-versa.
+- Add Sparkle. See http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/Bundles
+- Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. I hate to recommend it, but maybe http://github.com/drnic/choctop could do the trick?
 
 Later
 
 - Use the NSInvalidDataFreestandingTemplate image to indicate invalid fields.
-- Add some simple functionality to check if an update is available and direct the user to the download page.
-- Merge the Aliases text field into the Address field and add documentation about this to the help html file (not completely sure if this is an improvement though, let's discuss this first). 
+- Merge the 'Address' and 'Aliases' text fields, and the 'Open in browser' button into a single 'Addresses' list view with inline 'Open in browser' buttons.
