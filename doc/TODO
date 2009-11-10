@@ -3,7 +3,7 @@ Now
 - Don't show 'No Selection' in the text fields.
 - Make sure the 'Restart' button is disabled when the selected item is dirty. To avoid confusion, both the 'Restart' and 'Open in browser' buttons should be disabled when the 'Apply' button is enabled and vice-versa.
 - Add Sparkle, ideally using sheets. The first time you run the pane you should be asked whether or not you want to enable automatic updates. See http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/Bundles and http://developer.apple.com/mac/library/documentation/UserExperience/Conceptual/AppleHIGuidelines/XHIGInstallationsUpdates/XHIGInstallationsUpdates.html#//apple_ref/doc/uid/TP40002722-DontLinkElementID_131
-- Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. I hate to recommend it, but maybe http://github.com/drnic/choctop could do the trick?
+- Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. http://github.com/drnic/choctop should do the trick.
 
 Later
 
