@@ -24,7 +24,7 @@ namespace :prefpane do
   end
 end
 
-desc 'CLeans the build and release pkg'
+desc 'Cleans the build and release pkg'
 task :clean do
   sh 'rm -rf build/'
   sh 'rm -rf pkg'
