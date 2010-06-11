@@ -214,9 +214,11 @@ class PassengerApplication < NSObject
     value.nil? || value.empty?
   end
   
+  RAILS_APP_REGEXP = /Rails::Initializer|Application\.initialize!/
+  
   def check_application_type
     env_file = File.join(@path, 'config', 'environment.rb')
-    (File.exist?(env_file) and File.read(env_file) =~ /Rails::Initializer/) ? RAILS : RACK
+    (File.exist?(env_file) and File.read(env_file) =~ RAILS_APP_REGEXP) ? RAILS : RACK
   end
   
   def load_data_from_vhost_file(file = config_path)

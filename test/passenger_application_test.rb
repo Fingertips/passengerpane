@@ -104,6 +104,12 @@ describe "PassengerApplication#application_type" do
     @passenger_app.application_type.should == PassengerApplication::RAILS
   end
   
+  it "should recognize it as a Rails application if there's a config/environment.rb file, which contains `Application.initialize!'" do
+    File.stubs(:exist?).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns(true)
+    File.stubs(:read).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns("# Initialize the rails application\nRoomTemperature::Application.initialize!\n")
+    @passenger_app.application_type.should == PassengerApplication::RAILS
+  end
+  
   it "should recognize it as a Rack application if there's a config/environment.rb file, but doesn't contain the string `Rails::Initializer'" do
     File.stubs(:exist?).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns(true)
     File.stubs(:read).with('/Users/het-manfred/rails code/blog/config/environment.rb').returns("Foo bar")
