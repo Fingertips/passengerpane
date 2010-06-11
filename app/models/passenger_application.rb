@@ -214,7 +214,7 @@ class PassengerApplication < NSObject
     value.nil? || value.empty?
   end
   
-  RAILS_APP_REGEXP = /Rails::Initializer|Application\.initialize!/
+  RAILS_APP_REGEXP = /::Initializer\.run|Application\.initialize!/
   
   def check_application_type
     env_file = File.join(@path, 'config', 'environment.rb')
