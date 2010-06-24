@@ -1,9 +1,20 @@
 Now
 
 - Don't show 'No Selection' in the text fields.
+- No longer mark an item as dirty when the user reverts his changes, for example when you append a single character to the address value and then remove that character.
+- Make sure the 'Restart' button is disabled when the selected item is dirty. To avoid confusion, both the 'Restart' and 'Open in browser' buttons should be disabled when the 'Apply' button is enabled and vice-versa.
+- Immediately apply the configuration when a new application is added. In most cases the default configuration is exactly what you want.
+- Prevent duplicate folders. When the user tries to add a duplicate folder, select the configuration for the application that uses this folder in the source list.
+- Do not accept characters in the Address and Aliases fields that can't be used for the domain name (including whitespace in the address field). 
+- Check for duplicate addresses and aliases after Apply has been clicked. Show a sheet with the following alert:
+  - The changes could not be applied because the address “cj.local” ia already in use.
+    Choose a different address or rename “cj.local”.
+  - The changes could not be applied because the alias “assets.cj.local” ia already in use by “cj.local”.
+    Choose a different alias or remove “cj.local”.
+- Silently remove duplicate aliases for the same application. For example, 'assets1.local assets2.local assets3.local assets2.local' should be changed to 'assets1.local assets2.local assets3.local'.
+- Add Sparkle, ideally using sheets. The first time you run the pane you should be asked whether or not you want to enable automatic updates. See http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/Bundles and http://developer.apple.com/mac/library/documentation/UserExperience/Conceptual/AppleHIGuidelines/XHIGInstallationsUpdates/XHIGInstallationsUpdates.html#//apple_ref/doc/uid/TP40002722-DontLinkElementID_131
+- Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. http://github.com/drnic/choctop should do the trick.
 
 Later
 
-- Use the NSInvalidDataFreestandingTemplate image to indicate invalid fields.
-- Add some simple functionality to check if an update is available and direct the user to the download page.
-- Merge the Aliases text field into the Address field and add documentation about this to the help html file (not completely sure if this is an improvement though, let's discuss this first). 
+- Merge the 'Address' and 'Aliases' text fields, and the 'Open in browser' button into a single 'Addresses' list view with inline 'Open in browser' buttons.
