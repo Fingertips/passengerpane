@@ -3,7 +3,7 @@
 
 @interface SecurityHelper : NSObject
 {
-  AuthorizationRef authorizationRef;
+	AuthorizationRef authorizationRef;
 }
 + sharedInstance;
 - (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments;
