@@ -14,6 +14,7 @@ Now
 - Silently remove duplicate aliases for the same application. For example, 'assets1.local assets2.local assets3.local assets2.local' should be changed to 'assets1.local assets2.local assets3.local'.
 - Add Sparkle, ideally using sheets. The first time you run the pane you should be asked whether or not you want to enable automatic updates. See http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/Bundles and http://developer.apple.com/mac/library/documentation/UserExperience/Conceptual/AppleHIGuidelines/XHIGInstallationsUpdates/XHIGInstallationsUpdates.html#//apple_ref/doc/uid/TP40002722-DontLinkElementID_131
 - Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. http://github.com/drnic/choctop should do the trick.
+- Change the cursor to a hand when hovering over the link in the 'Visit http://www.modrails.com for installation instructions' message.
 
 Later
 
