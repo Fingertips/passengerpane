@@ -56,6 +56,7 @@ describe "ConfigInstaller" do
   ServerAlias manfred-s-blog.local my-blog.local
   DocumentRoot "/User/het-manfred/rails code/blog/public"
   RailsEnv production
+  RackEnv production
   <Directory \"/User/het-manfred/rails code/blog/public\">
     Order allow,deny
     Allow from all

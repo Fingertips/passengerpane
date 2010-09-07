@@ -65,6 +65,8 @@ class ConfigInstaller
       ("  ServerAlias #{app['aliases']}" unless app['aliases'].empty?),
       "  DocumentRoot \"#{public_dir}\"",
       "  #{app['app_type'].capitalize}Env #{app['environment']}",
+      # allow for later upgrade to rails 3 with config.ru file
+      ("  RackEnv #{app['environment']}" if app['app_type']=="rails"),
       (app['user_defined_data'] unless app['user_defined_data'].empty?),
       "</VirtualHost>"
     ].compact.join("\n")
