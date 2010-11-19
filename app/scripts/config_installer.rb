@@ -64,7 +64,8 @@ class ConfigInstaller
       "  ServerName #{app['host']}",
       ("  ServerAlias #{app['aliases']}" unless app['aliases'].empty?),
       "  DocumentRoot \"#{public_dir}\"",
-      "  #{app['app_type'].capitalize}Env #{app['environment']}",
+      ("  RailsEnv #{app['environment']}" if app['is_rails']),
+      ("  RackEnv #{app['environment']}" if app['is_rack']),
       (app['user_defined_data'] unless app['user_defined_data'].empty?),
       "</VirtualHost>"
     ].compact.join("\n")

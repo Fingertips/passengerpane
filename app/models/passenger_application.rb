@@ -198,6 +198,8 @@ class PassengerApplication < NSObject
     
     {
       'app_type' => application_type,
+      'is_rails' => is_rails?,
+      'is_rack' => is_rack?,
       'config_path' => config_path,
       'host' => @host.to_s,
       'aliases' => @aliases.to_s,
@@ -219,6 +221,16 @@ class PassengerApplication < NSObject
   def check_application_type
     env_file = File.join(@path, 'config', 'environment.rb')
     (File.exist?(env_file) and File.read(env_file) =~ RAILS_APP_REGEXP) ? RAILS : RACK
+  end
+  
+  def is_rack?
+    config_ru_file = File.join(@path, 'config.ru')
+    File.exist?(env_file)
+  end
+  
+  def is_rails?
+    env_file = File.join(@path, 'config', 'environment.rb')
+    File.exist?(env_file) && File.read(env_file) =~ RAILS_APP_REGEXP
   end
   
   def load_data_from_vhost_file(file = config_path)
