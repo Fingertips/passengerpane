@@ -3,3 +3,4 @@ build
 Passenger.xcodeproj/*.mode1v3
 Passenger.xcodeproj/*.pbxuser
 pkg
+tmp
