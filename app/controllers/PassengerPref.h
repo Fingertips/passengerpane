@@ -1,10 +1,11 @@
 #import <PreferencePanes/PreferencePanes.h>
 #import <SecurityInterface/SFAuthorizationView.h>
+#import "CLI.h"
 
 @interface PassengerPref : NSPreferencePane
 {
   Boolean authorized;
-  NSMutableArray *applications;
+  NSArray *applications;
   
   IBOutlet NSColor *textStateColor;
   

@@ -3,6 +3,7 @@
 @implementation PassengerPref
 
 - (void) mainViewDidLoad {
+  [[CLI sharedInstance] setPathToCLI:[[self bundle] pathForResource:@"ppane" ofType:nil inDirectory:@"bin"]];
   [self setupUI];
   [self setupAuthorizationView];
   [self setupApplicationView];
@@ -28,9 +29,8 @@
 }
 
 - (void)setupApplicationView {
-  applications = [NSMutableArray array];
+  applications = [[CLI sharedInstance] listApplications];
 }
-
 
 - (Boolean)isDirty {
   return false;
