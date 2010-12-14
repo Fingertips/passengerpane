@@ -56,3 +56,17 @@ task :bridgesupport do
   #sh "gen_bridge_metadata -f Security -e Security.BridgeSupport-exceptions.xml -o Security.bridgesupport"
   sh "gen_bridge_metadata -f Security -o Security.bridgesupport"
 end
+
+namespace :gem do
+  desc "Build the gem"
+  task :build do
+    sh "gem build ppane.gemspec"
+  end
+  
+  desc "Install the gem"
+  task :install => :build do
+    if filename = FileList['*.gem'].sort_by { |name| name }.last
+      sh "gem install #{filename}"
+    end
+  end
+end
