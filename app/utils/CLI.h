@@ -12,7 +12,10 @@
 
 - (NSArray *)listApplications;
 
-- (Boolean)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments;
+- (Boolean)execute:(NSArray *)arguments;
+- (Boolean)execute:(NSArray *)arguments secure:(Boolean)secure;
+
+- (Boolean)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments; // Remove
 
 - (AuthorizationRef) authorizationRef;
 - (void) setAuthorizationRef:(AuthorizationRef)ref;

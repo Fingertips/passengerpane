@@ -28,6 +28,19 @@ static id sharedCLI = nil;
   return applications;
 }
 
+- (Boolean)execute:(NSArray *)arguments {
+  return false;
+}
+
+- (Boolean)execute:(NSArray *)arguments secure:(Boolean)secure {
+  
+  if (secure) {
+    
+  } else {
+    [self execute:arguments];
+  }
+  return false;
+}
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 - (Boolean)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments {
