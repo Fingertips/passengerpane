@@ -1105,14 +1105,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">208</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">applicationsTableView</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="992120398"/>
-					</object>
-					<int key="connectionID">214</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">browse:</string>
 						<reference key="source" ref="565115411"/>
@@ -1613,14 +1605,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">454</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">openAddressInBrowserButton</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="535317141"/>
-					</object>
-					<int key="connectionID">455</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">enabled2: selection.dirty</string>
 						<reference key="source" ref="535317141"/>
@@ -1655,14 +1639,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<int key="connectionID">459</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">labelImage</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="36341174"/>
-					</object>
-					<int key="connectionID">460</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -1765,7 +1741,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="label">enabled: isDirty</string>
 						<reference key="source" ref="615078570"/>
 						<reference key="destination" ref="565115411"/>
-						<object class="NSNibBindingConnector" key="connector" id="323305546">
+						<object class="NSNibBindingConnector" key="connector" id="680417438">
 							<reference key="NSSource" ref="615078570"/>
 							<reference key="NSDestination" ref="565115411"/>
 							<string key="NSLabel">enabled: isDirty</string>
@@ -1804,7 +1780,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<integer value="-1"/>
 								</object>
 							</object>
-							<reference key="NSPreviousConnector" ref="323305546"/>
+							<reference key="NSPreviousConnector" ref="680417438"/>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
@@ -1825,6 +1801,38 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<int key="connectionID">470</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">openInBrowserButton</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="535317141"/>
+					</object>
+					<int key="connectionID">471</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">passengerIconView</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="36341174"/>
+					</object>
+					<int key="connectionID">472</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">dataSource</string>
+						<reference key="source" ref="992120398"/>
+						<reference key="destination" ref="565115411"/>
+					</object>
+					<int key="connectionID">473</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">applicationsTableView</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="992120398"/>
+					</object>
+					<int key="connectionID">474</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2522,7 +2530,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">470</int>
+			<int key="maxID">474</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2560,11 +2568,19 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>applicationsController</string>
+							<string>applicationsTableView</string>
+							<string>authorizationView</string>
+							<string>openInBrowserButton</string>
+							<string>passengerIconView</string>
 							<string>textStateColor</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSArrayController</string>
+							<string>NSTableView</string>
+							<string>SFAuthorizationView</string>
+							<string>NSButton</string>
+							<string>NSImageView</string>
 							<string>NSColor</string>
 						</object>
 					</object>
