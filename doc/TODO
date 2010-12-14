@@ -1,4 +1,9 @@
-Now
+Rewrite
+
+- Add options to ppane to install configuration files for MacPorts and possibly other package managers. Basically copies boilerplate config files to the homedir or /etc.
+  $ ppane config macports
+
+After rewrite
 
 - Don't show 'No Selection' in the text fields.
 - No longer mark an item as dirty when the user reverts his changes, for example when you append a single character to the address value and then remove that character.
