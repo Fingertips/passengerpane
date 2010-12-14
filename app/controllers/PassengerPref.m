@@ -1,10 +1,14 @@
-@interface PassengerLoader : NSObject
-{}
-@end
-@implementation PassengerLoader
-@end
+#import "PassengerPref.h"
 
-static void __attribute__((constructor)) loadRubyPrefPane(void)
-{
-	RBBundleInit("passenger_pref.rb", [PassengerLoader class], nil);
+@implementation PassengerPref
+
+- (void) mainViewDidLoad {
+  applications = [[NSMutableArray alloc] init];
+  authorized = false;
 }
+
+- (Boolean)isDirty {
+  return false;
+}
+
+@end
