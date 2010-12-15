@@ -41,6 +41,24 @@ Syntax OK
     }.strip)
     @httpd.passenger_module_installed?.should == false
   end
+  
+  it "knows if the configuration is valid" do
+    @httpd.expects(:`).returns("Syntax OK")
+    @httpd.should.be.valid
+  end
+  
+  it "knows the configuration is valid when the last line says so" do
+    @httpd.expects(:`).returns("[Wed Dec 15 11:17:25 2010] [warn] VirtualHost 172.16.0.3:80 overlaps with VirtualHost 172.16.0.3:80, the first has precedence, perhaps you need a NameVirtualHost directive
+    [Wed Dec 15 11:17:25 2010] [warn] NameVirtualHost *:80 has no VirtualHosts
+    Syntax OK")
+    @httpd.should.be.valid
+  end
+  
+  it "knows when the configuration is not valid" do
+    @httpd.expects(:`).returns("Syntax error on line 2 of /private/etc/apache2/httpd.conf:
+    Invalid command 'sdfasdadsf#', perhaps misspelled or defined by a module not included in the server con")
+    @httpd.should.not.be.valid
+  end
 end
 
 describe "A HttpdConf, with passenger configuration" do
@@ -102,7 +120,6 @@ Include /private/etc/apache2/manual_vhosts/*.conf
       @httpd.restart
     end.should == "[!] Apache configuration is not valid, skipping Apache restart\n"
   end
-  
 end
 
 describe "A HttpdConf, without passenger configuration" do

@@ -14,7 +14,7 @@ module PassengerPane
     def info
       if machine_readable?
         puts YAML.dump({
-          'passenger_module_installed' => @configuration.http.passenger_module_installed?,
+          'passenger_module_installed' => @configuration.httpd.passenger_module_installed?,
           'passenger_configured' => @configuration.httpd.passenger_configured?
         })
       else

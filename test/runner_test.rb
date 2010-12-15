@@ -53,8 +53,8 @@ describe "Runner" do
       PassengerPane::Runner.run({'m' => nil}, %w(info))
     end
     
-    output.should.include('Passenger installed:  yes')
-    output.should.include('Passenger configured: yes')
+    output.should.include('passenger_configured: true')
+    output.should.include('passenger_module_installed: true')
   end
   
   it "configures Apache for use with the Passenger Pane" do
@@ -123,6 +123,7 @@ describe "Runner" do
   end
   
   it "restarts Apache" do
+    @conf.httpd.expects(:valid?).returns(true)
     @conf.httpd.expects(:system).with(@conf.apache_restart_command).returns(true)
     capture_stdout do
       PassengerPane::Runner.run({}, %w(restart))

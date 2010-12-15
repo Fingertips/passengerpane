@@ -33,7 +33,7 @@ module PassengerPane
     end
     
     def valid?
-      `#{@configuration.httpd_binary} -t 2>&1`.strip == 'Syntax OK'
+      `#{@configuration.httpd_binary} -t 2>&1`.strip.end_with?('Syntax OK')
     end
     
     def restart
