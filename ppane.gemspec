@@ -2,7 +2,7 @@ $KCODE = 'u'
 
 Gem::Specification.new do |spec|
   spec.name    = "ppane"
-  spec.version = "0.1.0"
+  spec.version = "0.1.1"
   
   spec.authors = ["Eloy Duran",      "Manfred Stienstra"]
   spec.email   = ["eloy@fngtps.com", "manfred@fngtps.com"]
