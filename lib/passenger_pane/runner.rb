@@ -113,7 +113,7 @@ module PassengerPane
       puts
       puts "* requires root privileges"
       puts
-      puts "Options:"pp
+      puts "Options:"
       puts "  -h, --help       Show this help text"
       puts "  -m, --machine    Use machine readable output (YAML)"
       puts
