@@ -98,31 +98,31 @@ module PassengerPane
     end
     
     def self.usage
-      puts "Usage: #{File.basename($0)} <command> [options]"
+      puts "Usage: #{File.basename($0)} <command> [options] [attributes]"
       puts
       puts "Commands:"
-      puts "  list:             List all configured applications"
-      puts "  register:         Register all configured hostnames with Directory Services*"
-      puts "  info:             Show information about the system"
-      puts "  configure:        Configure Apache for use with the Passenger Pane*"
-      puts "  add <directory>:  Add an application in a directory*"
-      puts "  update <host>:    Update an application*"
-      puts "  delete <host>:    Deletes an application*"
-      puts "  restart <host>:   Restart an application"
-      puts "  restart:          Restart Apache to pick up configuration changes*"
+      puts "  list             List all configured applications"
+      puts "  register         Register all configured hostnames with Directory Services*"
+      puts "  info             Show information about the system"
+      puts "  configure        Configure Apache for use with the Passenger Pane*"
+      puts "  add <directory>  Add an application in a directory*"
+      puts "  update <host>    Update attributes of an application*"
+      puts "  delete <host>    Delete an application*"
+      puts "  restart <host>   Restart an application"
+      puts "  restart          Restart Apache to pick up configuration changes*"
       puts
       puts "* requires root privileges"
       puts
-      puts "Options:"
-      puts "  -h, --help:       Show this help text"
-      puts "  -m, --machine     Use machine readable output"
+      puts "Options:"pp
+      puts "  -h, --help       Show this help text"
+      puts "  -m, --machine    Use machine readable output (YAML)"
       puts
       puts "Attributes:"
-      puts "  --host:           Hostname for the application (ie. myapp.local)"
-      puts "  --aliases:        Aliases for the application (ie. assets.myapp.local)"
-      puts "  --path:           The folder with the application"
-      puts "  --environment:    The environment to run, usually development or production"
-      puts "  --framework:      The framework, either rack or rails"
+      puts "  --host           Hostname for the application (ie. myapp.local)"
+      puts "  --aliases        Aliases for the application (ie. assets.myapp.local)"
+      puts "  --path           The folder with the application"
+      puts "  --environment    The environment to run, usually development or production"
+      puts "  --framework      The framework, either rack or rails"
     end
     
     def self.run(flags, args)
