@@ -1,0 +1,13 @@
+recipe :ignore
+ignore(/^(tmp)/)
+
+recipe :ruby
+
+process do |files|
+  Ruby.run_tests(files.take_and_map do |file|
+    case file
+    when %r{^test/test_helper/add_allow_switch.rb$}
+      'test/test_helper/add_allow_switch_test.rb'
+    end
+  end)
+end

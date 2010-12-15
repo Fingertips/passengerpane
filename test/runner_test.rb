@@ -45,6 +45,18 @@ describe "Runner" do
     output.should.include('Passenger configured: yes')
   end
   
+  it "shows information about the system in YAML" do
+    @conf.httpd.stubs(:passenger_module_installed?).returns(true)
+    PassengerPane::DirectoryServices.stubs(:registered_hosts).returns(%w(assets.skit.local skit.local weblog.local))
+    
+    output = capture_stdout do
+      PassengerPane::Runner.run({'m' => nil}, %w(info))
+    end
+    
+    output.should.include('Passenger installed:  yes')
+    output.should.include('Passenger configured: yes')
+  end
+  
   it "configures Apache for use with the Passenger Pane" do
     Kernel.allow_backtick = true
     @conf.httpd.stubs(:restart)
