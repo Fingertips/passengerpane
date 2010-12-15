@@ -53,7 +53,7 @@ describe "Runner" do
       PassengerPane::Runner.run({'m' => nil}, %w(info))
     end
     
-    output.should.include('passenger_configured: true')
+    output.should.include('passenger_pane_configured: true')
     output.should.include('passenger_module_installed: true')
   end
   
@@ -66,7 +66,7 @@ describe "Runner" do
       PassengerPane::Runner.run({}, %w(configure))
     end
     
-    @conf.httpd.should.be.passenger_configured
+    @conf.httpd.should.be.passenger_pane_configured
   end
   
   it "does not configure Apache for use with the Passenger Pane if it's already configured" do

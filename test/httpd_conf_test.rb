@@ -104,7 +104,7 @@ Include /private/etc/apache2/manual_vhosts/*.conf
   end
   
   it "has passenger configured" do
-    @httpd.should.be.passenger_configured
+    @httpd.should.be.passenger_pane_configured
   end
   
   it "restarts apache" do
@@ -132,12 +132,12 @@ describe "A HttpdConf, without passenger configuration" do
   end
   
   it "does not have passenger configured" do
-    @httpd.should.not.be.passenger_configured
+    @httpd.should.not.be.passenger_pane_configured
   end
   
   it "configures passenger" do
     @httpd.configure_passenger
     @httpd.write
-    @httpd.should.be.passenger_configured
+    @httpd.should.be.passenger_pane_configured
    end
 end

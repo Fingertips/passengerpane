@@ -48,7 +48,7 @@ module PassengerPane
       `#{@configuration.httpd_binary} -D DUMP_MODULES 2>&1`.include? 'passenger_module'
     end
     
-    def passenger_configured?
+    def passenger_pane_configured?
       !!(contents =~ /Include.*#{@configuration.passenger_vhosts}/)
     end
     

@@ -15,12 +15,12 @@ module PassengerPane
       if machine_readable?
         puts YAML.dump({
           'passenger_module_installed' => @configuration.httpd.passenger_module_installed?,
-          'passenger_configured' => @configuration.httpd.passenger_configured?
+          'passenger_pane_configured' => @configuration.httpd.passenger_pane_configured?
         })
       else
-        puts "Apache directory:     #{@configuration.apache_directory}"
-        puts "Passenger installed:  #{@configuration.httpd.passenger_module_installed? ? 'yes' : 'no'}"
-        puts "Passenger configured: #{@configuration.httpd.passenger_configured? ? 'yes' : 'no'}"
+        puts "Apache directory:          #{@configuration.apache_directory}"
+        puts "Passenger installed:       #{@configuration.httpd.passenger_module_installed? ? 'yes' : 'no'}"
+        puts "Passenger Pane configured: #{@configuration.httpd.passenger_pane_configured? ? 'yes' : 'no'}"
         puts "Registered hostnames:"
         PassengerPane::DirectoryServices.registered_hosts.each do |host|
           puts "  #{host}"
@@ -29,7 +29,7 @@ module PassengerPane
     end
     
     def configure
-      unless @configuration.httpd.passenger_configured?
+      unless @configuration.httpd.passenger_pane_configured?
         @configuration.httpd.configure_passenger
         @configuration.httpd.write
         @configuration.httpd.restart
