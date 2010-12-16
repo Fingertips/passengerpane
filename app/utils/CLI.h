@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <YAML/YAML.h>
 
 enum {
   PPANE_SUCCESS = 0

@@ -1,4 +1,36 @@
-task :default => "prefpane:run"
+task :default => "test"
+
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.test_files = FileList['test/*_test.rb']
+  t.verbose = true  
+end
+
+namespace :ppane do
+  desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane"
+  task :fix_framework_location do
+    directory       = ENV['BUILT_PRODUCTS_DIR']
+    binary          = File.join(directory, 'Passenger.prefPane/Contents/MacOS/Passenger')
+    executable_path = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
+    sh "/usr/bin/install_name_tool -change '#{executable_path}' '#{executable_path.gsub('executable_path', 'loader_path')}' '#{binary}'"
+  end
+end
+
+namespace :gem do
+  desc "Build the gem"
+  task :build do
+    sh "gem build ppane.gemspec"
+  end
+  
+  desc "Install the gem"
+  task :install => :build do
+    if filename = FileList['*.gem'].sort_by { |name| name }.last
+      sh "gem install #{filename}"
+    end
+  end
+end
+
+# --- Evaluate
 
 namespace :prefpane do
   BUILD = "build/Release/Passenger.prefPane"
@@ -43,30 +75,4 @@ task :release => [:clean, 'prefpane:build'] do
     sh "cp #{file} #{pkg_dir}"
   end
   sh "cd pkg/ && tar -czvf #{name}.tgz #{name}/"
-end
-
-require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.test_files = FileList['test/*_test.rb']
-  t.verbose = true  
-end
-
-desc "Generate Security.framework BridgeSupport file"
-task :bridgesupport do
-  #sh "gen_bridge_metadata -f Security -e Security.BridgeSupport-exceptions.xml -o Security.bridgesupport"
-  sh "gen_bridge_metadata -f Security -o Security.bridgesupport"
-end
-
-namespace :gem do
-  desc "Build the gem"
-  task :build do
-    sh "gem build ppane.gemspec"
-  end
-  
-  desc "Install the gem"
-  task :install => :build do
-    if filename = FileList['*.gem'].sort_by { |name| name }.last
-      sh "gem install #{filename}"
-    end
-  end
 end

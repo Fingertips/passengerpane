@@ -3,8 +3,9 @@
 //
 
 #ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import <AppKit/AppKit.h>
-    #import <RubyCocoa/RubyCocoa.h>
-    #import <PreferencePanes/PreferencePanes.h>
+  #import <Foundation/Foundation.h>
+  #import <AppKit/AppKit.h>
+  #import <RubyCocoa/RubyCocoa.h>
+  #import <PreferencePanes/PreferencePanes.h>
+  #import <YAML/YAML.h>
 #endif

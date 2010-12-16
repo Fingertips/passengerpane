@@ -23,7 +23,8 @@ static id sharedCLI = nil;
 - (NSArray *)listApplications {
   NSArray *applications;
   
-  [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
+  NSDictionary *result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
+  NSLog(@"%@", result);
   
   return applications;
 }
@@ -37,9 +38,9 @@ static id sharedCLI = nil;
 }
 
 - (NSDictionary *)execute:(NSArray *)arguments {
+  NSString *data;
   NSPipe *stdout = [NSPipe pipe];
   NSTask *ppane;
-  NSDictionary *output = [NSDictionary dictionary];
   
   ppane = [[[NSTask alloc] init] autorelease];
   [ppane setLaunchPath:pathToCLI];
@@ -49,10 +50,12 @@ static id sharedCLI = nil;
   [ppane waitUntilExit];
   
   if ([ppane terminationStatus] == PPANE_SUCCESS) {
-    NSLog(@"%@", [[NSString alloc] initWithData:[[stdout fileHandleForReading] availableData] encoding:NSASCIIStringEncoding]);
+    data = [[NSString alloc] initWithData:[[stdout fileHandleForReading] availableData] encoding:NSUTF8StringEncoding];
+    [data autorelease];
+    return yaml_parse(data);
+  } else {
+    return [[NSDictionary dictionary] autorelease];
   }
-  
-  return output;
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
