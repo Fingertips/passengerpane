@@ -1,5 +1,9 @@
 #import <Foundation/Foundation.h>
 
+enum {
+  PPANE_SUCCESS = 0
+};
+
 
 @interface CLI : NSObject {
   AuthorizationRef authorizationRef;
@@ -12,8 +16,8 @@
 
 - (NSArray *)listApplications;
 
-- (BOOL)execute:(NSArray *)arguments;
-- (BOOL)execute:(NSArray *)arguments secure:(BOOL)secure;
+- (NSDictionary *)execute:(NSArray *)arguments elevated:(BOOL)elevated;
+- (NSDictionary *)execute:(NSArray *)arguments;
 
 - (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments; // Remove
 

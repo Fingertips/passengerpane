@@ -23,23 +23,36 @@ static id sharedCLI = nil;
 - (NSArray *)listApplications {
   NSArray *applications;
   
-  [self executeCommand:pathToCLI withArgs:[NSArray arrayWithObjects:@"list", @"-m", nil]];
+  [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
   
   return applications;
 }
 
-- (BOOL)execute:(NSArray *)arguments {
-  return NO;
+- (NSDictionary *)execute:(NSArray *)arguments elevated:(BOOL)elevated {
+  if (elevated) {
+    return [NSDictionary dictionary];
+  } else {
+    return [self execute:arguments];
+  }
 }
 
-- (BOOL)execute:(NSArray *)arguments secure:(BOOL)secure {
+- (NSDictionary *)execute:(NSArray *)arguments {
+  NSPipe *stdout = [NSPipe pipe];
+  NSTask *ppane;
+  NSDictionary *output = [NSDictionary dictionary];
   
-  if (secure) {
-    
-  } else {
-    [self execute:arguments];
+  ppane = [[[NSTask alloc] init] autorelease];
+  [ppane setLaunchPath:pathToCLI];
+  [ppane setArguments:arguments];
+  [ppane setStandardOutput:[stdout fileHandleForWriting]];
+  [ppane launch];
+  [ppane waitUntilExit];
+  
+  if ([ppane terminationStatus] == PPANE_SUCCESS) {
+    NSLog(@"%@", [[NSString alloc] initWithData:[[stdout fileHandleForReading] availableData] encoding:NSASCIIStringEncoding]);
   }
-  return NO;
+  
+  return output;
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
