@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <YAML/YAML.h>
+#import "Application.h"
 
 enum {
   PPANE_SUCCESS = 0
@@ -15,10 +16,10 @@ enum {
 
 + (id)sharedInstance;
 
-- (NSArray *)listApplications;
+- (NSMutableArray *)listApplications;
 
-- (NSDictionary *)execute:(NSArray *)arguments elevated:(BOOL)elevated;
-- (NSDictionary *)execute:(NSArray *)arguments;
+- (id)execute:(NSArray *)arguments elevated:(BOOL)elevated;
+- (id)execute:(NSArray *)arguments;
 
 - (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments; // Remove
 

@@ -30,6 +30,7 @@
 
 - (void)setupApplicationView {
   applications = [[CLI sharedInstance] listApplications];
+  [applicationsController rearrangeObjects];
 }
 
 - (BOOL)isDirty {

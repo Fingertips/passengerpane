@@ -20,16 +20,26 @@ static id sharedCLI = nil;
   return self;
 }
 
-- (NSArray *)listApplications {
-  NSArray *applications;
+- (NSMutableArray *)listApplications {
+  id result;
+  NSDictionary *item;
+  NSEnumerator *enumerator;
+  NSMutableArray *applications;
   
-  NSDictionary *result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
-  NSLog(@"%@", result);
+  result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
+  applications = [[NSMutableArray arrayWithCapacity:[result count]] autorelease];
+  
+  enumerator = [result objectEnumerator];
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  while (item = [enumerator nextObject]) {
+    [applications addObject:[[[Application alloc] initWithDictionary:item] autorelease]];
+  }
+  [pool drain];
   
   return applications;
 }
 
-- (NSDictionary *)execute:(NSArray *)arguments elevated:(BOOL)elevated {
+- (id)execute:(NSArray *)arguments elevated:(BOOL)elevated {
   if (elevated) {
     return [NSDictionary dictionary];
   } else {
@@ -37,7 +47,7 @@ static id sharedCLI = nil;
   }
 }
 
-- (NSDictionary *)execute:(NSArray *)arguments {
+- (id)execute:(NSArray *)arguments {
   NSString *data;
   NSPipe *stdout = [NSPipe pipe];
   NSTask *ppane;

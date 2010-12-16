@@ -20,6 +20,8 @@
 		6361755812B7C4B500E3412D /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
 		63F589E512BA627E00D959E3 /* YAML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F589E412BA627E00D959E3 /* YAML.framework */; };
 		63F589E712BA62CC00D959E3 /* YAML.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 63F589E612BA62CC00D959E3 /* YAML.framework */; };
+		63F589EB12BA6B5300D959E3 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = 63F589E912BA6B5200D959E3 /* Application.h */; };
+		63F589EC12BA6B5300D959E3 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F589EA12BA6B5200D959E3 /* Application.m */; };
 		76890D45109F7E9700097BC5 /* OpenInBrowserTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 76890D44109F7E9700097BC5 /* OpenInBrowserTemplate.tiff */; };
 		8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 32DBCFA20370C41700C91783 /* Passenger_Prefix.pch */; };
 		8D202CED0486D31800D8A456 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
@@ -62,6 +64,8 @@
 		6361755612B7C4B500E3412D /* CLI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLI.m; path = app/utils/CLI.m; sourceTree = "<group>"; };
 		63F589E412BA627E00D959E3 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
 		63F589E612BA62CC00D959E3 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
+		63F589E912BA6B5200D959E3 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = app/models/Application.h; sourceTree = "<group>"; };
+		63F589EA12BA6B5200D959E3 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Application.m; path = app/models/Application.m; sourceTree = "<group>"; };
 		76890D44109F7E9700097BC5 /* OpenInBrowserTemplate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = OpenInBrowserTemplate.tiff; path = resources/OpenInBrowserTemplate.tiff; sourceTree = "<group>"; };
 		8D202CF70486D31800D8A456 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D202CF80486D31800D8A456 /* Passenger.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Passenger.prefPane; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +93,7 @@
 		089C166AFE841209C02AAC07 /* Passenger */ = {
 			isa = PBXGroup;
 			children = (
+				5189C6E60E111C3300B83EA5 /* LICENSE */,
 				63F589E612BA62CC00D959E3 /* YAML.framework */,
 				63F589E412BA627E00D959E3 /* YAML.framework */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
@@ -134,7 +139,8 @@
 				6361755612B7C4B500E3412D /* CLI.m */,
 				6361753712B794C400E3412D /* PassengerPref.h */,
 				F506C03D013D9D7901CA16C8 /* PassengerPref.m */,
-				5189C6E60E111C3300B83EA5 /* LICENSE */,
+				63F589E912BA6B5200D959E3 /* Application.h */,
+				63F589EA12BA6B5200D959E3 /* Application.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 				8D202CEA0486D31800D8A456 /* Passenger_Prefix.pch in Headers */,
 				6361753812B794C400E3412D /* PassengerPref.h in Headers */,
 				6361755712B7C4B500E3412D /* CLI.h in Headers */,
+				63F589EB12BA6B5300D959E3 /* Application.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +291,7 @@
 			files = (
 				8D202CF10486D31800D8A456 /* PassengerPref.m in Sources */,
 				6361755812B7C4B500E3412D /* CLI.m in Sources */,
+				63F589EC12BA6B5300D959E3 /* Application.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
