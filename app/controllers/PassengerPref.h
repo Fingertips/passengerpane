@@ -20,6 +20,16 @@
 - (void)setupAuthorizationView;
 - (void)setupApplicationView;
 
+- (void)remove:(id)sender;
+- (void)browse:(id)sender;
+
+- (void)apply:(id)sender;
+- (void)revert:(id)sender;
+- (void)restart:(id)sender;
+
+- (void)openAddressInBrowser:(id)sender;
+- (void)showPassengerHelp:(id)sender;
+
 - (BOOL)isDirty;
 
 @end
