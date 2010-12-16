@@ -14,17 +14,17 @@
 
   [passengerIconView setImage:[[NSImage alloc] initByReferencingFile:[[self bundle] pathForImageResource:@"label"]]];
   browserButtonImage = [[NSImage alloc] initByReferencingFile:[[self bundle] pathForImageResource:@"OpenInBrowserTemplate"]];
-  [browserButtonImage setTemplate:true];
+  [browserButtonImage setTemplate:YES];
   [openInBrowserButton setImage:browserButtonImage];
   
   textStateColor = NSColor.disabledControlTextColor;
 }
 
 - (void)setupAuthorizationView {
-  authorized = false;
+  authorized = NO;
   [authorizationView setString:kAuthorizationRightExecute];
   [authorizationView setDelegate:self];
-  [authorizationView setAutoupdate:true];
+  [authorizationView setAutoupdate:YES];
   [authorizationView updateStatus:self];
 }
 
@@ -32,8 +32,8 @@
   applications = [[CLI sharedInstance] listApplications];
 }
 
-- (Boolean)isDirty {
-  return false;
+- (BOOL)isDirty {
+  return NO;
 }
 
 @end

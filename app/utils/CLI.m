@@ -28,32 +28,28 @@ static id sharedCLI = nil;
   return applications;
 }
 
-- (Boolean)execute:(NSArray *)arguments {
-  return false;
+- (BOOL)execute:(NSArray *)arguments {
+  return NO;
 }
 
-- (Boolean)execute:(NSArray *)arguments secure:(Boolean)secure {
+- (BOOL)execute:(NSArray *)arguments secure:(BOOL)secure {
   
   if (secure) {
     
   } else {
     [self execute:arguments];
   }
-  return false;
+  return NO;
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
-- (Boolean)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments {
+- (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments {
   char** args;
   OSStatus err = 0;
   unsigned int i = 0;
   
   if (arguments == nil || [arguments count] < 1) { 
-    err = AuthorizationExecuteWithPrivileges(authorizationRef,
-                                             (char *)pathToCommand,
-                                             0,
-                                             NULL,
-                                             NULL);
+    err = AuthorizationExecuteWithPrivileges(authorizationRef, (char *)pathToCommand, 0, NULL, NULL);
   } else  {
     args = malloc(sizeof(char*) * [arguments count]);
     while(i < [arguments count] && i < 19) {
@@ -61,11 +57,7 @@ static id sharedCLI = nil;
       i++;
     }
     args[i] = NULL;
-    err = AuthorizationExecuteWithPrivileges(authorizationRef,
-                                             (char *)pathToCommand,
-                                             0,
-                                             args,
-                                             NULL);
+    err = AuthorizationExecuteWithPrivileges(authorizationRef, (char *)pathToCommand, 0, args, NULL);
     free(args);
   }
   
@@ -90,11 +82,11 @@ static id sharedCLI = nil;
   authorizationRef = NULL;
 }
 
--(Boolean)isAuthorized {
+-(BOOL)isAuthorized {
   if (authorizationRef == NULL) {
-    return false;
+    return NO;
   } else  {
-    return true;
+    return YES;
   }
 }
 

@@ -4,7 +4,7 @@
 
 @interface PassengerPref : NSPreferencePane
 {
-  Boolean authorized;
+  BOOL authorized;
   NSArray *applications;
   
   IBOutlet NSColor *textStateColor;
@@ -20,6 +20,6 @@
 - (void)setupAuthorizationView;
 - (void)setupApplicationView;
 
-- (Boolean)isDirty;
+- (BOOL)isDirty;
 
 @end
