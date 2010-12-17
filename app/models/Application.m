@@ -7,10 +7,14 @@
 @synthesize dirty, valid;
 
 - (id) initWithDictionary:(NSDictionary*)dictionary {
-  // NSLog(@"Initializing an Application with: %@", dictionary);
   if ((self = [self init])) {
     self.host = [dictionary objectForKey:@"host"];
     self.aliases = [dictionary objectForKey:@"aliases"];
+    self.path = [dictionary objectForKey:@"path"];
+    self.environment = [dictionary objectForKey:@"environment"];
+    self.framework = [dictionary objectForKey:@"framework"];
+    self.dirty = NO;
+    self.valid = YES;
   }
   return self;
 }

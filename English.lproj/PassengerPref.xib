@@ -1795,22 +1795,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArray: applications</string>
-						<reference key="source" ref="467003467"/>
-						<reference key="destination" ref="565115411"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="467003467"/>
-							<reference key="NSDestination" ref="565115411"/>
-							<string key="NSLabel">contentArray: applications</string>
-							<string key="NSBinding">contentArray</string>
-							<string key="NSKeyPath">applications</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">482</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: arrangedObjects.host</string>
 						<reference key="source" ref="637716190"/>
 						<reference key="destination" ref="467003467"/>
@@ -1828,22 +1812,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<int key="connectionID">485</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">content: arrangedObjects.host</string>
-						<reference key="source" ref="992120398"/>
-						<reference key="destination" ref="467003467"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="992120398"/>
-							<reference key="NSDestination" ref="467003467"/>
-							<string key="NSLabel">content: arrangedObjects.host</string>
-							<string key="NSBinding">content</string>
-							<string key="NSKeyPath">arrangedObjects.host</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">494</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">

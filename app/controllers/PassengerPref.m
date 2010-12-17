@@ -29,9 +29,19 @@
 }
 
 - (void)setupApplicationView {
+  [applicationsTableView setDataSource:self];
+  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+  
   applications = [[CLI sharedInstance] listApplications];
-  [applicationsController rearrangeObjects];
+  [applicationsController addObjects:applications];
+  [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications lastObject], nil]];
 }
+
+#pragma NSTableViewDataSource protocol methods
+
+
+#pragma actions and notifications
 
 - (void)remove:(id)sender {}
 - (void)browse:(id)sender {}
