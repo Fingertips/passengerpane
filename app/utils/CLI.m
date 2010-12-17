@@ -39,8 +39,8 @@ static id sharedCLI = nil;
   return applications;
 }
 
-- (void)restart {
-  [self execute:[NSArray arrayWithObjects:@"restart", nil] elevated:YES];
+- (void)restart:(Application*)application {
+  [self execute:[NSArray arrayWithObjects:@"restart", application.host, nil] elevated:NO];
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
@@ -55,36 +55,39 @@ static id sharedCLI = nil;
   NSString *data;
   
   if (elevated) {
-    if ([arguments count] > 0) {
-      index = 0;
-      argumentsAsCArray = malloc(sizeof(char*)*[arguments count]);
-      while(index < [arguments count]) {
-        argumentsAsCArray[index++] = (char*)[[arguments objectAtIndex:index] UTF8String];
+    if ([self isAuthorized]) {
+      if ([arguments count] > 0) {
+        index = 0;
+        argumentsAsCArray = malloc(sizeof(char*)*[arguments count]);
+        while(index < [arguments count]) {
+          argumentsAsCArray[index++] = (char*)[[arguments objectAtIndex:index] UTF8String];
+        }
+        argumentsAsCArray[index] = NULL;
       }
-      argumentsAsCArray[index] = NULL;
-    }
-    
-    error = AuthorizationExecuteWithPrivileges(authorizationRef, (char*)pathToCLI, 0, argumentsAsCArray, &communicationPipe);
-    free(argumentsAsCArray);
-    
-    if (error == PPANE_SUCCESS)  {
-      temp = [[NSMutableData dataWithLength:1024] autorelease];
-      output = [[NSMutableData data] autorelease];
-      while(bytesRead = fread([temp mutableBytes], 1024, 1, communicationPipe)) {
-        [output appendData:temp];
+      error = AuthorizationExecuteWithPrivileges(authorizationRef, (char*)pathToCLI, 0, argumentsAsCArray, &communicationPipe);
+      free(argumentsAsCArray);
+      
+      if (error == PPANE_SUCCESS)  {
+        temp = [[NSMutableData dataWithLength:1024] autorelease];
+        output = [[NSMutableData data] autorelease];
+        while(bytesRead = fread([temp mutableBytes], 1024, 1, communicationPipe)) {
+          [output appendData:temp];
+        }
+        data = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+        [data autorelease];
+        
+        NSLog(@"%d", communicationPipe);
+        fclose(communicationPipe);
+      } else {
+        NSLog(@"AuthorizationExecuteWithPrivileges failed to execute the command (%d)", error);
+        data = [[NSString alloc] initWithCString:"" encoding:NSUTF8StringEncoding];
       }
-      data = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
-      [data autorelease];
+      
+      return yaml_parse(data);
     } else {
-      NSLog(@"AuthorizationExecuteWithPrivileges failed to execute the command");
-      data = [[NSString alloc] initWithCString:"" encoding:NSUTF8StringEncoding];
+      NSLog(@"Ignoring a privileged command becaus the pane isn't authorized");
+      return NULL;
     }
-    
-    NSLog(@"%d", communicationPipe);
-//    fclose(communicationPipe);
-    
-    return yaml_parse(data);
-    return NULL;
   } else {
     return [self execute:arguments];
   }

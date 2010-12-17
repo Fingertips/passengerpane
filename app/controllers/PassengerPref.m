@@ -67,8 +67,9 @@
 - (void)revert:(id)sender {}
 
 - (void)restart:(id)sender {
-  NSLog(@"Restarting Apache");
-  [[CLI sharedInstance] restart];
+  Application *application = [[applicationsController selectedObjects] objectAtIndex:0];
+  NSLog(@"Restarting application with hostname: %@", application.host);
+  [[CLI sharedInstance] restart:application];
 }
 
 - (void)openAddressInBrowser:(id)sender {}

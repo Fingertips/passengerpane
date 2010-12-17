@@ -17,7 +17,7 @@ enum {
 + (id)sharedInstance;
 
 - (NSMutableArray *)listApplications;
-- (void)restart;
+- (void)restart:(Application*)application;
 
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated;
 - (id)execute:(NSArray *)arguments;
