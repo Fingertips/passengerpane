@@ -10,6 +10,8 @@
 }
 
 @synthesize applications;
+@synthesize textStateColor;
+@synthesize authorized;
 
 - (void)setupUI {
   NSImage *browserButtonImage;
@@ -19,11 +21,11 @@
   [browserButtonImage setTemplate:YES];
   [openInBrowserButton setImage:browserButtonImage];
   
-  textStateColor = NSColor.disabledControlTextColor;
+  [self setTextStateColor:NSColor.disabledControlTextColor];
 }
 
 - (void)setupAuthorizationView {
-  authorized = NO;
+  self.authorized = NO;
   [authorizationView setString:kAuthorizationRightExecute];
   [authorizationView setDelegate:self];
   [authorizationView setAutoupdate:YES];
@@ -37,6 +39,23 @@
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
 }
 
+
+#pragma SFAuthorizationView delegate methods
+
+- (void)authorizationViewDidAuthorize:(SFAuthorizationView *)view {
+  [self setTextStateColor:NSColor.blackColor];
+  [[CLI sharedInstance] setAuthorizationRef:[[view authorization] authorizationRef]];
+  self.authorized = YES;
+  NSLog(@"Pane is now authorized");
+}
+
+- (void)authorizationViewDidDeauthorize:(SFAuthorizationView *)authorizationView {
+  [self setTextStateColor:NSColor.disabledControlTextColor];
+  [[CLI sharedInstance] deauthorize];
+  self.authorized = NO;
+  NSLog(@"Pane is now deauthorized");
+}
+
 #pragma NSTableViewDataSource protocol methods
 
 #pragma actions and notifications
@@ -46,7 +65,11 @@
 
 - (void)apply:(id)sender {}
 - (void)revert:(id)sender {}
-- (void)restart:(id)sender {}
+
+- (void)restart:(id)sender {
+  NSLog(@"Restarting Apache");
+  [[CLI sharedInstance] restart];
+}
 
 - (void)openAddressInBrowser:(id)sender {}
 - (void)showPassengerHelp:(id)sender {}

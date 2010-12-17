@@ -39,9 +39,52 @@ static id sharedCLI = nil;
   return applications;
 }
 
+- (void)restart {
+  [self execute:[NSArray arrayWithObjects:@"restart", nil] elevated:YES];
+}
+
+// Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated {
+  OSStatus error;
+  char **argumentsAsCArray = NULL;
+  unsigned int index;
+  
+  FILE *communicationPipe;
+  NSMutableData *temp, *output;
+  size_t bytesRead;
+  NSString *data;
+  
   if (elevated) {
-    return [NSDictionary dictionary];
+    if ([arguments count] > 0) {
+      index = 0;
+      argumentsAsCArray = malloc(sizeof(char*)*[arguments count]);
+      while(index < [arguments count]) {
+        argumentsAsCArray[index++] = (char*)[[arguments objectAtIndex:index] UTF8String];
+      }
+      argumentsAsCArray[index] = NULL;
+    }
+    
+    error = AuthorizationExecuteWithPrivileges(authorizationRef, (char*)pathToCLI, 0, argumentsAsCArray, &communicationPipe);
+    free(argumentsAsCArray);
+    
+    if (error == PPANE_SUCCESS)  {
+      temp = [[NSMutableData dataWithLength:1024] autorelease];
+      output = [[NSMutableData data] autorelease];
+      while(bytesRead = fread([temp mutableBytes], 1024, 1, communicationPipe)) {
+        [output appendData:temp];
+      }
+      data = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
+      [data autorelease];
+    } else {
+      NSLog(@"AuthorizationExecuteWithPrivileges failed to execute the command");
+      data = [[NSString alloc] initWithCString:"" encoding:NSUTF8StringEncoding];
+    }
+    
+    NSLog(@"%d", communicationPipe);
+//    fclose(communicationPipe);
+    
+    return yaml_parse(data);
+    return NULL;
   } else {
     return [self execute:arguments];
   }
@@ -64,35 +107,8 @@ static id sharedCLI = nil;
     [data autorelease];
     return yaml_parse(data);
   } else {
+    NSLog(@"NSTask failed to execute the command");
     return [[NSDictionary dictionary] autorelease];
-  }
-}
-
-// Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
-- (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments {
-  char** args;
-  OSStatus err = 0;
-  unsigned int i = 0;
-  
-  if (arguments == nil || [arguments count] < 1) { 
-    err = AuthorizationExecuteWithPrivileges(authorizationRef, (char *)pathToCommand, 0, NULL, NULL);
-  } else  {
-    args = malloc(sizeof(char*) * [arguments count]);
-    while(i < [arguments count] && i < 19) {
-      args[i] = (char*)[[arguments objectAtIndex:i] UTF8String];
-      i++;
-    }
-    args[i] = NULL;
-    err = AuthorizationExecuteWithPrivileges(authorizationRef, (char *)pathToCommand, 0, args, NULL);
-    free(args);
-  }
-  
-  if (err != 0)  {
-    NSBeep();
-    NSLog(@"Error %d in AuthorizationExecuteWithPrivileges",err);
-    return NO;
-  } else  {
-    return YES;
   }
 }
 

@@ -17,11 +17,10 @@ enum {
 + (id)sharedInstance;
 
 - (NSMutableArray *)listApplications;
+- (void)restart;
 
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated;
 - (id)execute:(NSArray *)arguments;
-
-- (BOOL)executeCommand:(NSString *)pathToCommand withArgs:(NSArray *)arguments; // Remove
 
 - (AuthorizationRef) authorizationRef;
 - (void) setAuthorizationRef:(AuthorizationRef)ref;

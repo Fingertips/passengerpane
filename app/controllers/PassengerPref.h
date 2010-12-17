@@ -17,6 +17,8 @@
 }
 
 @property (retain) NSMutableArray *applications;
+@property (retain) NSColor *textStateColor;
+@property BOOL authorized;
 
 - (void)setupUI;
 - (void)setupAuthorizationView;
