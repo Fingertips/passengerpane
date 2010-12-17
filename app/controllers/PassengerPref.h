@@ -5,7 +5,7 @@
 @interface PassengerPref : NSPreferencePane
 {
   BOOL authorized;
-  NSArray *applications;
+  NSMutableArray *applications;
   
   IBOutlet NSColor *textStateColor;
   
@@ -15,6 +15,8 @@
   IBOutlet SFAuthorizationView *authorizationView;
   IBOutlet NSTableView *applicationsTableView;
 }
+
+@property (retain) NSMutableArray *applications;
 
 - (void)setupUI;
 - (void)setupAuthorizationView;

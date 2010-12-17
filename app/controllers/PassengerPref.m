@@ -9,6 +9,8 @@
   [self setupApplicationView];
 }
 
+@synthesize applications;
+
 - (void)setupUI {
   NSImage *browserButtonImage;
 
@@ -29,17 +31,13 @@
 }
 
 - (void)setupApplicationView {
-  [applicationsTableView setDataSource:self];
-  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
-  
-  applications = [[CLI sharedInstance] listApplications];
-  [applicationsController addObjects:applications];
-  [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications lastObject], nil]];
+//  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+//  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+  [self setApplications:[[CLI sharedInstance] listApplications]];
+  [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
 }
 
 #pragma NSTableViewDataSource protocol methods
-
 
 #pragma actions and notifications
 
