@@ -55,12 +55,12 @@ static id sharedCLI = nil;
   ppane = [[[NSTask alloc] init] autorelease];
   [ppane setLaunchPath:pathToCLI];
   [ppane setArguments:arguments];
-  [ppane setStandardOutput:[stdout fileHandleForWriting]];
+  [ppane setStandardOutput:stdout];
   [ppane launch];
   [ppane waitUntilExit];
   
   if ([ppane terminationStatus] == PPANE_SUCCESS) {
-    data = [[NSString alloc] initWithData:[[stdout fileHandleForReading] availableData] encoding:NSUTF8StringEncoding];
+    data = [[NSString alloc] initWithData:[[stdout fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
     [data autorelease];
     return yaml_parse(data);
   } else {
