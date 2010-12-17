@@ -68,7 +68,6 @@
 
 - (void)restart:(id)sender {
   Application *application = [[applicationsController selectedObjects] objectAtIndex:0];
-  NSLog(@"Restarting application with hostname: %@", application.host);
   [[CLI sharedInstance] restart:application];
 }
 
