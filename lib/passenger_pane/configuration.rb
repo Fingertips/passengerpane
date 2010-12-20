@@ -10,12 +10,12 @@ module PassengerPane
         :httpd_conf             => "httpd.conf",
         :passenger_vhosts       => "passenger_pane_vhosts",
         :passenger_vhosts_ext   => "vhost.conf",
-        :apache_restart_command => "/bin/launchctl stop org.apache.httpd"
+        :apache_restart_command => "/usr/sbin/http -k graceful"
       }
     end
     
     def self.config_filename
-      File.expand_path(CONFIG_FILENAME)
+      File.expand_path(CONFIG_FILENAME).untaint
     end
     
     def self.auto

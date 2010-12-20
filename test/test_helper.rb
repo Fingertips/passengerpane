@@ -6,6 +6,8 @@ end
 require 'test/spec'
 require 'mocha'
 
+$SAFE = 1
+
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'passenger_pane'
 

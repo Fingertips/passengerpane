@@ -174,7 +174,7 @@ module PassengerPane
         needs_root
         new(options).register
       else
-        path = File.expand_path(command)
+        path = File.expand_path(command).untaint
         if File.exist?(path)
           needs_root
           new(options).add(path)
