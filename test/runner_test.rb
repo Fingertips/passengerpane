@@ -41,8 +41,8 @@ describe "Runner" do
       PassengerPane::Runner.run({}, %w(info))
     end
     
-    output.should.include('Passenger installed:  yes')
-    output.should.include('Passenger configured: yes')
+    output.should.include('Passenger installed:       yes')
+    output.should.include('Passenger Pane configured: yes')
   end
   
   it "shows information about the system in YAML" do
