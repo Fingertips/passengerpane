@@ -39,4 +39,6 @@
 - (void)loadApplications;
 - (BOOL)isDirty;
 
+- (BOOL)requestAuthorization;
+
 @end

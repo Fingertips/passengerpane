@@ -74,7 +74,13 @@
 - (void)remove:(id)sender {}
 - (void)browse:(id)sender {}
 
-- (void)apply:(id)sender {}
+- (void)apply:(id)sender {
+  if ([self requestAuthorization]) {
+    // Find dirty apps and apply the changes
+  } else {
+    NSLog(@"Unable to apply because authorization failed.");
+  }
+}
 - (void)revert:(id)sender {}
 
 - (void)restart:(id)sender {
@@ -93,6 +99,21 @@
 
 - (BOOL)isDirty {
   return NO;
+}
+
+- (BOOL)requestAuthorization {
+  NSError *error;
+  if ([[authorizationView authorization] obtainWithRight:kAuthorizationRightExecute
+                                               flags:(kAuthorizationFlagPreAuthorize ||
+                                                      kAuthorizationFlagExtendRights ||
+                                                      kAuthorizationFlagInteractionAllowed)
+                                               error:&error]
+      ) {
+    [self authorizationViewDidAuthorize:authorizationView];
+    return YES;
+  } else {
+    return NO;
+  }
 }
 
 @end
