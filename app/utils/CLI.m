@@ -28,12 +28,12 @@ static id sharedCLI = nil;
   
   NSLog(@"Retrieving a list of configured applications");
   result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
-  applications = [[NSMutableArray arrayWithCapacity:[result count]] autorelease];
+  applications = [NSMutableArray arrayWithCapacity:[result count]];
   
   enumerator = [result objectEnumerator];
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   while (item = [enumerator nextObject]) {
-    [applications addObject:[[[Application alloc] initWithDictionary:item] autorelease]];
+    [applications addObject:[[Application alloc] initWithDictionary:item]];
   }
   [pool drain];
   
@@ -49,14 +49,13 @@ static id sharedCLI = nil;
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated {
-  OSStatus error;
+  OSStatus status;
   char **argumentsAsCArray = NULL;
   unsigned int index;
   
   FILE *communicationPipe;
-  size_t bytesRead;
-  NSMutableData *temp, *output;
   NSString *data;
+  NSFileHandle *file;
   
   if (elevated) {
     if ([self isAuthorized]) {
@@ -69,30 +68,31 @@ static id sharedCLI = nil;
         argumentsAsCArray[index] = NULL;
       }
       
-      error = AuthorizationExecuteWithPrivileges(authorizationRef, [pathToCLI UTF8String], 0, argumentsAsCArray, &communicationPipe);
+      status = AuthorizationExecuteWithPrivileges(authorizationRef, [pathToCLI UTF8String],
+                                                  kAuthorizationFlagDefaults, argumentsAsCArray,
+                                                  &communicationPipe);
       free(argumentsAsCArray);
       
-      if (error == PPANE_SUCCESS) {
+      if (status == PPANE_SUCCESS) {
         if (communicationPipe) {
-//          output = [NSMutableData data];
-//          temp = [NSMutableData dataWithLength:1024];
-//          while(bytesRead = fread([temp mutableBytes], 1024, 1, communicationPipe)) {
-//            NSLog(@"Read %d bytes", bytesRead);
-//            [output appendData:[temp subdataWithRange:NSMakeRange(0, bytesRead)]];
-//          }
-//          fclose(communicationPipe);
+          file = [[NSFileHandle alloc] initWithFileDescriptor:fileno(communicationPipe)];
+          data = [[NSString alloc] initWithData:[file readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+          [file closeFile];
+          if ([data isEqual:@""]) {
+            NSLog(@"ppane didn't return any information");
+          } else {
+            NSLog(@"ppane returned: %@", data);
+            return yaml_parse(data);
+          }
         }
-//        data = [[NSString alloc] initWithData:output encoding:NSUTF8StringEncoding];
-//        NSLog(@"%@", data);
-        return NULL;
+        NSLog(@"AuthorizationExecuteWithPrivileges didn't return a valid pipe");
       } else {
-        NSLog(@"AuthorizationExecuteWithPrivileges failed to execute the command (%d)", error);
-        return NULL;
+        NSLog(@"AuthorizationExecuteWithPrivileges failed to execute ppane (%d)", status);
       }
     } else {
-      NSLog(@"Ignoring a privileged command becaus the pane isn't authorized");
-      return NULL;
+      NSLog(@"Ignoring a privileged command because the pane isn't authorized");
     }
+    return [NSDictionary dictionary];
   } else {
     return [self execute:arguments];
   }
@@ -103,7 +103,7 @@ static id sharedCLI = nil;
   NSPipe *stdout = [NSPipe pipe];
   NSTask *ppane;
   
-  ppane = [[[NSTask alloc] init] autorelease];
+  ppane = [[NSTask alloc] init];
   [ppane setLaunchPath:pathToCLI];
   [ppane setArguments:arguments];
   [ppane setStandardOutput:stdout];
@@ -112,11 +112,10 @@ static id sharedCLI = nil;
   
   if ([ppane terminationStatus] == PPANE_SUCCESS) {
     data = [[NSString alloc] initWithData:[[stdout fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-    [data autorelease];
     return yaml_parse(data);
   } else {
     NSLog(@"NSTask failed to execute the command");
-    return [[NSDictionary dictionary] autorelease];
+    return [NSDictionary dictionary];
   }
 }
 

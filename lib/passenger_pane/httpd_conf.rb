@@ -40,7 +40,7 @@ module PassengerPane
       if valid?
         system @configuration.apache_restart_command
       else
-        puts "[!] Apache configuration is not valid, skipping Apache restart"
+        $stderr.puts "[!] Apache configuration is not valid, skipping Apache restart"
       end
     end
     

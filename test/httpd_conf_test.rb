@@ -116,7 +116,7 @@ Include /private/etc/apache2/manual_vhosts/*.conf
   it "does not restart when the configuration isn't valid" do
     @httpd.expects(:valid?).returns(false)
     @httpd.expects(:system).with(@configuration.apache_restart_command).never
-    capture_stdout do
+    capture_stderr do
       @httpd.restart
     end.should == "[!] Apache configuration is not valid, skipping Apache restart\n"
   end

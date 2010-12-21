@@ -11,5 +11,17 @@ module TestHelper
       end
       collector.written.join
     end
+    
+    def capture_stderr(&block)
+      collector = Collector.new
+      stderr = $stderr
+      $stderr = collector
+      begin
+        block.call
+      ensure
+        $stderr = stderr
+      end
+      collector.written.join
+    end
   end
 end

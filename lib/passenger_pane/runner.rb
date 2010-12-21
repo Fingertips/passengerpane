@@ -142,50 +142,31 @@ module PassengerPane
         end
       end
       
-      unless $stdin.tty?
-        data = YAML.load($stdin.read) 
-        data.each do |name, value|
-          options[name] = value
-        end if data
-      end
-      
       case command
       when 'info'
         new(options).info
       when 'configure'
-        needs_root
         new(options).configure
       when 'add'
-        needs_root
         new(options).add(args.first)
       when 'update'
-        needs_root
         new(options).update(args.first)
       when 'delete'
-        needs_root
         new(options).delete(args.first)
       when 'restart'
-        host = args.first
-        needs_root unless host
-        new(options).restart(host)
+        new(options).restart(args.first)
       when 'list'
         new(options).list
       when 'register'
-        needs_root
         new(options).register
       else
         path = File.expand_path(command).untaint
         if File.exist?(path)
-          needs_root
           new(options).add(path)
         else
           usage
         end
       end
-    end
-    
-    def self.needs_root
-      puts "[!] The command might not run because it requires root privileges" unless ENV['USER'] == 'root'
     end
   end
 end
