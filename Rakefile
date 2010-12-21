@@ -6,10 +6,15 @@ namespace :test do
     t.test_files = FileList['test/ppane/*_test.rb']
     t.verbose = true
   end
+  
+  Rake::TestTask.new('passenger_pane') do |t|
+    t.test_files = FileList['test/passenger_pane/*_test.rb']
+    t.verbose = true
+  end
 end
 
 desc "Run all tests"
-task :test => 'test:ppane'
+task :test => %w(test:ppane test:passenger_pane)
 
 namespace :ppane do
   desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane"
