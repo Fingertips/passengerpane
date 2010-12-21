@@ -1,10 +1,15 @@
 task :default => "test"
 
 require 'rake/testtask'
-Rake::TestTask.new do |t|
-  t.test_files = FileList['test/*_test.rb']
-  t.verbose = true  
+namespace :test do
+  Rake::TestTask.new('ppane') do |t|
+    t.test_files = FileList['test/ppane/*_test.rb']
+    t.verbose = true
+  end
 end
+
+desc "Run all tests"
+task :test => 'test:ppane'
 
 namespace :ppane do
   desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane"
