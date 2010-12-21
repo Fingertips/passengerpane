@@ -41,10 +41,8 @@ static id sharedCLI = nil;
 }
 
 - (void)restart:(Application*)application {
-//  NSLog(@"Restarting application with hostname: %@", application.host);
-//  [self execute:[NSArray arrayWithObjects:@"restart", application.host, nil] elevated:NO];
-  
-  [self execute:[NSArray arrayWithObjects:@"restart", nil] elevated:YES];
+  NSLog(@"Restarting application with hostname: %@", application.host);
+  [self execute:[NSArray arrayWithObjects:@"restart", application.host, nil] elevated:NO];
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
