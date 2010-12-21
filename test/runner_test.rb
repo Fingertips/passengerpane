@@ -122,6 +122,12 @@ describe "Runner" do
     File.should.exist?(File.join(@app.path, 'tmp', 'restart.txt'))
   end
   
+  it "does not restart an application that doesn't exist" do
+    capture_stderr do
+      PassengerPane::Runner.run({}, ['restart', 'unknown'])
+    end.should == "[!] Can't find application with hostname `unknown'\n"
+  end
+  
   it "restarts Apache" do
     @conf.httpd.expects(:valid?).returns(true)
     @conf.httpd.expects(:system).with(@conf.apache_restart_command).returns(true)

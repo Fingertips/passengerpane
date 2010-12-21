@@ -84,8 +84,12 @@ module PassengerPane
     end
     
     def restart(host)
-      if host and application = PassengerPane::Application.find(@configuration, :host => host)
-        application.restart
+      if host
+        if application = PassengerPane::Application.find(@configuration, :host => host)
+          application.restart
+        else
+          $stderr.puts("[!] Can't find application with hostname `#{host}'")
+        end
       else
         @configuration.httpd.restart
       end
