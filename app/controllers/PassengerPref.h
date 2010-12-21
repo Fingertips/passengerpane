@@ -34,6 +34,9 @@
 - (void)openAddressInBrowser:(id)sender;
 - (void)showPassengerHelp:(id)sender;
 
+- (void)paneWillBecomeActive:(id)sender;
+
+- (void)loadApplications;
 - (BOOL)isDirty;
 
 @end

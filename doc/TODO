@@ -2,7 +2,6 @@ Rewrite
 
 - Add options to ppane to install configuration files for MacPorts and possibly other package managers. Basically copies boilerplate config files to the homedir or /etc.
   $ ppane config macports
-- Don't restart apache when the host can't be found
 
 After rewrite
 

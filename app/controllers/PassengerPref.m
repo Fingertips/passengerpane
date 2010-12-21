@@ -7,6 +7,12 @@
   [self setupUI];
   [self setupAuthorizationView];
   [self setupApplicationView];
+  
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(paneWillBecomeActive:)
+                                               name:NSApplicationWillBecomeActiveNotification
+                                             object:NULL];
 }
 
 @synthesize applications;
@@ -35,10 +41,9 @@
 - (void)setupApplicationView {
 //  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
 //  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
-  [self setApplications:[[CLI sharedInstance] listApplications]];
+  [self loadApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
 }
-
 
 #pragma SFAuthorizationView delegate methods
 
@@ -58,7 +63,13 @@
 
 #pragma NSTableViewDataSource protocol methods
 
-#pragma actions and notifications
+#pragma Notifications
+
+- (void)paneWillBecomeActive:(id)sender {
+  [self loadApplications];
+}
+
+#pragma Actions
 
 - (void)remove:(id)sender {}
 - (void)browse:(id)sender {}
@@ -74,6 +85,11 @@
 - (void)openAddressInBrowser:(id)sender {}
 - (void)showPassengerHelp:(id)sender {}
 
+#pragma Properties
+
+- (void)loadApplications {
+  [self setApplications:[[CLI sharedInstance] listApplications]];
+}
 
 - (BOOL)isDirty {
   return NO;
