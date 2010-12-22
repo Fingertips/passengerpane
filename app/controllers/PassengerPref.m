@@ -94,7 +94,8 @@
   if ([self requestAuthorization]) {
     for (application in applications) {
       if ([application isDirty]) {
-//        [[CLI sharedInstance] update:application];
+        NSLog(@"Found dirty application: %@", application.host);
+        [[CLI sharedInstance] update:application];
         isChanged = YES;
       }
     }

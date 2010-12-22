@@ -26,6 +26,7 @@ enum {
 
 - (id) initWithDictionary:(NSDictionary*)dictionary;
 - (NSMutableDictionary*) toDictionary;
+- (NSArray*) toArgumentArray;
 - (void) validate;
 
 @end

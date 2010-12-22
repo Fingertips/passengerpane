@@ -48,6 +48,14 @@ static id sharedCLI = nil;
   [self execute:[NSArray arrayWithObjects:@"restart", application.host, nil] elevated:NO];
 }
 
+
+- (void)update:(Application*)application {
+  NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"update", application.host, nil];
+  [arguments addObjectsFromArray:[application toArgumentArray]];
+  NSLog(@"Updating application with hostname %@ using %@", application.host, arguments);
+  [self execute:arguments elevated:YES];
+}
+
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated {
   OSStatus status;

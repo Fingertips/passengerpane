@@ -47,6 +47,15 @@
   return data;
 }
 
+- (NSArray*) toArgumentArray {
+  NSMutableArray *arguments = [NSMutableArray array];
+  [[self toDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    [arguments addObject:[NSString stringWithFormat:@"-%@", key]];
+    [arguments addObject:obj];
+  }];
+  return arguments;
+}
+
 - (void) validate {
   BOOL result = !(IsEmpty(host) || IsEmpty(path));
   if (result != valid) {

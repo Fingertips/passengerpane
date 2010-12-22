@@ -20,6 +20,7 @@ enum {
 
 - (NSMutableArray *)listApplications;
 - (void)restart:(Application*)application;
+- (void)update:(Application*)application;
 
 - (id)execute:(NSArray *)arguments elevated:(BOOL)elevated;
 - (id)execute:(NSArray *)arguments;
