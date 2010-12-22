@@ -13,3 +13,5 @@ require 'objective-c'
 # Well, you know how it goes…
 NO  = 0
 YES = 1
+DEVELOPMENT = 0
+PRODUCTION  = 1

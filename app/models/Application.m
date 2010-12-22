@@ -3,20 +3,21 @@
 
 @implementation Application
 
-@synthesize host, aliases, path, framework, environment, vhostAddress, userDefinedData;
+@synthesize host, aliases, path;
+@synthesize environment;
 @synthesize dirty, valid;
 
 - (id) init {
   if ((self = [super init])) {
+    environments = [NSArray arrayWithObjects:@"development", @"production", nil];
+    
     self.host = @"";
     self.aliases = @"";
     self.path = @"";
-    self.framework = @"rails";
-    self.environment = @"development";
-    self.vhostAddress = @"*:80";
-    self.userDefinedData = @"";
+    self.environment = PPANE_DEVELOPMENT;
     self.dirty = NO;
     [self validate];
+    beforeChanges = [self toDictionary];
   }
   return self;
 }
@@ -26,23 +27,39 @@
     self.host = [dictionary objectForKey:@"host"];
     self.aliases = [dictionary objectForKey:@"aliases"];
     self.path = [dictionary objectForKey:@"path"];
-    self.framework = [dictionary objectForKey:@"framework"];
-    self.environment = [dictionary objectForKey:@"environment"];
-    self.vhostAddress = [dictionary objectForKey:@"vhost_address"];
-    self.userDefinedData = [dictionary objectForKey:@"user_defined_data"];
+    self.environment = [environments indexOfObject:[dictionary objectForKey:@"environment"]];
     self.dirty = NO;
     [self validate];
+    beforeChanges = [self toDictionary];
   }
   return self;
 }
 
-- (void) setValue:(id)value forKey:(NSString*)key {
-  [super setValue:value forKey:key];
-  [self validate];
+- (NSMutableDictionary*) toDictionary {
+  NSMutableDictionary *data = [NSMutableDictionary dictionary];
+  
+  [data setValue:self.host forKey:@"host"];
+  [data setValue:self.aliases forKey:@"aliases"];
+  [data setValue:self.path forKey:@"path"];
+  [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
+  
+  return data;
 }
 
 - (void) validate {
-  self.valid = !(IsEmpty(host)||IsEmpty(path));
+  [self setValid:!(IsEmpty(host)||IsEmpty(path))];
+}
+
+- (void) checkChanges {
+  NSLog(@"%@", [self toDictionary]);
+  [self setDirty:![beforeChanges isEqualToDictionary:[self toDictionary]]];
+}
+
+- (void) setValue:(id)value forKey:(NSString*)key {
+  NSLog(@"Changing %@ to %@", key, value);
+  [super setValue:value forKey:key];
+  [self validate];
+  [self checkChanges];
 }
 
 @end

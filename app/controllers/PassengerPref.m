@@ -75,8 +75,19 @@
 - (void)browse:(id)sender {}
 
 - (void)apply:(id)sender {
+  Application *application;
+  BOOL isChanged = NO;
+  
   if ([self requestAuthorization]) {
-    // Find dirty apps and apply the changes
+    for (application in applications) {
+      if ([application isDirty]) {
+//        [[CLI sharedInstance] update:application];
+        isChanged = YES;
+      }
+    }
+//    if (isChanged) {
+//      [[CLI sharedInstance] restart];
+//    }
   } else {
     NSLog(@"Unable to apply because authorization failed.");
   }
