@@ -13,6 +13,7 @@
 		51B9190D0E01523900F45803 /* Alerts.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51B9190C0E01523900F45803 /* Alerts.icns */; };
 		51D45407109843A6003978A9 /* label.png in Resources */ = {isa = PBXBuildFile; fileRef = 51D45405109843A6003978A9 /* label.png */; };
 		51D45408109843A6003978A9 /* PassengerPref.icns in Resources */ = {isa = PBXBuildFile; fileRef = 51D45406109843A6003978A9 /* PassengerPref.icns */; };
+		6333C0D912C216AA00080A38 /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 6333C0D812C216AA00080A38 /* Common.h */; };
 		6361753812B794C400E3412D /* PassengerPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 6361753712B794C400E3412D /* PassengerPref.h */; };
 		6361755312B7C18F00E3412D /* bin in Resources */ = {isa = PBXBuildFile; fileRef = 6361755112B7C18F00E3412D /* bin */; };
 		6361755412B7C18F00E3412D /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 6361755212B7C18F00E3412D /* lib */; };
@@ -57,6 +58,7 @@
 		51B9190C0E01523900F45803 /* Alerts.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Alerts.icns; path = resources/Alerts.icns; sourceTree = "<group>"; };
 		51D45405109843A6003978A9 /* label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = label.png; path = resources/label.png; sourceTree = "<group>"; };
 		51D45406109843A6003978A9 /* PassengerPref.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = PassengerPref.icns; path = resources/PassengerPref.icns; sourceTree = "<group>"; };
+		6333C0D812C216AA00080A38 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Common.h; path = app/utils/Common.h; sourceTree = "<group>"; };
 		6361753712B794C400E3412D /* PassengerPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PassengerPref.h; path = app/controllers/PassengerPref.h; sourceTree = "<group>"; };
 		6361755112B7C18F00E3412D /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
 		6361755212B7C18F00E3412D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6333C0D812C216AA00080A38 /* Common.h */,
 				6361755512B7C4B500E3412D /* CLI.h */,
 				6361755612B7C4B500E3412D /* CLI.m */,
 				6361753712B794C400E3412D /* PassengerPref.h */,
@@ -190,6 +193,7 @@
 				6361753812B794C400E3412D /* PassengerPref.h in Headers */,
 				6361755712B7C4B500E3412D /* CLI.h in Headers */,
 				63F589EB12BA6B5300D959E3 /* Application.h in Headers */,
+				6333C0D912C216AA00080A38 /* Common.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

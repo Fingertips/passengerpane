@@ -56,7 +56,7 @@ module ObjectiveC
       prepare_source_file(path)
       source_path = source_file(path)
       frameworks.unshift 'Foundation'
-      command = "gcc -o #{bundle_path(path)} -fobjc-gc -flat_namespace -undefined suppress -bundle #{frameworks.map { |f| "-framework #{f}" }.join(' ')} -I#{File.dirname(source_path)} #{source_path}"
+      command = "gcc -o #{bundle_path(path)} -fobjc-gc -flat_namespace -undefined suppress -bundle #{frameworks.map { |f| "-framework #{f}" }.join(' ')} -I#{File.join(root_path, 'app/utils')} -I#{File.dirname(source_path)} #{source_path}"
       unless system(command)
         raise CompileError, "Unable to compile class `#{klass(path)}' at path: `#{source_path}'."
       end
