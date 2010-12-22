@@ -11,7 +11,7 @@ static id sharedCLI = nil;
   return sharedCLI;
 }
 
-@synthesize pathToCLI;
+@synthesize appDelegate, pathToCLI;
 
 - (id)init {
   if ((self = [super init])) {
@@ -22,6 +22,7 @@ static id sharedCLI = nil;
 
 - (NSMutableArray *)listApplications {
   id result;
+  Application *application;
   NSDictionary *item;
   NSEnumerator *enumerator;
   NSMutableArray *applications;
@@ -33,7 +34,9 @@ static id sharedCLI = nil;
   enumerator = [result objectEnumerator];
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   while (item = [enumerator nextObject]) {
-    [applications addObject:[[Application alloc] initWithDictionary:item]];
+    application = [[Application alloc] initWithDictionary:item];
+    [application setDelegate:appDelegate];
+    [applications addObject:application];
   }
   [pool drain];
   

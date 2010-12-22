@@ -2,8 +2,16 @@
 
 @implementation PassengerPref
 
+@synthesize authorized, dirty;
+
+@synthesize applications;
+@synthesize textStateColor;
+
 - (void) mainViewDidLoad {
-  [[CLI sharedInstance] setPathToCLI:[[self bundle] pathForResource:@"ppane" ofType:nil inDirectory:@"bin"]];
+  CLI *cli = [CLI sharedInstance];
+  [cli setPathToCLI:[[self bundle] pathForResource:@"ppane" ofType:nil inDirectory:@"bin"]];
+  [cli setAppDelegate:self];
+  
   [self setupUI];
   [self setupAuthorizationView];
   [self setupApplicationView];
@@ -14,10 +22,6 @@
                                                name:NSApplicationWillBecomeActiveNotification
                                              object:NULL];
 }
-
-@synthesize applications;
-@synthesize textStateColor;
-@synthesize authorized;
 
 - (void)setupUI {
   NSImage *browserButtonImage;
@@ -62,6 +66,15 @@
 }
 
 #pragma NSTableViewDataSource protocol methods
+
+#pragma KeyValueObserving protocol methods
+
+- (void)didChangeValueForKey:(NSString *)key {
+  [super didChangeValueForKey:key];
+  if (key == @"dirty") {
+    [self checkForDirtyApplications];
+  }
+}
 
 #pragma Notifications
 
@@ -108,10 +121,6 @@
   [self setApplications:[[CLI sharedInstance] listApplications]];
 }
 
-- (BOOL)isDirty {
-  return NO;
-}
-
 - (BOOL)requestAuthorization {
   NSError *error;
   if ([[authorizationView authorization] obtainWithRight:kAuthorizationRightExecute
@@ -125,6 +134,17 @@
   } else {
     return NO;
   }
+}
+
+- (void)checkForDirtyApplications {
+  Application *application;
+  for (application in applications) {
+    if ([application isDirty]) {
+      [self setDirty:YES];
+      return;
+    }
+  }
+  [self setDirty:NO];
 }
 
 @end

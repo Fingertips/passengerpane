@@ -8,10 +8,12 @@ enum {
 
 
 @interface CLI : NSObject {
+  id appDelegate;
   AuthorizationRef authorizationRef;
   NSString *pathToCLI;
 }
 
+@property (assign) id appDelegate;
 @property (retain) NSString *pathToCLI;
 
 + (id)sharedInstance;

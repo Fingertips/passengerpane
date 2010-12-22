@@ -3,6 +3,7 @@
 
 @implementation Application
 
+@synthesize delegate;
 @synthesize host, aliases, path;
 @synthesize environment;
 @synthesize dirty, valid;
@@ -47,12 +48,21 @@
 }
 
 - (void) validate {
-  [self setValid:!(IsEmpty(host)||IsEmpty(path))];
+  BOOL result = !(IsEmpty(host) || IsEmpty(path));
+  if (result != valid) {
+    [delegate willChangeValueForKey:@"valid"];
+    [self setValid:result];
+    [delegate didChangeValueForKey:@"valid"];
+  }
 }
 
 - (void) checkChanges {
-  NSLog(@"%@", [self toDictionary]);
-  [self setDirty:![beforeChanges isEqualToDictionary:[self toDictionary]]];
+  BOOL result = ![beforeChanges isEqualToDictionary:[self toDictionary]];
+  if (result != dirty) {
+    [delegate willChangeValueForKey:@"dirty"];
+    [self setDirty:result];
+    [delegate didChangeValueForKey:@"dirty"];
+  }
 }
 
 - (void) setValue:(id)value forKey:(NSString*)key {

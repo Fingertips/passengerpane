@@ -7,6 +7,8 @@ enum {
 };
 
 @interface Application : NSObject {
+  id delegate;
+  
   NSArray *environments;
   
   NSString *host, *aliases, *path;
@@ -16,6 +18,7 @@ enum {
   NSDictionary *beforeChanges;
 }
 
+@property (assign) id delegate;
 @property (retain) NSString *host, *aliases, *path;
 @property (assign) NSUInteger environment;
 @property (assign, getter=isDirty) BOOL dirty;

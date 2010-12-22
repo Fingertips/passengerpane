@@ -4,7 +4,7 @@
 
 @interface PassengerPref : NSPreferencePane
 {
-  BOOL authorized;
+  BOOL authorized, dirty;
   NSMutableArray *applications;
   
   IBOutlet NSColor *textStateColor;
@@ -16,9 +16,11 @@
   IBOutlet NSTableView *applicationsTableView;
 }
 
+@property (assign, getter=isAuthorized) BOOL authorized;
+@property (assign, getter=isDirty) BOOL dirty;
+
 @property (retain) NSMutableArray *applications;
 @property (retain) NSColor *textStateColor;
-@property BOOL authorized;
 
 - (void)setupUI;
 - (void)setupAuthorizationView;
@@ -37,8 +39,9 @@
 - (void)paneWillBecomeActive:(id)sender;
 
 - (void)loadApplications;
-- (BOOL)isDirty;
 
 - (BOOL)requestAuthorization;
+
+- (void)checkForDirtyApplications;
 
 @end
