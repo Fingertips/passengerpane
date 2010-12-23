@@ -39,6 +39,14 @@ static id sharedCLI = nil;
   return applications;
 }
 
+- (void) add:(Application *)application {
+  NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"add", application.path, nil];
+  [arguments addObjectsFromArray:[application toArgumentArray]];
+  NSLog(@"Adding application with hostname %@ using %@", application.host, arguments);
+  [self execute:arguments elevated:YES];
+  [application didApplyChanges];
+}
+
 - (void) update:(Application *)application {
   NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"update", application.host, nil];
   [arguments addObjectsFromArray:[application toArgumentArray]];

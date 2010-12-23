@@ -120,8 +120,13 @@
   if ([self requestAuthorization]) {
     for (application in applications) {
       if ([application isDirty]) {
-        NSLog(@"Found dirty application: %@", application.host);
-        [[CLI sharedInstance] update:application];
+        if ([application isFresh]) {
+          NSLog(@"Found new application: %@", application.host);
+          [[CLI sharedInstance] add:application];
+        } else {
+          NSLog(@"Found dirty application: %@", application.host);
+          [[CLI sharedInstance] update:application];
+        }
         isChanged = YES;
       }
     }
