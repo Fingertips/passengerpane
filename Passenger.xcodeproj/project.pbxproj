@@ -211,6 +211,7 @@
 				8D202CF50486D31800D8A456 /* Rez */,
 				51DA08CA104BFFFE00C8C106 /* Copy Frameworks */,
 				63F589E812BA635A00D959E3 /* ShellScript */,
+				63A221FF12C3DB0700BE4D68 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -273,9 +274,22 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		63A221FF12C3DB0700BE4D68 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rake ppane:install";
+		};
 		63F589E812BA635A00D959E3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (

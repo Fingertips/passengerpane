@@ -17,12 +17,18 @@ desc "Run all tests"
 task :test => %w(test:ppane test:passenger_pane)
 
 namespace :ppane do
-  desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane"
+  desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane (run from Xcode)"
   task :fix_framework_location do
     directory       = ENV['BUILT_PRODUCTS_DIR']
     binary          = File.join(directory, 'Passenger.prefPane/Contents/MacOS/Passenger')
     executable_path = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
     sh "/usr/bin/install_name_tool -change '#{executable_path}' '#{executable_path.gsub('executable_path', 'loader_path')}' '#{binary}'"
+  end
+  
+  desc "Install the Passenger Preference Pane (run from Xcode)"
+  task :install do
+    prefpane = File.join(ENV['BUILT_PRODUCTS_DIR'], 'Passenger.prefPane')
+    sh "open #{prefpane}"
   end
 end
 
