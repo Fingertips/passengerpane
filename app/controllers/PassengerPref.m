@@ -43,8 +43,6 @@
 }
 
 - (void)setupApplicationView {
-//  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-//  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
   [self loadApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
 }
@@ -109,17 +107,28 @@
 - (void)revert:(id)sender {}
 
 - (void)restart:(id)sender {
-  Application *application = [[applicationsController selectedObjects] objectAtIndex:0];
+  Application *application = [self selectedApplication];
   [[CLI sharedInstance] restart:application];
 }
 
-- (void)openAddressInBrowser:(id)sender {}
+- (void)openAddressInBrowser:(id)sender {
+//  url = OSX::NSURL.URLWithString("http://#{@applicationsController.selectedObjects.first.host}")
+//  OSX::NSWorkspace.sharedWorkspace.openURL(url)
+  Application *application = [self selectedApplication];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", application.host]];
+  [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
 - (void)showPassengerHelp:(id)sender {}
 
 #pragma Properties
 
 - (void)loadApplications {
   [self setApplications:[[CLI sharedInstance] listApplications]];
+}
+
+- (Application *) selectedApplication {
+  return [[applicationsController selectedObjects] objectAtIndex:0];
 }
 
 - (BOOL)requestAuthorization {

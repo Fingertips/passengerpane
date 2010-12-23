@@ -40,6 +40,8 @@
 
 - (void)loadApplications;
 
+- (Application *) selectedApplication;
+
 - (BOOL)requestAuthorization;
 
 - (void)checkForDirtyApplications;
