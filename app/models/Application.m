@@ -21,7 +21,7 @@
     [self validate];
     beforeChanges = [self toDictionary];
   }
-  return self;
+  return self;  
 }
 
 - (id) initWithAttributes:(NSDictionary *)attributes {

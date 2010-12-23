@@ -82,7 +82,13 @@
 
 #pragma Actions
 
-- (void) remove:(id)sender {
+- (IBAction) add:(id)sender {
+  Application *application = [[Application alloc] init];
+  [application setDelegate:self];
+  [applicationsController addObject:application];
+}
+
+- (IBAction) remove:(id)sender {
   Application *application = [self selectedApplication];
   if (![application isFresh]) {
     [[CLI sharedInstance] delete:application];
@@ -90,7 +96,7 @@
   [applicationsController removeObject:application];
 }
 
-- (void) browse:(id)sender {
+- (IBAction) browse:(id)sender {
   NSOpenPanel *panel = [NSOpenPanel openPanel];
   [panel setCanChooseDirectories:YES];
   [panel setCanChooseFiles:NO];
@@ -107,7 +113,7 @@
   }];
 }
 
-- (void) apply:(id)sender {
+- (IBAction) apply:(id)sender {
   Application *application;
   BOOL isChanged = NO;
   
@@ -126,20 +132,20 @@
     NSLog(@"Unable to apply because authorization failed.");
   }
 }
-- (void) revert:(id)sender {}
+- (IBAction) revert:(id)sender {}
 
-- (void) restart:(id)sender {
+- (IBAction) restart:(id)sender {
   Application *application = [self selectedApplication];
   [[CLI sharedInstance] restart:application];
 }
 
-- (void) openAddressInBrowser:(id)sender {
+- (IBAction) openAddressInBrowser:(id)sender {
   Application *application = [self selectedApplication];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", application.host]];
   [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-- (void) showPassengerHelp:(id)sender {}
+- (IBAction) showPassengerHelp:(id)sender {}
 
 #pragma Properties
 

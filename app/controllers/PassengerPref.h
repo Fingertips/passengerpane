@@ -27,15 +27,16 @@
 - (void) setupAuthorizationView;
 - (void) setupApplicationView;
 
-- (void) remove:(id)sender;
-- (void) browse:(id)sender;
+- (IBAction) add:(id)sender;
+- (IBAction) remove:(id)sender;
+- (IBAction) browse:(id)sender;
 
-- (void) apply:(id)sender;
-- (void) revert:(id)sender;
-- (void) restart:(id)sender;
+- (IBAction) apply:(id)sender;
+- (IBAction) revert:(id)sender;
+- (IBAction) restart:(id)sender;
 
-- (void) openAddressInBrowser:(id)sender;
-- (void) showPassengerHelp:(id)sender;
+- (IBAction) openAddressInBrowser:(id)sender;
+- (IBAction) showPassengerHelp:(id)sender;
 
 - (void) paneWillBecomeActive:(id)sender;
 
