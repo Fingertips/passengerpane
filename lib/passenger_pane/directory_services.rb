@@ -6,13 +6,13 @@ module PassengerPane
     
     def self.register(hosts)
       hosts.each do |host|
-        system "/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host} IPAddress 127.0.0.1"
+        system(trust("/usr/bin/dscl localhost -create /Local/Default/Hosts/#{host} IPAddress 127.0.0.1"))
       end
     end
     
     def self.unregister(hosts)
       hosts.each do |host|
-        system "/usr/bin/dscl localhost -delete /Local/Default/Hosts/#{host}"
+        system(trust("/usr/bin/dscl localhost -delete /Local/Default/Hosts/#{host}"))
       end
     end
   end

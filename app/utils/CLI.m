@@ -54,6 +54,7 @@ static id sharedCLI = nil;
   [arguments addObjectsFromArray:[application toArgumentArray]];
   NSLog(@"Updating application with hostname %@ using %@", application.host, arguments);
   [self execute:arguments elevated:YES];
+  [application resetDirtyStatus];
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m

@@ -74,6 +74,12 @@
   }
 }
 
+- (void) resetDirtyStatus {
+  beforeChanges = [self toDictionary];
+  [self checkChanges];
+  [self validate];
+}
+
 - (void) setValue:(id)value forKey:(NSString*)key {
   NSLog(@"Changing %@ to %@", key, value);
   [super setValue:value forKey:key];

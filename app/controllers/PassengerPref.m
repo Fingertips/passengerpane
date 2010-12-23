@@ -2,7 +2,7 @@
 
 @implementation PassengerPref
 
-@synthesize authorized, dirty;
+@synthesize authorized, dirty, revertable;
 
 @synthesize applications;
 @synthesize textStateColor;

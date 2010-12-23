@@ -28,5 +28,7 @@ enum {
 - (NSMutableDictionary*) toDictionary;
 - (NSArray*) toArgumentArray;
 - (void) validate;
+- (void) checkChanges;
+- (void) resetDirtyStatus;
 
 @end

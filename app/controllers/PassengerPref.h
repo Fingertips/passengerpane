@@ -4,7 +4,7 @@
 
 @interface PassengerPref : NSPreferencePane
 {
-  BOOL authorized, dirty;
+  BOOL authorized, dirty, revertable;
   NSMutableArray *applications;
   
   IBOutlet NSColor *textStateColor;
@@ -18,6 +18,7 @@
 
 @property (assign, getter=isAuthorized) BOOL authorized;
 @property (assign, getter=isDirty) BOOL dirty;
+@property (assign, getter=isRevertable) BOOL revertable;
 
 @property (retain) NSMutableArray *applications;
 @property (retain) NSColor *textStateColor;
