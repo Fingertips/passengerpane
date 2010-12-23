@@ -77,7 +77,7 @@
 #pragma Notifications
 
 - (void) paneWillBecomeActive:(id)sender {
-  [self loadApplications];
+  [self reloadApplications];
 }
 
 #pragma Actions
@@ -145,6 +145,27 @@
 
 - (void) loadApplications {
   [self setApplications:[[CLI sharedInstance] listApplications]];
+}
+
+- (void) reloadApplications {
+  NSUInteger index;
+  Application *existingApplication, *loadedApplication;
+  NSArray *loadedApplications = [[CLI sharedInstance] listApplications];
+  for (loadedApplication in loadedApplications) {
+    index = [applications indexOfObjectPassingTest:^ BOOL (id object, NSUInteger index, BOOL *stop) {
+      return [[object host] isEqualToString:[loadedApplication host]];
+    }];
+    // Application is already in the list
+    if (index != -1) {
+      existingApplication = [applications objectAtIndex:index];
+      if (![existingApplication isDirty]) {
+        [existingApplication updateWithAttributes:[loadedApplication toDictionary]];
+      }
+    // Someone added a new applications we didn't know about
+    } else {
+      [applicationsController addObject:loadedApplication];
+    }
+  }
 }
 
 - (Application *) selectedApplication {

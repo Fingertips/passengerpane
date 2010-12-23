@@ -40,6 +40,7 @@
 - (void) paneWillBecomeActive:(id)sender;
 
 - (void) loadApplications;
+- (void) reloadApplications;
 
 - (Application *) selectedApplication;
 - (NSString *) pathForDirectoryBrowser;

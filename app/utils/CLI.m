@@ -21,24 +21,20 @@ static id sharedCLI = nil;
 }
 
 - (NSMutableArray *)listApplications {
-  id result;
+  NSArray *result;
   Application *application;
-  NSDictionary *item;
-  NSEnumerator *enumerator;
+  NSDictionary *attributes;
   NSMutableArray *applications;
   
   NSLog(@"Retrieving a list of configured applications");
   result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
   applications = [NSMutableArray arrayWithCapacity:[result count]];
   
-  enumerator = [result objectEnumerator];
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  while (item = [enumerator nextObject]) {
-    application = [[Application alloc] initWithDictionary:item];
+  for (attributes in result) {
+    application = [[Application alloc] initWithAttributes:attributes];
     [application setDelegate:appDelegate];
     [applications addObject:application];
   }
-  [pool drain];
   
   return applications;
 }

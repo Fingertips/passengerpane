@@ -24,18 +24,22 @@
   return self;
 }
 
-- (id) initWithDictionary:(NSDictionary*)dictionary {
+- (id) initWithAttributes:(NSDictionary *)attributes {
   if ((self = [self init])) {
-    self.host = [dictionary objectForKey:@"host"];
-    self.aliases = [dictionary objectForKey:@"aliases"];
-    self.path = [dictionary objectForKey:@"path"];
-    self.environment = [environments indexOfObject:[dictionary objectForKey:@"environment"]];
+    [self updateWithAttributes:attributes];
     self.dirty = NO;
     self.fresh = NO;
     [self validate];
     beforeChanges = [self toDictionary];
   }
   return self;
+}
+
+- (void) updateWithAttributes:(NSDictionary *)attributes {
+  self.host = [attributes objectForKey:@"host"];
+  self.aliases = [attributes objectForKey:@"aliases"];
+  self.path = [attributes objectForKey:@"path"];
+  self.environment = [environments indexOfObject:[attributes objectForKey:@"environment"]];
 }
 
 - (NSMutableDictionary*) toDictionary {

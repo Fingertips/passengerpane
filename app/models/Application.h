@@ -25,7 +25,8 @@ enum {
 @property (assign, getter=isValid) BOOL valid;
 @property (assign, getter=isFresh) BOOL fresh;
 
-- (id) initWithDictionary:(NSDictionary*)dictionary;
+- (id) initWithAttributes:(NSDictionary *)attributes;
+- (void) updateWithAttributes:(NSDictionary *)attributes;
 - (NSMutableDictionary*) toDictionary;
 - (NSArray*) toArgumentArray;
 - (void) validate;
