@@ -83,6 +83,13 @@
   [self validate];
 }
 
+- (void) setPath:(NSString *)newPath {
+  if (IsEmpty(host) && !IsEmpty(newPath)) {
+    [self setHost:[NSString stringWithFormat:@"%@.local", [[[NSURL URLWithString:newPath] lastPathComponent] lowercaseString]]];
+  }
+  path = newPath;
+}
+
 - (void) setValue:(id)value forKey:(NSString*)key {
   NSLog(@"Changing %@ to %@", key, value);
   [super setValue:value forKey:key];
