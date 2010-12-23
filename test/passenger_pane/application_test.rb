@@ -36,6 +36,14 @@ describe "Application" do
     application.isFresh.should == NO
   end
   
+  # it "becomes unfresh after applying the information to configuration files" do
+  #   application = OSX::Application.alloc.init
+  #   application.host = 'fries.local'
+  #   application.path = '/Users/Fred/code/fries'
+  #   application.didApplyChanges
+  #   application.isFresh.should == NO
+  # end
+  # 
   # it "convert to a dictionary" do
   #   application = OSX::Application.alloc.initWithDictionary(@data)
   #   application.toDictionary.to_ruby.should == @data
