@@ -16,20 +16,20 @@ enum {
 @property (assign) id appDelegate;
 @property (retain) NSString *pathToCLI;
 
-+ (id)sharedInstance;
++ (id) sharedInstance;
 
-- (NSMutableArray *)listApplications;
-- (void)update:(Application*)application;
-- (void)restart:(Application*)application;
-- (void)restart;
+- (NSMutableArray *) listApplications;
+- (void) update:(Application *)application;
+- (void) restart:(Application *)application;
+- (void) restart;
 
-- (id)execute:(NSArray *)arguments elevated:(BOOL)elevated;
-- (id)execute:(NSArray *)arguments;
+- (id) execute:(NSArray *)arguments elevated:(BOOL)elevated;
+- (id) execute:(NSArray *)arguments;
 
 - (AuthorizationRef) authorizationRef;
 - (void) setAuthorizationRef:(AuthorizationRef)ref;
 
-- (void)deauthorize;
-- (BOOL)isAuthorized;
+- (void) deauthorize;
+- (BOOL) isAuthorized;
 
 @end

@@ -43,7 +43,7 @@ static id sharedCLI = nil;
   return applications;
 }
 
-- (void)update:(Application*)application {
+- (void) update:(Application *)application {
   NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"update", application.host, nil];
   [arguments addObjectsFromArray:[application toArgumentArray]];
   NSLog(@"Updating application with hostname %@ using %@", application.host, arguments);
@@ -51,18 +51,23 @@ static id sharedCLI = nil;
   [application didApplyChanges];
 }
 
-- (void)restart:(Application*)application {
+- (void) delete:(Application *)application {
+  NSLog(@"Deleting application with hostname: %@", application.host);
+  [self execute:[NSArray arrayWithObjects:@"delete", application.host, nil] elevated:YES];
+}
+
+- (void) restart:(Application *)application {
   NSLog(@"Restarting application with hostname: %@", application.host);
   [self execute:[NSArray arrayWithObjects:@"restart", application.host, nil] elevated:NO];
 }
 
-- (void)restart {
+- (void) restart {
   NSLog(@"Restarting Apache");
   [self execute:[NSArray arrayWithObject:@"restart"] elevated:YES];
 }
 
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
-- (id)execute:(NSArray *)arguments elevated:(BOOL)elevated {
+- (id) execute:(NSArray *)arguments elevated:(BOOL)elevated {
   OSStatus status;
   char **argumentsAsCArray = NULL;
   unsigned int index;

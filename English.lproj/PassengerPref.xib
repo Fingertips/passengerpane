@@ -1912,6 +1912,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="199236676"/>
 						</object>
 						<reference key="parent" ref="453226259"/>
+						<string key="objectName">Add Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">111</int>
@@ -1926,6 +1927,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="915657885"/>
 						</object>
 						<reference key="parent" ref="453226259"/>
+						<string key="objectName">Remove Button</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">113</int>

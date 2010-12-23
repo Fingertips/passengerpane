@@ -23,29 +23,29 @@
 @property (retain) NSMutableArray *applications;
 @property (retain) NSColor *textStateColor;
 
-- (void)setupUI;
-- (void)setupAuthorizationView;
-- (void)setupApplicationView;
+- (void) setupUI;
+- (void) setupAuthorizationView;
+- (void) setupApplicationView;
 
-- (void)remove:(id)sender;
-- (void)browse:(id)sender;
+- (void) remove:(id)sender;
+- (void) browse:(id)sender;
 
-- (void)apply:(id)sender;
-- (void)revert:(id)sender;
-- (void)restart:(id)sender;
+- (void) apply:(id)sender;
+- (void) revert:(id)sender;
+- (void) restart:(id)sender;
 
-- (void)openAddressInBrowser:(id)sender;
-- (void)showPassengerHelp:(id)sender;
+- (void) openAddressInBrowser:(id)sender;
+- (void) showPassengerHelp:(id)sender;
 
-- (void)paneWillBecomeActive:(id)sender;
+- (void) paneWillBecomeActive:(id)sender;
 
-- (void)loadApplications;
+- (void) loadApplications;
 
 - (Application *) selectedApplication;
 - (NSString *) pathForDirectoryBrowser;
 
-- (BOOL)requestAuthorization;
+- (BOOL) requestAuthorization;
 
-- (void)checkForDirtyApplications;
+- (void) checkForDirtyApplications;
 
 @end
