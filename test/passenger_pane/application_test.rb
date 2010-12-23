@@ -22,6 +22,7 @@ describe "Application" do
     application.environment.should == DEVELOPMENT
     application.isDirty.should == NO
     application.isValid.should == NO
+    application.isFresh.should == YES
   end
   
   it "initializes with a dictionary" do
@@ -32,6 +33,7 @@ describe "Application" do
     application.environment.should == DEVELOPMENT
     application.isDirty.should == NO
     application.isValid.should == YES
+    application.isFresh.should == NO
   end
   
   # it "convert to a dictionary" do

@@ -13,7 +13,7 @@ enum {
   
   NSString *host, *aliases, *path;
   NSUInteger environment;
-  BOOL dirty, valid;
+  BOOL dirty, valid, fresh;
   
   NSDictionary *beforeChanges;
 }
@@ -23,12 +23,13 @@ enum {
 @property (assign) NSUInteger environment;
 @property (assign, getter=isDirty) BOOL dirty;
 @property (assign, getter=isValid) BOOL valid;
+@property (assign, getter=isFresh) BOOL fresh;
 
 - (id) initWithDictionary:(NSDictionary*)dictionary;
 - (NSMutableDictionary*) toDictionary;
 - (NSArray*) toArgumentArray;
 - (void) validate;
 - (void) checkChanges;
-- (void) resetDirtyStatus;
+- (void) didApplyChanges;
 
 @end

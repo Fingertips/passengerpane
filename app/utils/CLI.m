@@ -48,7 +48,7 @@ static id sharedCLI = nil;
   [arguments addObjectsFromArray:[application toArgumentArray]];
   NSLog(@"Updating application with hostname %@ using %@", application.host, arguments);
   [self execute:arguments elevated:YES];
-  [application resetDirtyStatus];
+  [application didApplyChanges];
 }
 
 - (void)restart:(Application*)application {

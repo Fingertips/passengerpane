@@ -83,7 +83,23 @@
 #pragma Actions
 
 - (void)remove:(id)sender {}
-- (void)browse:(id)sender {}
+
+- (void)browse:(id)sender {
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  [panel setCanChooseDirectories:YES];
+  [panel setCanChooseFiles:NO];
+  [panel setDirectory:[self pathForDirectoryBrowser]];
+  [panel beginSheetModalForWindow:[mainView window] completionHandler:^(NSInteger button) {
+    Application *application = [self selectedApplication];
+    if (button == NSFileHandlingPanelOKButton) {
+      [application setValue:[panel filename] forKey:@"path"];
+    } else if (button == NSFileHandlingPanelCancelButton) {
+      if ([application isFresh] && ![application isDirty]) {
+        [self remove:sender];
+      }
+    }
+  }];
+}
 
 - (void)apply:(id)sender {
   Application *application;
@@ -112,8 +128,6 @@
 }
 
 - (void)openAddressInBrowser:(id)sender {
-//  url = OSX::NSURL.URLWithString("http://#{@applicationsController.selectedObjects.first.host}")
-//  OSX::NSWorkspace.sharedWorkspace.openURL(url)
   Application *application = [self selectedApplication];
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", application.host]];
   [[NSWorkspace sharedWorkspace] openURL:url];
@@ -129,6 +143,15 @@
 
 - (Application *) selectedApplication {
   return [[applicationsController selectedObjects] objectAtIndex:0];
+}
+
+- (NSString *) pathForDirectoryBrowser {
+  Application *application = [self selectedApplication];
+  if (application) {
+    return application.path;
+  } else {
+    return NSHomeDirectory();
+  }
 }
 
 - (BOOL)requestAuthorization {

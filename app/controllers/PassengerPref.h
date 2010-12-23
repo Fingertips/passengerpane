@@ -9,6 +9,7 @@
   
   IBOutlet NSColor *textStateColor;
   
+  IBOutlet NSView *mainView;
   IBOutlet NSArrayController *applicationsController;
   IBOutlet NSImageView *passengerIconView;
   IBOutlet NSButton *openInBrowserButton;
@@ -41,6 +42,7 @@
 - (void)loadApplications;
 
 - (Application *) selectedApplication;
+- (NSString *) pathForDirectoryBrowser;
 
 - (BOOL)requestAuthorization;
 

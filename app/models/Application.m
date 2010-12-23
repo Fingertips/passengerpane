@@ -6,7 +6,7 @@
 @synthesize delegate;
 @synthesize host, aliases, path;
 @synthesize environment;
-@synthesize dirty, valid;
+@synthesize dirty, valid, fresh;
 
 - (id) init {
   if ((self = [super init])) {
@@ -17,6 +17,7 @@
     self.path = @"";
     self.environment = PPANE_DEVELOPMENT;
     self.dirty = NO;
+    self.fresh = YES;
     [self validate];
     beforeChanges = [self toDictionary];
   }
@@ -30,6 +31,7 @@
     self.path = [dictionary objectForKey:@"path"];
     self.environment = [environments indexOfObject:[dictionary objectForKey:@"environment"]];
     self.dirty = NO;
+    self.fresh = NO;
     [self validate];
     beforeChanges = [self toDictionary];
   }
@@ -74,8 +76,9 @@
   }
 }
 
-- (void) resetDirtyStatus {
+- (void) didApplyChanges {
   beforeChanges = [self toDictionary];
+  self.fresh = NO;
   [self checkChanges];
   [self validate];
 }
