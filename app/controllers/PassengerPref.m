@@ -2,7 +2,7 @@
 
 @implementation PassengerPref
 
-@synthesize authorized, dirty, revertable;
+@synthesize authorized, dirty;
 
 @synthesize applications;
 @synthesize textStateColor;
@@ -99,9 +99,9 @@
         isChanged = YES;
       }
     }
-//    if (isChanged) {
-//      [[CLI sharedInstance] restart];
-//    }
+    if (isChanged) {
+      [[CLI sharedInstance] restart];
+    }
   } else {
     NSLog(@"Unable to apply because authorization failed.");
   }
