@@ -27,7 +27,7 @@ module PassengerPane
       end
     end
     
-    attr_accessor *ATTRIBUTES
+    attr_accessor(*ATTRIBUTES)
     
     def initialize(configuration, options={})
       @configuration = configuration
@@ -72,8 +72,13 @@ module PassengerPane
       data.gsub!(/\n\s*ServerAlias\s+(.+)/, '')
       @aliases = $1 || ''
       
-      data.gsub!(/\n\s*DocumentRoot\s+"(.+)\/public"/, '')
-      @path = $1
+      data.gsub!(/\n\s*DocumentRoot\s+"(.+)"/, '')
+      path = $1
+      if path.end_with?('public')
+        @path = File.dirname(path)
+      else
+        @path = path
+      end
       
       data.gsub!(/\n\s*(Rails|Rack)Env\s+(\w+)/, '')
       @framework   = $1.downcase

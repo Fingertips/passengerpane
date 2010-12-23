@@ -160,6 +160,7 @@
       existingApplication = [applications objectAtIndex:index];
       if (![existingApplication isDirty]) {
         [existingApplication updateWithAttributes:[loadedApplication toDictionary]];
+        [existingApplication didApplyChanges];
       }
     // Someone added a new applications we didn't know about
     } else {
