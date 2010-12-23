@@ -164,7 +164,7 @@ module PassengerPane
       when 'register'
         new(options).register
       else
-        path = File.expand_path(command).untaint
+        path = trust(File.expand_path(command))
         if File.exist?(path)
           new(options).add(path)
         else

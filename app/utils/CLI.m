@@ -94,7 +94,6 @@ static id sharedCLI = nil;
             return yaml_parse(data);
           }
         }
-        NSLog(@"AuthorizationExecuteWithPrivileges didn't return a valid pipe");
       } else {
         NSLog(@"AuthorizationExecuteWithPrivileges failed to execute ppane (%d)", status);
       }

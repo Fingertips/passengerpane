@@ -46,8 +46,8 @@ module PassengerPane
     
     def set(options)
       options.each do |key, value|
-        setter = "#{key}="
-        send(setter, value) if respond_to?(setter)
+        setter = trust("#{key}=")
+        send(setter, trust(value)) if respond_to?(setter)
       end
     end
     
@@ -58,7 +58,7 @@ module PassengerPane
     # -- Virtual Host reading and writing
     
     def contents
-      @contents ||= File.read(@config_filename)
+      @contents ||= File.read(trust(@config_filename))
     end
     
     attr_writer :contents

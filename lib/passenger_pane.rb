@@ -1,3 +1,5 @@
+require 'passenger_pane/trust'
+
 module PassengerPane
   autoload :Application,       'passenger_pane/application'
   autoload :Configuration,     'passenger_pane/configuration'

@@ -15,12 +15,12 @@ module PassengerPane
     end
     
     def self.config_filename
-      File.expand_path(CONFIG_FILENAME).untaint
+      File.expand_path(CONFIG_FILENAME)
     end
     
     def self.auto
       configuration = new
-      if File.exist?(config_filename)
+      if File.exist?(trust(config_filename))
         configuration.set(YAML.load_file(config_filename))
       end
       configuration
