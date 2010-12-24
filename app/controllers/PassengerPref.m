@@ -45,6 +45,9 @@
 - (void) setupApplicationView {
   [self loadApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
+  
+  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
+  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 }
 
 #pragma SFAuthorizationView delegate methods
@@ -64,6 +67,47 @@
 }
 
 #pragma NSTableViewDataSource protocol methods
+
+- (NSDragOperation) tableView:(NSTableView *)aTableView validateDrop:(id)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+  id items, path;
+  
+  if (!authorized) {
+    return NSDragOperationNone;
+  }
+  
+  items = [[info draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+  for (path in items) {
+    NSLog(@"%@", path);
+  }
+  
+  return NSDragOperationNone;
+}
+
+- (BOOL) tableView:(NSTableView *)aTableView acceptDrop:(id)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+  id items, path;
+  NSMutableArray *droppedApplications;
+  
+  applications = [NSMutableArray arrayWithCapacity:[items count]];
+  for (path in items) {
+    [droppedApplications addObject:[[Application alloc] initWithPath:path]];
+  }
+  [applicationsController addObjects:droppedApplications];
+  
+  return YES;
+}
+
+- (BOOL) tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+  Application *application;
+  NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
+  
+  for (application in [applications objectsAtIndexes:rowIndexes]) {
+    [paths addObject:[application path]];
+  }
+  [pboard declareTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil] owner:self];
+  [pboard setPropertyList:paths forType:NSFilenamesPboardType];
+  
+  return YES;
+}
 
 #pragma KeyValueObserving protocol methods
 
