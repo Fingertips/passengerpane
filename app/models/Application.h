@@ -26,6 +26,7 @@ enum {
 @property (assign, getter=isFresh) BOOL fresh;
 
 - (id) initWithAttributes:(NSDictionary *)attributes;
+- (id) initWithDirectory:(NSString *)aPath;
 - (void) updateWithAttributes:(NSDictionary *)attributes;
 - (NSMutableDictionary*) toDictionary;
 - (NSArray*) toArgumentArray;

@@ -9,7 +9,7 @@
 @synthesize dirty, valid, fresh;
 
 - (id) init {
-  if ((self = [super init])) {
+  if (self = [super init]) {
     environments = [NSArray arrayWithObjects:@"development", @"production", nil];
     
     self.host = @"";
@@ -20,17 +20,28 @@
     self.fresh = YES;
     [self validate];
     beforeChanges = [self toDictionary];
-  }
+  } 
   return self;  
 }
 
 - (id) initWithAttributes:(NSDictionary *)attributes {
-  if ((self = [self init])) {
+  if (self = [self init]) {
     [self updateWithAttributes:attributes];
     self.dirty = NO;
     self.fresh = NO;
     [self validate];
     beforeChanges = [self toDictionary];
+  }
+  return self;
+}
+
+- (id) initWithDirectory:(NSString *)aPath {
+  if (self = [self init]) {
+    beforeChanges = [self toDictionary];
+    self.path = aPath;
+    self.dirty = YES;
+    self.fresh = YES;
+    [self validate];
   }
   return self;
 }

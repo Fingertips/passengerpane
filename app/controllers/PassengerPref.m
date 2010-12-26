@@ -45,9 +45,8 @@
 - (void) setupApplicationView {
   [self loadApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
-  
-  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil]];
-  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+  [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
+//  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 }
 
 #pragma SFAuthorizationView delegate methods
@@ -70,6 +69,8 @@
 
 - (NSDragOperation) tableView:(NSTableView *)aTableView validateDrop:(id)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
   id items, path;
+  NSFileManager *fileManager = [[NSFileManager alloc] init];
+  BOOL isDir;
   
   if (!authorized) {
     return NSDragOperationNone;
@@ -77,22 +78,30 @@
   
   items = [[info draggingPasteboard] propertyListForType:NSFilenamesPboardType];
   for (path in items) {
-    NSLog(@"%@", path);
+    if (![fileManager fileExistsAtPath:path isDirectory:&isDir] || !isDir) {
+      NSLog(@"%@ %d", path, isDir);
+      return NSDragOperationNone;
+    }
   }
   
-  return NSDragOperationNone;
+  return NSDragOperationGeneric;
 }
 
 - (BOOL) tableView:(NSTableView *)aTableView acceptDrop:(id)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
   id items, path;
   NSMutableArray *droppedApplications;
+  Application *application;
   
-  applications = [NSMutableArray arrayWithCapacity:[items count]];
+  items = [[info draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+  droppedApplications = [NSMutableArray arrayWithCapacity:[items count]];
   for (path in items) {
-    [droppedApplications addObject:[[Application alloc] initWithPath:path]];
+    application = [[Application alloc] initWithDirectory:path];
+    [application setDelegate:self];
+    [droppedApplications addObject:application];
   }
   [applicationsController addObjects:droppedApplications];
-  
+  [self checkForDirtyApplications];
+    
   return YES;
 }
 
