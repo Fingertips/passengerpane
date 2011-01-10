@@ -24,6 +24,7 @@ enum {
 @property (assign, getter=isDirty) BOOL dirty;
 @property (assign, getter=isValid) BOOL valid;
 @property (assign, getter=isFresh) BOOL fresh;
+@property (readonly) NSDictionary *beforeChanges;
 
 - (id) initWithAttributes:(NSDictionary *)attributes;
 - (id) initWithDirectory:(NSString *)aPath;

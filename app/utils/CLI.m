@@ -48,7 +48,9 @@ static id sharedCLI = nil;
 }
 
 - (void) update:(Application *)application {
-  NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"update", application.host, nil];
+  NSDictionary *beforeChanges = [application beforeChanges];
+  NSString *currentHost = [beforeChanges valueForKey:@"host"];
+  NSMutableArray *arguments = [NSMutableArray arrayWithObjects:@"update", currentHost, nil];
   [arguments addObjectsFromArray:[application toArgumentArray]];
   NSLog(@"Updating application with hostname %@ using %@", application.host, arguments);
   [self execute:arguments elevated:YES];

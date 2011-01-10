@@ -7,6 +7,7 @@
 @synthesize host, aliases, path, configFilename;
 @synthesize environment;
 @synthesize dirty, valid, fresh;
+@synthesize beforeChanges;
 
 - (id) init {
   if (self = [super init]) {
