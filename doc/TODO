@@ -1,4 +1,3 @@
-- Make sure the 'Restart' button is disabled when the selected item is dirty. To avoid confusion, both the 'Restart' and 'Open in browser' buttons should be disabled when the 'Apply' button is enabled and vice-versa.
 - Immediately apply the configuration when a new application is added. In most cases the default configuration is exactly what you want.
 - Prevent duplicate folders. When the user tries to add a duplicate folder, select the configuration for the application that uses this folder in the source list.
 - Do not accept characters in the Address and Aliases fields that can't be used for the domain name (including whitespace in the address field). 
