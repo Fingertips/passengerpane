@@ -11,7 +11,7 @@ enum {
   
   NSArray *environments;
   
-  NSString *host, *aliases, *path;
+  NSString *host, *aliases, *path, *configFilename;
   NSUInteger environment;
   BOOL dirty, valid, fresh;
   
@@ -19,7 +19,7 @@ enum {
 }
 
 @property (assign) id delegate;
-@property (retain) NSString *host, *aliases, *path;
+@property (retain) NSString *host, *aliases, *path, *configFilename;
 @property (assign) NSUInteger environment;
 @property (assign, getter=isDirty) BOOL dirty;
 @property (assign, getter=isValid) BOOL valid;

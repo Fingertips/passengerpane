@@ -110,7 +110,7 @@
   NSMutableArray *paths = [NSMutableArray arrayWithCapacity:[rowIndexes count]];
   
   for (application in [applications objectsAtIndexes:rowIndexes]) {
-    [paths addObject:[application path]];
+    [paths addObject:[application configFilename]];
   }
   [pboard declareTypes:[NSArray arrayWithObjects:NSFilenamesPboardType, nil] owner:self];
   [pboard setPropertyList:paths forType:NSFilenamesPboardType];

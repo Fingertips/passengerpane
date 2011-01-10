@@ -4,7 +4,7 @@
 @implementation Application
 
 @synthesize delegate;
-@synthesize host, aliases, path;
+@synthesize host, aliases, path, configFilename;
 @synthesize environment;
 @synthesize dirty, valid, fresh;
 
@@ -50,7 +50,8 @@
   self.host = [attributes objectForKey:@"host"];
   self.aliases = [attributes objectForKey:@"aliases"];
   self.path = [attributes objectForKey:@"path"];
-  self.environment = [environments indexOfObject:[attributes objectForKey:@"environment"]];
+  self.environment = [environments indexOfObject:[attributes objectForKey:@"environment"]]; 
+  self.configFilename = [attributes objectForKey:@"config_filename"];
 }
 
 - (NSMutableDictionary*) toDictionary {
@@ -60,6 +61,7 @@
   [data setValue:self.aliases forKey:@"aliases"];
   [data setValue:self.path forKey:@"path"];
   [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
+  [data setValue:self.configFilename forKey:@"config_filename"];
   
   return data;
 }
