@@ -102,6 +102,7 @@
     [droppedApplications addObject:application];
   }
   [applicationsController addObjects:droppedApplications];
+  [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[droppedApplications lastObject], nil]];
   [self apply:self];
     
   return YES;
