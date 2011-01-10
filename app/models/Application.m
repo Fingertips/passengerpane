@@ -98,6 +98,12 @@
   [self validate];
 }
 
+- (void) revert {
+  [self updateWithAttributes:beforeChanges];
+  [self validate];
+  [self checkChanges];
+}
+
 - (void) setPath:(NSString *)newPath {
   if (IsEmpty(host) && !IsEmpty(newPath)) {
     [self setHost:[NSString stringWithFormat:@"%@.local", [[[NSURL URLWithString:newPath] lastPathComponent] lowercaseString]]];

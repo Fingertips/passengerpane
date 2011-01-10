@@ -46,7 +46,7 @@
   [self loadApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
   [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
-//  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+  [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 }
 
 #pragma SFAuthorizationView delegate methods
@@ -190,7 +190,12 @@
     NSLog(@"Unable to apply because authorization failed.");
   }
 }
-- (IBAction) revert:(id)sender {}
+- (IBAction) revert:(id)sender {
+  Application *application;
+  for (application in applications) {
+    [application revert];
+  }
+}
 
 - (IBAction) restart:(id)sender {
   Application *application = [self selectedApplication];

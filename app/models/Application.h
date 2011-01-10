@@ -33,5 +33,6 @@ enum {
 - (void) validate;
 - (void) checkChanges;
 - (void) didApplyChanges;
+- (void) revert;
 
 @end
