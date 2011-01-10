@@ -30,10 +30,12 @@ static id sharedCLI = nil;
   result = [self execute:[NSArray arrayWithObjects:@"list", @"-m", nil] elevated:NO];
   applications = [NSMutableArray arrayWithCapacity:[result count]];
   
-  for (attributes in result) {
-    application = [[Application alloc] initWithAttributes:attributes];
-    [application setDelegate:appDelegate];
-    [applications addObject:application];
+  if ([result count] > 0) {
+    for (attributes in result) {
+      application = [[Application alloc] initWithAttributes:attributes];
+      [application setDelegate:appDelegate];
+      [applications addObject:application];
+    }
   }
   
   return applications;

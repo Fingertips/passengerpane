@@ -44,7 +44,9 @@
 
 - (void) setupApplicationView {
   [self loadApplications];
-  [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
+  if ([applications count] > 0) {
+    [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];
+  }
   [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
   [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
 }
@@ -100,7 +102,7 @@
     [droppedApplications addObject:application];
   }
   [applicationsController addObjects:droppedApplications];
-  [self checkForDirtyApplications];
+  [self apply:self];
     
   return YES;
 }
@@ -147,6 +149,7 @@
     [[CLI sharedInstance] delete:application];
   }
   [applicationsController removeObject:application];
+  [self checkForDirtyApplications];
 }
 
 - (IBAction) browse:(id)sender {
@@ -189,6 +192,7 @@
   } else {
     NSLog(@"Unable to apply because authorization failed.");
   }
+  [self checkForDirtyApplications];
 }
 - (IBAction) revert:(id)sender {
   Application *application;
@@ -239,7 +243,11 @@
 }
 
 - (Application *) selectedApplication {
-  return [[applicationsController selectedObjects] objectAtIndex:0];
+  if (applications && ([applications count] > 0)) {
+    return [[applicationsController selectedObjects] objectAtIndex:0];
+  } else {
+    return nil;
+  }
 }
 
 - (NSString *) pathForDirectoryBrowser {
