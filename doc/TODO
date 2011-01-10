@@ -1,12 +1,3 @@
-Rewrite
-
-- Add options to ppane to install configuration files for MacPorts and possibly other package managers. Basically copies boilerplate config files to the homedir or /etc.
-  $ ppane config macports
-
-After rewrite
-
-- Don't show 'No Selection' in the text fields.
-- No longer mark an item as dirty when the user reverts his changes, for example when you append a single character to the address value and then remove that character.
 - Make sure the 'Restart' button is disabled when the selected item is dirty. To avoid confusion, both the 'Restart' and 'Open in browser' buttons should be disabled when the 'Apply' button is enabled and vice-versa.
 - Immediately apply the configuration when a new application is added. In most cases the default configuration is exactly what you want.
 - Prevent duplicate folders. When the user tries to add a duplicate folder, select the configuration for the application that uses this folder in the source list.
@@ -23,4 +14,6 @@ After rewrite
 
 Later
 
+- Add options to ppane to install configuration files for MacPorts and possibly other package managers. Basically copies boilerplate config files to the homedir or /etc.
+  $ ppane config macports
 - Merge the 'Address' and 'Aliases' text fields, and the 'Open in browser' button into a single 'Addresses' list view with inline 'Open in browser' buttons.
