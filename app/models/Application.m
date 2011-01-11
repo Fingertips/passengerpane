@@ -48,10 +48,12 @@
 }
 
 - (void) updateWithAttributes:(NSDictionary *)attributes {
+  NSString  *environment = [attributes objectForKey:@"environment"];
   self.host = [attributes objectForKey:@"host"];
   self.aliases = [attributes objectForKey:@"aliases"];
   self.path = [attributes objectForKey:@"path"];
-  self.environment = [environments indexOfObject:[attributes objectForKey:@"environment"]]; 
+  if (environment)
+    self.environment = [environments indexOfObject:environment];
   self.configFilename = [attributes objectForKey:@"config_filename"];
 }
 

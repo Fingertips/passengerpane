@@ -1,36 +1,11 @@
 task :default => "test"
 
-require 'rake/testtask'
-namespace :test do
-  Rake::TestTask.new('ppane') do |t|
-    t.test_files = FileList['test/ppane/*_test.rb']
-    t.verbose = true
-  end
-  
-  desc "Run all functional tests for the Passenger Preference Pane"
-  task :passenger_pane do
-    if `which nush`.strip != ''
-      sh "cd test/passenger_pane; nush  *_test.nu"
-    else
-      puts "[!] Please install Nu to run the functional tests (see doc/DEVELOPMENT)"
-    end
-  end
-end
-
 desc "Run all tests"
 task :test => %w(test:ppane test:passenger_pane)
 
 namespace :ppane do
-  desc "Adjusts the install name of the bundled YAML.framework so it can be found by the pane (run from Xcode)"
-  task :fix_framework_location do
-    directory       = ENV['BUILT_PRODUCTS_DIR']
-    binary          = File.join(directory, 'Passenger.prefPane/Contents/MacOS/Passenger')
-    executable_path = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
-    sh "/usr/bin/install_name_tool -change '#{executable_path}' '#{executable_path.gsub('executable_path', 'loader_path')}' '#{binary}'"
-  end
-  
-  desc "Install the Passenger Preference Pane (run from Xcode)"
-  task :install do
+  desc "Install the Passenger Preference Pane"
+  task :install => :build do
     prefpane = File.join(ENV['BUILT_PRODUCTS_DIR'], 'Passenger.prefPane')
     sh "open #{prefpane}"
   end
@@ -50,49 +25,48 @@ namespace :gem do
   end
 end
 
-# --- Evaluate
-
-namespace :prefpane do
-  BUILD = "build/Release/Passenger.prefPane"
-  BIN = File.join(BUILD, 'Contents/MacOS/Passenger')
+require 'rake/testtask'
+namespace :test do
+  Rake::TestTask.new('ppane') do |t|
+    t.test_files = FileList['test/ppane/*_test.rb']
+    t.verbose = true
+  end
   
-  desc 'Build the prefpane'
+  desc "Build framework for testing"
   task :build do
-    sh "xcodebuild -configuration Release"
+    result = `/Xcode4/usr/bin/xcodebuild -project Passenger.xcodeproj -target PassengerTest`
+    puts result unless result.include?('** BUILD SUCCEEDED **')
   end
   
-  # Make sure that the prefpane searches inside the bundle for the RubyCocoa framework.
-  #
-  # This task is invoked from the xcode project post build script.
-  desc 'Adjusts the install name of the bundled RubyCocoa to point to the right place'
-  task :change_ruycocoa_framework_location do
-    current = `/usr/bin/otool -L #{BIN}`.match(/^\t(.+RubyCocoa).+$/)[1]
-    sh "/usr/bin/install_name_tool -change '#{current}' '@loader_path/../Frameworks/RubyCocoa.framework/Versions/A/RubyCocoa' '#{BIN}'"
-  end
-  
-  desc 'Builds and opens the prefpane'
-  task :run => :build do
-    sh "open #{BUILD}"
+  desc "Run all functional tests for the Passenger Preference Pane"
+  task :passenger_pane => :build do
+    if File.exist?('/usr/local/bin/nush')
+      sh "cd test/passenger_pane; /usr/local/bin/nush  *_test.nu"
+    else
+      puts "[!] Please install Nu to run the functional tests (see doc/DEVELOPMENT)"
+    end
   end
 end
 
-desc 'Cleans the build and release pkg'
-task :clean do
-  sh 'rm -rf build/'
-  sh 'rm -rf pkg'
-end
-
-desc 'Creates a release build and pkg'
-task :release => [:clean, 'prefpane:build'] do
-  require 'osx/cocoa'
-  version = OSX::NSDictionary.dictionaryWithContentsOfFile('Info.plist')['CFBundleVersion'].to_s
-  name = "PassengerPane-#{version}"
-  pkg_dir = "pkg/#{name}"
-  
-  sh "mkdir -p #{pkg_dir}"
-  sh "cp -R build/Release/Passenger.prefPane #{pkg_dir}"
-  %w{ LICENSE README.rdoc app/config/passenger_pane_config.rb.ports }.each do |file|
-    sh "cp #{file} #{pkg_dir}"
+namespace :xcode do
+  desc "Prepares the compiled framework for loading from Nu"
+  task :setup_test_framework do
+    test_directory  = File.expand_path('../test/passenger_pane', __FILE__)
+    framework_name  = ENV['FULL_PRODUCT_NAME']
+    framework       = File.join(ENV['BUILT_PRODUCTS_DIR'], framework_name)
+    binary          = File.join(ENV['BUILT_PRODUCTS_DIR'], ENV['EXECUTABLE_PATH'])
+    yaml_path       = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
+    yaml_framework  = File.expand_path('../vendor/YAML.framework/Versions/A/YAML', __FILE__)
+    sh "/usr/bin/install_name_tool -change '#{yaml_path}' '#{yaml_framework}' '#{binary}'"
+    
+    sh "rm -Rf #{File.join(test_directory, framework_name)}"
+    sh "cp -r #{framework} #{test_directory}"
   end
-  sh "cd pkg/ && tar -czvf #{name}.tgz #{name}/"
+  
+  desc "Fixes the YAML framework location"
+  task :fix_framework_location do
+    binary          = File.join(ENV['BUILT_PRODUCTS_DIR'], ENV['EXECUTABLE_PATH'])
+    executable_path = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
+    sh "/usr/bin/install_name_tool -change '#{executable_path}' '#{executable_path.gsub('executable_path', 'loader_path')}' '#{binary}'"
+  end
 end
