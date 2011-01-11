@@ -7,3 +7,4 @@ tmp
 Passenger.xcodeproj/project.xcworkspace/xcuserdata/*
 Passenger.xcodeproj/xcuserdata/*
 *.gem
+test/passenger_pane/PassengerTest.framework

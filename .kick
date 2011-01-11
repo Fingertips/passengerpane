@@ -1,13 +1,26 @@
 recipe :ignore
-ignore(/^(tmp)/)
+ignore(/^(tmp|Passenger.xcodeproj)/)
 
 recipe :ruby
 
+module Nu
+  def self.run_tests(files)
+    unless files.empty?
+      execute "rake test:passenger_pane"
+    end
+  end
+end
+
 process do |files|
-  Ruby.run_tests(files.take_and_map do |file|
+  # Ruby.run_tests(files.take_and_map do |file|
+  #   case file
+  #   end
+  # end)
+  
+  Nu.run_tests(files.take_and_map do |file|
     case file
-    when %r{^test/test_helper/add_allow_switch.rb$}
-      'test/test_helper/add_allow_switch_test.rb'
+    when %r{^app/.*\.m$}, %r{^test/passenger_pane/.*_test\.nu$}
+      file
     end
   end)
 end
