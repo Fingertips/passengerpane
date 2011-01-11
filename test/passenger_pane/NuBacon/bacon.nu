@@ -1,8 +1,8 @@
-(load "bacon_summary")
-(load "bacon_specification")
-(load "bacon_context")
-(load "bacon_should")
-(load "bacon_macros")
+(load "NuBacon/bacon_summary")
+(load "NuBacon/bacon_specification")
+(load "NuBacon/bacon_context")
+(load "NuBacon/bacon_should")
+(load "NuBacon/bacon_macros")
 
 (class Bacon is NSObject
   (ivars (id) contexts
