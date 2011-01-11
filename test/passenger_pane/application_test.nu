@@ -50,4 +50,30 @@
   ))
 ))
 
+(describe "An Application" `(
+  (before (do ()
+    (set @attributes (NSMutableDictionary dictionary))
+    (@attributes setValue:"test.host" forKey:"host")
+    (@attributes setValue:"assets.test.host" forKey:"aliases")
+    (@attributes setValue:"/path/to/test" forKey:"path")
+    (@attributes setValue:"production" forKey:"environment")
+    (@attributes setValue:"/path/to/test.conf" forKey:"config_filename")
+    (set @application ((Application alloc) initWithAttributes:@attributes))
+  ))
+  
+  (it "converts its attributes to a dictionary" (do ()
+    (set attributes (@application toDictionary))
+    (~ (attributes objectForKey:"host") should be:"test.host")
+    (~ (attributes objectForKey:"aliases") should be:"assets.test.host")
+    (~ (attributes objectForKey:"path") should be:"/path/to/test")
+    (~ (attributes objectForKey:"environment") should be:"production")
+    (~ (attributes objectForKey:"config_filename") should be:"/path/to/test.conf")
+  ))
+  
+  (it "converts to an argument array" (do ()
+    (set arguments (@application toArgumentArray))
+    (~ (arguments list) should equal:`("-path" "/path/to/test" "-environment" "production" "-host" "test.host" "-config_filename" "/path/to/test.conf" "-aliases" "assets.test.host"))
+  ))
+))
+
 ((Bacon sharedInstance) run)
