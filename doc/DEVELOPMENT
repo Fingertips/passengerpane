@@ -1,0 +1,20 @@
+INSTALL DEPENDENCIES
+
+Install the Rubygems for the ppane specs:
+
+$ gem install test-spec mocha
+
+Install Nu [1] from source for the functional Cocoa specs:
+
+$ git clone https://github.com/timburks/nu.git
+$ cd nu
+$ make -j
+$ ./mininush tools/nuke
+$ ./mininush tools/nuke install
+
+RUN TESTS
+
+$ rake
+
+------------------------------------------------------------------------------
+[1] http://programming.nu
