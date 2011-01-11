@@ -7,9 +7,13 @@ namespace :test do
     t.verbose = true
   end
   
-  Rake::TestTask.new('passenger_pane') do |t|
-    t.test_files = FileList['test/passenger_pane/*_test.rb']
-    t.verbose = true
+  desc "Run all functional tests for the Passenger Preference Pane"
+  task :passenger_pane do
+    if `which nush`.strip != ''
+      sh "nush test/passenger_pane/*_test.nu"
+    else
+      puts "[!] Please install Nu to run the functional tests (see doc/DEVELOPMENT)"
+    end
   end
 end
 
