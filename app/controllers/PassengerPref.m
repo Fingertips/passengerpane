@@ -233,7 +233,7 @@
     if (index != -1) {
       existingApplication = [applications objectAtIndex:index];
       if (![existingApplication isDirty]) {
-        [existingApplication updateWithAttributes:[loadedApplication toDictionary]];
+        [existingApplication updateAttributes:[loadedApplication toDictionary]];
         [existingApplication didApplyChanges];
       }
     // Someone added a new applications we didn't know about

@@ -1,5 +1,6 @@
 #import "Application.h"
 
+static NSArray *environments;
 
 @implementation Application
 
@@ -9,10 +10,14 @@
 @synthesize dirty, valid, fresh;
 @synthesize beforeChanges;
 
++(void) initialize {
+  if (!environments)
+    environments = [NSArray arrayWithObjects:@"development", @"production", nil];
+    [environments retain];
+}
+
 - (id) init {
   if (self = [super init]) {
-    environments = [NSArray arrayWithObjects:@"development", @"production", nil];
-    
     self.host = @"";
     self.aliases = @"";
     self.path = @"";
@@ -21,13 +26,13 @@
     self.fresh = YES;
     [self validate];
     beforeChanges = [self toDictionary];
-  } 
-  return self;  
+  }
+  return self;
 }
 
 - (id) initWithAttributes:(NSDictionary *)attributes {
   if (self = [self init]) {
-    [self updateWithAttributes:attributes];
+    [self updateAttributes:attributes];
     self.dirty = NO;
     self.fresh = NO;
     [self validate];
@@ -47,23 +52,29 @@
   return self;
 }
 
-- (void) updateWithAttributes:(NSDictionary *)attributes {
-  NSString  *environment = [attributes objectForKey:@"environment"];
+- (void) updateAttributes:(NSDictionary *)attributes {
+  NSString *environmentAsString = [attributes objectForKey:@"environment"];
   self.host = [attributes objectForKey:@"host"];
   self.aliases = [attributes objectForKey:@"aliases"];
   self.path = [attributes objectForKey:@"path"];
-  if (environment)
-    self.environment = [environments indexOfObject:environment];
+  if (environmentAsString) {
+    self.environment = [environments indexOfObject:environmentAsString];
+  } else {
+    self.environment = 0;
+  }
   self.configFilename = [attributes objectForKey:@"config_filename"];
 }
 
 - (NSMutableDictionary*) toDictionary {
   NSMutableDictionary *data = [NSMutableDictionary dictionary];
-  
   [data setValue:self.host forKey:@"host"];
   [data setValue:self.aliases forKey:@"aliases"];
   [data setValue:self.path forKey:@"path"];
-  [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
+  if (environment) {
+    [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
+  } else {
+    [data setValue:[environments objectAtIndex:0] forKey:@"environment"];
+  }
   [data setValue:self.configFilename forKey:@"config_filename"];
   
   return data;
@@ -104,7 +115,7 @@
 }
 
 - (void) revert {
-  [self updateWithAttributes:beforeChanges];
+  [self updateAttributes:beforeChanges];
   [self validate];
   [self checkChanges];
 }
@@ -117,7 +128,6 @@
 }
 
 - (void) setValue:(id)value forKey:(NSString*)key {
-  NSLog(@"Changing %@ to %@", key, value);
   [super setValue:value forKey:key];
   [self validate];
   [self checkChanges];

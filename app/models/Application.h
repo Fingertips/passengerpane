@@ -9,8 +9,6 @@ enum {
 @interface Application : NSObject {
   id delegate;
   
-  NSArray *environments;
-  
   NSString *host, *aliases, *path, *configFilename;
   NSUInteger environment;
   BOOL dirty, valid, fresh;
@@ -28,7 +26,7 @@ enum {
 
 - (id) initWithAttributes:(NSDictionary *)attributes;
 - (id) initWithDirectory:(NSString *)aPath;
-- (void) updateWithAttributes:(NSDictionary *)attributes;
+- (void) updateAttributes:(NSDictionary *)attributes;
 - (NSMutableDictionary*) toDictionary;
 - (NSArray*) toArgumentArray;
 - (void) validate;

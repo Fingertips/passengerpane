@@ -12,10 +12,12 @@ module Nu
 end
 
 process do |files|
-  # Ruby.run_tests(files.take_and_map do |file|
-  #   case file
-  #   end
-  # end)
+  Ruby.run_tests(files.take_and_map do |file|
+    case file
+    when %r{^test/ppane/test_helper/add_allow_switch.rb$}
+      'test/ppane/test_helper/add_allow_switch_test.rb'
+    end
+  end)
   
   Nu.run_tests(files.take_and_map do |file|
     case file
