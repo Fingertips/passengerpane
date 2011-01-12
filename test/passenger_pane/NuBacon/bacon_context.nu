@@ -49,19 +49,26 @@
   )
   
   (- (id) run is
-    ; TODO
-    (set report t)
-    (if (report)
-      (unless (@_printedName)
-        (set @_printedName t)
-        (puts "\n#{@_name}")
+    (if (> (@_specifications count) 0)
+      (then
+        ; TODO
+        (set report t)
+        (if (report)
+          (unless (@_printedName)
+            (set @_printedName t)
+            (puts "\n#{@_name}")
+          )
+        )
+
+        (set specification (self currentSpecification))
+        (specification performSelector:"run" withObject:nil afterDelay:0)
+        ; TODO
+        ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate dateWithTimeIntervalSinceNow:0.1))
+      )
+      (else
+        (self finalize)
       )
     )
-
-    (set specification (self currentSpecification))
-    (specification performSelector:"run" withObject:nil afterDelay:0)
-    ; TODO
-    ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate dateWithTimeIntervalSinceNow:0.1))
   )
 
   (- (id) currentSpecification is
@@ -75,11 +82,14 @@
         (self run)
       )
       (else
-        ; DONE!
-        (if (@_delegate respondsToSelector:"contextDidFinish:")
-          (@_delegate contextDidFinish:self)
-        )
+        (self finalize)
       )
+    )
+  )
+
+  (- (id) finalize is
+    (if (@_delegate respondsToSelector:"contextDidFinish:")
+      (@_delegate contextDidFinish:self)
     )
   )
 

@@ -386,6 +386,20 @@
   (behaves_like "another shared context")
 ))
 
+(describe "Regression specs" `(
+  (describe "An empty context does not break, issue #5" `(
+    ; EMPTY
+  ))
+
+  (describe "An completely empty spec (no contexts/specifications)" `(
+    (it "does not break" (do ()
+      (puts "\n[!] The following summary is from a regression spec and can be ignored:")
+      (~ (system "nush -e '(load \"bacon\") ((Bacon sharedInstance) run)'") should be: 0)
+    ))
+  ))
+))
+
+
 ;(describe "Regression specs" `(
   ;(before (do ()
     ;(set @a 42)

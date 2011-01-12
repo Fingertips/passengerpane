@@ -22,17 +22,25 @@
   )
 
   (- (id) run is
-    (set context (self currentContext))
-    (context setDelegate:self)
-    (context performSelector:"run" withObject:nil afterDelay:0)
-    ; TODO check if this is really the right way to do it?
-    ; TODO make this work nicely when there is already a runloop, like in an (iOS) app runner
-    ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate dateWithTimeIntervalSinceNow:0.1))
-    ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate distantFuture))
-    (try
-      ((NSApplication sharedApplication) run)
-      (catch (e))
-      ; running on iOS most probably
+    (if (> (@contexts count) 0)
+      (then
+        (set context (self currentContext))
+        (context setDelegate:self)
+        (context performSelector:"run" withObject:nil afterDelay:0)
+        ; TODO check if this is really the right way to do it?
+        ; TODO make this work nicely when there is already a runloop, like in an (iOS) app runner
+        ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate dateWithTimeIntervalSinceNow:0.1))
+        ;((NSRunLoop mainRunLoop) runUntilDate:(NSDate distantFuture))
+        (try
+          ((NSApplication sharedApplication) run)
+          (catch (e))
+          ; running on iOS most probably
+        )
+      )
+      (else
+        ; DONE
+        ($BaconSummary print)
+      )
     )
   )
 
