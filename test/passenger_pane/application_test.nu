@@ -122,6 +122,42 @@
     (@application setValue:"test.local" forKey:"host")
     (~ (@application isDirty) should be:false)
   ))
+  
+  (it "reverts to its state before it became dirty" (do ()
+    (@application setValue:"test2.local" forKey:"host")
+    (@application revert)
+    (~ (@application isDirty) should be:false)
+    (~ (@application host) should be:"test.local")
+  ))
+))
+
+(describe "An Application, concerning freshness" `(
+  (before (do ()
+    (set @application ((Application alloc) initWithDirectory:"/path/to/test"))
+  ))
+  
+  (it "is fresh when it was just created and not saved to permanent storage" (do ()
+    (~ (@application isFresh) should be:true)
+  ))
+  
+  (it "is no longer fresh when it was committed to permanent storage" (do ()
+    (@application didApplyChanges)
+    (~ (@application isFresh) should be:false)
+  ))
+))
+
+(describe "An Application, concerning callbacks" `(
+  (before (do ()
+    (set @application ((Application alloc) initWithDirectory:"/path/to/test"))
+  ))
+  
+  (it "updates its internal status when the application configuration was committed to permanent storage" (do ()
+    (@application setValue:"test2.local" forKey:"host")
+    (@application didApplyChanges)
+    (~ (@application isFresh) should be:false)
+    (~ (@application isDirty) should be:false)
+    (~ (@application isValid) should be:true)
+  ))
 ))
 
 ((Bacon sharedInstance) run)
