@@ -76,4 +76,28 @@
   ))
 ))
 
+(describe "An Application, concering validation" `(
+  (it "is invalid without host and path" (do ()
+    (set application ((Application alloc) init))
+    (application validate)
+    (~ (application isValid) should be:0)
+  ))
+  
+  (it "is invalid with just a host" (do ()
+    (set attributes (NSMutableDictionary dictionary))
+    (attributes setValue:"test.host" forKey:"host")
+    (set application ((Application alloc) initWithAttributes:attributes))
+    (application validate)
+    (~ (application isValid) should be:0)
+  ))
+  
+  (it "is valid with a host and a path" (do ()
+    (set attributes (NSMutableDictionary dictionary))
+    (attributes setValue:"/path/to/test" forKey:"path")
+    (set application ((Application alloc) initWithAttributes:attributes))
+    (application validate)
+    (~ (application isValid) should be:1)
+  ))
+))
+
 ((Bacon sharedInstance) run)
