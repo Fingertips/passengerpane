@@ -20,8 +20,8 @@
 @property (assign, getter=isAuthorized) BOOL authorized;
 @property (assign, getter=isDirty) BOOL dirty;
 
-@property (retain) NSMutableArray *applications;
-@property (retain) NSColor *textStateColor;
+@property (assign) NSMutableArray *applications;
+@property (assign) NSColor *textStateColor;
 
 - (void) setupUI;
 - (void) setupAuthorizationView;

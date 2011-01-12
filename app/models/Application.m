@@ -13,7 +13,6 @@ static NSArray *environments;
 +(void) initialize {
   if (!environments)
     environments = [NSArray arrayWithObjects:@"development", @"production", nil];
-    [environments retain];
 }
 
 - (id) init {
@@ -101,9 +100,11 @@ static NSArray *environments;
 - (void) checkChanges {
   BOOL result = ![beforeChanges isEqualToDictionary:[self toDictionary]];
   if (result != dirty) {
-    [delegate willChangeValueForKey:@"dirty"];
+    if ([delegate respondsToSelector:@selector(willChangeValueForKey:)])
+      [delegate willChangeValueForKey:@"dirty"];
     [self setDirty:result];
-    [delegate didChangeValueForKey:@"dirty"];
+    if ([delegate respondsToSelector:@selector(didChangeValueForKey:)])
+      [delegate didChangeValueForKey:@"dirty"];
   }
 }
 

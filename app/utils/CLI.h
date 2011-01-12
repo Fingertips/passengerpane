@@ -14,7 +14,7 @@ enum {
 }
 
 @property (assign) id appDelegate;
-@property (retain) NSString *pathToCLI;
+@property (assign) NSString *pathToCLI;
 
 + (id) sharedInstance;
 

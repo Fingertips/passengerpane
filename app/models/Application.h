@@ -17,7 +17,7 @@ enum {
 }
 
 @property (assign) id delegate;
-@property (retain) NSString *host, *aliases, *path, *configFilename;
+@property (assign) NSString *host, *aliases, *path, *configFilename;
 @property (assign) NSUInteger environment;
 @property (assign, getter=isDirty) BOOL dirty;
 @property (assign, getter=isValid) BOOL valid;
