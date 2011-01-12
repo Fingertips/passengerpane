@@ -24,7 +24,7 @@ process do |files|
   
   Nu.run_tests(files.take_and_map do |file|
     case file
-    when %r{^app/.*\.m$}
+    when %r{^app/.*\.[mh]$}
       filename = File.basename(file.downcase)
       parts    = filename.split('.')
       "#{parts[0..-2]}_test.nu"

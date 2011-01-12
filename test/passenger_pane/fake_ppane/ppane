@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+puts "--- 
+- framework: rails
+  hosts: 
+  - manager.boom.local
+  - account.boom.local
+  path: /Users/manfred/Code/boommanager
+  vhost_address: \"*:80\"
+  environment: development
+  aliases: account.boom.local
+  host: manager.boom.local
+  config_filename: /private/etc/apache2/passenger_pane_vhosts/boommanager.local.vhost.conf
+  user_defined_data: |-
+    <Directory \"/Users/manfred/Code/boommanager/public\">
+        Order allow,deny
+        Allow from all
+      </Directory>
+- framework: rails
+  hosts: 
+  - scoring.boom.local
+  path: /Users/manfred/Code/boomscoring
+  vhost_address: \"*:80\"
+  environment: development
+  aliases: \"\"
+  host: scoring.boom.local
+  config_filename: /private/etc/apache2/passenger_pane_vhosts/boomscoring.local.vhost.conf
+  user_defined_data: |-
+    <Directory \"/Users/manfred/Code/boomscoring/public\">
+        Order allow,deny
+        Allow from all
+      </Directory>
+- framework: rails
+  hosts: 
+  - diagnose.local
+  path: /Users/manfred/Code/diagnose
+  vhost_address: \"*:80\"
+  environment: development
+  aliases: \"\"
+  host: diagnose.local
+  config_filename: /private/etc/apache2/passenger_pane_vhosts/diagnose.local.vhost.conf
+  user_defined_data: |-
+    <Directory \"/Users/manfred/Code/diagnose/public\">
+        Order allow,deny
+        Allow from all
+      </Directory>
+"
