@@ -5,8 +5,11 @@ recipe :ruby
 
 module Nu
   def self.run_tests(files)
-    unless files.empty?
-      execute "rake test:passenger_pane"
+    test_directory = File.expand_path('../test/passenger_pane', __FILE__)
+    files.each do |file|
+      if File.exist?(File.join(test_directory, file))
+        execute "cd #{test_directory}; /usr/local/bin/nush #{file}"
+      end
     end
   end
 end
@@ -21,8 +24,12 @@ process do |files|
   
   Nu.run_tests(files.take_and_map do |file|
     case file
-    when %r{^app/.*\.m$}, %r{^test/passenger_pane/.*_test\.nu$}
-      file
+    when %r{^app/.*\.m$}
+      filename = File.basename(file.downcase)
+      parts    = filename.split('.')
+      "#{parts[0..-2]}_test.nu"
+    when %r{^test/passenger_pane/.*_test\.nu$}
+      File.basename(file)
     end
   end)
 end
