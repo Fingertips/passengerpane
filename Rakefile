@@ -41,7 +41,7 @@ namespace :test do
   desc "Run all functional tests for the Passenger Preference Pane"
   task :passenger_pane => :build do
     if File.exist?('/usr/local/bin/nush')
-      sh "cd test/passenger_pane; /usr/local/bin/nush  *_test.nu"
+      sh "cd test/passenger_pane; for test in *_test.nu; do /usr/local/bin/nush $test; done"
     else
       puts "[!] Please install Nu to run the functional tests (see doc/DEVELOPMENT)"
     end
