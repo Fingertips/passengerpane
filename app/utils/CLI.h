@@ -33,4 +33,7 @@ enum {
 - (void) deauthorize;
 - (BOOL) isAuthorized;
 
+// For testing purposed only
+- (void) fakeAuthorize;
+
 @end

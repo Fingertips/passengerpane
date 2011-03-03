@@ -153,11 +153,11 @@ static id sharedCLI = nil;
   authorizationRef = ref;
 }
 
--(void)deauthorize {
+- (void) deauthorize {
   authorizationRef = NULL;
 }
 
--(BOOL)isAuthorized {
+- (BOOL) isAuthorized {
   if (authorizationRef == NULL) {
     return NO;
   } else  {
@@ -165,5 +165,8 @@ static id sharedCLI = nil;
   }
 }
 
+- (void) fakeAuthorize {
+  AuthorizationCreate(nil, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &authorizationRef);
+}
 
 @end
