@@ -55,18 +55,8 @@ namespace :xcode do
     framework_name  = ENV['FULL_PRODUCT_NAME']
     framework       = File.join(ENV['BUILT_PRODUCTS_DIR'], framework_name)
     binary          = File.join(ENV['BUILT_PRODUCTS_DIR'], ENV['EXECUTABLE_PATH'])
-    yaml_path       = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
-    yaml_framework  = File.expand_path('../vendor/YAML.framework/Versions/A/YAML', __FILE__)
-    sh "/usr/bin/install_name_tool -change '#{yaml_path}' '#{yaml_framework}' '#{binary}'"
     
     sh "rm -Rf #{File.join(test_directory, framework_name)}"
     sh "cp -r #{framework} #{test_directory}"
-  end
-  
-  desc "Fixes the YAML framework location"
-  task :fix_framework_location do
-    binary          = File.join(ENV['BUILT_PRODUCTS_DIR'], ENV['EXECUTABLE_PATH'])
-    executable_path = `/usr/bin/otool -L #{binary}`.match(/^\t(.+YAML)/)[1]
-    sh "/usr/bin/install_name_tool -change '#{executable_path}' '#{executable_path.gsub('executable_path', 'loader_path')}' '#{binary}'"
   end
 end

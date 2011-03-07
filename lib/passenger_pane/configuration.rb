@@ -1,3 +1,5 @@
+require 'json/pure'
+
 module PassengerPane
   class Configuration
     CONFIG_FILENAME  = '~/.passenger_pane.yml'

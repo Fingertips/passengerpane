@@ -7,5 +7,4 @@
   #import <AppKit/AppKit.h>
   #import <RubyCocoa/RubyCocoa.h>
   #import <PreferencePanes/PreferencePanes.h>
-  #import <YAML/YAML.h>
 #endif

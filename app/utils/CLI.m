@@ -81,14 +81,16 @@ static id sharedCLI = nil;
   unsigned int index;
   
   FILE *communicationPipe;
-  NSString *data;
   NSFileHandle *file;
+  NSData *data;
+  NSError *error = nil;
+  id dictionary = nil;
   
   if (elevated) {
     if ([self isAuthorized]) {
       if ([arguments count] > 0) {
         index = 0;
-        argumentsAsCArray = malloc(sizeof(char*)*[arguments count]);
+        argumentsAsCArray = NSAllocateCollectable(sizeof(char*)*[arguments count], 0);
         while(index < [arguments count]) {
           argumentsAsCArray[index++] = (char*)[[arguments objectAtIndex:index] UTF8String];
         }
@@ -98,18 +100,22 @@ static id sharedCLI = nil;
       status = AuthorizationExecuteWithPrivileges(authorizationRef, [pathToCLI UTF8String],
                                                   kAuthorizationFlagDefaults, argumentsAsCArray,
                                                   &communicationPipe);
-      free(argumentsAsCArray);
       
       if (status == PPANE_SUCCESS) {
         if (communicationPipe) {
           file = [[NSFileHandle alloc] initWithFileDescriptor:fileno(communicationPipe)];
-          data = [[NSString alloc] initWithData:[file readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+          data = [file readDataToEndOfFile];
           [file closeFile];
-          if ([data isEqual:@""]) {
-            NSLog(@"ppane didn't return any information");
-          } else {
+          if ([data length] > 0) {
             NSLog(@"ppane returned: %@", data);
-            return yaml_parse(data);
+            dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:data error:&error];
+            if (error) {
+              NSLog(@"ppane returned invalid JSON");
+            } else {
+              return dictionary;
+            }
+         } else {
+            NSLog(@"ppane didn't return any information");
           }
         }
       } else {
@@ -125,7 +131,9 @@ static id sharedCLI = nil;
 }
 
 - (id)execute:(NSArray *)arguments {
-  NSString *data;
+  NSData *data;
+  id dictionary;
+  NSError *error = nil;
   NSPipe *stdout = [NSPipe pipe];
   NSTask *ppane;
   
@@ -137,8 +145,14 @@ static id sharedCLI = nil;
   [ppane waitUntilExit];
   
   if ([ppane terminationStatus] == PPANE_SUCCESS) {
-    data = [[NSString alloc] initWithData:[[stdout fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-    return yaml_parse(data);
+    data = [[stdout fileHandleForReading] readDataToEndOfFile];
+    dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:data error:&error];
+    if (error) {
+      NSLog(@"ppane returned invalid JSON");
+    } else {
+      return dictionary;
+    }
+
   } else {
     NSLog(@"NSTask failed to execute the command");
     return [NSDictionary dictionary];

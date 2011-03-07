@@ -19,6 +19,25 @@
 		6361755412B7C18F00E3412D /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 6361755212B7C18F00E3412D /* lib */; };
 		6361755712B7C4B500E3412D /* CLI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6361755512B7C4B500E3412D /* CLI.h */; };
 		6361755812B7C4B500E3412D /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
+		63CE7E691324E58500EB042C /* CDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E511324E58500EB042C /* CDataScanner.h */; };
+		63CE7E6A1324E58500EB042C /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E521324E58500EB042C /* CDataScanner.m */; };
+		63CE7E6B1324E58500EB042C /* CFilteringJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E541324E58500EB042C /* CFilteringJSONSerializer.h */; };
+		63CE7E6D1324E58500EB042C /* CJSONDeserializer_BlocksExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E561324E58500EB042C /* CJSONDeserializer_BlocksExtensions.h */; };
+		63CE7E6F1324E58500EB042C /* CJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E581324E58500EB042C /* CJSONSerialization.h */; };
+		63CE7E711324E58500EB042C /* CJSONSerializedData.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E5A1324E58500EB042C /* CJSONSerializedData.h */; };
+		63CE7E731324E58500EB042C /* CDataScanner_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E5D1324E58500EB042C /* CDataScanner_Extensions.h */; };
+		63CE7E751324E58500EB042C /* NSDictionary_JSONExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E5F1324E58500EB042C /* NSDictionary_JSONExtensions.h */; };
+		63CE7E771324E58500EB042C /* CJSONDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E621324E58500EB042C /* CJSONDeserializer.h */; };
+		63CE7E781324E58500EB042C /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E631324E58500EB042C /* CJSONDeserializer.m */; };
+		63CE7E791324E58500EB042C /* CJSONScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E641324E58500EB042C /* CJSONScanner.h */; };
+		63CE7E7A1324E58500EB042C /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E651324E58500EB042C /* CJSONScanner.m */; };
+		63CE7E7B1324E58500EB042C /* CJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E661324E58500EB042C /* CJSONSerializer.h */; };
+		63CE7E7C1324E58500EB042C /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E671324E58500EB042C /* CJSONSerializer.m */; };
+		63CE7E7D1324E58500EB042C /* JSONRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E681324E58500EB042C /* JSONRepresentation.h */; };
+		63CE7E821324EC8200EB042C /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E521324E58500EB042C /* CDataScanner.m */; };
+		63CE7E831324EC8200EB042C /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E631324E58500EB042C /* CJSONDeserializer.m */; };
+		63CE7E841324EC8200EB042C /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E651324E58500EB042C /* CJSONScanner.m */; };
+		63CE7E851324EC8200EB042C /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E671324E58500EB042C /* CJSONSerializer.m */; };
 		63EF8CFF12DC8FC00063C6CD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */; };
 		63EF8D0412DC8FC10063C6CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63EF8D0212DC8FC10063C6CD /* InfoPlist.strings */; };
 		63EF8D0C12DC8FE10063C6CD /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
@@ -27,9 +46,6 @@
 		63EF8D1212DC91070063C6CD /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8D1112DC91070063C6CD /* PreferencePanes.framework */; };
 		63EF8D1412DC910F0063C6CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8D1312DC910F0063C6CD /* Security.framework */; };
 		63EF8D1612DC91140063C6CD /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8D1512DC91140063C6CD /* Carbon.framework */; };
-		63EF8D1C12DC99D50063C6CD /* YAML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8D1B12DC99D50063C6CD /* YAML.framework */; };
-		63F589E512BA627E00D959E3 /* YAML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63F589E412BA627E00D959E3 /* YAML.framework */; };
-		63F589E712BA62CC00D959E3 /* YAML.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 63F589E612BA62CC00D959E3 /* YAML.framework */; };
 		63F589EB12BA6B5300D959E3 /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = 63F589E912BA6B5200D959E3 /* Application.h */; };
 		63F589EC12BA6B5300D959E3 /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F589EA12BA6B5200D959E3 /* Application.m */; };
 		76890D45109F7E9700097BC5 /* OpenInBrowserTemplate.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 76890D44109F7E9700097BC5 /* OpenInBrowserTemplate.tiff */; };
@@ -48,7 +64,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				63F589E712BA62CC00D959E3 /* YAML.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,18 +88,35 @@
 		6361755212B7C18F00E3412D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		6361755512B7C4B500E3412D /* CLI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLI.h; path = app/utils/CLI.h; sourceTree = "<group>"; };
 		6361755612B7C4B500E3412D /* CLI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLI.m; path = app/utils/CLI.m; sourceTree = "<group>"; };
+		63CE7E511324E58500EB042C /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		63CE7E521324E58500EB042C /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		63CE7E541324E58500EB042C /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
+		63CE7E551324E58500EB042C /* CFilteringJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFilteringJSONSerializer.m; sourceTree = "<group>"; };
+		63CE7E561324E58500EB042C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
+		63CE7E571324E58500EB042C /* CJSONDeserializer_BlocksExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer_BlocksExtensions.m; sourceTree = "<group>"; };
+		63CE7E581324E58500EB042C /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
+		63CE7E591324E58500EB042C /* CJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerialization.m; sourceTree = "<group>"; };
+		63CE7E5A1324E58500EB042C /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
+		63CE7E5B1324E58500EB042C /* CJSONSerializedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializedData.m; sourceTree = "<group>"; };
+		63CE7E5D1324E58500EB042C /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		63CE7E5E1324E58500EB042C /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		63CE7E5F1324E58500EB042C /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		63CE7E601324E58500EB042C /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		63CE7E621324E58500EB042C /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		63CE7E631324E58500EB042C /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		63CE7E641324E58500EB042C /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		63CE7E651324E58500EB042C /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		63CE7E661324E58500EB042C /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		63CE7E671324E58500EB042C /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		63CE7E681324E58500EB042C /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		63EF8CFD12DC8FC00063C6CD /* PassengerTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PassengerTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		63EF8D0012DC8FC10063C6CD /* PassengerTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PassengerTest-Info.plist"; sourceTree = "<group>"; };
 		63EF8D0112DC8FC10063C6CD /* PassengerTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PassengerTest-Prefix.pch"; sourceTree = "<group>"; };
 		63EF8D0312DC8FC10063C6CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		63EF8D0F12DC90900063C6CD /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
 		63EF8D1112DC91070063C6CD /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		63EF8D1312DC910F0063C6CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		63EF8D1512DC91140063C6CD /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
-		63EF8D1B12DC99D50063C6CD /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
-		63F589E412BA627E00D959E3 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
-		63F589E612BA62CC00D959E3 /* YAML.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAML.framework; path = vendor/YAML.framework; sourceTree = "<group>"; };
 		63F589E912BA6B5200D959E3 /* Application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Application.h; path = app/models/Application.h; sourceTree = "<group>"; };
 		63F589EA12BA6B5200D959E3 /* Application.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Application.m; path = app/models/Application.m; sourceTree = "<group>"; };
 		76890D44109F7E9700097BC5 /* OpenInBrowserTemplate.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = OpenInBrowserTemplate.tiff; path = resources/OpenInBrowserTemplate.tiff; sourceTree = "<group>"; };
@@ -100,7 +132,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63EF8D1C12DC99D50063C6CD /* YAML.framework in Frameworks */,
 				63EF8D1612DC91140063C6CD /* Carbon.framework in Frameworks */,
 				63EF8D1412DC910F0063C6CD /* Security.framework in Frameworks */,
 				63EF8D1212DC91070063C6CD /* PreferencePanes.framework in Frameworks */,
@@ -112,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F589E512BA627E00D959E3 /* YAML.framework in Frameworks */,
 				8D202CF30486D31800D8A456 /* Cocoa.framework in Frameworks */,
 				8D202CF40486D31800D8A456 /* PreferencePanes.framework in Frameworks */,
 				518C7F560E06745E003A3ED0 /* Security.framework in Frameworks */,
@@ -126,10 +156,9 @@
 		089C166AFE841209C02AAC07 /* Passenger */ = {
 			isa = PBXGroup;
 			children = (
-				63EF8D0F12DC90900063C6CD /* YAML.framework */,
 				5189C6E60E111C3300B83EA5 /* LICENSE */,
-				63F589E612BA62CC00D959E3 /* YAML.framework */,
-				63F589E412BA627E00D959E3 /* YAML.framework */,
+				6333C0D812C216AA00080A38 /* Common.h */,
+				63CE7E501324E58500EB042C /* TouchJSON */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32DBCFA10370C40200C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -172,7 +201,6 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6333C0D812C216AA00080A38 /* Common.h */,
 				6361755512B7C4B500E3412D /* CLI.h */,
 				6361755612B7C4B500E3412D /* CLI.m */,
 				6361753712B794C400E3412D /* PassengerPref.h */,
@@ -219,6 +247,59 @@
 			name = "Other Sources";
 			sourceTree = "<group>";
 		};
+		63CE7E501324E58500EB042C /* TouchJSON */ = {
+			isa = PBXGroup;
+			children = (
+				63CE7E511324E58500EB042C /* CDataScanner.h */,
+				63CE7E521324E58500EB042C /* CDataScanner.m */,
+				63CE7E531324E58500EB042C /* Experimental */,
+				63CE7E5C1324E58500EB042C /* Extensions */,
+				63CE7E611324E58500EB042C /* JSON */,
+			);
+			name = TouchJSON;
+			path = vendor/TouchJSON;
+			sourceTree = "<group>";
+		};
+		63CE7E531324E58500EB042C /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				63CE7E541324E58500EB042C /* CFilteringJSONSerializer.h */,
+				63CE7E551324E58500EB042C /* CFilteringJSONSerializer.m */,
+				63CE7E561324E58500EB042C /* CJSONDeserializer_BlocksExtensions.h */,
+				63CE7E571324E58500EB042C /* CJSONDeserializer_BlocksExtensions.m */,
+				63CE7E581324E58500EB042C /* CJSONSerialization.h */,
+				63CE7E591324E58500EB042C /* CJSONSerialization.m */,
+				63CE7E5A1324E58500EB042C /* CJSONSerializedData.h */,
+				63CE7E5B1324E58500EB042C /* CJSONSerializedData.m */,
+			);
+			path = Experimental;
+			sourceTree = "<group>";
+		};
+		63CE7E5C1324E58500EB042C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63CE7E5D1324E58500EB042C /* CDataScanner_Extensions.h */,
+				63CE7E5E1324E58500EB042C /* CDataScanner_Extensions.m */,
+				63CE7E5F1324E58500EB042C /* NSDictionary_JSONExtensions.h */,
+				63CE7E601324E58500EB042C /* NSDictionary_JSONExtensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		63CE7E611324E58500EB042C /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				63CE7E621324E58500EB042C /* CJSONDeserializer.h */,
+				63CE7E631324E58500EB042C /* CJSONDeserializer.m */,
+				63CE7E641324E58500EB042C /* CJSONScanner.h */,
+				63CE7E651324E58500EB042C /* CJSONScanner.m */,
+				63CE7E661324E58500EB042C /* CJSONSerializer.h */,
+				63CE7E671324E58500EB042C /* CJSONSerializer.m */,
+				63CE7E681324E58500EB042C /* JSONRepresentation.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		63EF8CF712DC8FC00063C6CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,7 +307,6 @@
 				63EF8D1312DC910F0063C6CD /* Security.framework */,
 				63EF8D1112DC91070063C6CD /* PreferencePanes.framework */,
 				63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */,
-				63EF8D1B12DC99D50063C6CD /* YAML.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -243,6 +323,17 @@
 				6361755712B7C4B500E3412D /* CLI.h in Headers */,
 				63F589EB12BA6B5300D959E3 /* Application.h in Headers */,
 				6333C0D912C216AA00080A38 /* Common.h in Headers */,
+				63CE7E691324E58500EB042C /* CDataScanner.h in Headers */,
+				63CE7E6B1324E58500EB042C /* CFilteringJSONSerializer.h in Headers */,
+				63CE7E6D1324E58500EB042C /* CJSONDeserializer_BlocksExtensions.h in Headers */,
+				63CE7E6F1324E58500EB042C /* CJSONSerialization.h in Headers */,
+				63CE7E711324E58500EB042C /* CJSONSerializedData.h in Headers */,
+				63CE7E731324E58500EB042C /* CDataScanner_Extensions.h in Headers */,
+				63CE7E751324E58500EB042C /* NSDictionary_JSONExtensions.h in Headers */,
+				63CE7E771324E58500EB042C /* CJSONDeserializer.h in Headers */,
+				63CE7E791324E58500EB042C /* CJSONScanner.h in Headers */,
+				63CE7E7B1324E58500EB042C /* CJSONSerializer.h in Headers */,
+				63CE7E7D1324E58500EB042C /* JSONRepresentation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +368,6 @@
 				51DA08CA104BFFFE00C8C106 /* Copy Frameworks */,
 				8D202CF20486D31800D8A456 /* Frameworks */,
 				8D202CF50486D31800D8A456 /* Rez */,
-				63F589E812BA635A00D959E3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -362,19 +452,6 @@
 			shellPath = /bin/sh;
 			shellScript = "rake xcode:setup_test_framework";
 		};
-		63F589E812BA635A00D959E3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "rake xcode:fix_framework_location";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -382,6 +459,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CE7E821324EC8200EB042C /* CDataScanner.m in Sources */,
+				63CE7E831324EC8200EB042C /* CJSONDeserializer.m in Sources */,
+				63CE7E841324EC8200EB042C /* CJSONScanner.m in Sources */,
+				63CE7E851324EC8200EB042C /* CJSONSerializer.m in Sources */,
 				63EF8D0C12DC8FE10063C6CD /* CLI.m in Sources */,
 				63EF8D0D12DC8FE30063C6CD /* PassengerPref.m in Sources */,
 				63EF8D0E12DC8FE40063C6CD /* Application.m in Sources */,
@@ -395,6 +476,10 @@
 				8D202CF10486D31800D8A456 /* PassengerPref.m in Sources */,
 				6361755812B7C4B500E3412D /* CLI.m in Sources */,
 				63F589EC12BA6B5300D959E3 /* Application.m in Sources */,
+				63CE7E6A1324E58500EB042C /* CDataScanner.m in Sources */,
+				63CE7E781324E58500EB042C /* CJSONDeserializer.m in Sources */,
+				63CE7E7A1324E58500EB042C /* CJSONScanner.m in Sources */,
+				63CE7E7C1324E58500EB042C /* CJSONSerializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +523,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/vendor\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -464,6 +550,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/vendor\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Passenger_Prefix.pch;
@@ -481,6 +568,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
 				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_PPC64 = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -496,6 +584,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1)";
 				ARCHS_STANDARD_64_BIT_PRE_XCODE_3_1 = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_MODEL_PPC64 = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

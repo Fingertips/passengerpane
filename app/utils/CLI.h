@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <YAML/YAML.h>
+#import "CJSONDeserializer.h"
 #import "Application.h"
 
 enum {

@@ -45,7 +45,7 @@ describe "Runner" do
     output.should.include('Passenger Pane configured: yes')
   end
   
-  it "shows information about the system in YAML" do
+  it "shows information about the system in JSON" do
     @conf.httpd.stubs(:passenger_module_installed?).returns(true)
     PassengerPane::DirectoryServices.stubs(:registered_hosts).returns(%w(assets.skit.local skit.local weblog.local))
     
@@ -53,8 +53,8 @@ describe "Runner" do
       PassengerPane::Runner.run({'m' => nil}, %w(info))
     end
     
-    output.should.include('passenger_pane_configured: true')
-    output.should.include('passenger_module_installed: true')
+    output.should.include('"passenger_pane_configured":true')
+    output.should.include('"passenger_module_installed":true')
   end
   
   it "configures Apache for use with the Passenger Pane" do

@@ -13,7 +13,7 @@ module PassengerPane
     
     def info
       if machine_readable?
-        puts YAML.dump({
+        puts JSON.generate({
           'passenger_module_installed' => @configuration.httpd.passenger_module_installed?,
           'passenger_pane_configured' => @configuration.httpd.passenger_pane_configured?
         })
@@ -44,7 +44,7 @@ module PassengerPane
         @configuration.httpd.restart
       end
       if machine_readable?
-        puts YAML.dump(application.to_hash)
+        puts JSON.generate(application.to_hash)
       end
     end
     
@@ -55,7 +55,7 @@ module PassengerPane
           @configuration.httpd.restart
         end
         if machine_readable?
-          puts YAML.dump(application.to_hash)
+          puts JSON.generate(application.to_hash)
         end
       end
     end
@@ -69,7 +69,7 @@ module PassengerPane
     
     def list
       if machine_readable?
-        puts YAML.dump(@configuration.applications.map do |app|
+        puts JSON.generate(@configuration.applications.map do |app|
           app.to_hash
         end)
       else

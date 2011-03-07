@@ -55,8 +55,7 @@
     (@cli add:application)
     
     (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
-    (puts arguments)
-    (~ arguments should equal:"[\"add\", \"manager.boom.local\"]")
+    (~ arguments should equal:"[\"add\", \"/path/to/test\", \"-path\", \"/path/to/test\", \"-environment\", \"production\", \"-host\", \"test.local\", \"-config_filename\", \"/path/to/test.conf\", \"-aliases\", \"assets.test.local\"]")
   ))
 ))
 
