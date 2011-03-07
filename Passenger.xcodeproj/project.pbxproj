@@ -38,6 +38,10 @@
 		63CE7E831324EC8200EB042C /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E631324E58500EB042C /* CJSONDeserializer.m */; };
 		63CE7E841324EC8200EB042C /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E651324E58500EB042C /* CJSONScanner.m */; };
 		63CE7E851324EC8200EB042C /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E671324E58500EB042C /* CJSONSerializer.m */; };
+		63CE7E8A13251AB200EB042C /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E5E1324E58500EB042C /* CDataScanner_Extensions.m */; };
+		63CE7E8B13251AB200EB042C /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E601324E58500EB042C /* NSDictionary_JSONExtensions.m */; };
+		63CE7E8C13251AC000EB042C /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E5E1324E58500EB042C /* CDataScanner_Extensions.m */; };
+		63CE7E8D13251AC000EB042C /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E601324E58500EB042C /* NSDictionary_JSONExtensions.m */; };
 		63EF8CFF12DC8FC00063C6CD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */; };
 		63EF8D0412DC8FC10063C6CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63EF8D0212DC8FC10063C6CD /* InfoPlist.strings */; };
 		63EF8D0C12DC8FE10063C6CD /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
@@ -459,6 +463,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CE7E8C13251AC000EB042C /* CDataScanner_Extensions.m in Sources */,
+				63CE7E8D13251AC000EB042C /* NSDictionary_JSONExtensions.m in Sources */,
 				63CE7E821324EC8200EB042C /* CDataScanner.m in Sources */,
 				63CE7E831324EC8200EB042C /* CJSONDeserializer.m in Sources */,
 				63CE7E841324EC8200EB042C /* CJSONScanner.m in Sources */,
@@ -473,6 +479,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CE7E8A13251AB200EB042C /* CDataScanner_Extensions.m in Sources */,
+				63CE7E8B13251AB200EB042C /* NSDictionary_JSONExtensions.m in Sources */,
 				8D202CF10486D31800D8A456 /* PassengerPref.m in Sources */,
 				6361755812B7C4B500E3412D /* CLI.m in Sources */,
 				63F589EC12BA6B5300D959E3 /* Application.m in Sources */,

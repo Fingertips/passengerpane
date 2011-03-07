@@ -84,7 +84,7 @@ static id sharedCLI = nil;
   NSFileHandle *file;
   NSData *data;
   NSError *error = nil;
-  id dictionary = nil;
+  id result = nil;
   
   if (elevated) {
     if ([self isAuthorized]) {
@@ -108,11 +108,11 @@ static id sharedCLI = nil;
           [file closeFile];
           if ([data length] > 0) {
             NSLog(@"ppane returned: %@", data);
-            dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:data error:&error];
+            result = [[CJSONDeserializer deserializer] deserialize:data error:&error];
             if (error) {
-              NSLog(@"ppane returned invalid JSON");
+              NSLog(@"ppane returned invalid JSON: %@", [error description]);
             } else {
-              return dictionary;
+              return result;
             }
          } else {
             NSLog(@"ppane didn't return any information");
@@ -132,8 +132,9 @@ static id sharedCLI = nil;
 
 - (id)execute:(NSArray *)arguments {
   NSData *data;
-  id dictionary;
   NSError *error = nil;
+  id result = nil;
+  
   NSPipe *stdout = [NSPipe pipe];
   NSTask *ppane;
   
@@ -146,17 +147,20 @@ static id sharedCLI = nil;
   
   if ([ppane terminationStatus] == PPANE_SUCCESS) {
     data = [[stdout fileHandleForReading] readDataToEndOfFile];
-    dictionary = [[CJSONDeserializer deserializer] deserializeAsDictionary:data error:&error];
-    if (error) {
-      NSLog(@"ppane returned invalid JSON");
+    if ([data length] > 0) {
+      result = [[CJSONDeserializer deserializer] deserialize:data error:&error];
+      if (error) {
+        NSLog(@"ppane returned invalid JSON: %@", [error description]);
+      } else {
+        return result;
+      }
     } else {
-      return dictionary;
+      NSLog(@"ppane didn't return any data");
     }
-
   } else {
     NSLog(@"NSTask failed to execute the command");
-    return [NSDictionary dictionary];
   }
+  return [NSDictionary dictionary];
 }
 
 - (AuthorizationRef) authorizationRef {

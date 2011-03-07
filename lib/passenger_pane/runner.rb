@@ -1,4 +1,4 @@
-require 'yaml'
+require 'crock'
 
 module PassengerPane
   class Runner
