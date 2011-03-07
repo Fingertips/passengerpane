@@ -74,6 +74,12 @@
     (set arguments (@application toArgumentArray))
     (~ (arguments list) should equal:`("-path" "/path/to/test" "-environment" "production" "-host" "test.local" "-config_filename" "/path/to/test.conf" "-aliases" "assets.test.local"))
   ))
+  
+  (it "doesn't break when updating with an invalid environment" (do ()
+    (@attributes setValue:nil forKey:"environment")
+    (@application updateAttributes:@attributes)
+    (~ (@application environment) should be:0)
+  ))
 ))
 
 (describe "An Application, concering validation" `(

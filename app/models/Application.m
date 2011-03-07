@@ -69,7 +69,7 @@ static NSArray *environments;
   [data setValue:self.host forKey:@"host"];
   [data setValue:self.aliases forKey:@"aliases"];
   [data setValue:self.path forKey:@"path"];
-  if (environment) {
+  if (environment && environment < [environments count]) {
     [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
   } else {
     [data setValue:[environments objectAtIndex:0] forKey:@"environment"];
