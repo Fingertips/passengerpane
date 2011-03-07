@@ -81,7 +81,7 @@ module PassengerPane
       end
       
       data.gsub!(/\n\s*(Rails|Rack)Env\s+(\w+)/, '')
-      @framework   = $1.downcase
+      @framework   = $1 ? $1.downcase : nil
       @environment = $2
       
       data.gsub!(/<VirtualHost\s(.+?)>/, '')
@@ -140,7 +140,9 @@ module PassengerPane
       lines << "  ServerName #{host}"
       lines << "  ServerAlias #{aliases}" unless aliases == ''
       lines << "  DocumentRoot \"#{_document_root}\""
-      lines << "  #{rails? ? 'RailsEnv' : 'RackEnv'} #{environment}"
+      if @framework
+        lines << "  #{rails? ? 'RailsEnv' : 'RackEnv'} #{environment}"
+      end
       lines << "  #{user_defined_data}" unless user_defined_data.strip == ''
       lines << "</VirtualHost>"
       lines.join("\n")

@@ -195,6 +195,7 @@
   }
   [self checkForDirtyApplications];
 }
+
 - (IBAction) revert:(id)sender {
   Application *application;
   for (application in applications) {

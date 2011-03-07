@@ -32,7 +32,7 @@ describe "Application, working on an existing installation" do
   
   it "returns all applications" do
     apps = PassengerPane::Application.all(@configuration)
-    apps.map { |a| a.host }.sort.should == %w(franky.local het-manfreds-blog.local het-manfreds-wiki.local staging.blog.local)
+    apps.map { |a| a.host }.sort.should == %w(franky.local het-manfreds-blog.local het-manfreds-wiki.local noenv.local staging.blog.local)
   end
   
   it "does not screw up vhost configurations read from disk" do
