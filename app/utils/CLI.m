@@ -90,7 +90,7 @@ static id sharedCLI = nil;
     if ([self isAuthorized]) {
       if ([arguments count] > 0) {
         index = 0;
-        argumentsAsCArray = NSAllocateCollectable(sizeof(char*)*[arguments count], 0);
+        argumentsAsCArray = NSAllocateCollectable(sizeof(char*)*([arguments count]+1), 0);
         while(index < [arguments count]) {
           argumentsAsCArray[index++] = (char*)[[arguments objectAtIndex:index] UTF8String];
         }
