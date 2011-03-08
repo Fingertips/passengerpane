@@ -50,7 +50,7 @@ static NSData *kTrue = NULL;
         if (kTrue == NULL)
             kTrue = [[NSData alloc] initWithBytesNoCopy:(void *)"true" length:4 freeWhenDone:NO];
 
-        [thePool release];
+        [thePool drain];
         }
     }
 
