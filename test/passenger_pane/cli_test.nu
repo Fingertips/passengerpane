@@ -68,6 +68,12 @@
     (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
     (~ arguments should equal:"[\"delete\", \"test.local\"]")
   ))
+  
+  (it "restarts an application" (do ()
+    (@cli restart:@application)
+    (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
+    (~ arguments should equal:"[\"restart\", \"test.local\"]")
+  ))
 ))
 
 ((Bacon sharedInstance) run)
