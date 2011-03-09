@@ -52,6 +52,15 @@ you can file a ticket at: http://github.com/alloy/passengerpane/issues
 
 == Changelog
 
+=== Master
+
+* Rewrite in Cocoa for 64-bit support
+* Command-line utility
+  * ~/Library/PreferencePanes/Passenger.prefPane/Contents/Resources/bin/ppane --help
+  * Separately installable with RubyGems: gem install ppane
+* Fixed a bug that left hostnames in the Directory services after
+  unregistering apps.
+
 === v1.3
 
 * Mac OS X 10.6 support, although still in 32-bit mode:
