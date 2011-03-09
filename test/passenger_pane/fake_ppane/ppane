@@ -5,7 +5,7 @@ require File.expand_path('../../../../lib/passenger_pane/trust', __FILE__)
 command = ARGV[0]
 if command == 'list'
   puts '[{"framework":"rails","hosts":["manager.boom.local","account.boom.local"],"path":"\/Users\/manfred\/Code\/boommanager","config_filename":"\/private\/etc\/apache2\/passenger_pane_vhosts\/boommanager.local.vhost.conf","host":"manager.boom.local","aliases":"account.boom.local","environment":"development","vhost_address":"*:80","user_defined_data":"<Directory \"\/Users\/manfred\/Code\/boommanager\/public\">\n    Order allow,deny\n    Allow from all\n  <\/Directory>"},{"framework":"rails","hosts":["scoring.boom.local"],"path":"\/Users\/manfred\/Code\/boomscoring","config_filename":"\/private\/etc\/apache2\/passenger_pane_vhosts\/boomscoring.local.vhost.conf","host":"scoring.boom.local","aliases":"","environment":"development","vhost_address":"*:80","user_defined_data":"<Directory \"\/Users\/manfred\/Code\/boomscoring\/public\">\n    Order allow,deny\n    Allow from all\n  <\/Directory>"},{"framework":"rails","hosts":["diagnose.local"],"path":"\/Users\/manfred\/Code\/diagnose","config_filename":"\/private\/etc\/apache2\/passenger_pane_vhosts\/diagnose.local.vhost.conf","host":"diagnose.local","aliases":"","environment":"development","vhost_address":"*:80","user_defined_data":"<Directory \"\/Users\/manfred\/Code\/diagnose\/public\">\n    Order allow,deny\n    Allow from all\n  <\/Directory>"}]'
-elsif %w(add update restart).include?(command)
+elsif %w(add update delete restart).include?(command)
   require 'fileutils'
   tmpdir   = File.expand_path('../../../../tmp', __FILE__)
   filename = File.join(tmpdir, '.test/args.txt')

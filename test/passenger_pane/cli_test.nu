@@ -41,36 +41,32 @@
     (set @cli ((CLI alloc) init))
     (@cli setPathToCLI:pathToCLI)
     (@cli fakeAuthorize)
-  ))
-  
-  (it "adds a new application" (do ()
+    
     (set attributes (NSMutableDictionary dictionary))
     (attributes setValue:"test.local" forKey:"host")
     (attributes setValue:"assets.test.local" forKey:"aliases")
     (attributes setValue:"/path/to/test" forKey:"path")
     (attributes setValue:"production" forKey:"environment")
     (attributes setValue:"/path/to/test.conf" forKey:"config_filename")
-    (set application ((Application alloc) initWithAttributes:attributes))
-    
-    (@cli add:application)
-    
+    (set @application ((Application alloc) initWithAttributes:attributes))
+  ))
+  
+  (it "adds a new application" (do ()
+    (@cli add:@application)
     (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
     (~ arguments should equal:"[\"add\", \"/path/to/test\", \"-path\", \"/path/to/test\", \"-environment\", \"production\", \"-host\", \"test.local\", \"-config_filename\", \"/path/to/test.conf\", \"-aliases\", \"assets.test.local\"]")
   ))
   
   (it "updates an application" (do ()
-    (set attributes (NSMutableDictionary dictionary))
-    (attributes setValue:"test.local" forKey:"host")
-    (attributes setValue:"assets.test.local" forKey:"aliases")
-    (attributes setValue:"/path/to/test" forKey:"path")
-    (attributes setValue:"production" forKey:"environment")
-    (attributes setValue:"/path/to/test.conf" forKey:"config_filename")
-    (set application ((Application alloc) initWithAttributes:attributes))
-    
-    (@cli update:application)
-    
+    (@cli update:@application)
     (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
     (~ arguments should equal:"[\"update\", \"test.local\", \"-path\", \"/path/to/test\", \"-environment\", \"production\", \"-host\", \"test.local\", \"-config_filename\", \"/path/to/test.conf\", \"-aliases\", \"assets.test.local\"]")
+  ))
+  
+  (it "deletes an application" (do ()
+    (@cli delete:@application)
+    (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
+    (~ arguments should equal:"[\"delete\", \"test.local\"]")
   ))
 ))
 
