@@ -6,6 +6,10 @@
 	<string>English</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>PassengerPaneHelp</string>
+	<key>CFBundleHelpBookName</key>
+	<string>PassengerPaneHelp</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
@@ -24,24 +28,20 @@
 	<string>1.5</string>
 	<key>NSMainNibFile</key>
 	<string>PassengerPref</string>
+	<key>NSPrefPaneHelpAnchors</key>
+	<array>
+		<dict>
+			<key>anchor</key>
+			<string>main_passenger_help</string>
+			<key>title</key>
+			<string>Passenger Preferences Help</string>
+		</dict>
+	</array>
 	<key>NSPrefPaneIconFile</key>
 	<string>PassengerPref.icns</string>
 	<key>NSPrefPaneIconLabel</key>
 	<string>Passenger</string>
 	<key>NSPrincipalClass</key>
-	<string>PrefPanePassenger</string>
-	<key>CFBundleHelpBookFolder</key>
-	<string>PassengerPaneHelp</string>
-	<key>CFBundleHelpBookName</key>
-	<string>PassengerPaneHelp</string>
-	<key>NSPrefPaneHelpAnchors</key>
-	<array>
-	 <dict>
-	   <key>title</key>
-	   <string>Passenger Preferences Help</string>
-	   <key>anchor</key>
-	   <string>main_passenger_help</string>
-	 </dict>
-	</array>
+	<string>PassengerPref</string>
 </dict>
 </plist>

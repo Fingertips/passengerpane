@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+if $0 == __FILE__
+  $:.unshift(File.expand_path('../../lib', __FILE__))
+end
+
+require 'passenger_pane'
+require 'option_parser'
+
+PassengerPane::Runner.run(*OptionParser.parse(ARGV))

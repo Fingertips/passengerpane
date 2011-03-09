@@ -1,0 +1,30 @@
+INSTALL DEPENDENCIES
+
+Install the Rubygems for the ppane specs:
+
+$ gem install test-spec mocha
+
+Install Nu [1] from source for the functional Cocoa specs:
+
+$ git clone https://github.com/timburks/nu.git
+$ cd nu
+$ make -j
+
+Now open up the Nukefile and change the following line (98):
+
+(set @cflags "-Wall -g -std=gnu99 -fPIC")
+
+to:
+
+(set @cflags "-Wall -g -std=gnu99 -fPIC" -fobjc-gc)
+
+
+$ ./mininush tools/nuke
+$ ./mininush tools/nuke install
+
+RUN TESTS
+
+$ rake
+
+------------------------------------------------------------------------------
+[1] http://programming.nu

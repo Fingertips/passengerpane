@@ -1,0 +1,7 @@
+* Add inline docs to code, or however the Nu way is for API docs
+* Check what the best way is to terminate the app
+* Check if it plays nice when there's already a runloop, eg in a (iOS) app runner
+* Clean up specs by classes
+* Clean/abstract the runloop related methods that keep the current-index and schedule the next to run etc
+* Maybe make Should-not return a ShouldNot instance, so that the state of the original Should instance ins't negated? But this is mainly useful for meta-testing, like testing Bacon itself.
+* Make Should-satisfy:block: use the body of the block if @object is a block?

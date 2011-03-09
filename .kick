@@ -1,0 +1,35 @@
+recipe :ignore
+ignore(/^(tmp|Passenger.xcodeproj)/)
+
+recipe :ruby
+
+module Nu
+  def self.run_tests(files)
+    test_directory = File.expand_path('../test/passenger_pane', __FILE__)
+    files.each do |file|
+      if File.exist?(File.join(test_directory, file))
+        execute "cd #{test_directory}; /usr/local/bin/nush #{file}"
+      end
+    end
+  end
+end
+
+process do |files|
+  Ruby.run_tests(files.take_and_map do |file|
+    case file
+    when %r{^test/ppane/test_helper/add_allow_switch.rb$}
+      'test/ppane/test_helper/add_allow_switch_test.rb'
+    end
+  end)
+  
+  Nu.run_tests(files.take_and_map do |file|
+    case file
+    when %r{^app/.*\.[mh]$}
+      filename = File.basename(file.downcase)
+      parts    = filename.split('.')
+      "#{parts[0..-2]}_test.nu"
+    when %r{^test/passenger_pane/.*_test\.nu$}
+      File.basename(file)
+    end
+  end)
+end
