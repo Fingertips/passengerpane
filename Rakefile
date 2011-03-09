@@ -34,7 +34,7 @@ namespace :test do
   
   desc "Build framework for testing"
   task :build do
-    result = `/Xcode4/usr/bin/xcodebuild -project Passenger.xcodeproj -target PassengerTest`
+    result = `/Developer/usr/bin/xcodebuild -project Passenger.xcodeproj -target PassengerTest`
     puts result unless result.include?('** BUILD SUCCEEDED **')
   end
   
