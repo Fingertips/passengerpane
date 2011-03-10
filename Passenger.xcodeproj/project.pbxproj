@@ -19,6 +19,7 @@
 		6361755412B7C18F00E3412D /* lib in Resources */ = {isa = PBXBuildFile; fileRef = 6361755212B7C18F00E3412D /* lib */; };
 		6361755712B7C4B500E3412D /* CLI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6361755512B7C4B500E3412D /* CLI.h */; };
 		6361755812B7C4B500E3412D /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
+		6390095113290C0300048F28 /* PassengerPaneHelp in Resources */ = {isa = PBXBuildFile; fileRef = 6390094F13290C0300048F28 /* PassengerPaneHelp */; };
 		63CE7E691324E58500EB042C /* CDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E511324E58500EB042C /* CDataScanner.h */; };
 		63CE7E6A1324E58500EB042C /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E521324E58500EB042C /* CDataScanner.m */; };
 		63CE7E6B1324E58500EB042C /* CFilteringJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 63CE7E541324E58500EB042C /* CFilteringJSONSerializer.h */; };
@@ -43,7 +44,6 @@
 		63CE7E8C13251AC000EB042C /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E5E1324E58500EB042C /* CDataScanner_Extensions.m */; };
 		63CE7E8D13251AC000EB042C /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CE7E601324E58500EB042C /* NSDictionary_JSONExtensions.m */; };
 		63EF8CFF12DC8FC00063C6CD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */; };
-		63EF8D0412DC8FC10063C6CD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 63EF8D0212DC8FC10063C6CD /* InfoPlist.strings */; };
 		63EF8D0C12DC8FE10063C6CD /* CLI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6361755612B7C4B500E3412D /* CLI.m */; };
 		63EF8D0D12DC8FE30063C6CD /* PassengerPref.m in Sources */ = {isa = PBXBuildFile; fileRef = F506C03D013D9D7901CA16C8 /* PassengerPref.m */; };
 		63EF8D0E12DC8FE40063C6CD /* Application.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F589EA12BA6B5200D959E3 /* Application.m */; };
@@ -92,6 +92,7 @@
 		6361755212B7C18F00E3412D /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		6361755512B7C4B500E3412D /* CLI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CLI.h; path = app/utils/CLI.h; sourceTree = "<group>"; };
 		6361755612B7C4B500E3412D /* CLI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CLI.m; path = app/utils/CLI.m; sourceTree = "<group>"; };
+		6390095013290C0300048F28 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PassengerPaneHelp; sourceTree = "<group>"; };
 		63CE7E511324E58500EB042C /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		63CE7E521324E58500EB042C /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		63CE7E541324E58500EB042C /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -117,7 +118,6 @@
 		63EF8CFE12DC8FC00063C6CD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		63EF8D0012DC8FC10063C6CD /* PassengerTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PassengerTest-Info.plist"; sourceTree = "<group>"; };
 		63EF8D0112DC8FC10063C6CD /* PassengerTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PassengerTest-Prefix.pch"; sourceTree = "<group>"; };
-		63EF8D0312DC8FC10063C6CD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		63EF8D1112DC91070063C6CD /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		63EF8D1312DC910F0063C6CD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		63EF8D1512DC91140063C6CD /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -185,6 +185,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6390094F13290C0300048F28 /* PassengerPaneHelp */,
 				51D45405109843A6003978A9 /* label.png */,
 				6361755112B7C18F00E3412D /* bin */,
 				6361755212B7C18F00E3412D /* lib */,
@@ -197,7 +198,6 @@
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 				76890D44109F7E9700097BC5 /* OpenInBrowserTemplate.tiff */,
 				63EF8D0012DC8FC10063C6CD /* PassengerTest-Info.plist */,
-				63EF8D0212DC8FC10063C6CD /* InfoPlist.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -394,6 +394,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* Passenger */;
 			projectDirPath = "";
@@ -410,7 +411,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63EF8D0412DC8FC10063C6CD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +427,7 @@
 				76890D45109F7E9700097BC5 /* OpenInBrowserTemplate.tiff in Resources */,
 				6361755312B7C18F00E3412D /* bin in Resources */,
 				6361755412B7C18F00E3412D /* lib in Resources */,
+				6390095113290C0300048F28 /* PassengerPaneHelp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,12 +503,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		63EF8D0212DC8FC10063C6CD /* InfoPlist.strings */ = {
+		6390094F13290C0300048F28 /* PassengerPaneHelp */ = {
 			isa = PBXVariantGroup;
 			children = (
-				63EF8D0312DC8FC10063C6CD /* en */,
+				6390095013290C0300048F28 /* English */,
 			);
-			name = InfoPlist.strings;
+			name = PassengerPaneHelp;
 			sourceTree = "<group>";
 		};
 		9648B5EE0D195C2F00DC73E2 /* Pref.xib */ = {
@@ -541,7 +542,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_NAME = Passenger;
-				SDKROOT = macosx10.6;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = prefPane;
 				ZERO_LINK = YES;
@@ -565,7 +566,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				PRODUCT_NAME = Passenger;
-				SDKROOT = macosx10.6;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.6.sdk";
 				VALID_ARCHS = x86_64;
 				WRAPPER_EXTENSION = prefPane;
 			};

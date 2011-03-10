@@ -16,6 +16,7 @@
   [self setupAuthorizationView];
   [self setupApplicationView];
   
+  [[NSHelpManager sharedHelpManager] registerBooksInBundle:[self bundle]];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(paneWillBecomeActive:)
@@ -214,7 +215,9 @@
   [[NSWorkspace sharedWorkspace] openURL:url];
 }
 
-- (IBAction) showPassengerHelp:(id)sender {}
+- (IBAction) showPassengerHelp:(id)sender {
+  [[NSHelpManager sharedHelpManager] openHelpAnchor:@"main_passenger_help" inBook:@"PassengerPaneHelp"];
+}
 
 #pragma Properties
 
