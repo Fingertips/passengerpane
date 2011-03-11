@@ -16,4 +16,6 @@ elsif %w(add update delete restart).include?(command)
     file.write(ARGV.inspect)
   end
   FileUtils.chown_R(trust(ENV['USER']), nil, trust(tmpdir))
+elsif command == 'info'
+  puts '{"passenger_module_installed":false,"passenger_pane_configured":true}'
 end

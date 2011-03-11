@@ -74,6 +74,17 @@ static id sharedCLI = nil;
   [self execute:[NSArray arrayWithObject:@"restart"] elevated:YES];
 }
 
+- (BOOL) isPassengerModuleInstalled {
+  NSDictionary *info = [self execute:[NSArray arrayWithObject:@"info"]];
+  if (info) {
+    NSNumber *isInstalled = [info objectForKey:@"passenger_module_installed"];
+    return [isInstalled boolValue];
+  } else {
+    NSLog(@"Failed to read info, assuming Passenger module isn't installed.");
+    return NO;
+  }
+}
+
 // Inspired by: http://svn.kismac-ng.org/kmng/trunk/Subprojects/BIGeneric/BLAuthentication.m
 - (id) execute:(NSArray *)arguments elevated:(BOOL)elevated {
   OSStatus status;

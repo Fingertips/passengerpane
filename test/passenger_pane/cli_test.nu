@@ -34,6 +34,11 @@
     (set arguments (NSString stringWithContentsOfFile:pathToCLIArguments encoding:NSUTF8StringEncoding error:nil))
     (~ arguments should equal:"[\"restart\", \"manager.boom.local\"]")
   ))
+  
+  (it "knows whether the Passenger module is installed" (do ()
+    (set installed (@cli isPassengerModuleInstalled))
+    (~ installed should equal:false)
+  ))
 ))
 
 (describe "CLI, when authorized" `(do

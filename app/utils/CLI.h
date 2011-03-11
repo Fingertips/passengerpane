@@ -23,6 +23,7 @@ enum {
 - (void) update:(Application *)application;
 - (void) restart:(Application *)application;
 - (void) restart;
+- (BOOL) isPassengerModuleInstalled;
 
 - (id) execute:(NSArray *)arguments elevated:(BOOL)elevated;
 - (id) execute:(NSArray *)arguments;
