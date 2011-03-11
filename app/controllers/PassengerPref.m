@@ -28,13 +28,6 @@
 }
 
 - (void) setupUI {
-  NSImage *browserButtonImage;
-
-  [passengerIconView setImage:[[NSImage alloc] initByReferencingFile:[[self bundle] pathForImageResource:@"label"]]];
-  browserButtonImage = [[NSImage alloc] initByReferencingFile:[[self bundle] pathForImageResource:@"OpenInBrowserTemplate"]];
-  [browserButtonImage setTemplate:YES];
-  [openInBrowserButton setImage:browserButtonImage];
-  
   [self setTextStateColor:NSColor.disabledControlTextColor];
 }
 
