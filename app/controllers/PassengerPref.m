@@ -98,6 +98,17 @@
 
 #pragma NSTableViewDataSource protocol methods
 
+- (BOOL) hasApplicationWithPath:(id)path {
+  Application *application;
+  
+  for (application in applications) {
+    if ([[application path] isEqualToString:path]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
 - (NSDragOperation) tableView:(NSTableView *)aTableView validateDrop:(id)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
   id items, path;
   NSFileManager *fileManager = [[NSFileManager alloc] init];
@@ -109,8 +120,7 @@
   
   items = [[info draggingPasteboard] propertyListForType:NSFilenamesPboardType];
   for (path in items) {
-    if (![fileManager fileExistsAtPath:path isDirectory:&isDir] || !isDir) {
-      NSLog(@"%@ %d", path, isDir);
+    if (![fileManager fileExistsAtPath:path isDirectory:&isDir] || !isDir || [self hasApplicationWithPath:path]) {
       return NSDragOperationNone;
     }
   }
@@ -133,7 +143,7 @@
   [applicationsController addObjects:droppedApplications];
   [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[droppedApplications lastObject], nil]];
   [self apply:self];
-    
+  
   return YES;
 }
 
