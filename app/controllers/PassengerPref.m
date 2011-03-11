@@ -44,6 +44,7 @@
 }
 
 - (void) setupApplicationView {
+  [applicationsTableView setAllowsMultipleSelection:NO];
   [self loadApplications];
   if ([applications count] > 0) {
     [applicationsController setSelectedObjects:[NSArray arrayWithObjects:[applications objectAtIndex:0], nil]];

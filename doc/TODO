@@ -1,5 +1,3 @@
-- Fix the annoying flashing of the source list
-- Disallow multiple selections
 - Disable debug logging unless in debug mode
 - Prevent duplicate folders. When the user tries to add a duplicate folder, select the configuration for the application that uses this folder in the source list.
 - Do not accept characters in the Address and Aliases fields that can't be used for the domain name (including whitespace in the address field). 
@@ -12,6 +10,7 @@
 - Add Sparkle, ideally using sheets. The first time you run the pane you should be asked whether or not you want to enable automatic updates. See http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/Bundles and http://developer.apple.com/mac/library/documentation/UserExperience/Conceptual/AppleHIGuidelines/XHIGInstallationsUpdates/XHIGInstallationsUpdates.html#//apple_ref/doc/uid/TP40002722-DontLinkElementID_131
 - Add something that makes it easy to consistently release new versions in an internet-enabled disk image with a custom background and custom icon placement. http://github.com/drnic/choctop should do the trick.
 - Change the cursor to a hand when hovering over the link in the 'Visit http://www.modrails.com for installation instructions' message.
+- Fix the annoying flashing of the source list
 
 Later
 
