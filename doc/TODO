@@ -1,6 +1,5 @@
 - Fix the annoying flashing of the source list
 - Disallow multiple selections
-- Bring back documentation
 - Disable debug logging unless in debug mode
 - Prevent duplicate folders. When the user tries to add a duplicate folder, select the configuration for the application that uses this folder in the source list.
 - Do not accept characters in the Address and Aliases fields that can't be used for the domain name (including whitespace in the address field). 
