@@ -627,7 +627,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<reference key="NSNextKeyView" ref="593820217"/>
 								</object>
 							</object>
-							<string key="NSFrame">{{238, 89}, {413, 268}}</string>
+							<string key="NSFrame">{{238, 93}, {413, 268}}</string>
 							<reference key="NSSuperview" ref="453226259"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="452669158"/>
@@ -919,7 +919,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="NSCustomView" id="992940565">
 							<reference key="NSNextResponder" ref="453226259"/>
-							<int key="NSvFlags">-2147483380</int>
+							<int key="NSvFlags">268</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
 								<object class="NSImageView" id="556412990">
@@ -945,7 +945,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 									<object class="NSImageCell" key="NSCell" id="1020303840">
 										<int key="NSCellFlags">130560</int>
 										<int key="NSCellFlags2">33554432</int>
-										<int key="NSAlign">0</int>
+										<int key="NSAlign">7</int>
 										<int key="NSScale">0</int>
 										<int key="NSStyle">0</int>
 										<bool key="NSAnimates">NO</bool>
@@ -955,7 +955,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 								<object class="NSTextField" id="700798641">
 									<reference key="NSNextResponder" ref="992940565"/>
 									<int key="NSvFlags">268</int>
-									<string key="NSFrame">{{27, -10}, {332, 42}}</string>
+									<string key="NSFrame">{{29, -12}, {332, 42}}</string>
 									<reference key="NSSuperview" ref="992940565"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="615078570"/>
@@ -1059,14 +1059,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<int key="connectionID">139</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">installPassengerWarning</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="992940565"/>
-					</object>
-					<int key="connectionID">198</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">remove:</string>
 						<reference key="source" ref="565115411"/>
@@ -1081,14 +1073,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="713455384"/>
 					</object>
 					<int key="connectionID">263</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">newApplicationHostTextField</string>
-						<reference key="source" ref="565115411"/>
-						<reference key="destination" ref="423181793"/>
-					</object>
-					<int key="connectionID">265</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1822,6 +1806,14 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<int key="connectionID">524</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">passengerModuleWarning</string>
+						<reference key="source" ref="565115411"/>
+						<reference key="destination" ref="992940565"/>
+					</object>
+					<int key="connectionID">526</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1862,7 +1854,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="352101313"/>
 							<reference ref="987090916"/>
 							<reference ref="1040168125"/>
-							<reference ref="298054908"/>
 							<reference ref="432233478"/>
 							<reference ref="81605200"/>
 							<reference ref="992940565"/>
@@ -1870,6 +1861,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="232803967"/>
 							<reference ref="510136812"/>
 							<reference ref="615078570"/>
+							<reference ref="298054908"/>
 						</object>
 						<reference key="parent" ref="703878053"/>
 					</object>
@@ -2253,8 +2245,8 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="object" ref="992940565"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="700798641"/>
 							<reference ref="556412990"/>
+							<reference ref="700798641"/>
 						</object>
 						<reference key="parent" ref="453226259"/>
 					</object>
@@ -2528,7 +2520,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">524</int>
+			<int key="maxID">526</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2674,6 +2666,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>mainView</string>
 							<string>openInBrowserButton</string>
 							<string>passengerIconView</string>
+							<string>passengerModuleWarning</string>
 							<string>textStateColor</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2684,6 +2677,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>NSView</string>
 							<string>NSButton</string>
 							<string>NSImageView</string>
+							<string>NSView</string>
 							<string>NSColor</string>
 						</object>
 					</object>
@@ -2697,6 +2691,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>mainView</string>
 							<string>openInBrowserButton</string>
 							<string>passengerIconView</string>
+							<string>passengerModuleWarning</string>
 							<string>textStateColor</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -2724,6 +2719,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<object class="IBToOneOutletInfo">
 								<string key="name">passengerIconView</string>
 								<string key="candidateClassName">NSImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">passengerModuleWarning</string>
+								<string key="candidateClassName">NSView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">textStateColor</string>

@@ -16,6 +16,7 @@
   IBOutlet NSButton *openInBrowserButton;
   IBOutlet SFAuthorizationView *authorizationView;
   IBOutlet NSTableView *applicationsTableView;
+  IBOutlet NSView *passengerModuleWarning;
 }
 
 @property (assign, getter=isAuthorized) BOOL authorized;
@@ -28,6 +29,7 @@
 - (void) setupUI;
 - (void) setupAuthorizationView;
 - (void) setupApplicationView;
+- (void) setupPassengerModuleWarning;
 
 - (IBAction) add:(id)sender;
 - (IBAction) remove:(id)sender;

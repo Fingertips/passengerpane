@@ -15,6 +15,7 @@
   [self setupUI];
   [self setupAuthorizationView];
   [self setupApplicationView];
+  [self setupPassengerModuleWarning];
   
   [self checkIfPassengerModuleInstalled];
   
@@ -53,6 +54,20 @@
   }
   [applicationsTableView registerForDraggedTypes:[NSArray arrayWithObject:NSFilenamesPboardType]];
   [applicationsTableView setDraggingSourceOperationMask:NSDragOperationGeneric forLocal:NO];
+}
+
+- (void) setupPassengerModuleWarning {
+  NSUInteger index;
+  NSImageView *iconView;
+  
+  index = [[passengerModuleWarning subviews] indexOfObjectPassingTest:^ BOOL (id object, NSUInteger index, BOOL *stop) {
+    return [object isKindOfClass:[NSImageView class]];
+  }];
+  iconView = [[passengerModuleWarning subviews] objectAtIndex:index];
+  if (iconView) {
+    NSLog(@"%@", [iconView description]);
+    [iconView setImage:[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertCautionIcon.icns"]];
+  }
 }
 
 #pragma SFAuthorizationView delegate methods
