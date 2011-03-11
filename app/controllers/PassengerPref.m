@@ -59,15 +59,32 @@
 - (void) setupPassengerModuleWarning {
   NSUInteger index;
   NSImageView *iconView;
+  NSTextField *warningMessage;
+  
+  NSString *url = [NSString stringWithCString:"http://www.modrails.com" encoding:NSUTF8StringEncoding ];
+  NSRange occurence;
+  NSString *messageWithoutLink;
+  NSMutableAttributedString *messageWithLink;
   
   index = [[passengerModuleWarning subviews] indexOfObjectPassingTest:^ BOOL (id object, NSUInteger index, BOOL *stop) {
     return [object isKindOfClass:[NSImageView class]];
   }];
   iconView = [[passengerModuleWarning subviews] objectAtIndex:index];
-  if (iconView) {
-    NSLog(@"%@", [iconView description]);
-    [iconView setImage:[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertCautionIcon.icns"]];
-  }
+  [iconView setImage:[[NSImage alloc] initByReferencingFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertCautionIcon.icns"]];
+  
+  index = [[passengerModuleWarning subviews] indexOfObjectPassingTest:^ BOOL (id object, NSUInteger index, BOOL *stop) {
+    return [object isKindOfClass:[NSTextField class]];
+  }];
+  warningMessage = [[passengerModuleWarning subviews] objectAtIndex:index];
+  
+  messageWithoutLink = [warningMessage stringValue];
+  messageWithLink = [[NSMutableAttributedString alloc] initWithString:messageWithoutLink];
+  occurence = [messageWithoutLink rangeOfString:url];
+  [messageWithLink addAttribute:NSLinkAttributeName value:url range:occurence];
+  [messageWithLink addAttribute:NSForegroundColorAttributeName value:[NSColor blueColor] range:occurence];
+  [messageWithLink addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInt:NSSingleUnderlineStyle] range:occurence];
+  [messageWithLink addAttribute:NSFontAttributeName value:[NSFont systemFontOfSize:11] range:NSMakeRange(0, [messageWithLink length])];
+  [warningMessage setAttributedStringValue:messageWithLink];
 }
 
 #pragma SFAuthorizationView delegate methods
@@ -313,6 +330,11 @@
   // If we don't know or when it's not yet the case, check.
   if (!passengerModuleInstalled) {
     [self setPassengerModuleInstalled:[[CLI sharedInstance] isPassengerModuleInstalled]];
+    if (passengerModuleInstalled) {
+      [passengerModuleWarning setHidden:YES];
+    } else {
+      [passengerModuleWarning setHidden:NO];
+    }
   }
 }
 
