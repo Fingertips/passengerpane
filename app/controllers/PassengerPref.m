@@ -267,8 +267,8 @@
 - (BOOL) requestAuthorization {
   NSError *error;
   if ([[authorizationView authorization] obtainWithRight:kAuthorizationRightExecute
-                                               flags:(kAuthorizationFlagPreAuthorize ||
-                                                      kAuthorizationFlagExtendRights ||
+                                               flags:(kAuthorizationFlagPreAuthorize |
+                                                      kAuthorizationFlagExtendRights |
                                                       kAuthorizationFlagInteractionAllowed)
                                                error:&error]
       ) {
