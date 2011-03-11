@@ -75,7 +75,8 @@ static id sharedCLI = nil;
 }
 
 - (BOOL) isPassengerModuleInstalled {
-  NSDictionary *info = [self execute:[NSArray arrayWithObject:@"info"]];
+  NSLog(@"Checking if the Passenger module is installed");
+  NSDictionary *info = [self execute:[NSArray arrayWithObjects:@"info", @"-m", nil] elevated:NO];
   if (info) {
     NSNumber *isInstalled = [info objectForKey:@"passenger_module_installed"];
     return [isInstalled boolValue];
@@ -118,7 +119,6 @@ static id sharedCLI = nil;
           data = [file readDataToEndOfFile];
           [file closeFile];
           if ([data length] > 0) {
-            NSLog(@"ppane returned: %@", data);
             result = [[CJSONDeserializer deserializer] deserialize:data error:&error];
             if (error) {
               NSLog(@"ppane returned invalid JSON: %@", [error description]);

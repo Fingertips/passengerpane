@@ -2,7 +2,7 @@
 
 @implementation PassengerPref
 
-@synthesize authorized, dirty;
+@synthesize authorized, dirty, passengerModuleInstalled;
 
 @synthesize applications;
 @synthesize textStateColor;
@@ -15,6 +15,8 @@
   [self setupUI];
   [self setupAuthorizationView];
   [self setupApplicationView];
+  
+  [self checkIfPassengerModuleInstalled];
   
   [[NSHelpManager sharedHelpManager] registerBooksInBundle:[self bundle]];
   
@@ -136,6 +138,7 @@
 
 - (void) paneWillBecomeActive:(id)sender {
   [self reloadApplications];
+  [self checkIfPassengerModuleInstalled];
 }
 
 #pragma Actions
@@ -289,6 +292,13 @@
     }
   }
   [self setDirty:NO];
+}
+
+- (void)checkIfPassengerModuleInstalled {
+  // If we don't know or when it's not yet the case, check.
+  if (!passengerModuleInstalled) {
+    [self setPassengerModuleInstalled:[[CLI sharedInstance] isPassengerModuleInstalled]];
+  }
 }
 
 @end
