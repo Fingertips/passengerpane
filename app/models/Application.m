@@ -16,7 +16,7 @@ static NSArray *environments;
 }
 
 - (id) init {
-  if (self = [super init]) {
+  if ((self = [super init])) {
     self.host = @"";
     self.aliases = @"";
     self.path = @"";
@@ -30,7 +30,7 @@ static NSArray *environments;
 }
 
 - (id) initWithAttributes:(NSDictionary *)attributes {
-  if (self = [self init]) {
+  if ((self = [super init])) {
     [self updateAttributes:attributes];
     self.dirty = NO;
     self.fresh = NO;
@@ -41,7 +41,7 @@ static NSArray *environments;
 }
 
 - (id) initWithDirectory:(NSString *)aPath {
-  if (self = [self init]) {
+  if ((self = [super init])) {
     beforeChanges = [self toDictionary];
     self.path = aPath;
     self.dirty = YES;
