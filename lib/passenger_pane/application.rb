@@ -3,7 +3,7 @@ require 'fileutils'
 module PassengerPane
   class Application
     RAILS_APP_REGEXP = /::Initializer\.run|Application\.initialize!/
-    ATTRIBUTES = [:config_filename, :host, :aliases, :path, :framework, :environment, :vhost_address, :user_defined_data]
+    ATTRIBUTES = [:config_filename, :host, :aliases, :path, :unionStationKey, :framework, :environment, :vhost_address, :user_defined_data]
     
     def self.glob(configuration)
       File.join(
@@ -71,6 +71,10 @@ module PassengerPane
       
       data.gsub!(/\n\s*ServerAlias\s+(.+)/, '')
       @aliases = $1 || ''
+
+      data.gsub!(/\n\s*UnionStationSupport\s+(.+)/, '')
+      data.gsub!(/\n\s*UnionStationKey\s+(.+)/, '')
+      @unionStationKey = $1 || ''
       
       data.gsub!(/\n\s*DocumentRoot\s+"(.+)"/, '')
       path = $1
@@ -126,6 +130,7 @@ module PassengerPane
       @aliases ||= ''
       @environment ||= 'development'
       @vhost_address ||= '*:80'
+      @unionStationKey ||= ''
       @user_defined_data ||= _directory_defaults
       @config_filename ||= _config_filename
       @framework ||= _framework
@@ -142,6 +147,10 @@ module PassengerPane
       lines << "  DocumentRoot \"#{_document_root}\""
       if @framework
         lines << "  #{rails? ? 'RailsEnv' : 'RackEnv'} #{environment}"
+      end
+      if unionStationKey && !unionStationKey.empty?
+        lines << "  UnionStationSupport on"
+        lines << "  UnionStationKey #{unionStationKey}"
       end
       lines << "  #{user_defined_data}" unless user_defined_data.strip == ''
       lines << "</VirtualHost>"

@@ -7,6 +7,10 @@ Features include:
 * Drag and drop support
 * Managing hostnames without cluttering /etc/hosts. It uses Directory Services.
 
+== This fork
+
+* Added Phusion Union Station support
+
 == Requirements
 
 === PassengerPane

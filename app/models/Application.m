@@ -5,7 +5,7 @@ static NSArray *environments;
 @implementation Application
 
 @synthesize delegate;
-@synthesize host, aliases, path, configFilename;
+@synthesize host, aliases, path, configFilename, unionStationKey;
 @synthesize environment;
 @synthesize dirty, valid, fresh;
 @synthesize beforeChanges;
@@ -20,6 +20,7 @@ static NSArray *environments;
     self.host = @"";
     self.aliases = @"";
     self.path = @"";
+    self.unionStationKey = @"";
     self.environment = PPANE_DEVELOPMENT;
     self.dirty = NO;
     self.fresh = YES;
@@ -56,6 +57,7 @@ static NSArray *environments;
   self.host = [attributes objectForKey:@"host"];
   self.aliases = [attributes objectForKey:@"aliases"];
   self.path = [attributes objectForKey:@"path"];
+  self.unionStationKey = [attributes objectForKey:@"unionStationKey"];
   if (environmentAsString) {
     self.environment = [environments indexOfObject:environmentAsString];
   } else {
@@ -69,6 +71,7 @@ static NSArray *environments;
   [data setValue:self.host forKey:@"host"];
   [data setValue:self.aliases forKey:@"aliases"];
   [data setValue:self.path forKey:@"path"];
+  if (!IsEmpty(self.unionStationKey)) [data setValue:self.unionStationKey forKey:@"unionStationKey"];
   if (environment && environment < [environments count]) {
     [data setValue:[environments objectAtIndex:environment] forKey:@"environment"];
   } else {

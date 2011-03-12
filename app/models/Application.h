@@ -9,7 +9,7 @@ enum {
 @interface Application : NSObject {
   id delegate;
   
-  NSString *host, *aliases, *path, *configFilename;
+  NSString *host, *aliases, *path, *configFilename, *unionStationKey;
   NSUInteger environment;
   BOOL dirty, valid, fresh;
   
@@ -17,7 +17,7 @@ enum {
 }
 
 @property (assign) id delegate;
-@property (assign) NSString *host, *aliases, *path, *configFilename;
+@property (assign) NSString *host, *aliases, *path, *configFilename, *unionStationKey;
 @property (assign) NSUInteger environment;
 @property (assign, getter=isDirty) BOOL dirty;
 @property (assign, getter=isValid) BOOL valid;
