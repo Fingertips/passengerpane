@@ -21,8 +21,16 @@ require 'add_allow_switch'
 Kernel.add_allow_switch(:system)
 Kernel.add_allow_switch(:`)
 
+module StubBrokenMethod
+  def setup
+    super
+    PassengerPane::DirectoryServices.stubs(:broken?).returns(false)
+  end
+end
+
 module Test::Spec::TestCase::InstanceMethods
   include TestHelper::CaptureOutput
   include TestHelper::TemporaryDirectory
   include TestHelper::FakeApacheDirectory
+  include StubBrokenMethod
 end
