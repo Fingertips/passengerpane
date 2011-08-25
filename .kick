@@ -19,6 +19,12 @@ process do |files|
     case file
     when %r{^test/ppane/test_helper/add_allow_switch.rb$}
       'test/ppane/test_helper/add_allow_switch_test.rb'
+    when %r{^lib/(.*).rb$}
+      testfile = "test/ppane/#{File.basename($1)}_test.rb"
+      if File.exist?(testfile)
+        files.delete(file)
+        testfile
+      end
     end
   end)
   

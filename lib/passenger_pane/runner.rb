@@ -95,10 +95,20 @@ module PassengerPane
       end
     end
     
-    def register
-      @configuration.applications.each do |app|
-        app.register
+    def _all_hosts
+      @configuration.applications.inject([]) do |hosts, application|
+        hosts.concat application.to_hash['hosts']
       end
+    end
+    
+    def register
+      PassengerPane::DirectoryServices.register(_all_hosts)
+      PassengerPane::DirectoryServices.write_to_hosts_file_if_broken
+    end
+    
+    def unregister
+      PassengerPane::DirectoryServices.unregister(_all_hosts)
+      PassengerPane::DirectoryServices.write_to_hosts_file_if_broken
     end
     
     def self.usage
@@ -107,6 +117,7 @@ module PassengerPane
       puts "Commands:"
       puts "  list             List all configured applications"
       puts "  register         Register all configured hostnames with Directory Services*"
+      puts "  unregister       Unregister all configured hostnames with Directory Services*"
       puts "  info             Show information about the system"
       puts "  configure        Configure Apache for use with the Passenger Pane*"
       puts "  add <directory>  Add an application in a directory*"
@@ -163,6 +174,8 @@ module PassengerPane
         new(options).list
       when 'register'
         new(options).register
+      when 'unregister'
+        new(options).unregister
       else
         path = trust(File.expand_path(command))
         if File.exist?(path)

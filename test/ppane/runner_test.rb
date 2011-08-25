@@ -25,11 +25,21 @@ describe "Runner" do
   end
   
   it "registers all configured hostnames" do
-    @conf.applications.each do |app|
-      PassengerPane::DirectoryServices.expects(:register).with(app.to_hash['hosts'])
-    end
+    all_hosts = %w(assets.skit.local skit.local weblog.local)
+    PassengerPane::Runner.any_instance.stubs(:_all_hosts).returns(all_hosts)
+    PassengerPane::DirectoryServices.expects(:register).with(all_hosts)
     capture_stdout do
       PassengerPane::Runner.run({}, %w(register))
+    end
+  end
+  
+  it "unregisters all configured hostnames" do
+    
+    all_hosts = %w(assets.skit.local skit.local weblog.local)
+    PassengerPane::Runner.any_instance.stubs(:_all_hosts).returns(all_hosts)
+    PassengerPane::DirectoryServices.expects(:unregister).with(all_hosts)
+    capture_stdout do
+      PassengerPane::Runner.run({}, %w(unregister))
     end
   end
   
