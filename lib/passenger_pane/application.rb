@@ -74,7 +74,7 @@ module PassengerPane
       
       data.gsub!(/\n\s*DocumentRoot\s+"(.+)"/, '')
       path = $1
-      if path.end_with?('public')
+      if path && path.end_with?('public')
         @path = File.dirname(path)
       else
         @path = path
@@ -179,20 +179,30 @@ module PassengerPane
     # -- Directory services
     
     def register
-      PassengerPane::DirectoryServices.register(to_hash['hosts'])
+      if result = PassengerPane::DirectoryServices.register(to_hash['hosts'])
+        PassengerPane::DirectoryServices.write_to_hosts_file_if_broken
+      end; result
     end
     
     def unregister
-      PassengerPane::DirectoryServices.unregister(to_hash['hosts'])
+      if result = PassengerPane::DirectoryServices.unregister(to_hash['hosts'])
+        PassengerPane::DirectoryServices.write_to_hosts_file_if_broken
+      end; result
     end
     
     def sync_host_registration
       if new?
         register
       else
-        PassengerPane::DirectoryServices.register(added_hosts) and
-        PassengerPane::DirectoryServices.unregister(removed_hosts)
+        if PassengerPane::DirectoryServices.register(added_hosts) and
+           PassengerPane::DirectoryServices.unregister(removed_hosts)
+          PassengerPane::DirectoryServices.write_to_hosts_file_if_broken
+          true
+        else
+          false
+        end
       end
+      
     end
     
     # -- Persisting
