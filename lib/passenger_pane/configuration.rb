@@ -10,7 +10,7 @@ module PassengerPane
         :httpd_conf             => "httpd.conf",
         :passenger_vhosts       => "passenger_pane_vhosts",
         :passenger_vhosts_ext   => "vhost.conf",
-        :apache_restart_command => "/usr/sbin/http -k graceful"
+        :apache_restart_command => "/usr/sbin/httpd -k graceful"
       }
     end
     
